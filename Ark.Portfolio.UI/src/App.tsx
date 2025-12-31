@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage, ArchitecturalHomePage } from './pages/Home';
+import { HomePageV2 } from './pages/HomeV2';
 import { ProjectsPage } from './pages/Projects';
 import { ProjectDetails } from './pages/ProjectDetails/ProjectDetails';
 import { CVPage } from './pages/CV';  // Component name kept for now
@@ -9,6 +10,7 @@ import { ThemeProvider, useTheme } from './components/generic/ThemeContext';
 import { AuthProvider } from './components/generic/AuthContext';
 import { ProtectedRoute } from './components/generic/ProtectedRoute';
 import './styles/architectural-theme.css';
+import './styles/design-system.css';
 import { DashboardPage } from './pages/Admin/Dashboard';
 import { ProjectManager } from './pages/Admin/Projects';
 import { CvManager } from './pages/Admin/CV';  // Component name kept for now
@@ -21,11 +23,12 @@ import { AiSettingsPage } from './pages/Admin/AiSettings';
 
 /**
  * Theme-aware home page component.
- * Renders ArchitecturalHomePage for 'architectural' theme, HomePage for 'default'.
+ * Renders HomePageV2 (polished) for 'architectural' theme, HomePage for 'default'.
  */
 const ThemedHomePage = () => {
     const { theme } = useTheme();
-    return theme === 'architectural' ? <ArchitecturalHomePage /> : <HomePage />;
+    // Use new polished HomePageV2 for architectural theme
+    return theme === 'architectural' ? <HomePageV2 /> : <HomePage />;
 };
 
 /**
