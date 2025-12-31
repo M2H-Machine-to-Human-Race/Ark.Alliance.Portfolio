@@ -14,6 +14,19 @@ export default defineConfig({
     server: {
         port: 3080,
         https: true
+    },
+    build: {
+        chunkSizeWarningLimit: 1500,
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    'mermaid': ['mermaid'],
+                    'katex': ['katex'],
+                    'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+                    'markdown': ['react-markdown', 'remark-gfm', 'rehype-highlight']
+                }
+            }
+        }
     }
 })
 

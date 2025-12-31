@@ -5,6 +5,7 @@ import { ResumePageV2 } from './pages/ResumeV2';
 import { ProjectsPage } from './pages/Projects';
 import { ProjectsPageV2 } from './pages/ProjectsV2';
 import { ProjectDetails } from './pages/ProjectDetails/ProjectDetails';
+import { ProjectPresentation } from './pages/ProjectPresentation';
 import { CVPage } from './pages/CV';  // Legacy component kept for fallback
 import { ArchitecturePage } from './pages/Architecture';
 import { LoginPage } from './pages/Login';
@@ -53,6 +54,15 @@ const ThemedProjectsPage = () => {
 };
 
 /**
+ * Theme-aware project details page component.
+ * Renders ProjectPresentation (polished) for 'architectural' or 'aloevera' theme, ProjectDetails for 'default'.
+ */
+const ThemedProjectDetails = () => {
+    const { theme } = useTheme();
+    return theme === 'architectural' || theme === 'aloevera' ? <ProjectPresentation /> : <ProjectDetails />;
+};
+
+/**
  * Main application routes.
  */
 const AppRoutes = () => {
@@ -61,7 +71,7 @@ const AppRoutes = () => {
             {/* Public Routes */}
             <Route path="/" element={<ThemedHomePage />} />
             <Route path="/projects" element={<ThemedProjectsPage />} />
-            <Route path="/projects/:id" element={<ProjectDetails />} />
+            <Route path="/projects/:id" element={<ThemedProjectDetails />} />
             {/* Resume (Primary) - uses polished ResumePageV2 for architectural theme */}
             <Route path="/resume" element={<ThemedResumePage />} />
             {/* CV (Legacy redirect) */}
