@@ -1,0 +1,169 @@
+[
+    {
+        "title": "Ark.Alliance Trading Ecosystem",
+        "description": "A high-frequency crypto trading bot and ecosystem featuring a cyberpunk dashboard, real-time WebSocket streaming, and AI-driven trend detection. Built on a microservices architecture with a focus on resilience and speed.",
+        "status": "In Progress",
+        "isFeatured": true,
+        "technologies": [
+            "C#",
+            "React",
+            "TypeScript",
+            "Python",
+            "Docker",
+            "Kubernetes",
+            "Three.js",
+            "OpenAI"
+        ],
+        "imageUrl": "/assets/Bot10.PNG",
+        "repoUrl": "https://github.com/ark/alliance",
+        "demoUrl": "https://ark-alliance.demo",
+        "startDate": "2022-12-01",
+        "features": [
+            {
+                "title": "Strategy Command Center",
+                "description": "The central nerve center of the operation. Visualizes PnL in real-time with sub-millisecond updates via WebSockets. The 'Cyberpunk' aesthetic isn't just for show—it uses high-contrast neon elements to make critical alerts visible instantly.",
+                "icon": "monitor",
+                "imageUrl": "/assets/Bot10.PNG"
+            },
+            {
+                "title": "3D Market Topography",
+                "description": "Interactive Three.js visualization of the order book. Peaks and valleys represent buy/sell walls. This allows the trader to 'Surf the Wave' by visually identifying support and resistance zones in 3D space.",
+                "icon": "box",
+                "imageUrl": "/assets/Bot6.PNG"
+            },
+            {
+                "title": "AI Logic Analysis",
+                "description": "Real-time introspection into the 'Gemini' AI Strategy. Shows the calculated 'Sigma' (volatility threshold) and 'Trend Confidence' score. This is where the 'Wait' vs 'Trade' decisions happen.",
+                "icon": "cpu",
+                "imageUrl": "/assets/Bot2.PNG"
+            },
+            {
+                "title": "Logistics Matrix",
+                "description": "A grid view for managing hundreds of concurrent 'Worker' instances. Each cell represents a Docker container running a specific strategy on a specific pair. Green = Profit, Red = Inversion/Loss.",
+                "icon": "grid",
+                "imageUrl": "/assets/Bot13.PNG"
+            },
+            {
+                "title": "Configuration Console",
+                "description": "Fine-grained control over the 'Click' parameters. Here you set the 'Take Profit Step' (e.g., 0.05%) and the 'Inversion Sigma'. Changes propagate to active instances immediately.",
+                "icon": "sliders",
+                "imageUrl": "/assets/Bot5.PNG"
+            },
+            {
+                "title": "Execution Logs",
+                "description": "Live stream of order execution events. Tracks latency statistics (e.g., 'Order to Ack: 45ms') and API weight usage to prevent bans.",
+                "icon": "activity",
+                "imageUrl": "/assets/Bot4.PNG"
+            }
+        ],
+        "pages": [
+            {
+                "type": "OVERVIEW",
+                "title": "Surfing on the Wave",
+                "content": "### Philosophy: Chaos as Potential\n\nThe **Ark.Alliance** strategy is built on a simple premise: *You cannot predict the ocean, but you can learn to surf.* \n\nInstead of trying to forecast price 10 minutes from now, the bot reacts to *micro-movements* in the present moment. We call this **'Click Strategy'**.\n\n#### The 'Click' Mechanism\n\n1.  **Entry (The Paddle)**: The bot enters a position based on **Gemini AI Analysis** of order book imbalance and volatility.\n2.  **Surfing (The Ride)**: As price moves in favor, the bot executes 'Clicks'—partial take-profits at fixed intervals (e.g., every +0.1% PnL).\n    *   **Ratchet Effect**: Each click raises the 'Inversion Threshold' (Stop Loss), locking in gains.\n3.  **Inversion (The Bail)**: If the wave breaks (price reverses), the bot hits the 'Inversion Threshold'.\n    *   It instantly closes the position and flips to the opposite side (2x quantity).\n    *   **Result**: The surfer catches the *new* wave immediately.\n\n```mermaid\nstateDiagram-v2\n    [*] --> Entry\n    Entry --> Surfing: Price Moves Up\n    Surfing --> Click: +0.1% Gain\n    Click --> Surfing: Raise Safety Net\n    Surfing --> Inversion: Hit Safety Net\n    Inversion --> [*]: Flip Position\n```"
+            },
+            {
+                "type": "TECHNICAL",
+                "title": "Engineering Resilience",
+                "content": "### Speed vs. Reliability\n\nCrypto markets are 24/7 and unforgiving. The bot's architecture prioritizes **Resilience** over raw speed, though it achieves both.\n\n#### 1. Hybrid Push/Pull Architecture\n\nReliance on WebSockets alone is dangerous (silent disconnects). Reliability on Polling alone is too slow. We use **Both**.\n\n*   **Fast Path (Push)**: `BinanceUserDataStream` delivers order updates in ~50ms.\n*   **Safe Path (Pull)**: A `MonitoringLayout` polls the API every 200ms. If the WebSocket misses an event, the Poller catches it.\n\n#### 2. Fee Management & Pre-Computation\n\nTrading frequently ('Clicking') accumulates fees. Ignorance of fees leads to 'Death by a Thousand Cuts'.\n\n*   **Maker vs Taker**: The bot prefers `POST_ONLY` (Maker) orders to gain rebates.\n*   **Pre-Computation**: Before placing *any* trade, the `FuturesCost Service` calculates:\n    *   `OpenFee` + `CloseFee` + `FundingCost`\n    *   **Rule**: The first 'Click' target is moved *further out* to cover these costs. You are never 'Green' until the fees are paid.\n\n#### 3. Rate Limit Arbitrage\n\nBinance allows 1200 weight/minute. \n*   The **RateLimiter** service tracks usage in real-time.\n*   If usage > 80%, it switches non-critical polls to 'Lazy Mode', saving bandwidth for critical 'Inversion' orders.\n\n```mermaid\nsequenceDiagram\n    participant Bot\n    participant RateLimiter\n    participant Binance\n\n    Bot->>RateLimiter: Can I Order?\n    RateLimiter->>RateLimiter: Check Weight (1100/1200)\n    alt Critical (Inversion)\n        RateLimiter-->>Bot: YES (Emergency Override)\n    else Standard (Poll)\n        RateLimiter-->>Bot: PAUSE (Save for Trade)\n    end\n    Bot->>Binance: Execute Order\n```"
+            },
+            {
+                "type": "FUNCTIONAL",
+                "title": "Functional Gallery",
+                "content": "Experience the interface designed for the high-stakes environment of algorithmic trading."
+            }
+        ]
+    },
+    {
+        "title": "Logistics Orchestration Platform",
+        "description": "A comprehensive logistics supply chain platform for Ahold Delhaize, integrating TMS (Transport Management Systems), SAP, and real-time delivery tracking.",
+        "status": "Completed",
+        "isFeatured": true,
+        "technologies": [
+            "C#",
+            ".NET 8",
+            "Blazor",
+            "Azure",
+            "SAP",
+            "Microservices",
+            "CQRS"
+        ],
+        "imageUrl": "/assets/Bot13.PNG",
+        "startDate": "2021-01-01",
+        "endDate": "2025-02-01",
+        "features": [
+            {
+                "title": "TMS Integration",
+                "description": "Seamless connecting with Ortec & Axiodis TMS.",
+                "icon": "truck"
+            },
+            {
+                "title": "Global Tracking",
+                "description": "Real-time visibility into delivery status across Europe.",
+                "icon": "map"
+            }
+        ],
+        "pages": [
+            {
+                "type": "OVERVIEW",
+                "title": "Strategic Impact",
+                "content": "Revitalized logistics core by moving to Domain-Driven Design microservices, achieving 30% cost reduction."
+            }
+        ]
+    },
+    {
+        "title": "Live Show Control System",
+        "description": "Real-time audiovisual synchronization system for immersive live performances.",
+        "status": "Completed",
+        "technologies": [
+            "C++",
+            "Python",
+            "Unity",
+            "C#"
+        ],
+        "imageUrl": "/assets/Bot6.PNG",
+        "startDate": "2005-01-01",
+        "endDate": "2015-11-01",
+        "features": [
+            {
+                "title": "AV Sync",
+                "description": "Frame-perfect synchronization.",
+                "icon": "music"
+            },
+            {
+                "title": "3D Visuals",
+                "description": "Real-time stereoscopic 3D content.",
+                "icon": "box"
+            }
+        ],
+        "pages": [
+            {
+                "type": "OVERVIEW",
+                "title": "Art Meets Engineering",
+                "content": "Bridging technical precision and artistic expression for major live spectacles."
+            }
+        ]
+    },
+    {
+        "title": "Asset Position Integration",
+        "description": "Financial system integration bridging legacy Mainframe data with modern web interfaces.",
+        "status": "Completed",
+        "technologies": [
+            "C#",
+            ".NET 5",
+            "Docker",
+            "MQSeries",
+            "Cobol"
+        ],
+        "imageUrl": "/assets/Bot12.PNG",
+        "startDate": "2020-04-01",
+        "endDate": "2020-12-01",
+        "features": [
+            {
+                "title": "Legacy Bridge",
+                "description": "Secure communication with Mainframe.",
+                "icon": "server"
+            }
+        ]
+    }
+]

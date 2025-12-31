@@ -1,0 +1,49 @@
+{
+    "languages": [
+        "C#",
+        "Python",
+        "Java",
+        "TypeScript",
+        "JavaScript",
+        "C",
+        "C++",
+        "T-SQL",
+        "PL-SQL"
+    ],
+    "frameworks": [
+        ".NET up to 9",
+        "Entity Framework",
+        "Python Ecosystem",
+        "Unity",
+        "Adobe Suite",
+        "Cinema 4D"
+    ],
+    "databases": [
+        "SQL Server",
+        "SQLite",
+        "PostgreSQL",
+        "MongoDB",
+        "DB2",
+        "Oracle 9i",
+        "Sybase"
+    ],
+    "tools": [
+        "Docker",
+        "Kubernetes",
+        "Azure Services",
+        "GitHub",
+        "PyTorch",
+        "RabbitMQ",
+        "AWS Services",
+        "Unreal/Three.js"
+    ],
+    "methodologies": [
+        "DDD",
+        "CQRS",
+        "Event-Driven Architecture",
+        "Microservices",
+        "MLOps",
+        "Agile/Scrum",
+        "DevOps"
+    ]
+}

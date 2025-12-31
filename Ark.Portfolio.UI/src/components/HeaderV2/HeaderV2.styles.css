@@ -1,0 +1,379 @@
+/**
+ * HeaderV2 Styles
+ * Polished, responsive header with glassmorphism and smooth transitions.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+/* ============================================
+   Header Container
+   ============================================ */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-6);
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header.scrolled {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom-color: var(--border-color);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: var(--header-height-mobile);
+        padding: 0 var(--space-4);
+    }
+}
+
+/* ============================================
+   Logo Section
+   ============================================ */
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: transform var(--duration) var(--ease-out);
+}
+
+.header-logo:hover {
+    transform: scale(1.02);
+}
+
+.header-logo-mark {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-display);
+    font-weight: var(--font-bold);
+    font-size: var(--text-lg);
+    color: white;
+}
+
+.header-logo-text {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.025em;
+}
+
+.header-logo-text span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@media (max-width: 480px) {
+    .header-logo-text {
+        display: none;
+    }
+}
+
+/* ============================================
+   Navigation
+   ============================================ */
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.header-nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(100, 116, 139, 0.1);
+}
+
+.header-nav-link.active {
+    color: var(--color-primary-400);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.header-nav-link.active::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+}
+
+@media (max-width: 768px) {
+    .header-nav {
+        display: none;
+    }
+}
+
+/* ============================================
+   Right Section (Admin + Mobile Toggle)
+   ============================================ */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+/* Admin Button */
+.header-admin-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-secondary-400);
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-out);
+    text-decoration: none;
+}
+
+.header-admin-btn:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: var(--shadow-glow-purple);
+}
+
+.header-admin-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 480px) {
+    .header-admin-btn span {
+        display: none;
+    }
+
+    .header-admin-btn {
+        padding: var(--space-2);
+    }
+}
+
+/* Mobile Menu Toggle */
+.header-mobile-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-mobile-toggle:hover {
+    color: var(--text-primary);
+    background: rgba(100, 116, 139, 0.1);
+}
+
+.header-mobile-toggle[aria-expanded="true"] {
+    color: var(--color-primary-400);
+}
+
+@media (max-width: 768px) {
+    .header-mobile-toggle {
+        display: flex;
+    }
+}
+
+/* ============================================
+   Mobile Menu Overlay
+   ============================================ */
+
+.header-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-mobile-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   Mobile Menu Panel
+   ============================================ */
+
+.header-mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 100%;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    z-index: var(--z-modal);
+    transform: translateX(100%);
+    transition: transform var(--duration-slow) var(--ease-out);
+    display: flex;
+    flex-direction: column;
+}
+
+.header-mobile-menu.open {
+    transform: translateX(0);
+}
+
+.header-mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-mobile-menu-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+}
+
+.header-mobile-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-mobile-close:hover {
+    color: var(--text-primary);
+    background: rgba(100, 116, 139, 0.1);
+}
+
+/* Mobile Navigation Links */
+.header-mobile-nav {
+    flex: 1;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.header-mobile-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-mobile-link:hover {
+    color: var(--text-primary);
+    background: rgba(100, 116, 139, 0.1);
+}
+
+.header-mobile-link.active {
+    color: var(--color-primary-400);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.header-mobile-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Mobile Admin Section */
+.header-mobile-admin {
+    padding: var(--space-4);
+    border-top: 1px solid var(--border-color);
+}
+
+.header-mobile-admin-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: white;
+    background: var(--gradient-secondary);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-mobile-admin-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-purple);
+}
+
+/* ============================================
+   Page Offset for Fixed Header
+   ============================================ */
+
+.header-offset {
+    height: var(--header-height);
+}
+
+@media (max-width: 768px) {
+    .header-offset {
+        height: var(--header-height-mobile);
+    }
+}

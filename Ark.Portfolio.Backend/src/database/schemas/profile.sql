@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS profiles (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR(100) NOT NULL,
+  title VARCHAR(200),
+  bio TEXT,
+  email VARCHAR(200) NOT NULL,
+  linkedin_url VARCHAR(255),
+  github_url VARCHAR(255),
+  avatar_url VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

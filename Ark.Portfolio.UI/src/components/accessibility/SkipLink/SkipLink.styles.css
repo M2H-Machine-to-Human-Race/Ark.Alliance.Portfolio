@@ -1,0 +1,33 @@
+/**
+ * Skip Link Styles
+ * Visually hidden until focused for keyboard users.
+ */
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: none;
+}
+
+.skip-link:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
+}

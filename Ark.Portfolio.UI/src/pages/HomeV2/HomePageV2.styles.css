@@ -1,0 +1,263 @@
+/**
+ * HomePageV2 Styles
+ * Premium homepage layout with hero, quick nav, and CTAs.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+/* ============================================
+   Page Layout
+   ============================================ */
+
+.home-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+
+.home-hero {
+    padding: var(--space-6);
+}
+
+@media (min-width: 768px) {
+    .home-hero {
+        padding: var(--space-8);
+    }
+}
+
+@media (min-width: 1024px) {
+    .home-hero {
+        padding: var(--space-12);
+    }
+}
+
+/* ============================================
+   Quick Navigation Section
+   ============================================ */
+
+.home-quicknav {
+    padding: var(--space-12) var(--space-6);
+}
+
+@media (min-width: 768px) {
+    .home-quicknav {
+        padding: var(--space-16) var(--space-8);
+    }
+}
+
+.home-quicknav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.home-quicknav-header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+}
+
+.home-quicknav-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.home-quicknav-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Quick Nav Grid */
+.home-quicknav-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+    .home-quicknav-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .home-quicknav-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Quick Nav Card */
+.home-quicknav-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    overflow: hidden;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.home-quicknav-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    opacity: 0;
+    transition: opacity var(--duration) var(--ease-out);
+}
+
+.home-quicknav-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-xl);
+}
+
+.home-quicknav-card:hover::before {
+    opacity: 1;
+}
+
+.home-quicknav-card:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+}
+
+/* Card Icon */
+.home-quicknav-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    color: white;
+}
+
+.home-quicknav-card-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.home-quicknav-card-desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.home-quicknav-card-arrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-primary-400);
+}
+
+.home-quicknav-card-arrow svg {
+    transition: transform var(--duration) var(--ease-out);
+}
+
+.home-quicknav-card:hover .home-quicknav-card-arrow svg {
+    transform: translateX(4px);
+}
+
+/* ============================================
+   CTA Section
+   ============================================ */
+
+.home-cta {
+    padding: var(--space-12) var(--space-6);
+    background: var(--gradient-glow);
+}
+
+@media (min-width: 768px) {
+    .home-cta {
+        padding: var(--space-16) var(--space-8);
+    }
+}
+
+.home-cta-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home-cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.home-cta-text {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+.home-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.home-footer {
+    padding: var(--space-8) var(--space-6);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.home-footer-text {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+.home-footer-text a {
+    color: var(--color-primary-400);
+    text-decoration: none;
+}
+
+.home-footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   Animation Classes
+   ============================================ */
+
+.home-animate-in {
+    animation: slide-up var(--duration-slower) var(--ease-out) both;
+}
+
+.home-animate-in.delay-1 {
+    animation-delay: 100ms;
+}
+
+.home-animate-in.delay-2 {
+    animation-delay: 200ms;
+}
+
+.home-animate-in.delay-3 {
+    animation-delay: 300ms;
+}

@@ -1,0 +1,133 @@
+[
+    {
+        "title": "Ark.Alliance.TimeSeries.Service",
+        "description": "Backend backbone for high-frequency market data. Advanced polynomial approximations (Chebyshev) and geometric pattern matching for forecasting fluctuations.",
+        "status": "Featured",
+        "imageUrl": "https://images.unsplash.com/photo-1642790103517-181294a2013a?auto=format&fit=crop&q=80&w=1200&h=600",
+        "repoUrl": "",
+        "demoUrl": "",
+        "technologies": [
+            "C#",
+            "TypeScript",
+            "SQLite",
+            "Binance API"
+        ],
+        "features": [
+            {
+                "title": "Forecasting Fluctuations",
+                "description": "Uses polynomial regression to project short-term price movement depending on volume/depth factors.",
+                "icon": "chart"
+            },
+            {
+                "title": "Geometric Analogy",
+                "description": "Pattern matching against historical 'Bull Flags' or 'Head & Shoulders' using formulaic representations.",
+                "icon": "geometry"
+            },
+            {
+                "title": "Noise Filtration",
+                "description": "Chebyshev filters distinguish high-frequency market noise from genuine trend shifts.",
+                "icon": "filter"
+            }
+        ],
+        "pages": [
+            {
+                "title": "Overview",
+                "type": "OVERVIEW",
+                "navOrder": 1,
+                "content": "The TimeSeries Service is engineered for **ultra-low latency** market surveillance. It acts as a bridge between volatile exchange streams (Binance) and predictive intelligence layers."
+            },
+            {
+                "title": "Mathematical Foundation",
+                "type": "TECHNICAL",
+                "navOrder": 2,
+                "content": "**Chebyshev Polynomials of the First Kind:** `T_n(x) = cos(n arccos x)`\n\n**Regression Model:** `y(x) ≈ Σ c_i T_i(x)`\n\nLeveraging **Weighted Least Squares** with Cross-Validation (k=5) to find the optimal polynomial degree for dynamic regularization."
+            },
+            {
+                "title": "Architecture",
+                "type": "ARCHITECTURE",
+                "navOrder": 3,
+                "content": "Binance WS -> MarketDataService (In-Memory Cache & Chebyshev Engine) -> SQLite Persist\n\nControllers provide REST API access to analysis results."
+            }
+        ]
+    },
+    {
+        "title": "Ark.Alliance Ecosystem",
+        "description": "AI-driven architecture for mindful human-AI interaction using SLMs and resilient design patterns.",
+        "status": "Active",
+        "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200&h=600",
+        "repoUrl": "",
+        "demoUrl": "",
+        "technologies": [
+            "Python",
+            "PyTorch",
+            "C#",
+            "TypeScript",
+            "Unity",
+            "Three.js",
+            "Docker",
+            "K8s",
+            "SLM"
+        ],
+        "features": [
+            {
+                "title": "Harmonized Human-AI collaboration",
+                "description": "Bridging the gap between raw computational power and conscious human interaction.",
+                "icon": "handshake"
+            },
+            {
+                "title": "Resilient Integration",
+                "description": "Implementation of Circuit Breaker & Bulkhead patterns for robust system stability.",
+                "icon": "shield"
+            },
+            {
+                "title": "SLM Optimization",
+                "description": "Use of Small Language Models for specific domain logic to reduce overhead and improve privacy.",
+                "icon": "cpu"
+            }
+        ],
+        "pages": [
+            {
+                "title": "Summary & Goals",
+                "type": "OVERVIEW",
+                "navOrder": 1,
+                "content": "Ark.alliance is a cutting-edge ecosystem designed for Mindful AI Initiatives. It bridges the gap between raw computational power and conscious human interaction, focusing on scalable, resilient, and ethically-aligned AI architectures."
+            },
+            {
+                "title": "System Diagram",
+                "type": "ARCHITECTURE",
+                "navOrder": 2,
+                "content": "User App --> Ark Core (SLM nodes & External AI)"
+            }
+        ]
+    },
+    {
+        "title": "Ark.Alliance.Trading.Bot",
+        "description": "High-frequency algorithmic trading system built on .NET 9 and Python MLOps. Features predictive market sentiment analysis and automated risk mitigation.",
+        "status": "Active",
+        "imageUrl": "",
+        "repoUrl": "",
+        "demoUrl": "",
+        "technologies": [
+            "C#",
+            "PyTorch",
+            "RabbitMQ"
+        ],
+        "features": [],
+        "pages": []
+    },
+    {
+        "title": "Ark.Alliance.Statochi",
+        "description": "Advanced statistical forecasting engine for supply chain logistics. Utilizes time-series AI models to predict bottleneck shifts.",
+        "status": "Development",
+        "imageUrl": "",
+        "repoUrl": "",
+        "demoUrl": "",
+        "technologies": [
+            "Python",
+            "PostgreSQL",
+            "Azure Functions"
+        ],
+        "features": [],
+        "pages": []
+    }
+]

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armand Richelet-Kleinberg | Architectural Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@200;300;400;500;600;700;900&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Archivo Narrow', 'Arial Narrow', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .bg-concentric {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .circle-line {
+            fill: none;
+            stroke: #000;
+            stroke-width: 0.3;
+        }
+
+        .particle {
+            fill: #000;
+        }
+
+        .star-branch {
+            transform-origin: left;
+            animation: growBranch 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        @keyframes growBranch {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+
+        .menu-btn {
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .menu-btn:hover {
+            border-color: #000;
+            background-color: #fff;
+            transform: scale(1.08);
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.08);
+        }
+
+        .fade-in {
+            animation: fadeInPage 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; filter: blur(10px); transform: translateY(20px); }
+            to { opacity: 1; filter: blur(0); transform: translateY(0); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fafafa;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #eee;
+            border-radius: 0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #000;
+        }
+
+        /* Responsive Hierarchy */
+        @media (max-width: 768px) {
+            .text-9xl { font-size: 3.5rem; }
+            .text-8xl { font-size: 2.75rem; }
+            .text-5xl { font-size: 1.25rem; }
+            .text-3xl { font-size: 1.1rem; }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

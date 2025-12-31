@@ -1,0 +1,252 @@
+/* ArchitecturalHomePage Styles */
+
+.arch-home {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: white;
+    user-select: none;
+}
+
+/* Main content orchestrator */
+.arch-home__orchestrator {
+    position: relative;
+    width: 100%;
+    transition: all 1s ease-in-out;
+}
+
+.arch-home__orchestrator--hidden {
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Typographic core */
+.arch-home__core {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    padding: 0 0.75rem;
+}
+
+/* Name container */
+.arch-home__name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .arch-home__name-container {
+        flex-direction: row;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Titles container */
+.arch-home__titles {
+    width: 100%;
+    max-width: 48rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 0.5rem;
+}
+
+.arch-home__titles-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem 0.75rem;
+    max-width: 32rem;
+    margin: 0 auto;
+}
+
+/* Title separator dot */
+.arch-home__title-dot {
+    display: none;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 9999px;
+    background-color: #1f2937;
+    opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+    .arch-home__title-dot {
+        display: inline-block;
+    }
+}
+
+/* Divider line */
+.arch-home__divider {
+    height: 1px;
+    width: 6rem;
+    background-color: #f9fafb;
+    margin-top: 3rem;
+    opacity: 0.5;
+}
+
+/* ArchitecturalHomePage Styles */
+
+.arch-home {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: white;
+    user-select: none;
+}
+
+/* Main content orchestrator */
+.arch-home__orchestrator {
+    position: relative;
+    width: 100%;
+    transition: all 1s ease-in-out;
+}
+
+.arch-home__orchestrator--hidden {
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Typographic core */
+.arch-home__core {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    padding: 0 0.75rem;
+}
+
+/* Name container */
+.arch-home__name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .arch-home__name-container {
+        flex-direction: row;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Titles container */
+.arch-home__titles {
+    width: 100%;
+    max-width: 48rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 0.5rem;
+}
+
+.arch-home__titles-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem 0.75rem;
+    max-width: 32rem;
+    margin: 0 auto;
+}
+
+/* Title separator dot */
+.arch-home__title-dot {
+    display: none;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 9999px;
+    background-color: #1f2937;
+    opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+    .arch-home__title-dot {
+        display: inline-block;
+    }
+}
+
+/* Divider line */
+.arch-home__divider {
+    height: 1px;
+    width: 6rem;
+    background-color: #f9fafb;
+    margin-top: 3rem;
+    opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+    .arch-home__divider {
+        width: 8rem;
+    }
+}
+
+/* Loading state */
+.arch-home__loading {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+/* Mobile Menu Button */
+.arch-home__mobile-menu-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .arch-home__mobile-menu-btn {
+        display: none;
+    }
+}
+
+/* Radial Nav Container */
+.arch-home__radial-nav-container {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .arch-home__radial-nav-container {
+        display: block;
+    }
+}

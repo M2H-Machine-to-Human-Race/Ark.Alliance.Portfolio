@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header--page {
+    margin-bottom: 2rem;
+}
+
+.header__title-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__title {
+    font-weight: 700;
+    color: #fff;
+}
+
+.header--panel .header__title {
+    font-size: 1.25rem;
+}
+
+.header--page .header__title {
+    font-size: 2.25rem;
+    letter-spacing: -0.025em;
+}
+
+.header__subtitle {
+    color: rgb(148, 163, 184);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.header__actions {
+    display: flex;
+    gap: 0.5rem;
+}

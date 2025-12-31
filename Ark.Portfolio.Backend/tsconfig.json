@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "paths": {
+            "@ark/portfolio-share": [
+                "../Ark.Portfolio.Share/index.ts"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*.ts",
+        "../Ark.Portfolio.Share/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

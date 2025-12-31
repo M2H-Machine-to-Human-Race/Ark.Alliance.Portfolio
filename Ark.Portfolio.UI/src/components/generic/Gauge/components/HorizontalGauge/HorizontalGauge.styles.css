@@ -1,0 +1,50 @@
+/* HorizontalGauge.styles.css */
+.ark-h-gauge {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.ark-h-gauge__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.ark-h-gauge__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.ark-h-gauge__value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.ark-h-gauge__units {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-left: 0.25rem;
+}
+
+.ark-h-gauge__track {
+    height: 0.5rem;
+    /* 8px */
+    background: var(--bg-secondary);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.dark .ark-h-gauge__track {
+    background: #334155;
+}
+
+.ark-h-gauge__fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.3s ease-out, background-color 0.3s;
+}

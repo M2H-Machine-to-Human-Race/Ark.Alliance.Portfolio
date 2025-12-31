@@ -1,0 +1,66 @@
+[
+    {
+        "company": "M2H / AI and Technology",
+        "project": "Ark.Alliance Ecosystem; Mindful AI Initiatives",
+        "period": "Dec 2022 - Present",
+        "role": "AI Lead & Principal Solution Architect",
+        "tech": "C#, React, TypeScript, Python, Three.js, Docker, K8s, SLM, OpenAI, Anthropic, Mistral",
+        "desc": "Pioneered mindful AI solutions and the Ark.Alliance Ecosystem. Architected prompt libraries and guidelines for consistent AI experiences. Led full-stack teams (C#, React, Python) in startup environments, implementing resilient patterns (Circuit Breaker, Bulkhead) and robust incident response processes. Built scalable, cloud-native systems from scratch using Agile/DevOps."
+    },
+    {
+        "company": "Ahold Delhaize / Logistics Supply Chain",
+        "project": "New Logistics Systems Design & Optimization",
+        "period": "Jan 2021 - Feb 2025",
+        "role": "Solution & Software Architect",
+        "tech": "C#, .NET 8, Blazor, Microservices, Azure, SAP, CQRS, GitHub, OpenAI API",
+        "desc": "Architected and delivered critical logistics systems (TMS integration, delivery tracking). Led technical analysis and acceptance testing. Designed generic integration tools. Coached cross-functional and offshore teams to ensure high-quality delivery during cutover and HyperCare periods."
+    },
+    {
+        "company": "Candriam / Asset Management",
+        "project": "Asset Position Integration System",
+        "period": "Apr 2020 - Dec 2020",
+        "role": "Software Architect & Full Stack Dev",
+        "tech": "C#, .NET 5, Docker, MQSeries, DB2, Cobol, Microservices, SQL Server, CQRS",
+        "desc": "Reverse-engineered legacy Mainframe systems to modern .NET microservices. Designed and rewrote the asset position integration system (shares, funds) for financial account managers. Executed a seamless migration with zero downtime during cutover."
+    },
+    {
+        "company": "Liberty Steel / Steel Industry",
+        "project": "Web-Based Application Portfolio & SAP Integration",
+        "period": "May 2019 - Apr 2020",
+        "role": "Business Analyst & Full Stack Dev",
+        "tech": "C#, .NET Core, TypeScript, Python, Azure, SAP ERP, Clean Architecture, Blazor",
+        "desc": "Analyzed business flows and developed web-based microservices for steel production logistics. Migrated legacy services to WCF and rewrote production planning schedulers. Integrated deeply with SAP and Mainframe systems using Azure cloud services."
+    },
+    {
+        "company": "Delhaize Group / Retail Logistics",
+        "project": "Logistics Systems Design & Cloud Transformation",
+        "period": "Sep 2011 - Apr 2019",
+        "role": "Full Stack Developer & IT Owner",
+        "tech": "C#, .NET, Entity Framework, Azure, Java, SAP ERP, WMS, IoT, SQL Server/Oracle",
+        "desc": "Owned IT delivery for global logistics reporting and supplier management apps. Modernized legacy systems with SAP and WMS integrations (dock scheduling, EDIFACT). Provided L3 support and implemented ITIL processes for resilient 24/7 logistics operations."
+    },
+    {
+        "company": "Spectacles Charles Kleinberg",
+        "project": "Live Show Control Systems",
+        "period": "Jan 2005 - Nov 2015",
+        "role": "Solution Architect - Developer & Artist",
+        "tech": "C#, Python, C++, DirectX, Unity, Three.js, Max/Msp, Maya, Real-time Systems",
+        "desc": "Architected real-time show control systems synchronizing audio, MIDI, lighting, and 3D Stereoscopic visuals. Developed high-performance interactive solutions in Agile environments. Blended technical engineering with artistic direction for immersive live performances."
+    },
+    {
+        "company": "BNP Paribas Fortis / Banking",
+        "project": "Voice over IP Systems",
+        "period": "Nov 2010 - Feb 2011",
+        "role": "ICT Consultant",
+        "tech": ".NET (C#/VB), SQL Server, SOAP",
+        "desc": "Consulted on the architecture and full-stack development of robust Voice over IP systems for banking infrastructure."
+    },
+    {
+        "company": "Mastercard / Financial Services",
+        "project": "Credit Card Chip Validation",
+        "period": "Nov 2004 - Feb 2005",
+        "role": "Software Engineer",
+        "tech": "C#, C, SQL Server, Assembly",
+        "desc": "Developed critical testing and reporting systems for credit card chip compliance. Collaborated on feature launches to enhance global transaction security."
+    }
+]

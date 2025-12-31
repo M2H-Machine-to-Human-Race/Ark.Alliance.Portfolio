@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS media (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  url VARCHAR(255) NOT NULL,
+  type TEXT NOT NULL,
+  alt_text VARCHAR(255),
+  caption VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

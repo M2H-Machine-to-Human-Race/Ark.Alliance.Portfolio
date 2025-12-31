@@ -1,0 +1,72 @@
+/* KpiCard.styles.css */
+.ark-kpi-card {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.dark .ark-kpi-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+.ark-kpi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ark-kpi-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.ark-kpi-icon {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.ark-kpi-value-container {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.ark-kpi-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-primary);
+}
+
+.dark .ark-kpi-value {
+    color: #f1f5f9;
+}
+
+.ark-kpi-trend {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    gap: 0.125rem;
+}
+
+.ark-kpi-trend-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-left: 0.25rem;
+}
+
+.ark-kpi-sparkline {
+    margin-top: 0.5rem;
+    height: 2rem;
+    width: 100%;
+    opacity: 0.5;
+}

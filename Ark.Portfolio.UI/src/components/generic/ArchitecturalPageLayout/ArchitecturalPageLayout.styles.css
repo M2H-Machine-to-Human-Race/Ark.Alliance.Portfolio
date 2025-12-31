@@ -1,0 +1,96 @@
+/* ArchitecturalPageLayout Styles */
+
+.arch-layout {
+    animation: archFadeIn 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.arch-layout__container {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.arch-layout__header {
+    margin-bottom: 5rem;
+    border-bottom: 1px solid var(--arch-border, #e5e7eb);
+    padding-bottom: 3rem;
+}
+
+.arch-layout__subtitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6em;
+    color: var(--arch-text-muted, #9ca3af);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.arch-layout__title {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--arch-text-primary, #1a1a1a);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .arch-layout__title {
+        font-size: 8rem;
+    }
+}
+
+.arch-layout__content {
+    padding-bottom: 8rem;
+}
+
+/* Back Button */
+.arch-layout__back {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    color: var(--arch-text-muted, #9ca3af);
+    transition: all 0.3s ease;
+    z-index: 60;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .arch-layout__back {
+        background-color: transparent;
+        padding: 0;
+    }
+}
+
+.arch-layout__back:hover {
+    color: var(--arch-text-primary, #1a1a1a);
+}
+
+.arch-layout__back-icon {
+    transition: transform 0.3s ease;
+}
+
+.arch-layout__back:hover .arch-layout__back-icon {
+    transform: translateX(-4px);
+}
+
+.arch-layout__back-text {
+    display: none;
+    margin-left: 0.5rem;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+}
+
+@media (min-width: 768px) {
+    .arch-layout__back-text {
+        display: block;
+    }
+}

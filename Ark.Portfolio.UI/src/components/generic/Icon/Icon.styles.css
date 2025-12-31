@@ -1,0 +1,55 @@
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.icon svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icon--xs {
+    width: 12px;
+    height: 12px;
+}
+
+.icon--sm {
+    width: 16px;
+    height: 16px;
+}
+
+.icon--md {
+    width: 20px;
+    height: 20px;
+}
+
+.icon--lg {
+    width: 24px;
+    height: 24px;
+}
+
+.icon--xl {
+    width: 32px;
+    height: 32px;
+}
+
+.icon--spin {
+    animation: icon-spin 1s linear infinite;
+}
+
+@keyframes icon-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

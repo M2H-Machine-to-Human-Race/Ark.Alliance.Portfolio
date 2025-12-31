@@ -1,0 +1,106 @@
+.project-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+}
+
+.project-details__layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    height: calc(100vh - 12rem);
+}
+
+.project-details__sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.project-details__nav-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: transparent;
+    color: #94a3b8;
+    transition: all 0.2s;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    border: 1px solid transparent;
+}
+
+.project-details__nav-btn:hover {
+    background: rgba(30, 41, 59, 0.5);
+    color: white;
+}
+
+.project-details__nav-btn--active {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 16px -4px rgba(59, 130, 246, 0.2);
+}
+
+.project-details__content {
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+/* Markdown Content Styling */
+.markdown-content h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.markdown-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.markdown-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    /* slate-300 */
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.markdown-content p {
+    color: #94a3b8;
+    /* slate-400 */
+    line-height: 1.625;
+    margin-bottom: 1rem;
+}
+
+.markdown-content ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+.markdown-content pre {
+    background-color: #020617;
+    /* slate-950 */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    border: 1px solid #1e293b;
+    /* slate-800 */
+    margin-bottom: 1.5rem;
+}
+
+.markdown-content code {
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: #93c5fd;
+    /* blue-300 */
+}

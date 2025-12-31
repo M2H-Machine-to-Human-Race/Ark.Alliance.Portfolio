@@ -1,0 +1,40 @@
+.panel {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.panel--glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 41, 59, 0.5);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.panel--bordered {
+    background: transparent;
+    border: 1px solid rgba(51, 65, 85, 1);
+}
+
+.panel--default {
+    background: rgb(15, 23, 42);
+    border: 1px solid rgb(30, 41, 59);
+}
+
+.panel__header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+}
+
+.panel__body {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.panel__footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(51, 65, 85, 0.3);
+    background: rgba(15, 23, 42, 0.3);
+}

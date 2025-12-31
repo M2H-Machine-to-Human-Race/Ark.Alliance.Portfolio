@@ -1,0 +1,326 @@
+/**
+ * @fileoverview AI Settings Admin Page
+ * Standalone page for AI configuration management.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { AdminLayout } from '../../../components/generic/AdminLayout';
+import { Bot, Save, Sparkles, RefreshCw, AlertCircle, CheckCircle2, Settings, Zap, Brain, Cpu } from 'lucide-react';
+import { AiSettingsDto } from '@ark/portfolio-share';
+import axios from 'axios';
+import { authService } from '../../../services/auth.service';
+import './AiSettingsPage.styles.css';
+
+const API_URL = 'http://localhost:5085/api/admin';
+
+/**
+ * AI Provider configuration
+ */
+interface ProviderConfig {
+    id: string;
+    name: string;
+    icon: React.ReactNode;
+    models: string[];
+    description: string;
+}
+
+const AI_PROVIDERS: ProviderConfig[] = [
+    {
+        id: 'openai',
+        name: 'OpenAI',
+        icon: <Brain size={24} />,
+        models: ['gpt-4', 'gpt-4-turbo', 'gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'],
+        description: 'Industry-leading AI models with strong reasoning capabilities'
+    },
+    {
+        id: 'anthropic',
+        name: 'Anthropic',
+        icon: <Cpu size={24} />,
+        models: ['claude-3-opus', 'claude-3-sonnet', 'claude-3-haiku', 'claude-3.5-sonnet'],
+        description: 'Advanced AI with focus on safety and helpfulness'
+    },
+    {
+        id: 'google',
+        name: 'Google AI',
+        icon: <Sparkles size={24} />,
+        models: ['gemini-pro', 'gemini-pro-vision', 'gemini-2.0-flash'],
+        description: 'Multimodal AI models from Google DeepMind'
+    },
+    {
+        id: 'custom',
+        name: 'Custom Provider',
+        icon: <Settings size={24} />,
+        models: [],
+        description: 'Configure your own AI endpoint (OpenAI-compatible)'
+    }
+];
+
+export const AiSettingsPage: React.FC = () => {
+    const [settings, setSettings] = useState<AiSettingsDto>({
+        provider: 'openai',
+        model: 'gpt-4',
+        temperature: 0.7,
+        maxTokens: 2048,
+        isActive: true
+    });
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
+    const [testResult, setTestResult] = useState<{ success: boolean; message: string } | null>(null);
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
+    const getAuthHeaders = () => ({
+        headers: { Authorization: `Bearer ${authService.getToken()}` }
+    });
+
+    const fetchSettings = useCallback(async () => {
+        try {
+            const response = await axios.get(`${API_URL}/ai/settings`, getAuthHeaders());
+            setSettings(response.data);
+        } catch (err) {
+            setError('Failed to load AI settings');
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchSettings();
+    }, [fetchSettings]);
+
+    const handleSave = async () => {
+        setIsSaving(true);
+        setError('');
+        try {
+            await axios.put(`${API_URL}/ai/settings`, settings, getAuthHeaders());
+            setSuccessMessage('AI settings saved successfully');
+            setTimeout(() => setSuccessMessage(''), 3000);
+        } catch (err) {
+            setError('Failed to save AI settings');
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
+    const handleTest = async () => {
+        setTestResult(null);
+        setIsSaving(true);
+        try {
+            const response = await axios.post(`${API_URL}/ai/test`, {}, getAuthHeaders());
+            setTestResult(response.data);
+        } catch (err) {
+            setTestResult({ success: false, message: 'Connection test failed' });
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
+    const selectedProvider = AI_PROVIDERS.find(p => p.id === settings.provider);
+
+    if (isLoading) {
+        return (
+            <AdminLayout title="AI Settings">
+                <div className="ai-settings-loading">
+                    <RefreshCw className="spin" size={24} />
+                    <span>Loading AI configuration...</span>
+                </div>
+            </AdminLayout>
+        );
+    }
+
+    return (
+        <AdminLayout title="AI Settings">
+            <div className="ai-settings-page">
+                {/* Status Messages */}
+                {error && (
+                    <div className="ai-alert ai-alert-error">
+                        <AlertCircle size={18} /> {error}
+                    </div>
+                )}
+                {successMessage && (
+                    <div className="ai-alert ai-alert-success">
+                        <CheckCircle2 size={18} /> {successMessage}
+                    </div>
+                )}
+
+                {/* Header with Toggle */}
+                <div className="ai-settings-header">
+                    <div className="ai-settings-title">
+                        <Bot size={28} />
+                        <div>
+                            <h2>AI Configuration</h2>
+                            <p>Configure AI providers for text improvement and skill organization</p>
+                        </div>
+                    </div>
+                    <label className="ai-toggle">
+                        <input
+                            type="checkbox"
+                            checked={settings.isActive}
+                            onChange={e => setSettings({ ...settings, isActive: e.target.checked })}
+                        />
+                        <span className="ai-toggle-slider"></span>
+                        <span className="ai-toggle-label">{settings.isActive ? 'AI Enabled' : 'AI Disabled'}</span>
+                    </label>
+                </div>
+
+                {/* Provider Selection */}
+                <section className="ai-section">
+                    <h3><Zap size={18} /> Select Provider</h3>
+                    <div className="ai-provider-grid">
+                        {AI_PROVIDERS.map(provider => (
+                            <button
+                                key={provider.id}
+                                className={`ai-provider-card ${settings.provider === provider.id ? 'selected' : ''}`}
+                                onClick={() => setSettings({
+                                    ...settings,
+                                    provider: provider.id as any,
+                                    model: provider.models[0] || ''
+                                })}
+                            >
+                                <div className="ai-provider-icon">{provider.icon}</div>
+                                <div className="ai-provider-info">
+                                    <h4>{provider.name}</h4>
+                                    <p>{provider.description}</p>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Model & API Configuration */}
+                <section className="ai-section">
+                    <h3><Settings size={18} /> Configuration</h3>
+                    <div className="ai-form-grid">
+                        <div className="ai-form-group">
+                            <label>Model</label>
+                            {settings.provider === 'custom' ? (
+                                <input
+                                    type="text"
+                                    value={settings.model}
+                                    onChange={e => setSettings({ ...settings, model: e.target.value })}
+                                    placeholder="Enter model name (e.g., llama-3.1-70b)"
+                                />
+                            ) : (
+                                <select
+                                    value={settings.model}
+                                    onChange={e => setSettings({ ...settings, model: e.target.value })}
+                                >
+                                    {selectedProvider?.models.map(m => (
+                                        <option key={m} value={m}>{m}</option>
+                                    ))}
+                                </select>
+                            )}
+                        </div>
+
+                        {settings.provider === 'custom' && (
+                            <div className="ai-form-group full-width">
+                                <label>API URL</label>
+                                <input
+                                    type="url"
+                                    value={settings.apiUrl || ''}
+                                    onChange={e => setSettings({ ...settings, apiUrl: e.target.value })}
+                                    placeholder="https://api.example.com/v1/chat/completions"
+                                />
+                            </div>
+                        )}
+
+                        <div className="ai-form-group full-width">
+                            <label>
+                                API Key
+                                {settings.apiKeyMasked && (
+                                    <span className="ai-key-hint">Current: {settings.apiKeyMasked}</span>
+                                )}
+                            </label>
+                            <input
+                                type="password"
+                                value={settings.apiKey || ''}
+                                onChange={e => setSettings({ ...settings, apiKey: e.target.value })}
+                                placeholder="Enter new API key to update"
+                            />
+                        </div>
+
+                        <div className="ai-form-group">
+                            <label>Temperature: {settings.temperature}</label>
+                            <input
+                                type="range"
+                                min="0"
+                                max="2"
+                                step="0.1"
+                                value={settings.temperature}
+                                onChange={e => setSettings({ ...settings, temperature: parseFloat(e.target.value) })}
+                            />
+                            <div className="ai-range-labels">
+                                <span>Precise (0)</span>
+                                <span>Creative (2)</span>
+                            </div>
+                        </div>
+
+                        <div className="ai-form-group">
+                            <label>Max Tokens</label>
+                            <input
+                                type="number"
+                                min="256"
+                                max="32768"
+                                value={settings.maxTokens}
+                                onChange={e => setSettings({ ...settings, maxTokens: parseInt(e.target.value) || 2048 })}
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                {/* Test Result */}
+                {testResult && (
+                    <div className={`ai-test-result ${testResult.success ? 'success' : 'error'}`}>
+                        {testResult.success ? <CheckCircle2 size={20} /> : <AlertCircle size={20} />}
+                        <span>{testResult.message}</span>
+                    </div>
+                )}
+
+                {/* Actions */}
+                <div className="ai-settings-actions">
+                    <button
+                        className="ai-btn ai-btn-secondary"
+                        onClick={handleTest}
+                        disabled={isSaving}
+                    >
+                        <Sparkles size={16} />
+                        {isSaving ? 'Testing...' : 'Test Connection'}
+                    </button>
+                    <button
+                        className="ai-btn ai-btn-primary"
+                        onClick={handleSave}
+                        disabled={isSaving}
+                    >
+                        <Save size={16} />
+                        {isSaving ? 'Saving...' : 'Save Settings'}
+                    </button>
+                </div>
+
+                {/* Feature Info */}
+                <section className="ai-features">
+                    <h3>AI Features</h3>
+                    <div className="ai-feature-grid">
+                        <div className="ai-feature">
+                            <Sparkles size={20} />
+                            <div>
+                                <h4>Text Improvement</h4>
+                                <p>Enhance descriptions in Profile, Experience, and Education sections</p>
+                            </div>
+                        </div>
+                        <div className="ai-feature">
+                            <Brain size={20} />
+                            <div>
+                                <h4>Skill Organization</h4>
+                                <p>Automatically categorize and group skills intelligently</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </AdminLayout>
+    );
+};
+
+export default AiSettingsPage;

@@ -1,0 +1,71 @@
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 3rem;
+    /* Adjusted for icon width */
+    width: 2px;
+    background: rgba(51, 65, 85, 0.5);
+}
+
+.timeline__item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 5rem;
+}
+
+.timeline__marker {
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgb(15, 23, 42);
+    border: 2px solid rgb(59, 130, 246);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    color: white;
+}
+
+.timeline__content {
+    background: rgba(30, 41, 59, 0.3);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(4px);
+}
+
+.timeline__date {
+    font-family: monospace;
+    color: rgb(148, 163, 184);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.timeline__title {
+    color: white;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.timeline__subtitle {
+    color: rgb(59, 130, 246);
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.timeline__desc {
+    color: rgb(148, 163, 184);
+    line-height: 1.6;
+}

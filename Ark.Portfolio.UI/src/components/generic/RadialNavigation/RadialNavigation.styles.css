@@ -1,0 +1,135 @@
+/* Star branch connector line */
+.radial-nav__branch-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 0;
+    height: 1px;
+    transform-origin: left;
+}
+
+.radial-nav__branch {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+            rgba(229, 231, 235, 0.5),
+            rgba(209, 213, 219, 0.8),
+            rgba(156, 163, 175, 0.9));
+    transform-origin: left;
+    animation: growBranch 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes growBranch {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Navigation button */
+.radial-nav__button {
+    position: absolute;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+.radial-nav__button-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    background-color: white;
+    border: 1px solid rgba(243, 244, 246, 1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    outline: none;
+    cursor: pointer;
+}
+
+.radial-nav__button-inner:hover {
+    border-color: #000;
+    background-color: #fff;
+    transform: scale(1.08);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.08);
+}
+
+.radial-nav__button-inner:active {
+    transform: scale(0.95);
+}
+
+/* Desktop size */
+@media (min-width: 768px) {
+    .radial-nav__button-inner {
+        width: 6rem;
+        height: 6rem;
+    }
+}
+
+/* Icon container */
+.radial-nav__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0.25rem;
+    color: #9ca3af;
+    transition: color 0.5s ease;
+    z-index: 10;
+}
+
+.radial-nav__button-inner:hover .radial-nav__icon {
+    color: #000;
+}
+
+/* Ripple/glow effect on hover */
+.radial-nav__ripple {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background-color: rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: all 0.7s ease;
+}
+
+.radial-nav__button-inner:hover .radial-nav__ripple {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Label beneath button */
+.radial-nav__label {
+    position: absolute;
+    bottom: -2.5rem;
+    width: 10rem;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: #d1d5db;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .radial-nav__label {
+        bottom: -3.5rem;
+        font-size: 11px;
+    }
+}
+
+.radial-nav__button-inner:hover+.radial-nav__label,
+.radial-nav__button:hover .radial-nav__label {
+    color: #000;
+}

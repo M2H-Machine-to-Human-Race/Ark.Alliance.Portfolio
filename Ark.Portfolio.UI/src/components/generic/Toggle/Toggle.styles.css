@@ -1,0 +1,96 @@
+/* Toggle.styles.css */
+.ark-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ark-toggle {
+    position: relative;
+    border-radius: 9999px;
+    background: var(--bg-secondary);
+    /* Inactive color */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.dark .ark-toggle {
+    background: #475569;
+}
+
+.ark-toggle:focus {
+    box-shadow: 0 0 0 2px var(--color-primary-ring);
+}
+
+/* Sizes */
+.ark-toggle--sm {
+    width: 2rem;
+    height: 1.125rem;
+}
+
+.ark-toggle--md {
+    width: 2.75rem;
+    height: 1.5rem;
+}
+
+.ark-toggle--lg {
+    width: 3.5rem;
+    height: 1.875rem;
+}
+
+/* Thumb */
+.ark-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ark-toggle--sm .ark-toggle-thumb {
+    width: 0.875rem;
+    height: 0.875rem;
+}
+
+.ark-toggle--md .ark-toggle-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.ark-toggle--lg .ark-toggle-thumb {
+    width: 1.625rem;
+    height: 1.625rem;
+}
+
+/* Active State */
+.ark-toggle--on {
+    background: var(--color-success);
+    /* Use success color aka green usually, or primary */
+}
+
+.dark .ark-toggle--on {
+    background: #22c55e;
+}
+
+/* Move Thumb props based on size */
+.ark-toggle--on.ark-toggle--sm .ark-toggle-thumb {
+    transform: translateX(0.875rem);
+}
+
+.ark-toggle--on.ark-toggle--md .ark-toggle-thumb {
+    transform: translateX(1.25rem);
+}
+
+.ark-toggle--on.ark-toggle--lg .ark-toggle-thumb {
+    transform: translateX(1.625rem);
+}
+
+/* Disabled */
+.ark-toggle--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}

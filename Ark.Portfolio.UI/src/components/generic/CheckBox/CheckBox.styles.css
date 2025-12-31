@@ -1,0 +1,64 @@
+/* CheckBox.styles.css */
+.ark-checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ark-checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--border-color);
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.dark .ark-checkbox {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+/* Checked State */
+.ark-checkbox--checked,
+.ark-checkbox--indeterminate {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.dark .ark-checkbox--checked,
+.dark .ark-checkbox--indeterminate {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+/* Indeterminate Dash */
+.ark-checkbox-dash {
+    width: 0.625rem;
+    height: 2px;
+    background: white;
+    border-radius: 1px;
+}
+
+/* Hover */
+.ark-checkbox:not(.ark-checkbox--disabled):hover {
+    border-color: var(--color-primary);
+}
+
+/* Disabled */
+.ark-checkbox--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--bg-disabled);
+}
+
+/* Error */
+.ark-checkbox--error {
+    border-color: var(--color-error);
+}

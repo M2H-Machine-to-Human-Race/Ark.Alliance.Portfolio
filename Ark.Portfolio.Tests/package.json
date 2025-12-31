@@ -1,0 +1,31 @@
+{
+    "name": "@ark/portfolio-tests",
+    "version": "1.0.0",
+    "description": "Test suite for Ark.Portfolio application - Backend and Frontend testing",
+    "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
+        "test:backend": "jest --testPathPattern=Backend",
+        "test:frontend": "jest --testPathPattern=Frontend",
+        "test:share": "jest --testPathPattern=Share",
+        "test:integration": "jest --testPathPattern=Integration"
+    },
+    "keywords": [
+        "testing",
+        "jest",
+        "portfolio"
+    ],
+    "author": "Armand Richelet-Kleinberg",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jest": "^29.5.12",
+        "@types/node": "^20.11.30",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.2",
+        "typescript": "^5.4.3"
+    },
+    "dependencies": {
+        "@ark/portfolio-share": "file:../Ark.Portfolio.Share"
+    }
+}
