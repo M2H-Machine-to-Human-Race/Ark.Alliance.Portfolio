@@ -34,9 +34,109 @@ export class MermaidDiagramReaderViewModel extends BaseComponentModel {
             startOnLoad: false, // We control rendering
             theme: this._theme === 'dark' ? 'dark' : 'default',
             securityLevel: 'loose',
-            fontFamily: 'inherit',
-            // prevent loose parsing issues
-            logLevel: 'error'
+            fontFamily: 'Inter, sans-serif',
+            logLevel: 'error',
+            // Enhanced dark theme configuration
+            themeVariables: this._theme === 'dark' ? {
+                // Primary colors matching site theme
+                primaryColor: '#6366f1',
+                primaryTextColor: '#e2e8f0',
+                primaryBorderColor: '#8b5cf6',
+                lineColor: '#94a3b8',
+                secondaryColor: '#141b3d',
+                tertiaryColor: '#1e2749',
+
+                // Background colors
+                background: '#0a0e27',
+                mainBkg: '#141b3d',
+                secondBkg: '#1e2749',
+                tertiaryBkg: '#0a0e27',
+
+                // Text colors
+                textColor: '#e2e8f0',
+                secondaryTextColor: '#94a3b8',
+
+                // Node styling
+                nodeBorder: '#8b5cf6',
+                clusterBkg: '#1e2749',
+                clusterBorder: '#6366f1',
+
+                // Edge styling
+                edgeLabelBackground: '#141b3d',
+
+                // Flowchart specific
+                labelBoxBkgColor: '#141b3d',
+                labelBoxBorderColor: '#6366f1',
+
+                // Sequence diagram
+                actorBkg: '#141b3d',
+                actorBorder: '#6366f1',
+                actorTextColor: '#e2e8f0',
+                actorLineColor: '#94a3b8',
+                signalColor: '#e2e8f0',
+                signalTextColor: '#e2e8f0',
+                labelBoxBgColor: '#1e2749',
+                labelTextColor: '#e2e8f0',
+                loopTextColor: '#e2e8f0',
+                noteBorderColor: '#8b5cf6',
+                noteBkgColor: '#1e2749',
+                noteTextColor: '#e2e8f0',
+
+                // State diagram
+                stateBkg: '#141b3d',
+                stateBorder: '#6366f1',
+                stateLabelColor: '#e2e8f0',
+
+                // Class diagram
+                classText: '#e2e8f0',
+
+                // Git graph
+                git0: '#6366f1',
+                git1: '#8b5cf6',
+                git2: '#ec4899',
+                git3: '#f59e0b',
+                git4: '#10b981',
+                git5: '#3b82f6',
+                git6: '#14b8a6',
+                git7: '#f97316'
+            } : {
+                // Light theme variables (default)
+                primaryColor: '#6366f1',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#8b5cf6'
+            },
+            // Diagram-specific configurations
+            flowchart: {
+                curve: 'basis',
+                padding: 20,
+                nodeSpacing: 50,
+                rankSpacing: 50,
+                diagramPadding: 20,
+                htmlLabels: true
+            },
+            sequence: {
+                actorMargin: 50,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+                mirrorActors: true,
+                bottomMarginAdj: 1,
+                useMaxWidth: true,
+                rightAngles: false,
+                showSequenceNumbers: false
+            },
+            gantt: {
+                titleTopMargin: 25,
+                barHeight: 20,
+                barGap: 4,
+                topPadding: 50,
+                leftPadding: 75,
+                gridLineStartPadding: 35,
+                fontSize: 11,
+                numberSectionStyles: 4,
+                axisFormat: '%Y-%m-%d'
+            }
         });
     }
 

@@ -22,6 +22,12 @@ export const THEME_CONFIGS: Record<ThemeVariant, ThemeConfig> = {
         displayName: 'Architectural',
         description: 'Light minimalist theme with radial navigation',
         isFullScreen: true
+    },
+    aloevera: {
+        variant: 'aloevera',
+        displayName: 'Aloevera',
+        description: 'Purple gradient theme with modern typography',
+        isFullScreen: true
     }
 };
 

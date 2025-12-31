@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Home, FileText, Briefcase, Settings } from 'lucide-react';
+import { Menu, X, Home, FileText, Briefcase, Settings, LogIn, Download } from 'lucide-react';
 import { useHeaderV2Model } from './HeaderV2.model';
 import './HeaderV2.styles.css';
 
@@ -48,11 +48,20 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
                 className={`header ${vm.isScrolled ? 'scrolled' : ''} ${className}`}
                 role="banner"
             >
-                {/* Logo */}
+                {/* Profile Name & Current Page */}
                 <Link to="/" className="header-logo" aria-label="Home">
                     <div className="header-logo-mark">A</div>
-                    <div className="header-logo-text">
-                        Ark<span>.Portfolio</span>
+                    <div className="header-profile-info">
+                        <div className="header-profile-name">
+                            {vm.profile.fullName}
+                            {vm.currentPageTitle && (
+                                <>
+                                    <span className="header-page-separator">/</span>
+                                    <span className="header-page-title">{vm.currentPageTitle}</span>
+                                </>
+                            )}
+                        </div>
+                        <div className="header-profile-title">{vm.profile.title}</div>
                     </div>
                 </Link>
 
@@ -73,13 +82,26 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
 
                 {/* Right Section */}
                 <div className="header-right">
-                    {/* Admin Button (desktop) */}
+                    {/* Export Static Site Button (only for admin) */}
                     {vm.isAdmin && (
-                        <Link to="/admin/dashboard" className="header-admin-btn">
-                            <Settings size={16} />
-                            <span>Admin</span>
+                        <Link
+                            to="/admin/dashboard"
+                            className="header-export-btn"
+                            title="Export Static Website"
+                        >
+                            <Download size={16} />
+                            <span>Export</span>
                         </Link>
                     )}
+
+                    {/* Admin/Login Button (always visible on desktop) */}
+                    <Link
+                        to={vm.isAdmin ? "/admin/dashboard" : "/login"}
+                        className={`header-admin-btn ${!vm.isAdmin ? 'header-login-btn' : ''}`}
+                    >
+                        {vm.isAdmin ? <Settings size={16} /> : <LogIn size={16} />}
+                        <span>{vm.isAdmin ? 'Admin' : 'Login'}</span>
+                    </Link>
 
                     {/* Mobile Menu Toggle */}
                     <button
@@ -136,18 +158,17 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
                     ))}
                 </div>
 
-                {vm.isAdmin && (
-                    <div className="header-mobile-admin">
-                        <Link
-                            to="/admin/dashboard"
-                            className="header-mobile-admin-btn"
-                            onClick={vm.closeMobileMenu}
-                        >
-                            <Settings size={18} />
-                            Admin Dashboard
-                        </Link>
-                    </div>
-                )}
+                {/* Mobile Login/Admin Section (always visible) */}
+                <div className="header-mobile-admin">
+                    <Link
+                        to={vm.isAdmin ? "/admin/dashboard" : "/login"}
+                        className={`header-mobile-admin-btn ${!vm.isAdmin ? 'header-mobile-login-btn' : ''}`}
+                        onClick={vm.closeMobileMenu}
+                    >
+                        {vm.isAdmin ? <Settings size={18} /> : <LogIn size={18} />}
+                        {vm.isAdmin ? 'Admin Dashboard' : 'Login'}
+                    </Link>
+                </div>
             </nav>
 
             {/* Header Offset Spacer */}

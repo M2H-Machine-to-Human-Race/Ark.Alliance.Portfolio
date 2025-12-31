@@ -9,8 +9,9 @@
  * Available theme variants.
  * - 'default': Dark cyberpunk theme with sidebar navigation
  * - 'architectural': Light minimalist theme with radial navigation
+ * - 'aloevera': Purple gradient theme with modern typography
  */
-export type ThemeVariant = 'default' | 'architectural';
+export type ThemeVariant = 'default' | 'architectural' | 'aloevera';
 
 /**
  * Configuration for a theme.

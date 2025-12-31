@@ -1,5 +1,5 @@
 import { apiClient } from '../api/client';
-import { DashboardDataDto } from 'ark-portfolio-share/dtos/dashboard.dto';
+import { DashboardDataDto } from '@ark/portfolio-share';
 
 const DASHBOARD_MOCK: DashboardDataDto = {
     stats: { totalProjects: 12, totalSkills: 25, totalExperienceYears: 8, activeProjects: 3 },

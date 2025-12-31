@@ -154,5 +154,11 @@ router.put('/admin/carousel/reorder', authMiddleware, asyncHandler(adminControll
 router.put('/admin/carousel/:id', authMiddleware, asyncHandler(adminController.updateCarouselItem.bind(adminController)));
 router.delete('/admin/carousel/:id', authMiddleware, asyncHandler(adminController.deleteCarouselItem.bind(adminController)));
 
+// ============================================
+// Static Export Routes (Protected)
+// ============================================
+import staticExportRoutes from './static-export.routes';
+router.use('/admin', authMiddleware, staticExportRoutes);
+
 export default router;
 

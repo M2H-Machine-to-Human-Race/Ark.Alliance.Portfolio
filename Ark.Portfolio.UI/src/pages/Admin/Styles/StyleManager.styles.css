@@ -177,3 +177,113 @@
 .btn-save:hover {
     background-color: #2563eb;
 }
+
+/* ============================================
+   Quick Theme Selector
+   ============================================ */
+
+.sm-section {
+    margin-bottom: 1.5rem;
+}
+
+.sm-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: #6b7280;
+}
+
+.sm-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.sm-section-desc {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.sm-divider {
+    border-top: 1px solid #e5e7eb;
+    margin: 1.5rem 0;
+}
+
+.sm-theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.sm-theme-card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    padding: 0;
+}
+
+.sm-theme-card:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.sm-theme-card.active {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.sm-theme-preview {
+    height: 80px;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
+.sm-theme-preview-default {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+.sm-theme-preview-architectural {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #3b82f6 100%);
+}
+
+.sm-theme-preview-aloevera {
+    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%);
+}
+
+.sm-theme-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.sm-theme-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #111827;
+}
+
+.sm-theme-desc {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.sm-theme-active-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 0.75rem;
+    font-weight: 600;
+    justify-content: center;
+}

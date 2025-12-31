@@ -34,19 +34,19 @@
 export const API_CONFIG = {
     /**
      * Base URL for all public API endpoints
-     * Default: http://localhost:8085/api
+     * Default: https://localhost:3085/api
      */
     BASE_URL: import.meta.env.VITE_API_URL
         ? `${import.meta.env.VITE_API_URL}/api`
-        : 'http://localhost:8085/api',
+        : 'https://localhost:3085/api',
 
     /**
      * Base URL for admin API endpoints (protected)
-     * Default: http://localhost:8085/api/admin
+     * Default: https://localhost:3085/api/admin
      */
     ADMIN_BASE_URL: import.meta.env.VITE_API_URL
         ? `${import.meta.env.VITE_API_URL}/api/admin`
-        : 'http://localhost:8085/api/admin',
+        : 'https://localhost:3085/api/admin',
 
     /**
      * Request timeout in milliseconds

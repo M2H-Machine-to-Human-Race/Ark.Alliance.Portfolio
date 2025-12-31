@@ -1,0 +1,351 @@
+/**
+ * Markdown Renderer Styles
+ * Professional-grade styling matching GitHub/Obsidian quality
+ */
+
+.markdown-content {
+    font-family: var(--font-primary, 'Inter', sans-serif);
+    color: var(--text-primary, #e2e8f0);
+    line-height: 1.7;
+    max-width: 80ch;
+    font-size: 1rem;
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary, #e2e8f0);
+    scroll-margin-top: 5rem;
+}
+
+.markdown-content h1 {
+    font-size: 2.5rem;
+    border-bottom: 2px solid var(--accent-primary, #6366f1);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.markdown-content h2 {
+    font-size: 2rem;
+    border-bottom: 1px solid var(--bg-tertiary, #1e2749);
+    padding-bottom: 0.5rem;
+}
+
+.markdown-content h3 {
+    font-size: 1.5rem;
+}
+
+.markdown-content h4 {
+    font-size: 1.25rem;
+}
+
+.markdown-content h5 {
+    font-size: 1.1rem;
+}
+
+.markdown-content h6 {
+    font-size: 1rem;
+    color: var(--text-secondary, #94a3b8);
+}
+
+/* Heading anchors */
+.markdown-content h1 a,
+.markdown-content h2 a,
+.markdown-content h3 a,
+.markdown-content h4 a,
+.markdown-content h5 a,
+.markdown-content h6 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.markdown-content h1:hover a::before,
+.markdown-content h2:hover a::before,
+.markdown-content h3:hover a::before {
+    content: '#';
+    position: absolute;
+    left: -1.5rem;
+    color: var(--accent-primary, #6366f1);
+    font-weight: 400;
+}
+
+/* ============================================
+   Paragraphs
+   ============================================ */
+
+.markdown-content p {
+    margin: 1rem 0;
+    line-height: 1.7;
+}
+
+.markdown-content p:first-child {
+    margin-top: 0;
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+
+.markdown-content pre {
+    background: var(--bg-secondary, #141b3d);
+    border: 1px solid var(--bg-tertiary, #1e2749);
+    border-radius: var(--radius-md, 0.5rem);
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.markdown-content pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-family: var(--font-mono, 'Fira Code', 'Consolas', monospace);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.markdown-content code {
+    background: var(--bg-tertiary, #1e2749);
+    padding: 0.2em 0.4em;
+    border-radius: var(--radius-sm, 0.25rem);
+    font-family: var(--font-mono, 'Fira Code', 'Consolas', monospace);
+    font-size: 0.875em;
+    color: var(--accent-primary, #6366f1);
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+
+.markdown-content ul,
+.markdown-content ol {
+    padding-left: 2rem;
+    margin: 1rem 0;
+}
+
+.markdown-content li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.markdown-content li>p {
+    margin: 0.25rem 0;
+}
+
+.markdown-content ul ul,
+.markdown-content ol ol,
+.markdown-content ul ol,
+.markdown-content ol ul {
+    margin: 0.5rem 0;
+}
+
+/* Task lists */
+.markdown-content input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+.markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    border-radius: var(--radius-md, 0.5rem);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.markdown-content th,
+.markdown-content td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--bg-tertiary, #1e2749);
+    text-align: left;
+}
+
+.markdown-content th {
+    background: var(--bg-secondary, #141b3d);
+    font-weight: 600;
+    color: var(--text-primary, #e2e8f0);
+}
+
+.markdown-content tr:nth-child(even) {
+    background: rgba(30, 39, 73, 0.3);
+}
+
+.markdown-content tr:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+
+.markdown-content blockquote {
+    border-left: 4px solid var(--accent-primary, #6366f1);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-secondary, #94a3b8);
+    background: rgba(99, 102, 241, 0.05);
+    padding: 1rem 1.5rem;
+    border-radius: 0 var(--radius-md, 0.5rem) var(--radius-md, 0.5rem) 0;
+}
+
+.markdown-content blockquote p {
+    margin: 0.5rem 0;
+}
+
+.markdown-content blockquote :first-child {
+    margin-top: 0;
+}
+
+.markdown-content blockquote :last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+
+.markdown-content a {
+    color: var(--accent-primary, #6366f1);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.markdown-content a:hover {
+    border-bottom-color: var(--accent-primary, #6366f1);
+    color: var(--accent-secondary, #8b5cf6);
+}
+
+.markdown-content a:visited {
+    color: var(--accent-secondary, #8b5cf6);
+}
+
+/* External links icon */
+.markdown-content a[target="_blank"]::after {
+    content: '↗';
+    margin-left: 0.25rem;
+    font-size: 0.875em;
+    opacity: 0.6;
+}
+
+/* ============================================
+   Horizontal Rules
+   ============================================ */
+
+.markdown-content hr {
+    border: none;
+    border-top: 2px solid var(--bg-tertiary, #1e2749);
+    margin: 2rem 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+
+.markdown-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md, 0.5rem);
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   Strikethrough
+   ============================================ */
+
+.markdown-content del {
+    color: var(--text-secondary, #94a3b8);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* ============================================
+   Details/Summary
+   ============================================ */
+
+.markdown-content details {
+    background: var(--bg-secondary, #141b3d);
+    border: 1px solid var(--bg-tertiary, #1e2749);
+    border-radius: var(--radius-md, 0.5rem);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.markdown-content summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+    color: var(--accent-primary, #6366f1);
+}
+
+.markdown-content summary:hover {
+    color: var(--accent-secondary, #8b5cf6);
+}
+
+/* ============================================
+   Math Equations (KaTeX)
+   ============================================ */
+
+.markdown-content .katex {
+    font-size: 1.1em;
+}
+
+.markdown-content .katex-display {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+    .markdown-content {
+        font-size: 0.9375rem;
+    }
+
+    .markdown-content h1 {
+        font-size: 2rem;
+    }
+
+    .markdown-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .markdown-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .markdown-content pre {
+        padding: 1rem;
+    }
+
+    .markdown-content table {
+        font-size: 0.875rem;
+    }
+
+    .markdown-content th,
+    .markdown-content td {
+        padding: 0.5rem 0.75rem;
+    }
+}

@@ -7,7 +7,8 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { authService } from '../../../services/auth.service';
+import { authService } from '../../services/auth.service';
+import { profileService } from '../../services/profile.service';
 
 /**
  * Navigation item configuration
@@ -17,6 +18,14 @@ export interface NavItem {
     label: string;
     path: string;
     icon?: React.ReactNode;
+}
+
+/**
+ * Profile data for header display
+ */
+export interface HeaderProfile {
+    fullName: string;
+    title: string;
 }
 
 /**
@@ -33,6 +42,10 @@ export interface HeaderV2Model {
     isAdmin: boolean;
     /** Is header scrolled (for shadow effect) */
     isScrolled: boolean;
+    /** Profile data for header */
+    profile: HeaderProfile;
+    /** Current page title */
+    currentPageTitle: string;
 
     // Actions
     navigate: (path: string) => void;
@@ -51,6 +64,20 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 /**
+ * Get page title from path
+ */
+const getPageTitle = (path: string): string => {
+    if (path === '/' || path === '') return '';
+    if (path.startsWith('/projects/')) return 'Project Details';
+    if (path === '/projects') return 'Projects';
+    if (path === '/resume' || path === '/cv') return 'Resume';
+    if (path === '/architecture') return 'Architecture';
+    if (path === '/login') return 'Login';
+    if (path.startsWith('/admin')) return 'Admin';
+    return '';
+};
+
+/**
  * HeaderV2 ViewModel hook
  * Encapsulates all header logic and state management.
  */
@@ -61,6 +88,28 @@ export const useHeaderV2Model = (): HeaderV2Model => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [profile, setProfile] = useState<HeaderProfile>({
+        fullName: 'Armand Richelet-Kleinberg',
+        title: 'AI Principal Solutions Architect'
+    });
+
+    // Fetch profile data
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const data = await profileService.getProfile();
+                if (data) {
+                    setProfile({
+                        fullName: `${data.firstName} ${data.lastName}`,
+                        title: data.title || ''
+                    });
+                }
+            } catch (error) {
+                console.warn('Failed to fetch profile for header:', error);
+            }
+        };
+        fetchProfile();
+    }, []);
 
     // Check admin status
     useEffect(() => {
@@ -127,6 +176,8 @@ export const useHeaderV2Model = (): HeaderV2Model => {
         isMobileMenuOpen,
         isAdmin,
         isScrolled,
+        profile,
+        currentPageTitle: getPageTitle(location.pathname),
         navigate,
         toggleMobileMenu,
         closeMobileMenu,
@@ -135,3 +186,4 @@ export const useHeaderV2Model = (): HeaderV2Model => {
 };
 
 export default useHeaderV2Model;
+

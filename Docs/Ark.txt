@@ -1,0 +1,331 @@
+ 
+
+Personal Details 
+
+Name / Title 
+
+Armand Richelet-Kleinberg / AI Principal Solutions Architect – Full Stack Dev./ Tech - Business & Technical Analyst - Artist  
+
+Current Role 
+
+AI Principal Solutions Architect – Full Stack Dev. Business functional analyst 
+
+Availability 
+
+Now 
+
+ 
+
+Overview  
+
+Experienced AI Principal Architect with 20+ years in software development and system architecture, focused on the AI industry. Specialized in designing and delivering AI-driven solutions, MLOps pipelines, and cloud-native systems using C#, TypeScript (React), Js, Python. Proven ability to build scalable, event-driven architectures and integrate advanced AI frameworks. Expert in Agile/DevOps environments, translating complex AI business needs into robust, production-grade platforms. Strong track record in leading full-stack development across AI-centric applications and infrastructures. 
+
+ 
+
+ 
+
+Technical Skills 
+
+Coding Languages 
+
+C#, TypeScript, Python, JavaScript, Java, C, C++, T-SQL, PL-SQL, PS1, Batch 
+
+Framework(s) 
+
+.NET up to 9, .NET Framework, Entity Framework, Python Ecosystem. Android Studio, Adobe suite including Premiere, AfterEffect, Photoshop automation. Cinema 4D Maxon Scripting and Automation. 
+
+Databases 
+
+SQL Server, SQLite, PostgreSQL, DB2, Oracle 9i, Sybase, Informix, MongoDB 
+
+Tools & Platforms 
+
+Azure Services, Docker, Kubernetes, GitHub, RabbitMQ, MQSeries, 
+
+Methodologies 
+
+Agile/Scrum, DevOps, Domain-Driven, Cloud-Native Architecture, MLOps, Design (DDD), CQRS, Event-Driven Architecture (EDA), Microservices, ITIL, Resiliency Patterns (Circuit Breaker/Bulkhead/Retry). 
+
+Others 
+
+Build AI libraries, AI-driven System Architecture, Full-Stack AI Development, Business & Technical Analysis, Hugging Face Ecosystem, Prompt Engineering (Design/Test/Negatives Prompts, Tokenization, Resilient Design Processes (Postmortem, Incident Response), Startup Environment Experience.  
+
+ 
+
+  
+
+ 
+
+Work Experience  
+
+Client/Industry 
+
+M2H / AI and Technology 
+
+Project 
+
+Ark.Alliance Ecosystem; Mindful AI Initiatives 
+
+from - to  
+
+December 2022 - Actual 
+
+Job Title / Position 
+
+AI Lead & Principal Solution Architect - Full Stack Dev - Business Analyst 
+
+Technologies  
+
+C#, React, Ts, Js, Python, Three.js, Docker, Kubernetes, Entity Framework (SQL Server/SQLite/PostgreSQL/MongoDB), Cloud-Native/EDA, MLOps, DDD/CQRS/Microservices, OpenAI – Anthropic - Mistral - DeepSeek -Apî: SLM. 
+
+Description & Responsibilities 
+
+-AI development and architecture for mindful AI solutions. Designed, tested, and built AI prompt libraries and guidelines for consistent experiences.  
+
+-Coaching teams in full-stack development using C#, React, JS and Python in startup environments.  
+
+-Implementing resilient patterns (Circuit Breaker/Bulkhead/Retry) and processes (postmortem reviews, incident response).  
+
+-Building systems from scratch with Agile/DevOps, focusing on AI integration and scalability. 
+
+ 
+
+Client/Industry 
+
+Ahold Delhaize / Logistics Supply Chain 
+
+Project  
+
+New Logistics Systems Design & Dev, TMS, SAP, UBIDATA, Integration & Optimization 
+
+from - to  
+
+January 2021 – February 2025 
+
+Job Title / Position 
+
+Solution & Software Architect & Full Stack Dev 
+
+Technologies  
+
+C#, TypeScript, JavaScript, .NET 8, Blazor, Microservices, RestApi, DevOps, ML integration, SQL Server, Azure services, SAP ERP, TMS Ortec & Axiodis, EDIFACT, Manhattan, Entity Framework, Java, SQLite/PostgreSQL, CQRS/Clean Architecture/MediatR, EDA, GitHub, WMS, OpenAI API 
+
+Description & Responsibilities 
+
+-Participated in business analysis and test acceptance for new TMS systems. -Designed generic integration/orchestration systems and tracking tools for deliveries.  
+
+-Prepared and followed up on cutover and HyperCare periods. 
+
+-Engaged in architecture and team coaching, including collaboration with offshore full-stack development teams.  
+
+ 
+
+Client/Industry 
+
+Candriam / Asset Management 
+
+Project  
+
+Asset Position Integration System Mainframe <=> Chopin System 
+
+from - to  
+
+April – December 2020 
+
+Job Title / Position 
+
+Software Architect & Full Stack Dev 
+
+Technologies  
+
+C#, .NET 5, Docker, MQSeries, DB2, Cobol, WinServices, WebServices, Microservices RestApi, SQL Server, CQRS/Clean Architecture/MediatR, GitFlow, DevOps 
+
+Description & Responsibilities 
+
+Performed reverse engineering of the current system. 
+
+-Created 'As-Is' to 'To-Be' cartography. 
+
+-Designed and rewrote positions (shares, funds) integration system between Mainframe and new front-end system for financial account managers and traders.  
+
+-Managed cutover and HyperCare periods 
+
+ 
+
+Client/Industry 
+
+Liberty Steel / Steel Industry 
+
+Project  
+
+Web-Based Application Portfolio for Steel Production & SAP - Third Party System Integration - Azure Cloud Based 
+
+from - to  
+
+May 2019 – April 2020 
+
+Job Title / Position 
+
+Business Analyst & Full Stack Dev 
+
+Technologies  
+
+C#, .NET up to 5, JS, TypeScript, Python, Rest Api Microservices, C++, MVVM, Blazor, MQSeries, Azure Services (DataFactory, AD, VM, Bus, Blob, Monitoring...), DB2, SAP ERP, SQL Server/SQLite/PostgreSQL, Clean Architecture, WCF, WPF, Jira, DevOps, GitHub 
+
+Description & Responsibilities 
+
+Conducted business analysis and developed new web-based microservices and logistics-integration software, along with analytical tools for steel-production flows.  
+
+-Migrated old services to WCF.  
+
+-Rewrote production planning scheduler interface and Mainframe integration. 
+
+ 
+
+Client/Industry 
+
+Delhaize Group / Retail Logistics 
+
+Project  
+
+Logistics Systems Design, SAP Integration & Optimization & Cloud Transformation 
+
+from - to  
+
+September 2011 – April 2019 
+
+Job Title / Position 
+
+Full Stack Developer & IT Owner & Analyst 
+
+Technologies  
+
+C#, .NET Framework, Entity Framework, Azure Services, VB, Java-Eclipse, SOAP, WebServices, SAP ERP, SQL Server/Oracle/DB2, AS400 iSeries, MQSeries, WMS, AVG (IoT), Programming Devices PDA, Pagers, LED Screens 
+
+Description & Responsibilities 
+
+-Developed global reporting for monitoring and compliance.  
+
+-Enhanced and rewrote legacy supplier management applications with SAP and new WMS integrations, dock scheduling, RECADV transmissions, and VMI support.  
+
+-Provided L2/L3 support for complex issues.  
+
+-Implemented ITIL processes for resilient logistics solutions. 
+
+ 
+
+Client/Industry 
+
+Spectacles Charles Kleinberg / Entertainment 
+
+Project  
+
+Live Show Control Systems (Video, 3D StereoScopic, Sound 
+
+from - to  
+
+Jan 2005 - Nov 2015 
+
+Job Title / Position 
+
+Solution Architect - Developer, Artist - Scenographer 
+
+Technologies  
+
+C#, Python, TypeScript, C++, DirectX, Vrml, Unity, Three.js, Max/Msp ,3D Max, PhotoShop, MandleBlub, Delphi, Fruityloop, Maya, Maxon C4D, IClone. 
+
+Description & Responsibilities 
+
+-Architected real-time systems for show control, including audio/MIDI/lighting sync and interactive 3D Stereoscopic.  
+
+-Built from scratch using Agile/DevOps in high-growth settings.  
+
+-Developed performant solutions, leveraging skills transferable to AI-driven interactive applications. 
+
+ 
+
+Client/Industry 
+
+BNP Paribas Fortis / Banking 
+
+Project  
+
+Voice over IP 
+
+from - to  
+
+November 2010 – February 2011 
+
+Job Title / Position 
+
+ICT Consultant 
+
+Technologies  
+
+.NET Framework (C#/VB/WinForms/WebForms/WCF), SQL Server, Soap 
+
+Description & Responsibilities 
+
+-Consulted on full-stack development for banking Voice over Ip systems, focusing on robust architectures. 
+
+ 
+
+Client/Industry 
+
+Mastercard / Financial Services 
+
+Project  
+
+Credit Card chip validation, Terminal testing & Reporting system 
+
+from - to  
+
+November 2004 – February 2005 
+
+Job Title / Position 
+
+Software Engineer 
+
+Technologies  
+
+C#, C, SQL Server, Assembleur 
+
+Description & Responsibilities 
+
+-Developed testing & reporting systems for credit card chip validation. 
+
+-Collaborated on feature launches to enhance transactions. 
+
+-Tested for compliance. 
+
+ 
+
+Education  
+
+Degree 
+
+Master’s degree studies in ULB - UDM (not completed) 
+
+Subject 
+
+ITIL, 2013 
+
+Institution 
+
+ULB - UDM 
+
+ 
+
+Certificates & Training 
+
+Year 
+
+ 
+
+2013 
+
+ITIL 
+
+
+
+

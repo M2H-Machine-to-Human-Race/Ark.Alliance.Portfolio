@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Define configuration to allow switching mock/real
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8085/api';
-const USE_MOCKS_ON_FAIL = true;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://localhost:3085/api';
+const USE_MOCKS_ON_FAIL = import.meta.env.VITE_USE_MOCKS === 'true';
 
 export class ApiClient {
     private client: AxiosInstance;

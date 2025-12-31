@@ -16,7 +16,7 @@ export function getStoredTheme(): ThemeVariant {
     if (typeof window === 'undefined') return DEFAULT_THEME;
 
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored && (stored === 'default' || stored === 'architectural')) {
+    if (stored && (stored === 'default' || stored === 'architectural' || stored === 'aloevera')) {
         return stored;
     }
     return DEFAULT_THEME;

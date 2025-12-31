@@ -11,7 +11,7 @@
         "PL-SQL"
     ],
     "frameworks": [
-        ".NET up to 9",
+        ".NET up to 10",
         "Entity Framework",
         "Python Ecosystem",
         "Unity",

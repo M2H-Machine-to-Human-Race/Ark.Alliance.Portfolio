@@ -3,8 +3,9 @@ import { CvDto, SkillLevel, Technology } from '../../../../Ark.Portfolio.Share';
 
 // Mock CV for fallback
 const MOCK_CV: CvDto = {
+    profile: {} as any,
     education: [],
-    experience: [],
+    experiences: [],
     skills: [
         { name: 'React', level: SkillLevel.EXPERT, category: 'Frontend' },
         { name: 'Node.js', level: SkillLevel.ADVANCED, category: 'Backend' }

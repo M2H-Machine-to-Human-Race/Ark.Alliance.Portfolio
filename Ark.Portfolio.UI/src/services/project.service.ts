@@ -1,10 +1,14 @@
 import { apiClient } from '../api/client';
-import { ProjectDto } from 'ark-portfolio-share/dtos/project.dto';
+import { ProjectDto } from '@ark/portfolio-share';
 import { MOCK_PROJECTS } from '@ark/portfolio-share';
 
 export class ProjectService {
-    async getProjects(): Promise<ProjectDto[]> {
+    async getAll(): Promise<ProjectDto[]> {
         return apiClient.get<ProjectDto[]>('/projects', {}, MOCK_PROJECTS);
+    }
+
+    async getProjects(): Promise<ProjectDto[]> {
+        return this.getAll();
     }
 
     async getFeaturedProjects(): Promise<ProjectDto[]> {

@@ -84,8 +84,52 @@
     background-clip: text;
 }
 
+/* Profile Info in Header */
+.header-profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.header-profile-name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.header-page-separator {
+    color: var(--text-muted);
+    font-weight: var(--font-normal);
+    opacity: 0.5;
+}
+
+.header-page-title {
+    color: var(--color-primary-400);
+    font-weight: var(--font-medium);
+}
+
+.header-profile-title {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-weight: var(--font-normal);
+    letter-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
 @media (max-width: 480px) {
     .header-logo-text {
+        display: none;
+    }
+
+    .header-profile-info {
         display: none;
     }
 }
@@ -172,6 +216,19 @@
     background: rgba(139, 92, 246, 0.2);
     border-color: rgba(139, 92, 246, 0.4);
     box-shadow: var(--shadow-glow-purple);
+}
+
+/* Login Button Variant (when not authenticated) */
+.header-login-btn {
+    color: var(--color-primary-400);
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.header-login-btn:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: var(--shadow-glow-blue);
 }
 
 .header-admin-btn svg {
@@ -362,6 +419,37 @@
 .header-mobile-admin-btn:hover {
     transform: translateY(-1px);
     box-shadow: var(--shadow-lg), var(--shadow-glow-purple);
+}
+
+/* Mobile Login Button Variant */
+.header-mobile-login-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+}
+
+/* Export Button */
+.header-export-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.5rem 1rem;
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: white;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: none;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+.header-mobile-login-btn:hover {
+    box-shadow: var(--shadow-lg), var(--shadow-glow-blue);
 }
 
 /* ============================================

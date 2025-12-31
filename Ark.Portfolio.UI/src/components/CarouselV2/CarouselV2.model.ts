@@ -85,7 +85,7 @@ export const useCarouselV2Model = (config: CarouselV2Config): CarouselV2Model =>
     const [direction, setDirection] = useState<'left' | 'right'>('right');
 
     const touchStartX = useRef<number>(0);
-    const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+    const autoplayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const totalSlides = slides.length;
 

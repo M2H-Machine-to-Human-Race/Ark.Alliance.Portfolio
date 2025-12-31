@@ -1,7 +1,10 @@
 import React from 'react';
 import { AdminLayout } from '../../../components/generic/AdminLayout';
 import { useStyleManagerModel } from './StyleManager.model';
-import { Plus, Edit2, Trash2, Check } from 'lucide-react';
+import { Plus, Edit2, Trash2, Check, Palette } from 'lucide-react';
+import { useTheme } from '../../../components/generic/ThemeContext';
+import { THEME_CONFIGS } from '../../../components/generic/ThemeContext/ThemeContext.config';
+import { ThemeVariant } from '../../../components/generic/ThemeContext/ThemeContext.types';
 import './StyleManager.styles.css';
 
 export const StyleManager: React.FC = () => {
@@ -18,9 +21,52 @@ export const StyleManager: React.FC = () => {
         handleSave
     } = useStyleManagerModel();
 
+    // Theme switcher
+    const { theme: currentTheme, setTheme } = useTheme();
+    const themeVariants = Object.keys(THEME_CONFIGS) as ThemeVariant[];
+
     return (
         <AdminLayout title="Style Manager">
             <div className="style-manager">
+                {/* Quick Theme Selector Section */}
+                <div className="sm-section">
+                    <div className="sm-section-header">
+                        <Palette size={20} />
+                        <h2 className="sm-section-title">Quick Theme Selector</h2>
+                    </div>
+                    <p className="sm-section-desc">
+                        Switch between available theme presets. Changes apply immediately.
+                    </p>
+                    <div className="sm-theme-grid">
+                        {themeVariants.map(variant => {
+                            const config = THEME_CONFIGS[variant];
+                            const isActive = variant === currentTheme;
+                            return (
+                                <button
+                                    key={variant}
+                                    className={`sm-theme-card ${isActive ? 'active' : ''}`}
+                                    onClick={() => setTheme(variant)}
+                                >
+                                    <div className={`sm-theme-preview sm-theme-preview-${variant}`} />
+                                    <div className="sm-theme-info">
+                                        <span className="sm-theme-name">{config.displayName}</span>
+                                        <span className="sm-theme-desc">{config.description}</span>
+                                    </div>
+                                    {isActive && (
+                                        <div className="sm-theme-active-badge">
+                                            <Check size={14} />
+                                            Active
+                                        </div>
+                                    )}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                <div className="sm-divider" />
+
+                {/* Custom Styles Section */}
                 <div className="sm-header">
                     <h2 className="sm-title">Theme Configurations</h2>
                     <button

@@ -1,0 +1,364 @@
+/**
+ * ResumePageV2 Styles
+ * Premium resume page with timeline, skills visualization, and responsive layout.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+/* ============================================
+   Page Layout
+   ============================================ */
+
+.resume-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.resume-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-8);
+}
+
+@media (max-width: 768px) {
+    .resume-container {
+        padding: var(--space-4);
+    }
+}
+
+/* ============================================
+   Page Header
+   ============================================ */
+
+.resume-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+    padding: var(--space-8) 0;
+}
+
+.resume-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+    letter-spacing: -0.025em;
+}
+
+.resume-title span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.resume-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Summary Card */
+.resume-summary {
+    max-width: 800px;
+    margin: var(--space-8) auto 0;
+    padding: var(--space-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    text-align: left;
+}
+
+/* ============================================
+   Main Content Grid
+   ============================================ */
+
+.resume-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+}
+
+@media (min-width: 1024px) {
+    .resume-content {
+        grid-template-columns: 2fr 1fr;
+        gap: var(--space-12);
+    }
+}
+
+/* ============================================
+   Timeline Section
+   ============================================ */
+
+.resume-timeline-section {
+    min-width: 0;
+    /* Prevent grid blowout */
+}
+
+.resume-section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+}
+
+.resume-section-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    color: white;
+}
+
+.resume-section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+}
+
+/* ============================================
+   Skills Section
+   ============================================ */
+
+.resume-skills-section {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-4));
+    height: fit-content;
+}
+
+@media (max-width: 1023px) {
+    .resume-skills-section {
+        position: static;
+    }
+}
+
+.resume-skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+/* Skill Category Card */
+.resume-skill-category {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.resume-skill-category:hover {
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.resume-skill-category-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.resume-skill-category-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    color: white;
+}
+
+.resume-skill-category-name {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+}
+
+.resume-skill-category-count {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    padding: var(--space-1) var(--space-2);
+    background: rgba(100, 116, 139, 0.1);
+    border-radius: var(--radius-full);
+}
+
+/* Skills List */
+.resume-skill-list {
+    padding: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.resume-skill-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(100, 116, 139, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+    transition: all var(--duration) var(--ease-out);
+}
+
+.resume-skill-item:hover {
+    background: rgba(100, 116, 139, 0.2);
+}
+
+/* Proficiency Bar (optional) */
+.resume-skill-proficiency {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    opacity: 0.5;
+}
+
+/* ============================================
+   Skill with Progress Bar (Alternative View)
+   ============================================ */
+
+.resume-skill-progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-2) 0;
+}
+
+.resume-skill-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resume-skill-progress-name {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-primary);
+}
+
+.resume-skill-progress-value {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+}
+
+.resume-skill-progress-bar {
+    height: 4px;
+    background: rgba(100, 116, 139, 0.2);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.resume-skill-progress-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width var(--duration-slow) var(--ease-out);
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+.resume-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: var(--space-4);
+}
+
+.resume-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--color-primary-500);
+    border-radius: var(--radius-full);
+    animation: spin 1s linear infinite;
+}
+
+.resume-loading-text {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   Error State
+   ============================================ */
+
+.resume-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: var(--space-4);
+    text-align: center;
+}
+
+.resume-error-icon {
+    color: var(--color-error);
+}
+
+.resume-error-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+}
+
+.resume-error-text {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+    .resume-page {
+        background: white;
+    }
+
+    .resume-skills-section {
+        position: static;
+    }
+
+    .resume-content {
+        display: block;
+    }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+.resume-animate-in {
+    animation: slide-up var(--duration-slow) var(--ease-out) both;
+}
+
+.resume-animate-in.delay-1 {
+    animation-delay: 100ms;
+}
+
+.resume-animate-in.delay-2 {
+    animation-delay: 200ms;
+}
+
+.resume-animate-in.delay-3 {
+    animation-delay: 300ms;
+}

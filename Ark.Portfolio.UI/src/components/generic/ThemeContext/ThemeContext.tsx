@@ -36,7 +36,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, initialT
     // Apply theme class to document
     useEffect(() => {
         const root = document.documentElement;
-        root.classList.remove('theme-default', 'theme-architectural');
+        root.classList.remove('theme-default', 'theme-architectural', 'theme-aloevera');
         root.classList.add(`theme-${theme}`);
     }, [theme]);
 
