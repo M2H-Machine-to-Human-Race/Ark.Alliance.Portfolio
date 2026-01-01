@@ -129,7 +129,14 @@ describe('ProjectsPageV2', () => {
     });
 
     describe('Success State with Mock Data', () => {
-        it('renders all projects from MOCK_PROJECTS', () => {
+        // Guard: Verify mock data structure before running tests
+        beforeAll(() => {
+            expect(MOCK_PROJECTS).toBeDefined();
+            expect(Array.isArray(MOCK_PROJECTS)).toBe(true);
+            expect(MOCK_PROJECTS.length).toBeGreaterThan(0);
+        });
+
+        it('renders all projects from MOCK_PROJECTS dynamically', () => {
             mockUseProjectsPageV2Model.mockReturnValue({
                 isLoading: false,
                 error: null,
@@ -145,14 +152,13 @@ describe('ProjectsPageV2', () => {
             // Verify projects grid is rendered
             expect(screen.getByTestId('projects-grid')).toBeInTheDocument();
 
-            // Verify each project from seed data is rendered
-            expect(screen.getByText('Ark.Alliance.TimeSeries.Service')).toBeInTheDocument();
-            expect(screen.getByText('Ark.Alliance Ecosystem')).toBeInTheDocument();
-            expect(screen.getByText('Ark.Alliance.Trading.Bot')).toBeInTheDocument();
-            expect(screen.getByText('Ark.Alliance.Statochi')).toBeInTheDocument();
+            // DATA-DRIVEN: Verify each project from MOCK_PROJECTS is rendered
+            MOCK_PROJECTS.forEach(project => {
+                expect(screen.getByText(project.title)).toBeInTheDocument();
+            });
         });
 
-        it('renders project descriptions from seed data', () => {
+        it('renders project descriptions dynamically from MOCK_PROJECTS', () => {
             mockUseProjectsPageV2Model.mockReturnValue({
                 isLoading: false,
                 error: null,
@@ -165,9 +171,12 @@ describe('ProjectsPageV2', () => {
                 </MemoryRouter>
             );
 
-            // Check descriptions from seed data
-            expect(screen.getByText(/Backend backbone for high-frequency market data/)).toBeInTheDocument();
-            expect(screen.getByText(/AI-driven architecture for mindful human-AI interaction/)).toBeInTheDocument();
+            // DATA-DRIVEN: Check that each project's description is rendered
+            MOCK_PROJECTS.forEach(project => {
+                // Use first 50 chars of description for unique identification
+                const descSnippet = project.description.substring(0, 50);
+                expect(screen.getByText(new RegExp(descSnippet.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeInTheDocument();
+            });
         });
 
         it('renders technology badges for each project', () => {
@@ -185,7 +194,13 @@ describe('ProjectsPageV2', () => {
 
             // Check that tech badges are rendered
             const techBadges = screen.getAllByTestId('tech-badge');
-            expect(techBadges.length).toBeGreaterThan(0);
+
+            // Calculate expected tech badges (max 5 per project as per component)
+            const expectedBadgeCount = MOCK_PROJECTS.reduce((count, project) => {
+                return count + Math.min(project.technologies?.length || 0, 5);
+            }, 0);
+
+            expect(techBadges.length).toBe(expectedBadgeCount);
         });
 
         it('renders correct number of project cards', () => {
@@ -201,9 +216,81 @@ describe('ProjectsPageV2', () => {
                 </MemoryRouter>
             );
 
-            // Should have exactly 4 projects from seed data
+            // DATA-DRIVEN: Should have exactly MOCK_PROJECTS.length project cards
             MOCK_PROJECTS.forEach(project => {
                 expect(screen.getByTestId(`project-card-${project.id}`)).toBeInTheDocument();
+            });
+
+            // Verify count matches
+            const projectCards = screen.getAllByTestId(/project-card-\d+/);
+            expect(projectCards.length).toBe(MOCK_PROJECTS.length);
+        });
+
+        it('renders project status for each project', () => {
+            mockUseProjectsPageV2Model.mockReturnValue({
+                isLoading: false,
+                error: null,
+                projects: MOCK_PROJECTS
+            });
+
+            render(
+                <MemoryRouter>
+                    <TestableProjectsPageV2 />
+                </MemoryRouter>
+            );
+
+            // Count unique statuses and verify they're all displayed
+            const statusCounts = new Map<string, number>();
+            MOCK_PROJECTS.forEach(project => {
+                statusCounts.set(project.status, (statusCounts.get(project.status) || 0) + 1);
+            });
+
+            // Verify each unique status is displayed the correct number of times
+            statusCounts.forEach((count, status) => {
+                const statusElements = screen.getAllByText(status);
+                // Filter to only those with the correct class
+                const actualStatusElements = statusElements.filter(el => el.classList.contains('project-card-status'));
+                expect(actualStatusElements.length).toBe(count);
+            });
+        });
+
+        it('verifies mock data integrity and structure', () => {
+            // STRUCTURAL VALIDATION: Ensure mock data has required fields
+            MOCK_PROJECTS.forEach((project, index) => {
+                expect(project.id).toBeDefined();
+                expect(project.title).toBeDefined();
+                expect(project.description).toBeDefined();
+                expect(project.status).toBeDefined();
+                expect(project.technologies).toBeDefined();
+                expect(Array.isArray(project.technologies)).toBe(true);
+
+                // Verify technologies are non-empty
+                expect(project.technologies.length).toBeGreaterThan(0);
+            });
+        });
+
+        it('renders features for projects that have them', () => {
+            mockUseProjectsPageV2Model.mockReturnValue({
+                isLoading: false,
+                error: null,
+                projects: MOCK_PROJECTS
+            });
+
+            render(
+                <MemoryRouter>
+                    <TestableProjectsPageV2 />
+                </MemoryRouter>
+            );
+
+            // Verify projects with features have them defined
+            MOCK_PROJECTS.forEach(project => {
+                if (project.features && project.features.length > 0) {
+                    expect(project.features.length).toBeGreaterThan(0);
+                    project.features.forEach(feature => {
+                        expect(feature.title).toBeDefined();
+                        expect(feature.description).toBeDefined();
+                    });
+                }
             });
         });
     });

@@ -46,7 +46,45 @@ export class ApiClient {
             throw error;
         }
     }
+
+    async put<T>(url: string, data?: any, config?: AxiosRequestConfig, mockData?: T): Promise<T> {
+        try {
+            const response = await this.client.put<T>(url, data, config);
+            return response.data;
+        } catch (error) {
+            if ((FORCE_MOCKS || ALLOW_FALLBACK) && mockData) {
+                console.warn(`API call to ${url} failed. Falling back to mock data.`);
+                return mockData;
+            }
+            throw error;
+        }
+    }
+
+    async delete<T>(url: string, config?: AxiosRequestConfig, mockData?: T): Promise<T> {
+        try {
+            const response = await this.client.delete<T>(url, config);
+            return response.data;
+        } catch (error) {
+            if ((FORCE_MOCKS || ALLOW_FALLBACK) && mockData) {
+                console.warn(`API call to ${url} failed. Falling back to mock data.`);
+                return mockData;
+            }
+            throw error;
+        }
+    }
+
+    async patch<T>(url: string, data?: any, config?: AxiosRequestConfig, mockData?: T): Promise<T> {
+        try {
+            const response = await this.client.patch<T>(url, data, config);
+            return response.data;
+        } catch (error) {
+            if ((FORCE_MOCKS || ALLOW_FALLBACK) && mockData) {
+                console.warn(`API call to ${url} failed. Falling back to mock data.`);
+                return mockData;
+            }
+            throw error;
+        }
+    }
 }
 
 export const apiClient = new ApiClient();
-
