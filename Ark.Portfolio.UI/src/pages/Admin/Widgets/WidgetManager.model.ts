@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AdminWidgetDto } from '@ark/portfolio-share';
 import { authService } from '../../../services/auth.service';
+import { API_CONFIG } from '../../../config/api.constants';
 
-const API_URL = 'http://localhost:5085/api/admin/widgets';
+const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/widgets`;
 
 export const useWidgetManagerModel = () => {
     const [widgets, setWidgets] = useState<AdminWidgetDto[]>([]);

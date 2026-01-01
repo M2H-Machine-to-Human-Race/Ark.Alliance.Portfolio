@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AdminMenuItemDto } from '@ark/portfolio-share';
 import { authService } from '../../../services/auth.service';
+import { API_CONFIG } from '../../../config/api.constants';
 
-const API_URL = 'http://localhost:5085/api/admin/menu';
+const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/menu`;
 
 export const useMenuManagerModel = () => {
     const [menuItems, setMenuItems] = useState<AdminMenuItemDto[]>([]);

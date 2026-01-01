@@ -45,15 +45,28 @@ export const ProjectsPageV2: React.FC = () => {
                         <div className="projects-loading-spinner" />
                         <p>Loading projects...</p>
                     </div>
+                ) : vm.error ? (
+                    <div className="projects-error">
+                        <h2 className="projects-error-title">Unable to Load Projects</h2>
+                        <p className="projects-error-message">{vm.error}</p>
+                    </div>
                 ) : (
                     <div className="projects-grid">
                         {vm.projects.map((project) => (
-                            <Link
+                            <div
                                 key={project.id}
-                                to={`/projects/${project.id}`}
-                                className="project-card-link"
+                                className="project-card-link relative group"
                             >
-                                <GlassCard className="project-card group">
+                                <GlassCard className="project-card h-full">
+                                    {/* Main Overlay Link */}
+                                    <Link
+                                        to={`/projects/${project.id}`}
+                                        className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-2xl"
+                                        aria-label={`View ${project.title}`}
+                                    >
+                                        <span className="sr-only">View Details</span>
+                                    </Link>
+
                                     {/* Image */}
                                     <div className="project-card-image-container">
                                         {project.imageUrl ? (
@@ -83,18 +96,18 @@ export const ProjectsPageV2: React.FC = () => {
                                                 </h3>
                                                 <span className="project-card-status">{project.status}</span>
                                             </div>
-                                            <div className="project-card-actions">
+                                            <div className="project-card-actions relative z-20">
                                                 {project.repoUrl && (
-                                                    <span
+                                                    <a
+                                                        href={project.repoUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
                                                         className="action-btn"
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
-                                                            window.open(project.repoUrl, '_blank');
-                                                        }}
                                                         title="View Repository"
+                                                        onClick={(e) => e.stopPropagation()}
                                                     >
                                                         <Github size={20} />
-                                                    </span>
+                                                    </a>
                                                 )}
                                             </div>
                                         </div>
@@ -123,7 +136,7 @@ export const ProjectsPageV2: React.FC = () => {
                                         </div>
                                     </div>
                                 </GlassCard>
-                            </Link>
+                            </div>
                         ))}
                     </div>
                 )}

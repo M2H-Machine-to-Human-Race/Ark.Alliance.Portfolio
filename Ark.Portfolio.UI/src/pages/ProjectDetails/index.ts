@@ -1,2 +1,2 @@
-export * from './ProjectDetailsPage';
+export * from './v2/ProjectPresentation';
 

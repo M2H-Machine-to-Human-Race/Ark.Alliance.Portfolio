@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Home, FileText, Briefcase, Settings, LogIn, Download } from 'lucide-react';
+import { Menu, X, Home, FileText, Briefcase, Settings, LogIn, Download, Loader2 } from 'lucide-react';
 import { useHeaderV2Model } from './HeaderV2.model';
 import './HeaderV2.styles.css';
 
@@ -25,6 +25,7 @@ export interface HeaderV2Props {
  * Polished, accessible header with:
  * - Logo and brand
  * - Primary navigation (Home, Resume, Portfolio)
+ * - Generate Static Website button (when authenticated)
  * - Admin access button (when authenticated)
  * - Responsive mobile menu with slideout drawer
  * - Keyboard navigation support
@@ -82,16 +83,28 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
 
                 {/* Right Section */}
                 <div className="header-right">
-                    {/* Export Static Site Button (only for admin) */}
+                    {/* Generate Static Website Button (only for admin) */}
                     {vm.isAdmin && (
-                        <Link
-                            to="/admin/dashboard"
+                        <button
                             className="header-export-btn"
-                            title="Export Static Website"
+                            onClick={vm.generateStaticSite}
+                            disabled={vm.isExporting}
+                            title={vm.exportStatus || "Generate Static Website"}
                         >
-                            <Download size={16} />
-                            <span>Export</span>
-                        </Link>
+                            {vm.isExporting ? (
+                                <Loader2 size={16} className="header-export-spinner" />
+                            ) : (
+                                <Download size={16} />
+                            )}
+                            <span>{vm.isExporting ? 'Generating...' : 'Export Site'}</span>
+                        </button>
+                    )}
+
+                    {/* Export Status Toast */}
+                    {vm.exportStatus && !vm.isExporting && (
+                        <div className="header-export-status">
+                            {vm.exportStatus}
+                        </div>
                     )}
 
                     {/* Admin/Login Button (always visible on desktop) */}
@@ -157,6 +170,27 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
                         </Link>
                     ))}
                 </div>
+
+                {/* Mobile Export Button (for admin) */}
+                {vm.isAdmin && (
+                    <div className="header-mobile-export">
+                        <button
+                            className="header-mobile-export-btn"
+                            onClick={() => {
+                                vm.generateStaticSite();
+                                vm.closeMobileMenu();
+                            }}
+                            disabled={vm.isExporting}
+                        >
+                            {vm.isExporting ? (
+                                <Loader2 size={18} className="header-export-spinner" />
+                            ) : (
+                                <Download size={18} />
+                            )}
+                            {vm.isExporting ? 'Generating...' : 'Generate Static Site'}
+                        </button>
+                    </div>
+                )}
 
                 {/* Mobile Login/Admin Section (always visible) */}
                 <div className="header-mobile-admin">

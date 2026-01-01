@@ -10,6 +10,7 @@ import { Project } from '../database/entities/project.entity';
 import { ProjectTechnology } from '../database/entities/project-technology.entity';
 import { AdminProjectDto, CrudResponseDto, PaginatedResponseDto } from '@ark/portfolio-share';
 import { Like } from 'typeorm';
+import { EventService } from './event.service';
 
 /**
  * Service for managing projects in the admin panel.
@@ -17,6 +18,7 @@ import { Like } from 'typeorm';
 export class AdminProjectService {
     private projectRepo = AppDataSource.getRepository(Project);
     private techRepo = AppDataSource.getRepository(ProjectTechnology);
+    private eventService = new EventService();
 
     /**
      * Get all projects with pagination and optional search.
@@ -94,6 +96,8 @@ export class AdminProjectService {
                 savedProject.technologies = techs;
             }
 
+            await this.eventService.publish('ProjectCreated', { id: savedProject.id });
+
             return {
                 success: true,
                 message: 'Project created successfully',
@@ -162,6 +166,8 @@ export class AdminProjectService {
                 project.technologies = techs;
             }
 
+            await this.eventService.publish('ProjectUpdated', { id: project.id });
+
             return {
                 success: true,
                 message: 'Project updated successfully',
@@ -193,6 +199,8 @@ export class AdminProjectService {
                     timestamp: new Date().toISOString()
                 };
             }
+            await this.eventService.publish('ProjectDeleted', { id });
+
             return {
                 success: true,
                 message: 'Project deleted successfully',

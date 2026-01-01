@@ -1,318 +1,338 @@
-# Ark.Alliance.Portfolio
+<p align="center">
+  <img src="83925731.png" alt="Ark Alliance Logo" width="120" />
+</p>
 
-**A Modern Developer Portfolio System**
+<h1 align="center">Ark.Alliance.Portfolio</h1>
 
-A full-stack TypeScript monorepo for showcasing projects, experience, and skills with a premium cyberpunk-inspired design.
+<p align="center">
+  <strong>A comprehensive, AI-powered portfolio ecosystem with CMS capabilities</strong>
+</p>
 
----
-
-**Author**: Armand Richelet-Kleinberg  
-**License**: MIT
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [API Reference](#api-reference)
-- [Deployment](#deployment)
-- [Dependencies](#dependencies)
-- [Configuration](#configuration)
+<p align="center">
+  <a href="https://github.com/ark-alliance/ark-portfolio/actions/workflows/ci.yml">
+    <img src="https://github.com/ark-alliance/ark-portfolio/actions/workflows/ci.yml/badge.svg" alt="CI Status" />
+  </a>
+  <a href="LICENSE.md">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
+  </a>
+  <img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen" alt="Node Version" />
+  <img src="https://img.shields.io/badge/typescript-5.x-blue" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/react-18.x-61dafb" alt="React" />
+</p>
 
 ---
 
-## Overview
+## 📖 Table of Contents
 
-Ark.Portfolio is a comprehensive portfolio system designed for developers and engineers to showcase their work. It features:
-
-- **Hero Section**: Professional introduction with social links
-- **Project Showcase**: Carousel and grid displays with rich project details
-- **CV/Resume**: Education, experience, and skills presentation
-- **Architecture Diagrams**: Mermaid-powered technical documentation
-- **Modern UI**: Glassmorphism, animations, and responsive design
-
----
-
-## Architecture
-
-### System Overview
-
-```mermaid
-graph TB
-    subgraph Client["Client Layer"]
-        Browser["Web Browser"]
-    end
-    
-    subgraph UI["Ark.Portfolio.UI (React)"]
-        Router["React Router"]
-        Pages["Pages"]
-        Components["Generic Components"]
-        ViewModels["ViewModels (MVVM)"]
-        APIClient["API Client"]
-    end
-    
-    subgraph Backend["Ark.Portfolio.Backend (Express)"]
-        Routes["Express Routes"]
-        Controllers["Controllers"]
-        Services["Services"]
-        Mappers["DTO Mappers"]
-        Repository["Repositories"]
-    end
-    
-    subgraph Share["Ark.Portfolio.Share"]
-        DTOs["DTOs"]
-        Enums["Enums"]
-    end
-    
-    subgraph Data["Data Layer"]
-        SQLite["SQLite Database"]
-    end
-    
-    Browser --> Router
-    Router --> Pages
-    Pages --> Components
-    Pages --> ViewModels
-    ViewModels --> APIClient
-    APIClient -->|HTTP REST| Routes
-    Routes --> Controllers
-    Controllers --> Services
-    Services --> Mappers
-    Services --> Repository
-    Repository --> SQLite
-    
-    Share -.->|types| UI
-    Share -.->|types| Backend
-```
-
-### Data Flow
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant UI as React UI
-    participant VM as ViewModel
-    participant API as API Service
-    participant Ctrl as Controller
-    participant Svc as Service
-    participant Mapper as Mapper
-    participant DB as SQLite
-    
-    User->>UI: Navigate to page
-    UI->>VM: onInit()
-    VM->>API: getProjects()
-    API->>Ctrl: GET /api/projects
-    Ctrl->>Svc: getAllProjects()
-    Svc->>DB: Query entities
-    DB-->>Svc: Project entities
-    Svc->>Mapper: mapProjectsToDtos()
-    Mapper-->>Svc: ProjectDto[]
-    Svc-->>Ctrl: ProjectDto[]
-    Ctrl-->>API: JSON response
-    API-->>VM: Projects data
-    VM-->>UI: State update
-    UI-->>User: Rendered content
-```
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Project Structure](#-project-structure)
+- [Architecture Layers](#-architecture-layers)
+- [Getting Started](#-getting-started)
+- [Configuration](#-configuration)
+- [Deployment](#-deployment)
+- [CI/CD](#-cicd)
+- [Contributing](#-contributing)
+- [Security](#-security)
+- [License](#-license)
 
 ---
 
-## Project Structure
+## 🌟 Overview
 
-```
+**Ark.Alliance.Portfolio** is a production-ready portfolio platform that goes beyond a simple showcase. It demonstrates enterprise-grade software engineering practices while providing a fully functional content management system.
+
+### What Makes It Special
+
+| Principle | Implementation |
+|-----------|----------------|
+| **Clean Architecture** | Strict separation across UI, Backend, and Shared contract layers |
+| **AI Integration** | Multi-provider AI services (OpenAI, Anthropic, Google Gemini) for content generation |
+| **Static Export** | Generate deployable static websites from CMS content |
+| **Type Safety** | End-to-end TypeScript with shared DTOs ensuring API contract compliance |
+| **Resilience** | Self-healing services, graceful fallbacks, and comprehensive error handling |
+| **Design Excellence** | Adaptive theming, MVVM architecture, and accessibility-first components |
+
+---
+
+## 🚀 Key Features
+
+### 🤖 AI-Powered Content Generation
+
+Integrated AI services supporting multiple providers with encrypted API key storage:
+- **OpenAI** (GPT-4, GPT-4 Turbo)
+- **Anthropic** (Claude 3 Opus, Sonnet, Haiku)
+- **Google Gemini** (1.5 Pro, 1.5 Flash)
+
+Accessible via the Admin Dashboard under AI Settings for content generation, summarization, and enhancement.
+
+### 📤 Static Website Export
+
+Transform your portfolio into a deployable static website:
+- One-click export from the Admin Dashboard
+- Generates optimized HTML, CSS, and assets
+- Ready for GitHub Pages, Netlify, or any static host
+- Preserves all styling and interactivity
+
+### 🖼️ Media Management
+
+Comprehensive media handling through the CMS:
+- Upload and organize images, videos, and documents
+- Automatic thumbnail generation
+- Tag-based organization and search
+- CDN-ready asset optimization
+
+### 🎨 Dynamic Theming
+
+Runtime theme switching with two built-in themes:
+- **Architectural** - Clean, structural aesthetic
+- **Aloe Vera** - Organic, nature-inspired design
+
+### 📊 Admin Dashboard
+
+Full-featured content management:
+- Project management with Mermaid diagram support
+- Resume/CV editing with timeline components
+- Skill and technology tagging
+- Analytics and visitor insights (planned)
+
+---
+
+## 📂 Project Structure
+
+```text
 Ark.Portfolio/
-├── Ark.Portfolio.Backend/       # Express.js REST API
-│   ├── src/
-│   │   ├── controllers/         # HTTP endpoint handlers
-│   │   ├── services/            # Business logic
-│   │   ├── mappers/             # Entity-to-DTO mappers
-│   │   ├── database/            # TypeORM entities & repos
-│   │   └── routes/              # Route definitions
-│   └── README.md
-│
-├── Ark.Portfolio.Share/         # Shared TypeScript library
-│   ├── dtos/                    # Data Transfer Objects
-│   ├── enums/                   # Shared enumerations
-│   ├── mocks/                   # Development mock data
-│   └── README.md
-│
-├── Ark.Portfolio.UI/            # React frontend
-│   ├── src/
-│   │   ├── components/          # Reusable UI components
-│   │   │   ├── base/            # MVVM base classes
-│   │   │   └── generic/         # Generic components
-│   │   ├── pages/               # Application pages
-│   │   ├── api/                 # API client & services
-│   │   └── styles/              # Global styles
-│   └── README.md
-│
-├── Docs/                        # Additional documentation
-└── README.md                    # This file
+├── .github/                    # GitHub Actions & Templates
+│   └── workflows/              # CI/CD Pipelines
+├── Ark.Portfolio.UI/           # Frontend (React/Vite/TypeScript)
+├── Ark.Portfolio.Backend/      # Backend (Node.js/Express/TypeORM)
+├── Ark.Portfolio.Share/        # Shared Library (DTOs, Enums, Types)
+├── Ark.Portfolio.Tests/        # Unified Test Suite (Jest)
+├── Docs/                       # Additional documentation
+├── CONTRIBUTING.md             # Contribution guidelines
+├── SECURITY.md                 # Security policy
+├── LICENSE.md                  # MIT License
+└── README.md                   # This file
 ```
 
 ---
 
-## Getting Started
+## 🏗️ Architecture Layers
+
+This solution follows a layered architecture pattern. Each layer has a specific responsibility and communicates through well-defined contracts.
+
+| Layer | Module | Description | Documentation |
+|-------|--------|-------------|---------------|
+| **Frontend** | Ark.Portfolio.UI | React application with MVVM architecture, responsive design, and admin CMS | [📖 README](./Ark.Portfolio.UI/README.md) |
+| **Backend** | Ark.Portfolio.Backend | RESTful API with authentication, AI services, and database persistence | [📖 README](./Ark.Portfolio.Backend/README.md) |
+| **Shared** | Ark.Portfolio.Share | Type-safe contracts (DTOs, Enums) shared across the stack | [📖 README](./Ark.Portfolio.Share/README.md) |
+| **Quality** | Ark.Portfolio.Tests | Comprehensive test suite with 235+ tests | [📖 README](./Ark.Portfolio.Tests/README.md) |
+
+### Dependency Graph
+
+```mermaid
+graph TD
+    subgraph "Presentation Layer"
+        UI[Ark.Portfolio.UI<br/>React + Vite]
+    end
+    
+    subgraph "Application Layer"
+        Backend[Ark.Portfolio.Backend<br/>Express + TypeORM]
+    end
+    
+    subgraph "Shared Contracts"
+        Share[Ark.Portfolio.Share<br/>DTOs + Enums]
+    end
+    
+    subgraph "Quality Assurance"
+        Tests[Ark.Portfolio.Tests<br/>Jest + RTL]
+    end
+
+    UI -->|HTTP/REST| Backend
+    UI -->|Import Types| Share
+    Backend -->|Import Types| Share
+    Tests -.->|Tests| UI
+    Tests -.->|Tests| Backend
+    Tests -->|Import Types| Share
+```
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- **Node.js** 18 or higher
-- **npm** 9 or higher
+- **Node.js** v18.0.0 or higher
+- **npm** v9.0.0 or higher
+- **Git** for version control
 
-### Installation
+### Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/ark/portfolio.git
-cd Ark.Portfolio
+git clone https://github.com/ark-alliance/ark-portfolio.git
+cd ark-portfolio
 
-# Install all dependencies
-cd Ark.Portfolio.Share && npm install && cd ..
-cd Ark.Portfolio.Backend && npm install && cd ..
-cd Ark.Portfolio.UI && npm install && cd ..
+# Install and build Shared Library (required first)
+cd Ark.Portfolio.Share
+npm install
+npm run build
+
+# Install and start Backend
+cd ../Ark.Portfolio.Backend
+npm install
+npm run dev
+# Backend runs on https://localhost:3085
+
+# In a new terminal - Install and start Frontend
+cd Ark.Portfolio.UI
+npm install
+npm run dev
+# Frontend runs on http://localhost:3080
 ```
 
-### Development
+### Running Tests
 
 ```bash
-# Terminal 1: Start Backend (port 8085)
-cd Ark.Portfolio.Backend
-npm run dev
+cd Ark.Portfolio.Tests
+npm install
+npm test
 
-# Terminal 2: Start Frontend (port 5173)
-cd Ark.Portfolio.UI
-npm run dev
+# With coverage report
+npm run test:coverage
 ```
 
-Open http://localhost:5173 in your browser.
+---
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+#### Backend (`Ark.Portfolio.Backend/.env`)
+
+```env
+# Server Configuration
+PORT=3085
+NODE_ENV=development
+
+# Database
+DATABASE_TYPE=sqlite
+DATABASE_NAME=portfolio.db
+
+# Authentication
+JWT_SECRET=your-super-secret-jwt-key
+JWT_EXPIRES_IN=24h
+
+# AI Services (encrypted in production)
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+GOOGLE_AI_API_KEY=...
+
+# CORS
+CORS_ORIGIN=http://localhost:3080
+```
+
+#### Frontend (`Ark.Portfolio.UI/.env`)
+
+```env
+# API Configuration
+VITE_API_URL=https://localhost:3085/api
+VITE_USE_MOCK_DATA=false
+
+# Feature Flags
+VITE_ENABLE_AI_FEATURES=true
+VITE_ENABLE_STATIC_EXPORT=true
+```
 
 ---
 
-## API Reference
+## 🚢 Deployment
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/profile` | GET | Portfolio owner profile |
-| `/api/projects` | GET | All projects |
-| `/api/projects/featured` | GET | Featured projects |
-| `/api/projects/:id/presentation` | GET | Full project details |
-| `/api/cv` | GET | Education, experience, skills |
-| `/api/dashboard` | GET | Dashboard statistics |
+### Production Build
 
----
-
-## Deployment
+```bash
+# Build all layers
+cd Ark.Portfolio.Share && npm run build
+cd ../Ark.Portfolio.Backend && npm run build
+cd ../Ark.Portfolio.UI && npm run build
+```
 
 ### Docker Deployment
 
 ```bash
-# Build and run with docker-compose
+# Build and run with Docker Compose (if available)
 docker-compose up -d
-
-# Or build images separately
-docker build -t ark-portfolio-backend ./Ark.Portfolio.Backend
-docker build -t ark-portfolio-ui ./Ark.Portfolio.UI
 ```
 
-### Manual Deployment
+### Static Site Export
 
-1. Build the Share library:
-   ```bash
-   cd Ark.Portfolio.Share && npm run build
-   ```
-
-2. Build and start the Backend:
-   ```bash
-   cd Ark.Portfolio.Backend
-   npm run build
-   npm start
-   ```
-
-3. Build and serve the UI:
-   ```bash
-   cd Ark.Portfolio.UI
-   npm run build
-   # Serve the dist/ folder with your preferred web server
-   ```
+1. Log in to the Admin Dashboard
+2. Navigate to **Export** → **Static Site**
+3. Click **Generate Static Website**
+4. Download the ZIP file
+5. Deploy to your preferred static host (GitHub Pages, Netlify, Vercel)
 
 ---
 
-## Dependencies
+## 🔄 CI/CD
 
-### Backend
-| Package | Purpose |
-|---------|---------|
-| express | Web framework |
-| typeorm | ORM for database |
-| sqlite3 | Database driver |
-| cors | Cross-origin support |
-| helmet | Security headers |
-| dotenv | Environment config |
+This repository uses **GitHub Actions** for continuous integration. The workflow is triggered on:
 
-### Frontend
-| Package | Purpose |
-|---------|---------|
-| react | UI library |
-| react-router-dom | Routing |
-| axios | HTTP client |
-| chart.js | Data visualization |
-| mermaid | Diagram rendering |
-| lucide-react | Icons |
-| tailwindcss | CSS framework |
+- **Push** to `main` or `develop` branches
+- **Pull Requests** targeting `main` or `develop`
 
-### Shared
-| Package | Purpose |
-|---------|---------|
-| typescript | Type safety |
+### Workflow Steps
+
+1. ✅ Build Shared Library
+2. ✅ Build Backend
+3. ✅ Build Frontend
+4. ✅ Run Test Suite (235+ tests)
+
+### Branch Protection
+
+| Branch | Protection Rules |
+|--------|-----------------|
+| `main` | Requires PR approval, passing CI, no force push |
+| `develop` | Requires passing CI |
+
+Workflow file: [.github/workflows/ci.yml](.github/workflows/ci.yml)
 
 ---
 
-## Configuration
+## 🤝 Contributing
 
-### Environment Variables
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a pull request.
 
-**Backend** (`Ark.Portfolio.Backend/.env`):
-```env
-PORT=8085
-DATABASE_PATH=./ark_portfolio.sqlite
-```
+### Quick Contribution Guide
 
-**Frontend** (`Ark.Portfolio.UI/.env`):
-```env
-VITE_API_URL=http://localhost:8085/api
-```
-
-### Database
-
-The application uses **SQLite** by default. On first startup:
-- Database is auto-created
-- Initial data is seeded automatically
-
-To reset the database, delete `ark_portfolio.sqlite` and restart.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ---
 
-## License
+## 🔒 Security
 
-MIT License
+For security concerns, please review our [Security Policy](SECURITY.md).
 
-Copyright (c) 2024 - 2025  Armand Richelet-Kleinberg
+- 🔐 JWT-based authentication with bcrypt hashing
+- 🛡️ Helmet security headers
+- 🔑 Encrypted API key storage for AI services
+- 🚫 CORS protection enabled
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+To report a vulnerability, please email: security@ark-alliance.io
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+---
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## 📜 License
+
+This project is licensed under the **MIT License** - see the [LICENSE.md](LICENSE.md) file for details.
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by <strong>Armand Richelet-Kleinberg</strong> | © M2H.IO - Ark Alliance Ecosystem</sub><br>
+  <sub>AI-assisted development with Anthropic Claude & Google Gemini</sub>
+</div>

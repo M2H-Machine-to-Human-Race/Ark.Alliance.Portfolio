@@ -11,7 +11,7 @@
  */
 
 import { ProjectSection, ProjectDto } from '@ark/portfolio-share';
-import { SidebarNavItem } from '../../components/ProjectSidebar';
+import { SidebarNavItem } from '../../../components/ProjectSidebar';
 
 /**
  * ProjectPresentation Page Props

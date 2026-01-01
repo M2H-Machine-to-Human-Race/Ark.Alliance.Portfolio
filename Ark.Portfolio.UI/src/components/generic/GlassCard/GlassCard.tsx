@@ -18,8 +18,8 @@ export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
                 animate={{ opacity: 1, y: 0 }}
                 className={cn(
                     "backdrop-blur-md border rounded-2xl p-6 transition-all duration-300",
-                    "bg-slate-900/50 border-slate-800",
-                    variant === 'default' && "hover:border-slate-700 hover:bg-slate-900/60 hover:shadow-xl hover:shadow-blue-900/10",
+                    "bg-[var(--bg-card)] border-[var(--border-color)]",
+                    variant === 'default' && "hover:border-[var(--border-color-hover)] hover:bg-slate-900/60 hover:shadow-xl hover:shadow-blue-900/10",
                     variant === 'scanner' && "border-blue-500/30 bg-blue-900/10 hover:border-blue-400/50",
                     variant === 'hologram' && "border-emerald-500/30 bg-emerald-900/10 hover:border-emerald-400/50",
                     className

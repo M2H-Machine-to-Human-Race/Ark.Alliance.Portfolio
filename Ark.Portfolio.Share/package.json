@@ -1,16 +1,72 @@
 {
-    "name": "@ark/portfolio-share",
+    "name": "@ark-alliance/portfolio-share",
     "version": "1.0.0",
-    "description": "Shared layer for Ark Portfolio",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "build": "tsc"
+    "description": "Shared DTOs, Enums, and Type definitions for Ark.Alliance.Portfolio ecosystem",
+    "author": "Armand Richelet-Kleinberg <armand@m2h.io>",
+    "license": "MIT",
+    "homepage": "https://github.com/ark-alliance/ark-portfolio#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ark-alliance/ark-portfolio.git",
+        "directory": "Ark.Portfolio.Share"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ark-alliance/ark-portfolio/issues"
+    },
+    "keywords": [
+        "ark-alliance",
+        "portfolio",
+        "dto",
+        "typescript",
+        "shared",
+        "types"
+    ],
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.js"
+        },
+        "./dtos/*": {
+            "types": "./dist/dtos/*.d.ts",
+            "import": "./dist/dtos/*.js"
+        },
+        "./enums/*": {
+            "types": "./dist/enums/*.d.ts",
+            "import": "./dist/enums/*.js"
+        },
+        "./mocks/*": {
+            "types": "./dist/mocks/*.d.ts",
+            "import": "./dist/mocks/*.js"
+        },
+        "./constants/*": {
+            "types": "./dist/constants/*.d.ts",
+            "import": "./dist/constants/*.js"
+        }
+    },
+    "files": [
+        "dist/**/*",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "clean": "rimraf dist",
+        "prepublishOnly": "npm run clean && npm run build",
+        "typecheck": "tsc --noEmit"
+    },
     "devDependencies": {
+        "rimraf": "^5.0.0",
         "typescript": "^5.0.0"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "engines": {
+        "node": ">=18.0.0"
     }
 }

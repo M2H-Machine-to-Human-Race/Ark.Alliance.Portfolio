@@ -8,6 +8,9 @@
 
 import { EducationRepository, ExperienceRepository, SkillRepository } from '../database/repositories/cv.repository';
 import { CvDto, SkillLevel, Technology } from '@ark/portfolio-share';
+import { AppDataSource } from '../config/database';
+import { Profile } from '../database/entities/profile.entity';
+import { mapProfileToDto } from '../mappers';
 
 /**
  * Service class for CV-related operations.
@@ -29,7 +32,12 @@ export class CvService {
             relations: ['category']
         });
 
+        const profileRepo = AppDataSource.getRepository(Profile);
+        const profile = await profileRepo.findOne({ where: {} });
+        if (!profile) throw new Error('Profile not found');
+
         return {
+            profile: mapProfileToDto(profile),
             education: education.map((e: any) => ({
                 id: e.id,
                 institution: e.institution,
@@ -39,7 +47,7 @@ export class CvService {
                 endDate: e.endDate,
                 description: e.description
             })),
-            experience: experience.map((e: any) => ({
+            experiences: experience.map((e: any) => ({
                 id: e.id,
                 company: e.company,
                 position: e.position,

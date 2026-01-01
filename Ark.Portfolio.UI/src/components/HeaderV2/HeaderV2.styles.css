@@ -443,9 +443,101 @@
     transition: all var(--duration) var(--ease-out);
 }
 
-.header-export-btn:hover {
+.header-export-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+.header-export-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Export Spinner Animation */
+.header-export-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Export Status Toast */
+.header-export-status {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    padding: 0.5rem 1rem;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--text-primary);
+    white-space: nowrap;
+    box-shadow: var(--shadow-lg);
+    animation: fadeInDown 0.2s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Export Section */
+.header-mobile-export {
+    padding: var(--space-3) var(--space-4);
+}
+
+.header-mobile-export-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: white;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.header-mobile-export-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+.header-mobile-export-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+    .header-export-btn span {
+        display: none;
+    }
+
+    .header-export-btn {
+        padding: var(--space-2);
+        border-radius: var(--radius-md);
+    }
 }
 
 .header-mobile-login-btn:hover {

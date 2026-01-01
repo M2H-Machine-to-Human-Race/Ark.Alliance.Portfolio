@@ -17,11 +17,27 @@
         "moduleResolution": "node",
         "types": [
             "jest",
-            "node"
-        ]
+            "node",
+            "react",
+            "react-dom"
+        ],
+        "jsx": "react-jsx",
+        "baseUrl": ".",
+        "paths": {
+            "@ui/*": [
+                "../Ark.Portfolio.UI/src/*"
+            ],
+            "@ark/portfolio-share/*": [
+                "../Ark.Portfolio.Share/*"
+            ],
+            "@ark/portfolio-share": [
+                "../Ark.Portfolio.Share/index.ts"
+            ]
+        }
     },
     "include": [
-        "./**/*.ts"
+        "./**/*.ts",
+        "./**/*.tsx"
     ],
     "exclude": [
         "node_modules",

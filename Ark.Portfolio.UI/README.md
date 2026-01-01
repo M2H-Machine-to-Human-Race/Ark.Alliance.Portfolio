@@ -1,176 +1,203 @@
 # Ark.Portfolio.UI
 
-React/TypeScript frontend application for the Ark Portfolio. Features a modern, responsive design with a cyberpunk-inspired dark theme.
+The **Frontend** is a modern React application built with Vite and TypeScript. It features a polished, responsive user interface with MVVM architecture, multiple themes, deep linking, and a comprehensive admin dashboard with CMS capabilities.
 
-## Overview
+## 📦 Functional Capabilities
 
-Built with:
-- **React 18** with TypeScript
-- **Vite** for fast development and building
-- **MVVM Architecture** for clean separation of concerns
-- **TailwindCSS** for utility-first styling
-- **Lucide React** for icons
-- **React Router** for navigation
-- **Chart.js** for data visualization
-- **Mermaid** for architecture diagrams
+The frontend delivers a premium, responsive experience with deep administrative control.
 
-## Architecture
+| Domain | Capability | Description | Code Reference |
+| :--- | :--- | :--- | :--- |
+| **UX/UI** | **Dynamic Theming** | Runtime theme switching (`Architectural` vs `Aloe Vera`) using CSS variables and React Context. | `src/styles/*-theme.css` |
+| **Routing** | **Deep Linking** | URL-based state recovery for project details and sections, enabling shareable deep links. | `src/pages/ProjectDetails/v2/` |
+| **CMS** | **Admin Dashboard** | Protected route suite for managing content (Projects, Media, Resume) without code changes. | `src/pages/Admin/` |
+| **Export** | **Static Site Generation** | Export the entire portfolio as a static website for deployment on any host. | Admin Dashboard → Export |
+| **Media** | **Asset Management** | Upload, organize, and optimize images and media with tag-based search. | `src/pages/Admin/MediaManager` |
+| **AI** | **AI Configuration** | Configure and test AI providers (OpenAI, Anthropic, Google) for content generation. | `src/pages/Admin/AiSettingsPage` |
+| **Security** | **Auth Context** | Global authentication state persistence and protected route guarding. | `src/contexts/AuthContext.tsx` |
+| **Design** | **Atomic Components** | Reusable V2 component library (Cards, Buttons, Inputs) with strict design tokens. | `src/components/` |
 
-### MVVM Pattern
+---
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  View (React Component)                                  │
-│  - JSX rendering                                         │
-│  - Event handling                                        │
-│  - useState for local state                              │
-└─────────────────┬───────────────────────────────────────┘
-                  │ binds to
-                  ▼
-┌─────────────────────────────────────────────────────────┐
-│  ViewModel (extends BaseComponentModel)                  │
-│  - Business logic                                        │
-│  - Data transformation                                   │
-│  - API orchestration                                     │
-└─────────────────┬───────────────────────────────────────┘
-                  │ uses
-                  ▼
-┌─────────────────────────────────────────────────────────┐
-│  API Services                                            │
-│  - HTTP communication                                    │
-│  - Error handling                                        │
-└─────────────────────────────────────────────────────────┘
-```
+## 🏗️ Project Structure
 
-## Project Structure
-
-```
+```text
 Ark.Portfolio.UI/
-├── public/                  # Static assets
 ├── src/
-│   ├── api/                 # API integration
-│   │   ├── client.ts        # Base HTTP client
-│   │   └── services/        # Domain-specific API services
-│   ├── assets/              # Images, fonts, etc.
-│   ├── components/
-│   │   ├── base/            # Base classes (MVVM)
-│   │   │   ├── BaseComponent.model.ts
-│   │   │   └── BaseComponent.types.ts
-│   │   ├── generic/         # Reusable UI components
-│   │   │   ├── Button/
-│   │   │   ├── Carousel/
-│   │   │   ├── Panel/
-│   │   │   ├── Icon/
-│   │   │   └── ...
-│   │   └── Layout/          # Page layout components
-│   ├── hooks/               # Custom React hooks
-│   ├── pages/               # Application pages
-│   │   ├── Home/            # Home page with hero section
-│   │   ├── Projects/        # Projects listing
-│   │   ├── ProjectDetails/  # Single project view
-│   │   ├── CV/              # Curriculum Vitae
-│   │   └── Architecture/    # System architecture view
-│   ├── services/            # Frontend services
-│   ├── styles/              # Global CSS
-│   ├── utils/               # Utility functions
-│   ├── App.tsx              # Root component
-│   └── main.tsx             # Entry point
-├── index.html
-├── package.json
-├── tailwind.config.js
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## Generic Components
-
-| Component | Description |
-|-----------|-------------|
-| `Button` | Styled button with variants (primary, outline, ghost) |
-| `Carousel` | Auto-playing carousel with controls and indicators |
-| `Panel` | Glass-morphism container panels |
-| `Icon` | Lucide icon wrapper |
-| `GlassCard` | Glassmorphism card component |
-| `KpiCard` | Key Performance Indicator display card |
-| `DataGrid` | Tabular data display |
-| `Timeline` | Vertical timeline component |
-| `MermaidDiagramReader` | Renders Mermaid diagrams |
-
-## Pages
-
-| Page | Route | Description |
-|------|-------|-------------|
-| Home | `/` | Hero section, featured projects carousel |
-| Projects | `/projects` | Grid of all portfolio projects |
-| Project Details | `/projects/:id` | Full project presentation |
-| CV | `/cv` | Education, experience, skills |
-| Architecture | `/architecture` | System architecture diagrams |
-
-## Setup
-
-### Prerequisites
-- Node.js 18+
-- npm 9+
-
-### Installation
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-### Environment Variables
-
-Create a `.env` file:
-
-```env
-VITE_API_URL=http://localhost:8085/api
-```
-
-## Component Development
-
-### Creating a New Component
-
-Each component follows the MVVM structure:
-
-```
-ComponentName/
-├── ComponentName.tsx        # View (React component)
-├── ComponentName.model.ts   # ViewModel (business logic)
-├── ComponentName.types.ts   # TypeScript interfaces
-├── ComponentName.styles.css # Component styles
-└── index.ts                 # Barrel export
-```
-
-### Using the ViewModel
-
-```tsx
-import { useMemo, useEffect, useState } from 'react';
-import { MyViewModel } from './MyComponent.model';
-
-export const MyComponent = () => {
-    const vm = useMemo(() => new MyViewModel(), []);
-    const [tick, setTick] = useState(0);
-
-    useEffect(() => {
-        vm.onDataUpdate = () => setTick(t => t + 1);
-        vm.onInit();
-        return () => vm.onDestroy();
-    }, [vm]);
-
-    return <div>{vm.data}</div>;
-};
+│   ├── api/             # API client and service abstractions
+│   ├── components/      # Reusable UI components (MVVM)
+│   │   ├── HeaderV2/    # Header with navigation
+│   │   ├── CarouselV2/  # Hero carousel
+│   │   ├── TimelineV2/  # Resume timeline
+│   │   └── generic/     # Base components (GlassCard, etc.)
+│   ├── contexts/        # Global state (Auth, Theme)
+│   ├── hooks/           # Custom React hooks
+│   ├── pages/           # Route views
+│   │   ├── Admin/       # CMS Dashboard (Protected)
+│   │   ├── HomeV2/      # Landing page
+│   │   ├── ResumeV2/    # Resume/CV page
+│   │   ├── ProjectsV2/  # Projects grid
+│   │   └── ProjectDetails/ # Project presentation
+│   ├── services/        # Business logic layer
+│   ├── styles/          # CSS themes and global styles
+│   ├── utils/           # Utility functions
+│   ├── App.tsx          # Router & Provider setup
+│   └── main.tsx         # Entry point
+├── public/              # Static assets
+└── dist/                # Production build output
 ```
 
 ---
 
-**Author**: Armand Richelet-Kleinberg
+## 🧠 MVVM Architecture
+
+The application strictly adheres to the **Model-View-ViewModel (MVVM)** design pattern for scalability, testability, and separation of concerns.
+
+### Pattern Structure
+
+| Layer | File | Responsibility |
+|-------|------|----------------|
+| **Model** | `*.model.ts` | Type definitions, interfaces, state shape |
+| **ViewModel** | `use*Model` hook | State management, side effects, business logic |
+| **View** | `*.tsx` | Pure presentation, consumes ViewModel |
+| **Styles** | `*.styles.css` | Component-specific styling |
+
+### Component File Structure
+
+```
+ComponentName/
+├── ComponentName.tsx        # View (presentation only)
+├── ComponentName.model.ts   # ViewModel (state & logic)
+├── ComponentName.styles.css # Styles
+└── index.ts                 # Barrel export
+```
+
+### Data Flow
+
+```mermaid
+graph LR
+    subgraph "MVVM Pattern"
+        V[View<br/>📄 .tsx]
+        VM[ViewModel<br/>🧠 useModel]
+        M[Model<br/>📋 .model.ts]
+    end
+    
+    V -->|User Action| VM
+    VM -->|Updates State| VM
+    VM -->|Re-renders| V
+    VM -.->|Implements| M
+```
+
+---
+
+## 📐 Component Hierarchy
+
+```mermaid
+graph TD
+    App[App.tsx]
+    AuthProvider[AuthProvider]
+    ThemeProvider[ThemeProvider]
+    Router[BrowserRouter]
+    
+    App --> AuthProvider
+    AuthProvider --> ThemeProvider
+    ThemeProvider --> Router
+    
+    subgraph "Public Routes"
+        Router --> HomePage[HomePageV2]
+        Router --> ResumePage[ResumePageV2]
+        Router --> ProjectsPage[ProjectsPageV2]
+        Router --> ProjectDetail[ProjectPresentation]
+    end
+
+    subgraph "Protected Admin Routes"
+        Router --> Dashboard[DashboardPage]
+        Dashboard --> ProjectMan[ProjectManager]
+        Dashboard --> AiSettings[AiSettingsPage]
+        Dashboard --> MediaMan[MediaManager]
+        Dashboard --> StaticExport[StaticExporter]
+    end
+```
+
+---
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+Create a `.env` file in the UI root:
+
+```env
+# API Configuration
+VITE_API_URL=https://localhost:3085/api
+VITE_USE_MOCK_DATA=false
+
+# Feature Flags
+VITE_ENABLE_AI_FEATURES=true
+VITE_ENABLE_STATIC_EXPORT=true
+
+# Theme
+VITE_DEFAULT_THEME=architectural
+```
+
+---
+
+## 🚀 Usage
+
+### Prerequisites
+
+- Node.js v18+
+- Backend running (optional for UI-only development with mock data)
+
+### Development Server
+
+```bash
+npm install
+npm run dev
+# Server runs on http://localhost:3080
+```
+
+### Production Build
+
+```bash
+npm run build
+# Output in /dist
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+## 🎨 Theming
+
+Two built-in themes are available:
+
+| Theme | Description |
+|-------|-------------|
+| **Architectural** | Clean, structural aesthetic with sharp edges |
+| **Aloe Vera** | Organic, nature-inspired with soft curves |
+
+Toggle themes runtime via the Theme Context or Admin settings.
+
+---
+
+## 📱 Responsive Design
+
+The UI is fully responsive with breakpoints:
+
+| Breakpoint | Width | Layout |
+|------------|-------|--------|
+| Mobile | `< 768px` | Single column, hamburger menu |
+| Tablet | `768px - 1024px` | Two columns |
+| Desktop | `> 1024px` | Full layout |
+
+---
+
+<div align="center">
+  <sub>Armand Richelet-Kleinberg © M2H.IO - Ark Alliance Ecosystem</sub><br>
+  <sub>AI-assisted development with Anthropic Claude & Google Gemini</sub>
+</div>

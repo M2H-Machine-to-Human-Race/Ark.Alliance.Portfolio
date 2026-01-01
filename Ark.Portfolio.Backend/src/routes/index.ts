@@ -62,25 +62,7 @@ router.post('/admin/projects', authMiddleware, asyncHandler(adminController.crea
 router.put('/admin/projects/:id', authMiddleware, asyncHandler(adminController.updateProject.bind(adminController)));
 router.delete('/admin/projects/:id', authMiddleware, asyncHandler(adminController.deleteProject.bind(adminController)));
 
-// Admin CV (Legacy redirects)
-router.get('/admin/cv', authMiddleware, (req, res) => res.redirect(301, '/api/admin/resume'));
-router.put('/admin/cv/profile', authMiddleware, (req, res) => res.redirect(307, '/api/admin/resume/profile'));
-router.post('/admin/cv/experience', authMiddleware, (req, res) => res.redirect(307, '/api/admin/resume/experience'));
-router.put('/admin/cv/experience/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/experience/${req.params.id}`));
-router.delete('/admin/cv/experience/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/experience/${req.params.id}`));
-router.post('/admin/cv/education', authMiddleware, (req, res) => res.redirect(307, '/api/admin/resume/education'));
-router.put('/admin/cv/education/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/education/${req.params.id}`));
-router.delete('/admin/cv/education/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/education/${req.params.id}`));
-router.post('/admin/cv/skill', authMiddleware, (req, res) => res.redirect(307, '/api/admin/resume/skill'));
-router.put('/admin/cv/skill/reorder', authMiddleware, (req, res) => res.redirect(307, '/api/admin/resume/skill/reorder'));
-router.put('/admin/cv/skill/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/skill/${req.params.id}`));
-router.delete('/admin/cv/skill/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/skill/${req.params.id}`));
-router.get('/admin/cv/categories', authMiddleware, (req, res) => res.redirect(301, '/api/admin/resume/categories'));
-router.post('/admin/cv/category', authMiddleware, (req, res) => res.redirect(307, '/api/admin/resume/category'));
-router.put('/admin/cv/category/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/category/${req.params.id}`));
-router.delete('/admin/cv/category/:id', authMiddleware, (req, res) => res.redirect(307, `/api/admin/resume/category/${req.params.id}`));
-
-// Admin Resume (Primary)
+// Admin Resume (Primary - replaces deprecated CV endpoints)
 router.get('/admin/resume', authMiddleware, asyncHandler(adminController.getCv.bind(adminController)));
 router.put('/admin/resume/profile', authMiddleware, asyncHandler(adminController.updateProfile.bind(adminController)));
 

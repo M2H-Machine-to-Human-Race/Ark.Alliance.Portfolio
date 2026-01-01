@@ -11,9 +11,10 @@ import { Bot, Save, Sparkles, RefreshCw, AlertCircle, CheckCircle2, Settings, Za
 import { AiSettingsDto } from '@ark/portfolio-share';
 import axios from 'axios';
 import { authService } from '../../../services/auth.service';
+import { API_CONFIG } from '../../../config/api.constants';
 import './AiSettingsPage.styles.css';
 
-const API_URL = 'http://localhost:5085/api/admin';
+const API_URL = API_CONFIG.ADMIN_BASE_URL;
 
 /**
  * AI Provider configuration

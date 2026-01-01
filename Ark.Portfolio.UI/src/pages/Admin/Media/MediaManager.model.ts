@@ -9,8 +9,9 @@ import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { AdminMediaDto, MediaTypeEnum } from '@ark/portfolio-share';
 import { authService } from '../../../services/auth.service';
+import { API_CONFIG } from '../../../config/api.constants';
 
-const API_URL = 'http://localhost:5085/api/admin/media';
+const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/media`;
 
 /**
  * Media type filter tabs.

@@ -25,5 +25,8 @@ export class Education {
 
     @Column({ default: 1 })
     profileId!: number;
+
+    @Column({ default: 0 })
+    displayOrder!: number;
 }
 

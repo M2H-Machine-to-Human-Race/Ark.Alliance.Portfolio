@@ -25,6 +25,7 @@ import { StyleConfig } from '../database/entities/style-config.entity';
 import { CarouselItem } from '../database/entities/carousel-item.entity';
 import { User } from '../database/entities/user.entity';
 import { AiSettings } from '../database/entities/ai-settings.entity';
+import { Outbox } from '../database/entities/outbox.entity';
 
 dotenv.config();
 
@@ -41,7 +42,7 @@ const baseConfig = {
         Profile, Project, ProjectTechnology, Education, Experience, Skill,
         SkillCategory, Widget, Media, ProjectPage, ProjectFeature, ProjectController,
         ProjectEndpoint, TeamMember, MenuItem, StyleConfig, CarouselItem,
-        User, AiSettings
+        User, AiSettings, Outbox
     ],
     subscribers: [],
     migrations: [],

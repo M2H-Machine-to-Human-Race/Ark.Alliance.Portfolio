@@ -13,7 +13,14 @@ export default defineConfig({
     },
     server: {
         port: 3080,
-        https: true
+        https: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3085', // Backend runs HTTP by default
+                changeOrigin: true,
+                secure: false,
+            }
+        }
     },
     build: {
         chunkSizeWarningLimit: 1500,

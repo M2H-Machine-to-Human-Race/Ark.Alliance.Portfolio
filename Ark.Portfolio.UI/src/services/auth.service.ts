@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5085/api/auth';
+// Uses HTTP by default, can be configured via environment variable
+const API_URL = import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/auth`
+    : 'http://localhost:3085/api/auth';
 
 export interface User {
     id: string;

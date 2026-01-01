@@ -8,8 +8,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ProjectCardData } from '../../components/ProjectGrid/ProjectGrid.model';
 import axios from 'axios';
+import { API_CONFIG } from '../../config/api.constants';
 
-const API_URL = 'http://localhost:5085/api';
+const API_URL = API_CONFIG.BASE_URL;
 
 /**
  * PortfolioPageV2 ViewModel state

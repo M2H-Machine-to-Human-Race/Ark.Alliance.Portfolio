@@ -16,8 +16,18 @@ export const LoginPage: React.FC = () => {
     return (
         <div className="login-container">
             <div className="login-card">
+                {/* Logo and Application Name */}
+                <div className="login-branding">
+                    <img
+                        src="/logo.png"
+                        alt="Ark Alliance Logo"
+                        className="login-logo"
+                    />
+                    <h1 className="login-app-name">Ark.Alliance.Portfolio</h1>
+                </div>
+
                 <div className="login-header">
-                    <h1 className="login-title">Admin Portal</h1>
+                    <h2 className="login-title">Admin Portal</h2>
                     <p className="login-subtitle">Sign in to manage your portfolio</p>
                 </div>
 
@@ -53,6 +63,10 @@ export const LoginPage: React.FC = () => {
                         {isLoading ? 'Signing in...' : 'Sign In'}
                     </button>
                 </form>
+
+                <p className="login-footer">
+                    © {new Date().getFullYear()} Ark Alliance Ecosystem
+                </p>
             </div>
         </div>
     );

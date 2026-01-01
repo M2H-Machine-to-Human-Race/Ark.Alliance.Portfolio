@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AdminProjectDto } from '@ark/portfolio-share';
 import { authService } from '../../../services/auth.service';
+import { API_CONFIG } from '../../../config/api.constants';
 
-const API_URL = 'http://localhost:5085/api/admin/projects';
+const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/projects`;
 
 export const useProjectManagerModel = () => {
     const [projects, setProjects] = useState<AdminProjectDto[]>([]);

@@ -13,11 +13,11 @@
 
 import React from 'react';
 import { ArrowLeft, Edit, ExternalLink, Github } from 'lucide-react';
-import { HeaderV2 } from '../../components/HeaderV2/HeaderV2';
-import { ProjectSidebar } from '../../components/ProjectSidebar';
-import { MarkdownRenderer } from '../../components/MarkdownRenderer/MarkdownRenderer';
-import { MermaidDiagramReader } from '../../components/generic/MermaidDiagramReader/MermaidDiagramReader';
-import { TechBadge } from '../../components/TechBadge/TechBadge';
+import { HeaderV2 } from '../../../components/HeaderV2/HeaderV2';
+import { ProjectSidebar } from '../../../components/ProjectSidebar';
+import { MarkdownRenderer } from '../../../components/MarkdownRenderer/MarkdownRenderer';
+import { MermaidDiagramReader } from '../../../components/generic/MermaidDiagramReader/MermaidDiagramReader';
+import { TechBadge } from '../../../components/TechBadge/TechBadge';
 import { useProjectPresentationModel } from './ProjectPresentation.model';
 import { ProjectPresentationProps } from './ProjectPresentation.types';
 import './ProjectPresentation.styles.css';

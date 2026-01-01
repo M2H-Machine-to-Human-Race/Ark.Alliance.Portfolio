@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    # ────────────────────────────────────────────────────────────────
+    # 1. Build Shared Library (Required by all other projects)
+    # ────────────────────────────────────────────────────────────────
+    - name: Install dependencies (Share)
+      working-directory: ./Ark.Portfolio.Share
+      run: npm ci
+
+    - name: Build (Share)
+      working-directory: ./Ark.Portfolio.Share
+      run: npm run build
+
+    # ────────────────────────────────────────────────────────────────
+    # 2. Build Backend
+    # ────────────────────────────────────────────────────────────────
+    - name: Install dependencies (Backend)
+      working-directory: ./Ark.Portfolio.Backend
+      run: npm ci
+
+    - name: Build (Backend)
+      working-directory: ./Ark.Portfolio.Backend
+      run: npm run build
+
+    # ────────────────────────────────────────────────────────────────
+    # 3. Build Frontend
+    # ────────────────────────────────────────────────────────────────
+    - name: Install dependencies (UI)
+      working-directory: ./Ark.Portfolio.UI
+      run: npm ci
+
+    - name: Build (UI)
+      working-directory: ./Ark.Portfolio.UI
+      run: npm run build
+
+    # ────────────────────────────────────────────────────────────────
+    # 4. Run Tests
+    # ────────────────────────────────────────────────────────────────
+    - name: Install dependencies (Tests)
+      working-directory: ./Ark.Portfolio.Tests
+      run: npm ci
+
+    - name: Run Tests
+      working-directory: ./Ark.Portfolio.Tests
+      run: npm test
+
+    - name: Generate Coverage Report
+      working-directory: ./Ark.Portfolio.Tests
+      run: npm run test:coverage
+      continue-on-error: true
+
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report-node-${{ matrix.node-version }}
+        path: Ark.Portfolio.Tests/coverage/
+        retention-days: 7
+      if: matrix.node-version == '20.x'

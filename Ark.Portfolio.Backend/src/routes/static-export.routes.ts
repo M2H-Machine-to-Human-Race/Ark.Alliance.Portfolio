@@ -29,7 +29,7 @@ async function getPortfolioData() {
 
     const [profile, projects, experiences, skills] = await Promise.all([
         profileRepo.findOne({ where: {} }),
-        projectRepo.find({ order: { createdAt: 'DESC' } }),
+        projectRepo.find({ order: { startDate: 'DESC' } }),
         experienceRepo.find({ order: { startDate: 'DESC' } }),
         skillRepo.find()
     ]);

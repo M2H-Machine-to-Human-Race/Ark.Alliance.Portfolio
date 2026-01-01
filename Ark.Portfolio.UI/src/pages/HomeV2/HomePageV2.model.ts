@@ -8,8 +8,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { CarouselSlide } from '../../components/CarouselV2';
 import axios from 'axios';
+import { API_CONFIG } from '../../config/api.constants';
 
-const API_URL = 'http://localhost:5085/api';
+const API_URL = API_CONFIG.BASE_URL;
 
 /**
  * Quick navigation card configuration

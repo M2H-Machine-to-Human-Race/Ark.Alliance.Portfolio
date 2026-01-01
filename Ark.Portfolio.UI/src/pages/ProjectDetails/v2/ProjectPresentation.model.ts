@@ -19,8 +19,8 @@ import {
     ProjectDto,
     TERMINOLOGY,
 } from '@ark/portfolio-share';
-import { projectService } from '../../services/project.service';
-import { SidebarNavItem } from '../../components/ProjectSidebar';
+import { projectService } from '../../../services/project.service';
+import { SidebarNavItem } from '../../../components/ProjectSidebar';
 import {
     ProjectPresentationModel,
     SectionContent,

@@ -28,25 +28,23 @@
  * Default values point to local development environment.
  * Override via VITE_API_URL environment variable for production.
  * 
- * Backend default port: 8085 (as per backend/.env)
- * UI dev server port: 3080 (as per package.json)
+ * Backend default port: 3085 (HTTP by default, HTTPS optional)
+ * UI dev server port: 3080
  */
 export const API_CONFIG = {
     /**
      * Base URL for all public API endpoints
-     * Default: https://localhost:3085/api
+     * Default: http://localhost:3085/api (HTTP by default)
      */
-    BASE_URL: import.meta.env.VITE_API_URL
-        ? `${import.meta.env.VITE_API_URL}/api`
-        : 'https://localhost:3085/api',
+    BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:3085/api',
 
     /**
      * Base URL for admin API endpoints (protected)
-     * Default: https://localhost:3085/api/admin
+     * Default: http://localhost:3085/api/admin
      */
     ADMIN_BASE_URL: import.meta.env.VITE_API_URL
-        ? `${import.meta.env.VITE_API_URL}/api/admin`
-        : 'https://localhost:3085/api/admin',
+        ? `${import.meta.env.VITE_API_URL}/admin`
+        : 'http://localhost:3085/api/admin',
 
     /**
      * Request timeout in milliseconds
@@ -72,4 +70,3 @@ export const API_CONFIG = {
  * Ensures type safety when using API_CONFIG
  */
 export type ApiConfig = typeof API_CONFIG;
-

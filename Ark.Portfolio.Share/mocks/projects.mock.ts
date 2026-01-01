@@ -1,82 +1,283 @@
-import { ProjectDto, ProjectFeatureDto, ProjectPageDto } from '../dtos/project.dto';
+import { ProjectDto } from '../dtos/project.dto';
 import { ProjectStatus } from '../enums/project-status.enum';
 import { Technology } from '../enums/technology.enum';
+import { ProjectSection } from '../enums/project-section.enum';
 
 export const MOCK_PROJECTS: ProjectDto[] = [
     {
         id: '1',
-        title: 'Ark.Alliance Trading Ecosystem',
-        description: 'A high-frequency crypto trading bot and ecosystem featuring a cyberpunk dashboard, real-time WebSocket streaming, and AI-driven trend detection. Built on a microservices architecture with a focus on resilience and speed.',
+        title: 'Ark.Portfolio - AI-Powered Portfolio CMS',
+        description: 'Enterprise-grade, AI-powered portfolio platform combining comprehensive content management with multi-provider AI integration (OpenAI, Anthropic, Google Gemini), static site export capabilities, and end-to-end type safety. Features 20 TypeORM entities, 235+ passing tests, MVVM architecture in React frontend, and RESTful API backend with JWT authentication.',
         status: ProjectStatus.IN_PROGRESS,
-        technologies: [Technology.CSHARP, Technology.REACT, Technology.TYPESCRIPT, Technology.PYTHON, Technology.DOCKER, Technology.KUBERNETES, Technology.THREEJS],
-        imageUrl: '/assets/Bot10.PNG',
-        repoUrl: 'https://github.com/ark/alliance',
-        demoUrl: 'https://ark-alliance.demo',
-        startDate: new Date('2022-12-01'),
+        imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=600',
+        repoUrl: 'https://github.com/YourUsername/Ark.Portfolio',
+        demoUrl: '',
+        technologies: [
+            Technology.REACT,
+            Technology.TYPESCRIPT,
+            Technology.NODEJS,
+            Technology.SQLITE,
+            Technology.REST,
+            Technology.OPENAI,
+            Technology.ANTHROPIC,
+            Technology.GEMINI
+        ],
+        startDate: new Date('2024-01-01'),
         features: [
-            { id: 'f1', title: 'Strategy Command Center', description: "The central nerve center of the operation. Visualizes PnL in real-time with sub-millisecond updates via WebSockets. The 'Cyberpunk' aesthetic isn't just for show—it uses high-contrast neon elements to make critical alerts visible instantly.", icon: 'monitor', imageUrl: '/assets/Bot10.PNG' },
-            { id: 'f2', title: '3D Market Topography', description: "Interactive Three.js visualization of the order book. Peaks and valleys represent buy/sell walls. This allows the trader to 'Surf the Wave' by visually identifying support and resistance zones in 3D space.", icon: 'box', imageUrl: '/assets/Bot6.PNG' },
-            { id: 'f3', title: 'AI Logic Analysis', description: "Real-time introspection into the 'Gemini' AI Strategy. Shows the calculated 'Sigma' (volatility threshold) and 'Trend Confidence' score. This is where the 'Wait' vs 'Trade' decisions happen.", icon: 'cpu', imageUrl: '/assets/Bot2.PNG' },
-            { id: 'f4', title: 'Logistics Matrix', description: "A grid view for managing hundreds of concurrent 'Worker' instances. Each cell represents a Docker container running a specific strategy on a specific pair. Green = Profit, Red = Inversion/Loss.", icon: 'grid', imageUrl: '/assets/Bot13.PNG' },
-            { id: 'f5', title: 'Configuration Console', description: "Fine-grained control over the 'Click' parameters. Here you set the 'Take Profit Step' (e.g., 0.05%) and the 'Inversion Sigma'. Changes propagate to active instances immediately.", icon: 'sliders', imageUrl: '/assets/Bot5.PNG' },
-            { id: 'f6', title: 'Execution Logs', description: "Live stream of order execution events. Tracks latency statistics (e.g., 'Order to Ack: 45ms') and API weight usage to prevent bans.", icon: 'activity', imageUrl: '/assets/Bot4.PNG' }
+            {
+                id: 'f1-1',
+                title: 'Multi-Provider AI Integration',
+                description: 'Seamlessly integrated with OpenAI GPT-4, Anthropic Claude 3, and Google Gemini for intelligent content generation, summarization, and enhancement with AES-256 encrypted API key storage',
+                icon: 'brain',
+                imageUrl: ''
+            },
+            {
+                id: 'f1-2',
+                title: 'Comprehensive CMS',
+                description: 'Full-featured content management system with 20 TypeORM entities covering profile, projects, experiences, education, skills, media assets, carousel items, and dynamic widgets',
+                icon: 'database',
+                imageUrl: ''
+            },
+            {
+                id: 'f1-3',
+                title: 'Static Site Export',
+                description: 'One-click generation of deployable static websites from CMS content, ready for GitHub Pages, Netlify, or Vercel with preserved styling and interactivity',
+                icon: 'download',
+                imageUrl: ''
+            },
+            {
+                id: 'f1-4',
+                title: 'Enterprise Architecture',
+                description: 'Clean three-tier architecture (UI, Backend, Shared) with MVVM pattern, Repository pattern, type-safe DTOs, and comprehensive error handling',
+                icon: 'sitemap',
+                imageUrl: ''
+            },
+            {
+                id: 'f1-5',
+                title: 'Production-Grade Security',
+                description: 'JWT authentication, bcrypt password hashing (12 rounds), Helmet security headers, CORS protection, and AES-256 encryption for sensitive API keys',
+                icon: 'shield-alt',
+                imageUrl: ''
+            },
+            {
+                id: 'f1-6',
+                title: 'Dynamic Theming',
+                description: 'Runtime theme switching between Architectural and Aloe Vera themes with no page reload, CSS variable injection, and JSON-based configuration',
+                icon: 'palette',
+                imageUrl: ''
+            }
         ],
         pages: [
             {
-                id: 'p1',
-                type: 'OVERVIEW',
-                title: 'Surfing on the Wave',
-                content: "### Philosophy: Chaos as Potential\n\nThe **Ark.Alliance** strategy is built on a simple premise: *You cannot predict the ocean, but you can learn to surf.* \n\nInstead of trying to forecast price 10 minutes from now, the bot reacts to *micro-movements* in the present moment. We call this **'Click Strategy'**.\n\n#### The 'Click' Mechanism\n\n1.  **Entry (The Paddle)**: The bot enters a position based on **Gemini AI Analysis** of order book imbalance and volatility.\n2.  **Surfing (The Ride)**: As the price moves in our favor, the bot executes 'Clicks'—partial take-profits at fixed intervals (e.g., every +0.1% PnL).\n    *   **Ratchet Effect**: Each click raises the 'Inversion Threshold' (Stop Loss), locking in gains.\n3.  **Inversion (The Bail)**: If the wave breaks (price reverses), the bot hits the 'Inversion Threshold'.\n    *   It instantly closes the position and flips to the opposite side (2x quantity).\n    *   **Result**: The surfer catches the *new* wave immediately.\n\n```mermaid\nstateDiagram-v2\n    [*] --> Entry\n    Entry --> Surfing: Price Moves Up\n    Surfing --> Click: +0.1% Gain\n    Click --> Surfing: Raise Safety Net\n    Surfing --> Inversion: Hit Safety Net\n    Inversion --> [*]: Flip Position\n```"
+                id: 'p1-1',
+                title: 'Overview',
+                type: ProjectSection.OVERVIEW,
+                order: 1,
+                content: '## Project Overview\n\n**Ark.Portfolio** is a production-ready, enterprise-grade portfolio platform that transcends traditional portfolio websites. It combines modern web development practices with AI-powered content generation, comprehensive CMS capabilities, and static site export functionality.\n\n### Core Capabilities\n\n1. **Content Management System (CMS)** - Full CRUD operations for all 20 entities\n2. **AI-Powered Features** - Multi-provider AI integration with encrypted API key storage\n3. **Static Site Export** - Generate deployable static websites from CMS content\n4. **Enterprise Architecture** - Clean three-tier structure with type-safe contracts\n\n### Key Statistics\n\n- 20 TypeORM Entities\n- 3-Layer Architecture\n- 16 Backend Services\n- 235+ Test Cases'
             },
             {
-                id: 'p2',
-                type: 'TECHNICAL',
-                title: 'Engineering Resilience',
-                content: "### Speed vs. Reliability\n\nCrypto markets are 24/7 and unforgiving. The bot's architecture prioritizes **Resilience** over raw speed, though it achieves both.\n\n#### 1. Hybrid Push/Pull Architecture\n\nReliance on WebSockets alone is dangerous (silent disconnects). Reliability on Polling alone is too slow. We use **Both**.\n\n*   **Fast Path (Push)**: `BinanceUserDataStream` delivers order updates in ~50ms.\n*   **Safe Path (Pull)**: A `MonitoringLayout` polls the API every 200ms. If the WebSocket misses an event, the Poller catches it.\n\n#### 2. Fee Management & Pre-Computation\n\nTrading frequently ('Clicking') accumulates fees. Ignorance of fees leads to 'Death by a Thousand Cuts'.\n\n*   **Maker vs Taker**: The bot prefers `POST_ONLY` (Maker) orders to gain rebates.\n*   **Pre-Computation**: Before placing *any* trade, the `FuturesCost Service` calculates:\n    *   `OpenFee` + `CloseFee` + `FundingCost`\n    *   **Rule**: The first 'Click' target is moved *further out* to cover these costs. You are never 'Green' until the fees are paid.\n\n#### 3. Rate Limit Arbitrage\n\nBinance allows 1200 weight/minute. \n*   The **RateLimiter** service tracks usage in real-time.\n*   If usage > 80%, it switches non-critical polls to 'Lazy Mode', saving bandwidth for critical 'Inversion' orders.\n\n```mermaid\nsequenceDiagram\n    participant Bot\n    participant RateLimiter\n    participant Binance\n\n    Bot->>RateLimiter: Can I Order?\n    RateLimiter->>RateLimiter: Check Weight (1100/1200)\n    alt Critical (Inversion)\n        RateLimiter-->>Bot: YES (Emergency Override)\n    else Standard (Poll)\n        RateLimiter-->>Bot: PAUSE (Save for Trade)\n    end\n    Bot->>Binance: Execute Order\n```"
+                id: 'p1-2',
+                title: 'Architecture & Data Model',
+                type: ProjectSection.ARCHITECTURE,
+                order: 2,
+                content: '## System Architecture\n\nThree-tier structure: Presentation (React 18), Shared (DTOs), Application (Express + TypeORM)\n\n### 20 Data Model Entities\n\n**Core**: Profile, User\n**Professional**: Experience, Education, Skill, SkillCategory\n**Projects**: Project, ProjectPage, ProjectFeature, ProjectTechnology, ProjectController, ProjectEndpoint\n**Content**: Media, CarouselItem, MenuItem, Widget, StyleConfig\n**Advanced**: AiSettings, TeamMember, Outbox'
             },
             {
-                id: 'p3',
-                type: 'FUNCTIONAL',
-                title: 'Functional Gallery',
-                content: "Experience the interface designed for the high-stakes environment of algorithmic trading."
+                id: 'p1-3',
+                title: 'Features & Use Cases',
+                type: ProjectSection.TECHNICAL,
+                order: 3,
+                content: '## Use Cases\n\n1. **Portfolio Management** - Centralized content with version control\n2. **AI Content Generation** - OpenAI/Anthropic/Gemini integration\n3. **Static Deployment** - Export to GitHub Pages/Netlify/Vercel\n4. **Dynamic Theming** - Instant theme changes without reload\n5. **Multi-Page Documentation** - Comprehensive project docs with Mermaid diagrams'
+            },
+            {
+                id: 'p1-4',
+                title: 'Deployment & Integration',
+                type: ProjectSection.TECHNICAL,
+                order: 4,
+                content: '## Deployment Options\n\n- **Full Stack**: Node.js + PostgreSQL/SQLite\n- **Static Export**: One-click ZIP download\n- **Docker**: docker-compose with backend, frontend, DB\n\n## Security\n\n- JWT auth, bcrypt hashing\n- Helmet headers, CORS\n- AES-256 encryption for API keys'
             }
         ]
     },
     {
         id: '2',
-        title: 'Logistics Orchestration Platform',
-        description: 'A comprehensive logistics supply chain platform for Ahold Delhaize, integrating TMS (Transport Management Systems), SAP, and real-time delivery tracking. Designed for high availability and scale.',
-        status: ProjectStatus.COMPLETED,
-        technologies: [Technology.CSHARP, Technology.BLAZOR, Technology.AZURE, Technology.SAP],
-        imageUrl: '/assets/Bot13.PNG',
-        startDate: new Date('2021-01-01'),
-        endDate: new Date('2025-02-01'),
+        title: 'Ark.Alliance.React.Component.UI',
+        description: 'Enterprise-grade React component library with MVVM architecture spanning 40 component categories across Finance/Trading, Healthcare, Logistics, E-Commerce, AI/ML, and more. Built with React 19, TypeScript 5.9, Zod validation, and Tailwind CSS 4. Features 258 passing tests (100% coverage), premium neon aesthetics, and complete type safety.',
+        status: ProjectStatus.IN_PROGRESS,
+        imageUrl: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=1200&h=600',
+        repoUrl: 'https://github.com/YourUsername/Ark.Alliance.React.Component.UI',
+        demoUrl: '',
+        technologies: [
+            Technology.REACT,
+            Technology.TYPESCRIPT,
+            Technology.TAILWIND,
+            Technology.THREEJS,
+            Technology.DOCKER
+        ],
+        startDate: new Date('2024-01-01'),
         features: [
-            { id: 'f4', title: 'TMS Integration', description: 'Seamless connecting with Ortec & Axiodis TMS.', icon: 'truck' },
-            { id: 'f5', title: 'Global Tracking', description: 'Real-time visibility into delivery status across Europe.', icon: 'map' }
+            {
+                id: 'f2-1',
+                title: 'MVVM Architecture Pattern',
+                description: 'Strict Model-View-ViewModel separation with Zod schema-based models, custom React Hook ViewModels, and pure presentation Views. Ensures testable, maintainable, and scalable component design.',
+                icon: 'layer-group',
+                imageUrl: ''
+            },
+            {
+                id: 'f2-2',
+                title: '40 Component Categories',
+                description: 'Comprehensive component suite spanning Buttons, Cards, Gauges (5 types), Input (6 variants), Chart3D (Three.js), Charts, Grids, Modal, TimeLines, Documents (Markdown), and 28 more categories.',
+                icon: 'th',
+                imageUrl: ''
+            },
+            {
+                id: 'f2-3',
+                title: 'Multi-Domain Support',
+                description: 'Components designed for Finance/Trading, Healthcare, Logistics, E-Commerce, AI/ML, Music/Audio, Video/Streaming, Social/Communication, Payments, and Data Visualization industries.',
+                icon: 'industry',
+                imageUrl: ''
+            },
+            {
+                id: 'f2-4',
+                title: 'Runtime Zod Validation',
+                description: 'All models use Zod 4 schemas for runtime type checking, schema-based validation with clear error messages, and TypeScript type inference from schemas for compile-time safety.',
+                icon: 'check-circle',
+                imageUrl: ''
+            },
+            {
+                id: 'f2-5',
+                title: 'Premium Visual Modes',
+                description: 'Four distinct visual modes: Normal, Neon (glowing for trading), Minimal (reduced weight), and Glass (glassmorphism with backdrop blur). Mode switching without code changes.',
+                icon: 'palette',
+                imageUrl: ''
+            },
+            {
+                id: 'f2-6',
+                title: '100% Test Coverage',
+                description: '258 tests passing with Vitest and React Testing Library. 35 BaseInput tests, 28 ProgressBar tests, 25 GenericPanel tests, 24 Tooltip tests, comprehensive scenario-based testing.',
+                icon: 'vial',
+                imageUrl: ''
+            }
         ],
         pages: [
             {
-                id: 'p3',
-                type: 'OVERVIEW',
-                title: 'Strategic Impact',
-                content: "This platform revitalized the logistics core of a major retailer. By moving from a monolithic legacy system to a **Domain-Driven Design (DDD)** microservices architecture, we achieved:\n\n*   30% reduction in operational costs.\n*   Real-time tracking for customers.\n*   Seamless integration with offshore development teams."
+                id: 'p2-1',
+                title: 'Overview',
+                type: ProjectSection.OVERVIEW,
+                order: 1,
+                content: '## Ark.Alliance.React.Component.UI\n\nEnterprise-Grade React Component Library with MVVM Architecture for multi-domain applications.\n\n### Key Features\n\n- 40 Component Categories\n- MVVM Architecture with Zod Validation\n- Premium neon, minimal, glass visual modes\n- 258 tests (100% pass rate)\n- TypeScript 5.9 strict mode\n- Interactive Showcase at localhost:5090\n\n### Business Domains\n\nFinance/Trading, Healthcare, Logistics, E-Commerce, AI/ML, Music/Audio, Video, Social, Payments, Data Visualization'
+            },
+            {
+                id: 'p2-2',
+                title: 'MVVM Architecture',
+                type: ProjectSection.ARCHITECTURE,
+                order: 2,
+                content: '## Model-View-ViewModel Pattern\n\n**Model (*.model.ts)**: Zod Schema + TypeScript types\n**ViewModel (*.viewmodel.ts)**: Custom React Hook with state management\n**View (*.tsx)**: Pure presentation component with forwardRef/memo\n\n### Core Infrastructure\n\n- BaseComponentModel\n- BaseViewModel\n- FormInputModel\n- useFormInputRestrictions'
+            },
+            {
+                id: 'p2-3',
+                title: 'Component Catalog',
+                type: ProjectSection.TECHNICAL,
+                order: 3,
+                content: '## Implemented Components\n\n**Primitives**: NeonButton, NeonToggle, GlowCard, TradingGridCard\n**Input**: Input, Select, TextArea, Slider, NumericInput, FileUpload\n**Gauges**: CircularGauge, SpeedometerGauge, DigitalGauge, BatteryGauge, SignalBarsGauge\n**Advanced**: Chart3D (Three.js), DataGrid, Modal, Timeline, MarkdownRenderer\n**Layout**: Header, Footer, SideBarMenu, Panel, GenericPanel\n\n### Visual Modes\n\nnormal, neon, minimal, glass'
+            },
+            {
+                id: 'p2-4',
+                title: 'Testing & Quality',
+                type: ProjectSection.TECHNICAL,
+                order: 4,
+                content: '## Test Suite\n\n**Total**: 258 tests ✅ 100% pass\n**Framework**: Vitest 2.1.8\n**Library**: @testing-library/react 16.1.0\n\n### Test Breakdown\n\n- BaseInput: 35 tests\n- ProgressBar: 28 tests\n- GenericPanel: 25 tests\n- Tooltip: 24 tests\n- TradingGridCard: 23 tests\n\n### ComponentTestEngine\n\nScenario-driven testing utility for consistent patterns'
             }
         ]
     },
     {
         id: '3',
-        title: 'Live Show Control System',
-        description: 'A real-time audiovisual synchronization system for immersive live performances. Controls lighting, 3D stereoscopic visuals, and audio/MIDI in perfect sync.',
-        status: ProjectStatus.COMPLETED,
-        technologies: [Technology.CPP, Technology.PYTHON, Technology.UNITY, Technology.CSHARP],
-        imageUrl: '/assets/Bot6.PNG',
-        startDate: new Date('2005-01-01'),
-        endDate: new Date('2015-11-01'),
-        features: [
-            { id: 'f6', title: 'AV Sync', description: 'Frame-perfect synchronization of Audio and Video.', icon: 'music' },
-            { id: 'f7', title: '3D Visuals', description: 'Real-time generation of stereoscopic 3D content.', icon: 'box' }
+        title: 'Ark.Alliance.Trading.Providers.Lib',
+        description: 'Production-ready TypeScript SDK unifying cryptocurrency trading across multiple exchanges (Binance Futures, Deribit) with a single, elegant API. Features Result pattern for type-safe error handling, event-driven async architecture, WebSocket streams for low-latency market data, HMAC-SHA256 and Ed25519 authentication, 70+ test scenarios with 100% pass rate. Published on NPM.',
+        status: ProjectStatus.IN_PROGRESS,
+        imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=1200&h=600',
+        repoUrl: 'https://github.com/YourUsername/Ark.Alliance.Trading.Providers.Lib',
+        demoUrl: '',
+        technologies: [
+            Technology.TYPESCRIPT,
+            Technology.NODEJS,
+            Technology.DOCKER,
+            Technology.BINANCE,
+            Technology.REST
         ],
-        pages: []
+        startDate: new Date('2024-01-01'),
+        features: [
+            {
+                id: 'f3-1',
+                title: 'Multi-Provider Abstraction',
+                description: 'Unified interface for Binance Futures and Deribit exchanges with IProviderClient pattern. Write once, trade on any supported exchange without code changes. Extensible architecture for adding new providers.',
+                icon: 'plug',
+                imageUrl: ''
+            },
+            {
+                id: 'f3-2',
+                title: 'Result Pattern Error Handling',
+                description: 'Type-safe Result<T> pattern for functional error handling. No exceptions in normal flow, explicit success/failure states, chainable operations (map, flatMap), comprehensive error details with ResultStatus enum.',
+                icon: 'check-circle',
+                imageUrl: ''
+            },
+            {
+                id: 'f3-3',
+                title: 'Real-Time WebSocket Streams',
+                description: 'Low-latency market data via WebSocket connections. Subscribe to klines, book ticker, user data streams, order events. Event-driven architecture with typed event emitters for order fills and position updates.',
+                icon: 'wifi',
+                imageUrl: ''
+            },
+            {
+                id: 'f3-4',
+                title: 'Secure Authentication',
+                description: 'HMAC-SHA256 signature generation for Binance, Ed25519 signature generation for Deribit, automatic token refresh mechanisms, secure credential storage with IAuthStrategy interface.',
+                icon: 'lock',
+                imageUrl: ''
+            },
+            {
+                id: 'f3-5',
+                title: 'Comprehensive Testing',
+                description: '70+ test scenarios with ReflectionTestEngine, scenario-driven JSON test definitions, dynamic parameter resolution ($DYNAMIC_LIMIT_BUY), tested against live testnets, 100% pass rate across all categories.',
+                icon: 'vial',
+                imageUrl: ''
+            },
+            {
+                id: 'f3-6',
+                title: 'Clean Architecture',
+                description: 'Domain-driven design with clear layer separation: Domain (entities, interfaces), Application (use cases, mappers), Infrastructure (clients, auth). TypeScript-first with full IntelliSense support.',
+                icon: 'sitemap',
+                imageUrl: ''
+            }
+        ],
+        pages: [
+            {
+                id: 'p3-1',
+                title: 'Overview',
+                type: ProjectSection.OVERVIEW,
+                order: 1,
+                content: '## Ark Alliance Trading Providers Library\n\nProduction-Ready Multi-Provider Cryptocurrency Trading SDK\n\n### Perfect For\n\n- Algorithmic trading bots\n- Market data aggregators\n- Portfolio management systems\n- Trading analytics platforms\n\n### Key Features\n\n- Multi-Provider (Binance, Deribit)\n- Order Management (place, modify, cancel, track)\n- Position Tracking with P&L\n- WebSocket Streams (low-latency)\n- Result Pattern (type-safe errors)\n- 70+ test scenarios (100% pass)\n- Published on NPM'
+            },
+            {
+                id: 'p3-2',
+                title: 'Architecture',
+                type: ProjectSection.ARCHITECTURE,
+                order: 2,
+                content: '## Clean Architecture\n\n### Layers\n\n**Domain**: Entities (Order, Position, Account), Interfaces (IProviderClient, IAuthStrategy)\n**Application**: Use Cases, Data Mappers\n**Infrastructure**: API Clients (REST, WebSocket), Authentication (HMAC, Ed25519)\n\n### Provider Abstraction\n\nIProviderClient interface implemented by Binance and Deribit providers\n\n### Result Pattern\n\nResult<T> with success/failure states, chainable operations (map, flatMap), ResultStatus enum'
+            },
+            {
+                id: 'p3-3',
+                title: 'Use Cases & Examples',
+                type: ProjectSection.TECHNICAL,
+                order: 3,
+                content: '## Functional Use Cases\n\n### 1. Algorithmic Trading Bot\n\nSubscribe to market data, analyze signals, place orders, monitor fills\n\n### 2. Portfolio Management\n\nAggregate positions across exchanges, rebalance, unified interface\n\n### 3. Market Data Aggregation\n\nCollect prices from multiple sources, identify arbitrage opportunities\n\n### 4. Risk Management\n\nMonitor exposure, enforce limits, automated stop-loss orders'
+            },
+            {
+                id: 'p3-4',
+                title: 'Testing & Quality',
+                type: ProjectSection.TECHNICAL,
+                order: 4,
+                content: '## Test Suite\n\n**Total**: 70+ scenarios\n**Pass Rate**: 100%\n**Framework**: ReflectionTestEngine\n\n### Coverage\n\n- Account (8 scenarios)\n- Market Data (8)\n- Orders (12)\n- Positions (14)\n- GTX Orders (13)\n- Market Orders (8)\n- Algo Orders (10)\n- Mixed Workflows (10)\n\n### Dynamic Parameters\n\n$DYNAMIC_LIMIT_BUY → bidPrice * 0.95\n$DYNAMIC_LIMIT_SELL → askPrice * 1.05'
+            }
+        ]
     }
 ];

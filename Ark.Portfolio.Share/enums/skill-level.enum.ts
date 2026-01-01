@@ -10,5 +10,7 @@ export enum SkillLevel {
     /** Strong proficiency, can work independently */
     ADVANCED = 'Advanced',
     /** Deep expertise, can mentor others */
-    EXPERT = 'Expert'
+    EXPERT = 'Expert',
+    /** Recognized authority, sets standards */
+    MASTER = 'Master'
 }

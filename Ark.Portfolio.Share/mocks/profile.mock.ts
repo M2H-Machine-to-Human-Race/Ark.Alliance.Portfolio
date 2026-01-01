@@ -5,9 +5,9 @@ export const PROFILE_MOCK: ProfileDto = {
     firstName: "Armand",
     lastName: "Richelet-Kleinberg",
     title: "AI Principal Solutions Architect",
-    overview: "Experienced AI Principal Architect with 20+ years in software development.", // Shortened for mock
-    email: "contact@example.com",
-    githubUrl: "",
-    linkedinUrl: "",
-    avatarUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=600"
+    overview: "Visionary AI Architect with over 20 years of experience in distributed systems, high-frequency trading, and cognitive computing. Specializing in bridging the gap between theoretical AI models and production-grade enterprise solutions. Proven track record of delivering resilient, high-scale architectures for Fintech and Logistics sectors.",
+    email: "arkleinberg@gmail.com",
+    githubUrl: "https://github.com/ark-alliance",
+    linkedinUrl: "https://linkedin.com/in/armand-richelet-kleinberg",
+    avatarUrl: "/assets/Icon.png"
 };

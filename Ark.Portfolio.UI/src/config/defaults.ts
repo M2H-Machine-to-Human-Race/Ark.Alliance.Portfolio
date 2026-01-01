@@ -17,9 +17,10 @@ export const PLACEHOLDER_IMAGES = {
 
 // ============================================
 // API Configuration
+// Uses HTTP by default, configure VITE_API_URL for HTTPS
 // ============================================
 export const API_CONFIG = {
-    baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:5085/api',
+    baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3085/api',
     timeout: 30000
 };
 

@@ -9,6 +9,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { authService } from '../../services/auth.service';
 import { profileService } from '../../services/profile.service';
+import { API_CONFIG } from '../../config/defaults';
 
 /**
  * Navigation item configuration
@@ -46,12 +47,17 @@ export interface HeaderV2Model {
     profile: HeaderProfile;
     /** Current page title */
     currentPageTitle: string;
+    /** Is export in progress */
+    isExporting: boolean;
+    /** Export status message */
+    exportStatus: string | null;
 
     // Actions
     navigate: (path: string) => void;
     toggleMobileMenu: () => void;
     closeMobileMenu: () => void;
     handleKeyDown: (e: React.KeyboardEvent) => void;
+    generateStaticSite: () => Promise<void>;
 }
 
 /**
@@ -60,7 +66,7 @@ export interface HeaderV2Model {
 const NAV_ITEMS: NavItem[] = [
     { id: 'home', label: 'Home', path: '/' },
     { id: 'resume', label: 'Resume', path: '/resume' },
-    { id: 'portfolio', label: 'Portfolio', path: '/projects' },
+    { id: 'portfolio', label: 'Projects Portfolio', path: '/projects' },
 ];
 
 /**
@@ -88,6 +94,8 @@ export const useHeaderV2Model = (): HeaderV2Model => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isExporting, setIsExporting] = useState(false);
+    const [exportStatus, setExportStatus] = useState<string | null>(null);
     const [profile, setProfile] = useState<HeaderProfile>({
         fullName: 'Armand Richelet-Kleinberg',
         title: 'AI Principal Solutions Architect'
@@ -170,6 +178,51 @@ export const useHeaderV2Model = (): HeaderV2Model => {
         }
     }, [toggleMobileMenu]);
 
+    /**
+     * Generate static website export
+     */
+    const generateStaticSite = useCallback(async () => {
+        if (isExporting) return;
+
+        setIsExporting(true);
+        setExportStatus('Generating static site...');
+
+        try {
+            const token = authService.getToken();
+            const response = await fetch(`${API_CONFIG.baseUrl}/admin/export/static`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Export failed: ${response.statusText}`);
+            }
+
+            // Download the ZIP file
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ark-portfolio-static-${new Date().toISOString().split('T')[0]}.zip`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+
+            setExportStatus('Export complete!');
+            setTimeout(() => setExportStatus(null), 3000);
+        } catch (error) {
+            console.error('Static site generation failed:', error);
+            setExportStatus('Export failed. Check console.');
+            setTimeout(() => setExportStatus(null), 5000);
+        } finally {
+            setIsExporting(false);
+        }
+    }, [isExporting]);
+
     return {
         navItems: NAV_ITEMS,
         activePath: location.pathname,
@@ -178,12 +231,14 @@ export const useHeaderV2Model = (): HeaderV2Model => {
         isScrolled,
         profile,
         currentPageTitle: getPageTitle(location.pathname),
+        isExporting,
+        exportStatus,
         navigate,
         toggleMobileMenu,
         closeMobileMenu,
         handleKeyDown,
+        generateStaticSite,
     };
 };
 
 export default useHeaderV2Model;
-

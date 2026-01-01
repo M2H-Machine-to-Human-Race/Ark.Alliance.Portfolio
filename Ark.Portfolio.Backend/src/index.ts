@@ -4,8 +4,10 @@ import cors from 'cors';
 import helmet from 'helmet';
 import path from 'path';
 import fs from 'fs';
+import http from 'http';
 import https from 'https';
 import dotenv from 'dotenv';
+import readline from 'readline';
 import { initializeDatabase } from './database/context/db-context';
 import routes from './routes';
 import { killPort } from './utils/port-killer';
@@ -18,6 +20,9 @@ dotenv.config();
 const app = express();
 // Default to 3085 as requested, or use ENV if provided
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3085;
+
+// Protocol settings - HTTP by default, HTTPS optional
+const USE_HTTPS = process.env.USE_HTTPS === 'true';
 
 app.use(cors());
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
@@ -181,9 +186,85 @@ function getOrCreateCertificate(): { key: string | Buffer; cert: string | Buffer
 }
 
 /**
+ * Prompt user for protocol selection in interactive dev mode
+ */
+async function promptProtocolSelection(): Promise<boolean> {
+    // Skip prompt if not interactive terminal or CI environment
+    if (!process.stdin.isTTY || process.env.CI === 'true') {
+        return USE_HTTPS;
+    }
+
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    return new Promise((resolve) => {
+        console.log('\n╔════════════════════════════════════════════════════════════╗');
+        console.log('║           Ark.Portfolio Backend - Dev Server               ║');
+        console.log('╠════════════════════════════════════════════════════════════╣');
+        console.log('║  Select protocol:                                          ║');
+        console.log('║    [1] HTTP  (default, simpler for development)            ║');
+        console.log('║    [2] HTTPS (auto-signed certificate)                     ║');
+        console.log('╚════════════════════════════════════════════════════════════╝');
+
+        rl.question('\nEnter choice [1/2] (default: 1): ', (answer) => {
+            rl.close();
+            const useHttps = answer.trim() === '2';
+            console.log(`\n→ Selected: ${useHttps ? 'HTTPS' : 'HTTP'}\n`);
+            resolve(useHttps);
+        });
+
+        // Auto-select HTTP after 5 seconds if no input
+        setTimeout(() => {
+            console.log('\n→ No input received, defaulting to HTTP\n');
+            rl.close();
+            resolve(false);
+        }, 5000);
+    });
+}
+
+/**
+ * Starts the HTTP server with retry logic.
+ */
+async function startHttpServer(port: number, maxRetries: number = 3): Promise<void> {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            await new Promise<void>((resolve, reject) => {
+                const server = http.createServer(app).listen(port, () => {
+                    console.log('════════════════════════════════════════════════════════════');
+                    console.log(`  🚀 HTTP Server running on port ${port}`);
+                    console.log(`  📍 Access at: http://localhost:${port}`);
+                    console.log(`  📚 API Docs:  http://localhost:${port}/api-docs`);
+                    console.log('════════════════════════════════════════════════════════════');
+                    resolve();
+                });
+
+                server.on('error', (err: NodeJS.ErrnoException) => {
+                    if (err.code === 'EADDRINUSE') {
+                        server.close();
+                        reject(err);
+                    } else {
+                        reject(err);
+                    }
+                });
+            });
+            return; // Success
+        } catch (err) {
+            const error = err as NodeJS.ErrnoException;
+            if (error.code === 'EADDRINUSE' && attempt < maxRetries) {
+                console.warn(`Port ${port} still in use. Retrying in 1 second... (${attempt}/${maxRetries})`);
+                await killPort(port);
+                await delay(1000);
+            } else {
+                throw err;
+            }
+        }
+    }
+}
+
+/**
  * Starts the HTTPS server with retry logic.
- * @param port - Port to listen on
- * @param maxRetries - Maximum retry attempts
  */
 async function startHttpsServer(port: number, maxRetries: number = 3): Promise<void> {
     const sslOptions = getOrCreateCertificate();
@@ -192,8 +273,11 @@ async function startHttpsServer(port: number, maxRetries: number = 3): Promise<v
         try {
             await new Promise<void>((resolve, reject) => {
                 const server = https.createServer(sslOptions, app).listen(port, () => {
-                    console.log(`HTTPS Server is running on port ${port}`);
-                    console.log(`Access at: https://localhost:${port}`);
+                    console.log('════════════════════════════════════════════════════════════');
+                    console.log(`  🔒 HTTPS Server running on port ${port}`);
+                    console.log(`  📍 Access at: https://localhost:${port}`);
+                    console.log(`  📚 API Docs:  https://localhost:${port}/api-docs`);
+                    console.log('════════════════════════════════════════════════════════════');
                     resolve();
                 });
 
@@ -221,6 +305,15 @@ async function startHttpsServer(port: number, maxRetries: number = 3): Promise<v
 }
 
 const startServer = async () => {
+    console.log('\n╔════════════════════════════════════════════════════════════╗');
+    console.log('║              Ark.Alliance.Portfolio Backend                 ║');
+    console.log('╚════════════════════════════════════════════════════════════╝\n');
+
+    // Interactive protocol selection for dev mode
+    const useHttps = process.env.NODE_ENV === 'production'
+        ? USE_HTTPS  // Use env var in production
+        : await promptProtocolSelection();  // Interactive in dev
+
     // Ensure port is free before proceeding
     console.log(`Ensuring port ${PORT} is free...`);
     await killPort(PORT);
@@ -252,12 +345,15 @@ const startServer = async () => {
         console.error('Error seeding admin user:', error);
     }
 
-    // Start HTTPS server with retry
+    // Start server based on protocol selection
     try {
-        await startHttpsServer(PORT);
+        if (useHttps) {
+            await startHttpsServer(PORT);
+        } else {
+            await startHttpServer(PORT);
+        }
     } catch (error) {
-        console.error(`Failed to start HTTPS server on port ${PORT}:`, error);
-        // Don't exit - process handlers will keep it alive
+        console.error(`Failed to start server on port ${PORT}:`, error);
     }
 };
 
@@ -276,6 +372,3 @@ process.on('unhandledRejection', (reason: unknown, promise: Promise<unknown>) =>
 });
 
 startServer();
-
-
-

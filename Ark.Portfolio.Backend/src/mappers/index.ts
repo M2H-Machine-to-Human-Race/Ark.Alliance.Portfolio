@@ -4,4 +4,5 @@
  */
 
 export * from './project.mapper';
+export * from './profile.mapper';
 
