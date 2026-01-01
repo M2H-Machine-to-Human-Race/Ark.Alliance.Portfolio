@@ -9,8 +9,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ark-alliance/ark-portfolio/actions/workflows/ci.yml">
-    <img src="https://github.com/ark-alliance/ark-portfolio/actions/workflows/ci.yml/badge.svg" alt="CI Status" />
+  <a href="https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Portfolio/actions/workflows/ci.yml">
+    <img src="https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Portfolio/actions/workflows/ci.yml/badge.svg" alt="CI Status" />
+  </a>
+  <a href="https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Portfolio/issues">
+    <img src="https://img.shields.io/github/issues/M2H-Machine-to-Human-Race/Ark.Alliance.Portfolio" alt="Issues" />
+  </a>
+  <a href="https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Portfolio/pulls">
+    <img src="https://img.shields.io/github/issues-pr/M2H-Machine-to-Human-Race/Ark.Alliance.Portfolio" alt="Pull Requests" />
   </a>
   <a href="LICENSE.md">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
