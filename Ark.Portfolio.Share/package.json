@@ -1,5 +1,5 @@
 {
-    "name": "@ark-alliance/portfolio-share",
+    "name": "@arkalliance/portfolio-share",
     "version": "1.0.0",
     "description": "Shared DTOs, Enums, and Type definitions for Ark.Alliance.Portfolio ecosystem",
     "author": "Armand Richelet-Kleinberg <armand@m2h.io>",

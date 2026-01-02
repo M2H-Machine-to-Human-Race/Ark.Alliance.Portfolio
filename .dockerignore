@@ -1,0 +1,56 @@
+# Dependencies
+**/node_modules
+**/.pnpm-store
+
+# Build outputs (will be rebuilt in Docker)
+**/dist
+**/build
+
+# Git
+**/.git
+**/.gitignore
+**/.gitattributes
+
+# IDE
+**/.vs
+**/.vscode
+**/.idea
+*.suo
+*.user
+
+# Environment files (secrets should be passed via HF Spaces Secrets)
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Test files
+Ark.Portfolio.Tests
+**/coverage
+**/.nyc_output
+
+# Documentation (not needed in production)
+.github
+Docs
+**/*.md
+!package.json
+
+# Database files (will be created fresh)
+**/*.db
+**/*.sqlite
+
+# Certificates (will use HF HTTPS termination)
+**/Certificate
+**/.certs
+
+# PowerShell scripts
+**/*.ps1
+
+# Miscellaneous
+**/.DS_Store
+**/Thumbs.db
