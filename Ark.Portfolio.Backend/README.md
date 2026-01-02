@@ -1,5 +1,20 @@
 # Ark.Portfolio.Backend
 
+<div align="center">
+
+![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js)
+![Express](https://img.shields.io/badge/Express-4.x-black?style=for-the-badge&logo=express)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![SQLite](https://img.shields.io/badge/SQLite-TypeORM-003B57?style=for-the-badge&logo=sqlite)
+
+**RESTful API Backend for the Ark.Portfolio Ecosystem**
+
+*Express • TypeORM • JWT Auth • Multi-Provider AI • Static Export*
+
+</div>
+
+---
+
 The **Backend** is a robust Node.js/Express application providing RESTful APIs for the portfolio ecosystem. It features TypeORM for database interactions, multi-provider AI services, JWT authentication, and secure content management.
 
 ## 📦 Functional Capabilities
@@ -23,26 +38,43 @@ The backend serves as the secure, intelligent core of the ecosystem.
 
 ```text
 Ark.Portfolio.Backend/
-├── src/
-│   ├── config/          # Database, Swagger, CORS configuration
-│   ├── controllers/     # Request handlers
-│   │   ├── admin.controller.ts
-│   │   ├── auth.controller.ts
-│   │   ├── project.controller.ts
-│   │   └── ai.controller.ts
+├── 📁 src/
+│   ├── config/                    # Configuration modules
+│   │   ├── database.config.ts     # TypeORM setup
+│   │   ├── swagger.config.ts      # API documentation
+│   │   └── cors.config.ts         # CORS whitelist
+│   │
+│   ├── controllers/               # Request handlers
+│   │   ├── admin.controller.ts    # Admin CMS routes
+│   │   ├── auth.controller.ts     # Authentication
+│   │   ├── project.controller.ts  # Project CRUD
+│   │   └── ai.controller.ts       # AI operations
+│   │
 │   ├── database/
-│   │   ├── entities/    # TypeORM entities
-│   │   └── seeds/       # Initial data seeding
-│   ├── middleware/      # Auth, Error, Logging
-│   ├── services/        # Business logic
-│   │   ├── ai.service.ts
-│   │   ├── auth.service.ts
-│   │   ├── media.service.ts
-│   │   └── static-export.service.ts
-│   └── index.ts         # Entry point
-├── uploads/             # Media file storage
-├── static-export/       # Generated static sites
-└── portfolio.db         # SQLite database
+│   │   ├── entities/              # TypeORM entities
+│   │   │   ├── Project.ts         # Project entity
+│   │   │   ├── User.ts            # User entity
+│   │   │   └── AiSettings.ts      # AI config entity
+│   │   ├── seeds/                 # Initial data seeding
+│   │   └── InitDbAsset/           # JSON seed data
+│   │       ├── projects.json
+│   │       └── profile.json
+│   │
+│   ├── middleware/                # Express middleware
+│   │   ├── auth.middleware.ts     # JWT verification
+│   │   └── error.middleware.ts    # Global error handler
+│   │
+│   ├── services/                  # Business logic
+│   │   ├── ai.service.ts          # Multi-provider AI
+│   │   ├── auth.service.ts        # Authentication
+│   │   ├── media.service.ts       # File uploads
+│   │   └── static-export.service.ts  # SSG
+│   │
+│   └── index.ts                   # Entry point
+│
+├── 📁 uploads/                     # Media file storage
+├── 📁 static-export/               # Generated static sites
+└── 📄 portfolio.db                 # SQLite database
 ```
 
 ---
@@ -262,7 +294,23 @@ npm test -- --testPathPattern=Backend
 
 ---
 
+## 📚 Related Documentation
+
+| Document | Location | Purpose |
+|----------|----------|--------|
+| Share Layer | `../Ark.Portfolio.Share/README.md` | DTOs, enums consumed by API |
+| UI Layer | `../Ark.Portfolio.UI/README.md` | Frontend integration |
+| Tests Layer | `../Ark.Portfolio.Tests/README.md` | Backend test patterns |
+
+---
+
 <div align="center">
-  <sub>Armand Richelet-Kleinberg © M2H.IO - Ark Alliance Ecosystem</sub><br>
-  <sub>AI-assisted development with Anthropic Claude & Google Gemini</sub>
+
+**Ark.Portfolio.Backend** — Part of the Ark Alliance Ecosystem
+
+<sub>
+Armand Richelet-Kleinberg © M2H.IO<br>
+AI-assisted development with Anthropic Claude & Google Gemini
+</sub>
+
 </div>

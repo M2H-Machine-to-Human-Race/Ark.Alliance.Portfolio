@@ -1,0 +1,42 @@
+[
+    {
+        "title": "Ark.Portfolio",
+        "subtitle": "AI-Powered Portfolio CMS",
+        "description": "Enterprise-grade portfolio platform with multi-provider AI integration, comprehensive CMS, and static site export. 235+ tests, MVVM architecture, JWT authentication.",
+        "imageUrl": "/Assets/Projects/Ark.Portfolio/portfolio-hero.png",
+        "linkUrl": "/projects/1",
+        "linkText": "View Project",
+        "order": 1,
+        "isActive": true
+    },
+    {
+        "title": "Ark.Alliance.React.Component.UI",
+        "subtitle": "Enterprise React Component Library",
+        "description": "40 component categories spanning Finance, Healthcare, Logistics, and more. React 19, TypeScript 5.9, 258 passing tests with 100% coverage, MVVM architecture.",
+        "imageUrl": "/Assets/Projects/Ark.Alliance.React.Component/components-hero.png",
+        "linkUrl": "/projects/2",
+        "linkText": "Explore Components",
+        "order": 2,
+        "isActive": true
+    },
+    {
+        "title": "Ark.Alliance.Trading.Bot",
+        "subtitle": "Automated Cryptocurrency Trading",
+        "description": "Real-time algorithmic trading platform with WebSocket integration, multi-exchange support, and advanced analytics dashboard. Built for high-frequency trading.",
+        "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Bot/Bot6.PNG",
+        "linkUrl": "/projects",
+        "linkText": "Learn More",
+        "order": 3,
+        "isActive": true
+    },
+    {
+        "title": "Ark.Alliance.Trading.Providers.Lib",
+        "subtitle": "Multi-Exchange Trading SDK",
+        "description": "TypeScript SDK unifying cryptocurrency trading across Binance Futures, Deribit with Result pattern, WebSocket streams, and 70+ tested scenarios. Published on NPM.",
+        "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Providers.Lib/trading-hero.png",
+        "linkUrl": "/projects/3",
+        "linkText": "View Documentation",
+        "order": 4,
+        "isActive": true
+    }
+]

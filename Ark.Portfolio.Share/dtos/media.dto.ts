@@ -126,3 +126,140 @@ export interface MediaListResponseDto {
     /** Page size */
     pageSize: number;
 }
+
+/**
+ * Media binary data exchange DTO.
+ * @remarks Used for transferring media files as byte arrays in API contracts.
+ * Supports base64 encoding for JSON transport or raw bytes for multipart/form-data.
+ */
+export interface MediaBinaryDataDto {
+    /** Media record ID */
+    id: string;
+    /** Display name */
+    name: string;
+    /** MIME type of the binary data */
+    mimeType: string;
+    /** File size in bytes */
+    fileSize: number;
+    /** Base64-encoded binary data (for JSON transport) */
+    base64Data?: string;
+    /** Original filename */
+    originalFileName?: string;
+}
+
+/**
+ * Media upload with binary data DTO.
+ * @remarks Used for uploading files with embedded binary data.
+ */
+export interface MediaUploadBinaryDto extends UploadMediaDto {
+    /** Base64-encoded file content */
+    base64Content: string;
+    /** MIME type of the file */
+    mimeType: string;
+    /** Original filename */
+    originalFileName: string;
+    /** File size in bytes */
+    fileSize: number;
+}
+
+/**
+ * Media seed data DTO.
+ * @remarks Used for database initialization with default media assets.
+ * Maps directly to Media entity fields for seeding.
+ */
+export interface MediaSeedDto {
+    /** Display name */
+    name: string;
+    /** Unique key for programmatic reference (kebab-case) */
+    key: string;
+    /** Relative URL path to the asset file */
+    url: string;
+    /** Media type classification */
+    type: MediaTypeEnum;
+    /** MIME type */
+    mimeType: string;
+    /** Original filename */
+    originalFileName: string;
+    /** File size in bytes */
+    fileSize: number;
+    /** Alt text for accessibility */
+    altText?: string;
+    /** Description for AI context and display */
+    description?: string;
+    /** Tags for categorization and filtering */
+    tags?: string[];
+    /** Whether publicly accessible */
+    isPublic?: boolean;
+}
+
+/**
+ * Default media seed data for database initialization.
+ * @remarks These entries correspond to files in the backend /Assets folder.
+ */
+export const DEFAULT_MEDIA_SEED: MediaSeedDto[] = [
+    {
+        name: 'Ark.Portfolio Hero',
+        key: 'project-ark-portfolio-hero',
+        url: '/Assets/Projects/Ark.Portfolio/portfolio-hero.png',
+        type: MediaTypeEnum.IMAGE,
+        mimeType: 'image/png',
+        originalFileName: 'portfolio-hero.png',
+        fileSize: 605232,
+        altText: 'Ark.Portfolio project hero image',
+        description: 'AI-Powered Portfolio CMS hero image for carousel and project display',
+        tags: ['project', 'hero', 'carousel'],
+        isPublic: true
+    },
+    {
+        name: 'Ark.Alliance React Component Hero',
+        key: 'project-ark-react-component-hero',
+        url: '/Assets/Projects/Ark.Alliance.React.Component/components-hero.png',
+        type: MediaTypeEnum.IMAGE,
+        mimeType: 'image/png',
+        originalFileName: 'components-hero.png',
+        fileSize: 605096,
+        altText: 'Ark.Alliance React Component Library hero image',
+        description: 'Enterprise React component library hero image for carousel and project display',
+        tags: ['project', 'hero', 'carousel'],
+        isPublic: true
+    },
+    {
+        name: 'Ark.Alliance Trading Bot Screenshot',
+        key: 'project-trading-bot-6',
+        url: '/Assets/Projects/Ark.Alliance.Trading.Bot/Bot6.PNG',
+        type: MediaTypeEnum.IMAGE,
+        mimeType: 'image/png',
+        originalFileName: 'Bot6.PNG',
+        fileSize: 505004,
+        altText: 'Ark.Alliance Trading Bot analytics screenshot',
+        description: 'Trading Bot analytics and monitoring interface - used for carousel',
+        tags: ['project', 'trading', 'carousel', 'screenshot'],
+        isPublic: true
+    },
+    {
+        name: 'Ark.Alliance Trading Providers Hero',
+        key: 'project-trading-providers-hero',
+        url: '/Assets/Projects/Ark.Alliance.Trading.Providers.Lib/trading-hero.png',
+        type: MediaTypeEnum.IMAGE,
+        mimeType: 'image/png',
+        originalFileName: 'trading-hero.png',
+        fileSize: 695430,
+        altText: 'Ark.Alliance Trading Providers Library hero image',
+        description: 'Multi-exchange trading SDK hero image for carousel and project display',
+        tags: ['project', 'hero', 'carousel'],
+        isPublic: true
+    },
+    {
+        name: 'Profile Avatar',
+        key: 'profile-avatar',
+        url: '/Assets/Site/Icon.png',
+        type: MediaTypeEnum.IMAGE,
+        mimeType: 'image/png',
+        originalFileName: 'Icon.png',
+        fileSize: 101421,
+        altText: 'Armand Richelet-Kleinberg profile avatar',
+        description: 'Default profile avatar image',
+        tags: ['profile', 'avatar'],
+        isPublic: true
+    }
+];

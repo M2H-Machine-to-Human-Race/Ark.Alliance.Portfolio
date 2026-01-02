@@ -70,6 +70,7 @@ export function mapProjectToDto(project: Project): ProjectDto {
             : [],
         imageUrl: project.imageUrl,
         repoUrl: project.repoUrl,
+        packageUrl: project.packageUrl,
         demoUrl: project.demoUrl,
         startDate: project.startDate,
         endDate: project.endDate,

@@ -246,6 +246,17 @@
     }
 }
 
+/* Connection Indicator in Header */
+.header-connection-indicator {
+    margin-right: var(--space-1);
+}
+
+@media (max-width: 640px) {
+    .header-connection-indicator {
+        display: none;
+    }
+}
+
 /* Mobile Menu Toggle */
 .header-mobile-toggle {
     display: none;

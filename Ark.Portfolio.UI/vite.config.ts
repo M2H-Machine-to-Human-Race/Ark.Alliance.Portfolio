@@ -19,6 +19,11 @@ export default defineConfig({
                 target: 'http://localhost:3085', // Backend runs HTTP by default
                 changeOrigin: true,
                 secure: false,
+            },
+            '/Assets': {
+                target: 'http://localhost:3085', // Serve assets from backend
+                changeOrigin: true,
+                secure: false,
             }
         }
     },

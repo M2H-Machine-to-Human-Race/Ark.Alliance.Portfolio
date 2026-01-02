@@ -1,149 +1,168 @@
+/**
+ * @fileoverview Database Seed Orchestrator
+ * Main entry point for database seeding operations.
+ * Coordinates all domain-specific seeders in the correct order.
+ * 
+ * @module database/seeds/seed
+ * @author Armand Richelet-Kleinberg
+ * 
+ * @description
+ * This module provides the main seeding functionality for initializing the database
+ * with default data. It orchestrates multiple domain-specific seeders to populate:
+ * 
+ * - **Profile**: Portfolio owner's personal information
+ * - **Experience**: Professional work history (8 records)
+ * - **Skills**: Technical competencies (40+ technologies across 5 categories)
+ * - **Carousel**: Homepage slider items (4 featured projects)
+ * - **Media**: Asset references for admin management (5 default images)
+ * - **Projects**: Portfolio projects with pages, features, and technologies (3 projects)
+ * 
+ * @example Running as CLI:
+ * ```bash
+ * npx ts-node src/database/seeds/seed.ts
+ * ```
+ * 
+ * @example Programmatic usage:
+ * ```typescript
+ * import { seedDatabase, runSeed } from './database/seeds/seed';
+ * 
+ * // With existing DataSource
+ * await seedDatabase(dataSource);
+ * 
+ * // Full reset and reseed
+ * await runSeed();
+ * ```
+ */
+
 import { DataSource } from 'typeorm';
 import { AppDataSource } from '../../config/database';
-import { Profile } from '../entities/profile.entity';
-import { Project } from '../entities/project.entity';
-import { ProjectTechnology } from '../entities/project-technology.entity';
-import { ProjectPage } from '../entities/project-page.entity';
-import { ProjectFeature } from '../entities/project-feature.entity';
-import { ProjectController } from '../entities/project-controller.entity';
-import { ProjectEndpoint } from '../entities/project-endpoint.entity';
-import { Experience } from '../entities/experience.entity';
-import { Skill } from '../entities/skill.entity';
-import * as fs from 'fs';
-import * as path from 'path';
 
-export const seedDatabase = async (dataSource: DataSource) => {
-    console.log('Seeding database from JSON assets...');
+// Import all seeders
+import {
+    seedProfile,
+    seedExperience,
+    seedSkills,
+    seedCarousel,
+    seedMedia,
+    seedTechnologies,
+    seedProjects,
+    clearProfile,
+    clearExperience,
+    clearSkills,
+    clearCarousel,
+    clearMedia,
+    clearTechnologies,
+    clearProjects
+} from './seeders';
 
-    // Paths
-    const jsonPath = path.join(__dirname, '../../database/InitDbAsset/JsonDatas');
-    const projectPath = path.join(__dirname, '../../database/InitDbAsset/ProjectData');
+/**
+ * Seeds the database with initial data from all domain seeders.
+ * 
+ * @param dataSource - TypeORM DataSource connection
+ * @returns Promise resolving when all seeding is complete
+ * 
+ * @remarks
+ * Seeding order is important due to potential dependencies:
+ * 1. Profile (standalone, no dependencies)
+ * 2. Experience (standalone, no dependencies)
+ * 3. Skills (standalone, no dependencies)
+ * 4. Carousel (references project images)
+ * 5. Media (references asset files)
+ * 6. Technologies (master data, referenced by projects)
+ * 7. Projects (references technologies)
+ * 
+ * Each seeder checks for existing data before inserting to prevent duplicates.
+ */
+export const seedDatabase = async (dataSource: DataSource): Promise<void> => {
+    console.log('╔════════════════════════════════════════════════════════════╗');
+    console.log('║           Database Seeding - Ark.Portfolio                 ║');
+    console.log('╚════════════════════════════════════════════════════════════╝');
+    console.log('');
 
-    // Read Data
-    const profileData = JSON.parse(fs.readFileSync(path.join(jsonPath, 'profile.json'), 'utf-8'));
-    const experienceData = JSON.parse(fs.readFileSync(path.join(jsonPath, 'experience.json'), 'utf-8'));
-    const skillsData = JSON.parse(fs.readFileSync(path.join(jsonPath, 'skills.json'), 'utf-8'));
-    const projectsData = JSON.parse(fs.readFileSync(path.join(projectPath, 'projects.json'), 'utf-8'));
+    // 1. Profile & Identity
+    console.log('─── Profile & Identity ───');
+    await seedProfile(dataSource);
 
-    // 1. Seed Profile
-    const profileRepo = dataSource.getRepository(Profile);
-    if (await profileRepo.count() === 0) {
-        const profile = new Profile();
-        Object.assign(profile, profileData);
-        await profileRepo.save(profile);
-        console.log('Profile seeded');
-    }
+    // 2. Resume/CV Components
+    console.log('');
+    console.log('─── Resume Components ───');
+    await seedExperience(dataSource);
+    await seedSkills(dataSource);
 
-    // 2. Seed Experience
-    const expRepo = dataSource.getRepository(Experience);
-    for (const exp of experienceData) {
-        const existing = await expRepo.findOneBy({ company: exp.company, project: exp.project });
-        if (!existing) {
-            const newExp = expRepo.create({
-                company: exp.company,
-                project: exp.project,
-                position: exp.role || exp.position || 'Unknown', // Map role to position
-                startDate: new Date(),
-                endDate: null,
-                description: exp.desc || exp.description
-            });
-            await expRepo.save(newExp);
-        }
-    }
-    console.log('Experience seeded');
+    // 3. Content & Media
+    console.log('');
+    console.log('─── Content & Media ───');
+    await seedCarousel(dataSource);
+    await seedMedia(dataSource);
 
-    // 3. Seed Skills
-    const skillRepo = dataSource.getRepository(Skill);
-    for (const [categoryName, skills] of Object.entries(skillsData)) {
-        for (const skillName of (skills as string[])) {
-            const existing = await skillRepo.findOneBy({ name: skillName });
-            if (!existing) {
-                const skill = skillRepo.create({
-                    name: skillName,
-                    level: 'Expert' // Default level
-                    // Note: categoryId would need to be set if categories are created first
-                });
-                await skillRepo.save(skill);
-            }
-        }
-    }
-    console.log('Skills seeded');
+    // 4. Master Data
+    console.log('');
+    console.log('─── Master Data ───');
+    await seedTechnologies(dataSource);
 
-    // 4. Seed Projects (Deep)
-    const projectRepo = dataSource.getRepository(Project);
-    const techRepo = dataSource.getRepository(ProjectTechnology);
+    // 5. Portfolio Projects
+    console.log('');
+    console.log('─── Portfolio Projects ───');
+    await seedProjects(dataSource);
 
-    for (const pData of projectsData) {
-        let project = await projectRepo.findOneBy({ title: pData.title });
-        if (!project) {
-            project = projectRepo.create({
-                title: pData.title,
-                description: pData.description,
-                status: pData.status,
-                imageUrl: pData.imageUrl,
-                repoUrl: pData.repoUrl,
-                demoUrl: pData.demoUrl
-                // startDate/endDate skipped for now
-            });
-            await projectRepo.save(project);
-
-            // Pages
-            if (pData.pages) {
-                const pageRepo = dataSource.getRepository(ProjectPage);
-                for (const pg of pData.pages) {
-                    const page = pageRepo.create({
-                        ...pg,
-                        project: project
-                    });
-                    await pageRepo.save(page);
-                }
-            }
-
-            // Features
-            if (pData.features) {
-                const featureRepo = dataSource.getRepository(ProjectFeature);
-                for (const feat of pData.features) {
-                    const feature = featureRepo.create({
-                        ...feat,
-                        project: project
-                    });
-                    await featureRepo.save(feature);
-                }
-            }
-
-            // Technologies
-            if (pData.technologies) {
-                for (const tech of pData.technologies) {
-                    // Check composite key manually or just insert ignoring dups
-                    const newTech = techRepo.create({
-                        projectId: project.id, // Now matching string type
-                        technology: tech
-                    });
-                    await techRepo.save(newTech);
-                }
-            }
-        }
-    }
-    console.log('Projects seeded');
+    console.log('');
+    console.log('════════════════════════════════════════════════════════════');
+    console.log('  ✅ All seed data loaded successfully');
+    console.log('════════════════════════════════════════════════════════════');
 };
 
-// Wrapper function to initialize DataSource and call seedDatabase
-// Exported for potential use, but mainly for CLI execution
-export const runSeed = async () => {
+/**
+ * Clears all seeded data from the database.
+ * Clears in reverse order of dependencies to respect foreign key constraints.
+ * 
+ * @param dataSource - TypeORM DataSource connection
+ * @returns Promise resolving when all data is cleared
+ */
+export const clearDatabase = async (dataSource: DataSource): Promise<void> => {
+    console.log('Clearing existing data...');
+
+    // Clear in reverse order of dependencies
+    await clearProjects(dataSource);       // ProjectTechnology, ProjectFeature, ProjectPage, Project
+    await clearTechnologies(dataSource);   // Technology (master data)
+    await clearMedia(dataSource);          // Media
+    await clearCarousel(dataSource);       // CarouselItem
+    await clearSkills(dataSource);         // Skill
+    await clearExperience(dataSource);     // Experience
+    await clearProfile(dataSource);        // Profile
+
+    console.log('✓ Database cleared');
+};
+
+/**
+ * Full reset and reseed operation.
+ * Initializes DataSource, clears existing data, seeds fresh data, and closes connection.
+ * 
+ * @returns Promise resolving when operation is complete
+ * 
+ * @remarks
+ * This is the main entry point for CLI execution.
+ * It handles:
+ * - DataSource initialization
+ * - Full data clear (in dependency order)
+ * - Fresh seed of all data
+ * - Proper connection cleanup
+ * 
+ * @throws Will throw an error if seeding fails, after logging the error
+ */
+export const runSeed = async (): Promise<void> => {
     const dataSource = await AppDataSource.initialize();
     console.log('Data Source has been initialized!');
+    console.log('');
 
     try {
-        // Clear existing data (in reverse order of dependencies)
-        await dataSource.createQueryBuilder().delete().from(ProjectTechnology).execute();
-        await dataSource.createQueryBuilder().delete().from(ProjectFeature).execute();
-        await dataSource.createQueryBuilder().delete().from(ProjectPage).execute();
-        await dataSource.createQueryBuilder().delete().from(Project).execute();
-        await dataSource.createQueryBuilder().delete().from(Experience).execute();
-        await dataSource.createQueryBuilder().delete().from(Skill).execute();
-        await dataSource.createQueryBuilder().delete().from(Profile).execute();
+        // Clear all existing data
+        await clearDatabase(dataSource);
+        console.log('');
 
+        // Seed fresh data
         await seedDatabase(dataSource);
+
+        console.log('');
         console.log('Database seeding process finished.');
     } catch (error) {
         console.error('Seeding failed:', error);
@@ -160,4 +179,3 @@ if (require.main === module) {
         process.exit(1);
     });
 }
-
