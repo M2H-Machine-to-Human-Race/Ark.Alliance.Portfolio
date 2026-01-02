@@ -23,7 +23,7 @@
         "title": "Ark.Alliance.Trading.Bot",
         "subtitle": "Automated Cryptocurrency Trading",
         "description": "Real-time algorithmic trading platform with WebSocket integration, multi-exchange support, and advanced analytics dashboard. Built for high-frequency trading.",
-        "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Bot/Bot6.PNG",
+        "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Bot/bot-hero.png",
         "linkUrl": "/projects",
         "linkText": "Learn More",
         "order": 3,
@@ -33,10 +33,20 @@
         "title": "Ark.Alliance.Trading.Providers.Lib",
         "subtitle": "Multi-Exchange Trading SDK",
         "description": "TypeScript SDK unifying cryptocurrency trading across Binance Futures, Deribit with Result pattern, WebSocket streams, and 70+ tested scenarios. Published on NPM.",
-        "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Providers.Lib/trading-hero.png",
+        "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Providers.Lib/providers-hero.png",
         "linkUrl": "/projects/3",
         "linkText": "View Documentation",
         "order": 4,
+        "isActive": true
+    },
+    {
+        "title": "Ark.Alliance.Trading.TrendsCalculator",
+        "subtitle": "Real-Time Crypto Trend Analysis",
+        "description": "Production-grade microservice for cryptocurrency trend analysis. Combines Hurst Exponent, GARCH, Linear Regression, and EMA with optional Gemini AI. WebSocket streaming for sub-second updates.",
+        "imageUrl": "/Assets/Projects/Ark.Alliance.TrendsCalculator/trends-hero.png",
+        "linkUrl": "/projects/4",
+        "linkText": "Explore Trends",
+        "order": 5,
         "isActive": true
     }
 ]

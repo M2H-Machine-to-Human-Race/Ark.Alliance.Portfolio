@@ -16,6 +16,7 @@ import { LoginPage } from './pages/Login';
 import { LoadingPage } from './pages/Loading';
 import { ThemeProvider } from './components/generic/ThemeContext';
 import { AuthProvider } from './components/generic/AuthContext';
+import { TechnologyProvider } from './contexts/TechnologyContext';
 import { ProtectedRoute } from './components/generic/ProtectedRoute';
 import './styles/architectural-theme.css';
 import './styles/design-system.css';
@@ -91,12 +92,14 @@ function App() {
     return (
         <AuthProvider>
             <ThemeProvider>
-                <ToastProvider>
-                    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-                        <AppRoutes />
-                        <ToastContainer />
-                    </BrowserRouter>
-                </ToastProvider>
+                <TechnologyProvider>
+                    <ToastProvider>
+                        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                            <AppRoutes />
+                            <ToastContainer />
+                        </BrowserRouter>
+                    </ToastProvider>
+                </TechnologyProvider>
             </ThemeProvider>
         </AuthProvider>
     );

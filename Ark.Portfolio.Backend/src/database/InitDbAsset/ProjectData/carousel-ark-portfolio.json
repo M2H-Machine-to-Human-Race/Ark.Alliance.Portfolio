@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Ark.Alliance.Portfolio",
+        "subtitle": "AI-Powered Portfolio CMS & Static Site Generator",
+        "description": "Production-grade content management system for portfolios with multi-provider AI integration, one-click static export, and comprehensive admin dashboard.",
+        "imageUrl": "/Assets/Projects/Ark.Portfolio/portfolio-hero.png",
+        "linkUrl": "/projects/ark-alliance-portfolio",
+        "order": 1,
+        "isActive": true
+    },
+    {
+        "title": "Admin Dashboard",
+        "subtitle": "Comprehensive Content Management Interface",
+        "description": "Manage all portfolio content through an intuitive admin interface with real-time preview and AI-assisted content creation.",
+        "imageUrl": "/Assets/Projects/Ark.Portfolio/Admin_Dashobard.PNG",
+        "linkUrl": "/admin/dashboard",
+        "order": 2,
+        "isActive": true
+    },
+    {
+        "title": "Project Management",
+        "subtitle": "Multi-Page Documentation System",
+        "description": "Create rich project documentation with Markdown support, Mermaid diagrams, and comprehensive feature descriptions.",
+        "imageUrl": "/Assets/Projects/Ark.Portfolio/Admin_Projects.PNG",
+        "linkUrl": "/admin/projects",
+        "order": 3,
+        "isActive": true
+    },
+    {
+        "title": "Homepage Carousel",
+        "subtitle": "Dynamic Homepage Content",
+        "description": "Configure eye-catching carousel items with custom images, titles, and links to highlight your best work.",
+        "imageUrl": "/Assets/Projects/Ark.Portfolio/Admin_Hero_Carrousel.PNG",
+        "linkUrl": "/admin/carousel",
+        "order": 4,
+        "isActive": true
+    },
+    {
+        "title": "Resume Builder",
+        "subtitle": "Professional Experience Timeline",
+        "description": "Build your professional story with rich experience entries, education history, and skill management.",
+        "imageUrl": "/Assets/Projects/Ark.Portfolio/Admin_ResumeManager.PNG",
+        "linkUrl": "/admin/resume",
+        "order": 5,
+        "isActive": true
+    }
+]

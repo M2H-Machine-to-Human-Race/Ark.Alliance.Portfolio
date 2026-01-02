@@ -1,0 +1,78 @@
+{
+    "title": "Ark.Alliance.Trading.TrendsCalculator",
+    "description": "Production-ready real-time cryptocurrency trend analysis microservice combining advanced statistical indicators (Hurst Exponent, GARCH, Linear Regression, EMA) with optional Google Gemini AI integration. Features WebSocket streaming, configurable thresholds, walk-forward validation, and seamless integration with distributed trading systems. Built with TypeScript, React 19, Express, and Socket.IO.",
+    "status": "Featured",
+    "imageUrl": "/Assets/Projects/Ark.Alliance.TrendsCalculator/trends-hero.png",
+    "repoUrl": "https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator",
+    "demoUrl": "",
+    "packageUrl": "",
+    "technologies": [
+        "react",
+        "typescript",
+        "nodejs",
+        "express",
+        "socketio",
+        "vite",
+        "zod",
+        "binance",
+        "gemini"
+    ],
+    "features": [
+        {
+            "title": "Real-Time Trend Analysis",
+            "description": "Sub-second WebSocket streaming of trend calculations with composite scoring from multiple mathematical indicators. Maintains rolling buffer of 200 price points per symbol for accurate statistical analysis.",
+            "icon": "chart-line"
+        },
+        {
+            "title": "Multi-Indicator Engine",
+            "description": "Combines Hurst Exponent (market persistence), GARCH (volatility forecasting), Linear Regression (trend slope/R²), and EMA crossovers (50/200) into a unified composite score for LONG/SHORT/WAIT decisions.",
+            "icon": "calculator"
+        },
+        {
+            "title": "AI-Augmented Insights",
+            "description": "Optional Google Gemini integration provides contextual analysis and confidence scoring. Mathematical indicators ground AI recommendations in quantitative data for informed trading decisions.",
+            "icon": "brain"
+        },
+        {
+            "title": "Distributed Trading Integration",
+            "description": "REST API and WebSocket events designed for seamless integration with trading bots, portfolio managers, and analytics platforms. Event-driven architecture enables real-time signal consumption.",
+            "icon": "network-wired"
+        },
+        {
+            "title": "Walk-Forward Validation",
+            "description": "Training mode for backtesting and parameter optimization. Evaluate strategy performance across historical data with accuracy metrics per direction (LONG/SHORT/WAIT).",
+            "icon": "graduation-cap"
+        },
+        {
+            "title": "MVVM Architecture",
+            "description": "Clean separation of concerns with Model-View-ViewModel pattern in React frontend. Zod-validated DTOs ensure type safety across the entire stack from backend to UI.",
+            "icon": "layer-group"
+        }
+    ],
+    "pages": [
+        {
+            "title": "Overview",
+            "type": "OVERVIEW",
+            "navOrder": 1,
+            "content": "## Ark.Alliance.Trading.TrendsCalculator\n\n**Real-Time Cryptocurrency Trend Analysis Microservice**\n\nA production-grade service that transforms raw market data into actionable trend intelligence. It answers one critical question for trading systems: **Should I go LONG, SHORT, or WAIT?**\n\n### Core Capabilities\n\n| Capability | Description |\n|------------|-------------|\n| **Real-Time Analysis** | Sub-second trend updates via WebSocket |\n| **Multi-Indicator** | Hurst, GARCH, Linear Regression, EMA |\n| **AI Integration** | Optional Gemini for contextual insights |\n| **Training Mode** | Walk-forward validation for optimization |\n| **Type Safety** | Zod-validated DTOs across stack |\n\n### Perfect For\n\n- 🤖 **Algorithmic Trading Bots** — Entry/exit signal generation\n- 📊 **Analytics Platforms** — Multi-symbol trend monitoring\n- 💼 **Portfolio Managers** — Risk assessment and allocation\n- 🔬 **Quant Research** — Strategy backtesting and validation\n\n### Technology Stack\n\n- **Frontend**: React 19, TypeScript, Vite, Socket.IO Client\n- **Backend**: Node.js 18+, Express, Socket.IO Server\n- **Math Engine**: Hurst, GARCH, Linear Regression, EMA\n- **External**: Binance Futures API, Google Gemini AI\n- **Shared**: Zod validation, TypeScript DTOs"
+        },
+        {
+            "title": "Architecture & Data Model",
+            "type": "ARCHITECTURE",
+            "navOrder": 2,
+            "content": "## System Architecture\n\n### Three-Layer Structure\n\n```\nPresentation Layer (TrendsCalculator.Ui)\n├── React 19 + TypeScript\n├── MVVM Component Pattern\n├── Socket.IO Real-Time\n└── Vite Build Tool\n        ↓\nShared Layer (TrendsCalculator.Share)\n├── 23 Data Transfer Objects\n├── 12 Enumerations\n└── Zod Validation Schemas\n        ↓\nApplication Layer (TrendsCalculator.Backend)\n├── Express REST API\n├── Socket.IO WebSocket\n├── 5 Core Services\n└── Mathematical Engine\n        ↓\nExternal Systems\n├── Binance Futures (Market Data)\n└── Google Gemini (AI Analysis)\n```\n\n### Core Services\n\n| Service | Lines | Responsibility |\n|---------|-------|----------------|\n| `TrendCalculatorService` | 751 | Trend calculation engine |\n| `BinanceStreamService` | 290 | Market data ingestion |\n| `SymbolTrackingService` | 220 | Symbol lifecycle |\n| `StreamingAnalysisService` | 330 | Real-time processing |\n| `MarketDataService` | 180 | Data aggregation |\n\n### Mathematical Indicators\n\n**Hurst Exponent** — Market memory analysis\n- H < 0.5: Mean-reverting (range trading)\n- H ≈ 0.5: Random walk (neutral)\n- H > 0.5: Trending (momentum)\n\n**GARCH** — Volatility forecasting\n- Predicts next-period variance\n- Identifies volatility clustering\n\n**Linear Regression** — Trend direction\n- Slope: direction and steepness\n- R²: trend reliability (0-1)\n\n**EMA Crossover** — MA bias\n- EMA 50 > EMA 200: Bullish\n- EMA 50 < EMA 200: Bearish"
+        },
+        {
+            "title": "Features & Use Cases",
+            "type": "FUNCTIONAL",
+            "navOrder": 3,
+            "content": "## Functional Use Cases\n\n### 1. Algorithmic Trading Bot Integration\n\n**Scenario**: Trading bot needs trend signals for entry timing\n\n**Workflow**:\n1. Bot connects via WebSocket\n2. Subscribes to symbol (e.g., BTCUSDT)\n3. Receives `buffer:progress` events during warmup\n4. Receives `trend:update` events with direction + strength\n5. Executes trades based on composite score threshold\n\n**Benefits**:\n- Sub-second latency\n- Confidence scoring\n- Multiple indicator confirmation\n\n### 2. Multi-Symbol Portfolio Screening\n\n**Scenario**: Analyst monitors 20 symbols for strong trends\n\n**Workflow**:\n1. Track multiple symbols via REST API\n2. Receive parallel WebSocket updates\n3. Filter by strength > 0.7\n4. Request AI analysis for top candidates\n5. Make informed allocation decisions\n\n**Benefits**:\n- Parallel processing\n- Unified trend view\n- AI-augmented insights\n\n### 3. Walk-Forward Strategy Validation\n\n**Scenario**: Quant validates indicator parameters\n\n**Workflow**:\n1. Start training session with historical data\n2. System splits into train/test periods\n3. Parameters optimized on training data\n4. Validated against test data\n5. Accuracy metrics reported per direction\n\n**Benefits**:\n- Avoid overfitting\n- Direction-specific accuracy\n- Parameter optimization\n\n### 4. Real-Time Dashboard Monitoring\n\n**UI Pages**:\n- **Overview**: Summary metrics and active symbols\n- **Symbols**: Add/remove tracking with buffer progress\n- **Visualization**: Live price charts with trend overlays\n- **Configuration**: AI settings and parameters\n- **Training**: Validation metrics and history"
+        },
+        {
+            "title": "Deployment & Integration",
+            "type": "TECHNICAL",
+            "navOrder": 4,
+            "content": "## Deployment\n\n### Prerequisites\n\n- Node.js >= 18.0.0\n- npm >= 8.0.0\n- Binance account (optional, for live data)\n- Google Gemini API key (optional, for AI)\n\n### Quick Start\n\n```bash\n# 1. Install Share layer\ncd Ark.Alliance.TrendsCalculator.Share\nnpm install && npm run build\n\n# 2. Start Backend\ncd ../Ark.Alliance.TrendsCalculator.Backend\nnpm install\ncp .env.example .env\nnpm run dev\n\n# 3. Start Frontend\ncd ../Ark.Alliance.TrendsCalculator.Ui\nnpm install\nnpm run dev\n```\n\n### Environment Variables\n\n```env\n# Server\nPORT=3001\nNODE_ENV=development\n\n# Binance\nBINANCE_API_KEY=your_key\nBINANCE_SECRET_KEY=your_secret\nBINANCE_USE_TESTNET=true\n\n# AI (optional)\nGEMINI_API_KEY=your_gemini_key\n\n# Calculation\nDEFAULT_BUFFER_SIZE=200\nMIN_BUFFER_SIZE=50\n```\n\n## API Integration\n\n### REST Endpoints\n\n| Endpoint | Method | Purpose |\n|----------|--------|---------||\n| `/api/health` | GET | Health check |\n| `/api/symbol/track` | POST | Start tracking |\n| `/api/symbol/:symbol/track` | DELETE | Stop tracking |\n| `/api/symbol/:symbol/status` | GET | Buffer status |\n| `/api/trend/:symbol/analyze` | GET | Current trend |\n| `/api/trend/:symbol/history` | GET | Trend history |\n\n### WebSocket Events\n\n**Server → Client**:\n- `trend:update` — Trend analysis result\n- `buffer:progress` — Buffer filling status\n- `symbol:added` — Symbol tracking started\n- `ai:analysis` — AI analysis result\n\n**Client → Server**:\n- `subscribe:symbol` — Subscribe to updates\n- `unsubscribe:symbol` — Unsubscribe\n\n### Example Consumer\n\n```typescript\nimport { io } from 'socket.io-client';\n\nconst socket = io('wss://trends-api.example.com');\n\nsocket.emit('subscribe:symbol', 'BTCUSDT');\n\nsocket.on('trend:update', (data) => {\n  console.log(`${data.symbol}: ${data.direction}`);\n  console.log(`Strength: ${data.strength}`);\n  console.log(`Composite: ${data.compositeScore}`);\n});\n```"
+        }
+    ]
+}

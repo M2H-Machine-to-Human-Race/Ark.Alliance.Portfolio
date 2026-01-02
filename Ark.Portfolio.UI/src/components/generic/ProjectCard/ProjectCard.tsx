@@ -47,8 +47,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                     <p className="tech-label">Technologies</p>
                     <div className="tech-list">
                         {project.technologies.map((t, idx) => {
-                            const name = typeof t === 'string' ? t : t.name;
-                            return <TechBadge key={name || idx} name={name} size="sm" />;
+                            const techKey = typeof t === 'string' ? t : t.name;
+                            return <TechBadge key={techKey || idx} techKey={techKey} size="sm" showIcon />;
                         })}
                     </div>
                 </div>
