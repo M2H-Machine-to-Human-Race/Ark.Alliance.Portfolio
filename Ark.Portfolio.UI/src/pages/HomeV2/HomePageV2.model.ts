@@ -7,6 +7,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { CarouselSlide } from '../../components/CarouselV2';
+import { DEFAULT_CAROUSEL_SLIDES } from '@ark/portfolio-share';
+import { startupService } from '../../services/startup.service';
 import axios from 'axios';
 import { API_CONFIG } from '../../config/api.constants';
 
@@ -92,14 +94,25 @@ export const useHomePageV2Model = (): HomePageV2Model => {
         setError(null);
 
         try {
-            // Fetch carousel and profile in parallel
-            const [carouselRes, profileRes] = await Promise.all([
-                axios.get(`${API_URL}/carousel`).catch(() => ({ data: [] })),
-                axios.get(`${API_URL}/profile`).catch(() => ({ data: null })),
-            ]);
+            // First check if startup service already has data
+            const startupData = startupService.getData();
+
+            let carousel = startupData.carousel;
+            let profileData = startupData.profile;
+
+            // Only fetch if startup data is empty (shouldn't happen normally)
+            if (carousel.length === 0) {
+                const carouselRes = await axios.get(`${API_URL}/carousel`).catch(() => ({ data: [] }));
+                carousel = carouselRes.data;
+            }
+
+            if (!profileData) {
+                const profileRes = await axios.get(`${API_URL}/profile`).catch(() => ({ data: null }));
+                profileData = profileRes.data;
+            }
 
             // Map carousel items to slides
-            const slides: CarouselSlide[] = carouselRes.data.map((item: any) => ({
+            const slides: CarouselSlide[] = carousel.map((item: any) => ({
                 id: item.id,
                 title: item.title || 'Welcome',
                 subtitle: item.subtitle,
@@ -111,29 +124,15 @@ export const useHomePageV2Model = (): HomePageV2Model => {
 
             // Add default slide if no carousel items
             if (slides.length === 0) {
-                slides.push({
-                    id: 'default',
-                    title: 'Welcome to My Portfolio',
-                    subtitle: 'Full-Stack Developer',
-                    description: 'Explore my projects, experience, and technical expertise in building modern web applications.',
-                    ctaLabel: 'View Portfolio',
-                    ctaLink: '/projects',
-                });
+                slides.push(...DEFAULT_CAROUSEL_SLIDES);
             }
 
             setCarouselSlides(slides);
-            setProfile(profileRes.data);
+            setProfile(profileData);
         } catch (err) {
             setError('Failed to load page data');
             // Set default slide on error
-            setCarouselSlides([{
-                id: 'error',
-                title: 'Welcome to My Portfolio',
-                subtitle: 'Explore & Discover',
-                description: 'Browse my professional work, technical projects, and expertise.',
-                ctaLabel: 'Get Started',
-                ctaLink: '/projects',
-            }]);
+            setCarouselSlides(DEFAULT_CAROUSEL_SLIDES as CarouselSlide[]);
         } finally {
             setIsLoading(false);
         }

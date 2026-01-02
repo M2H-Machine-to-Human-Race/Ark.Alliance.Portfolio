@@ -6,19 +6,13 @@
  */
 
 import { useState, useCallback, useRef, useEffect } from 'react';
+import { CarouselSlideDto } from '@ark/portfolio-share';
 
 /**
- * Carousel slide data structure
+ * Re-export CarouselSlide from shared library for backward compatibility.
+ * Use CarouselSlideDto from @ark/portfolio-share in new code.
  */
-export interface CarouselSlide {
-    id: number | string;
-    title: string;
-    subtitle?: string;
-    description?: string;
-    imageUrl?: string;
-    ctaLabel?: string;
-    ctaLink?: string;
-}
+export type CarouselSlide = CarouselSlideDto;
 
 /**
  * CarouselV2 ViewModel configuration

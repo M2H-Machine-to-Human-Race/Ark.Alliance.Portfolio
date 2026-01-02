@@ -1,163 +1,219 @@
 # Ark.Portfolio.Tests
 
-The **Test Suite** ensures the reliability and stability of the entire Ark.Portfolio ecosystem. It encompasses unit tests, integration tests, and component tests using Jest as the primary test runner.
+<div align="center">
+
+![Tests](https://img.shields.io/badge/Tests-185%20Passing-brightgreen?style=for-the-badge&logo=jest)
+![Coverage](https://img.shields.io/badge/Coverage-80%25+-blue?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+
+**Comprehensive Test Suite for the Ark.Portfolio Ecosystem**
+
+*Unit Tests • Integration Tests • Component Tests • Accessibility Tests*
+
+</div>
+
+---
 
 ## 📊 Test Statistics
 
-| Metric | Value |
-|--------|-------|
-| **Test Suites** | 14 |
-| **Total Tests** | 235 |
-| **Coverage** | 80%+ |
-| **Execution Time** | ~5s |
+| Metric | Value | Description |
+|--------|-------|-------------|
+| **Test Suites** | 11 | Active test files |
+| **Total Tests** | 185 | All passing ✅ |
+| **Frontend Tests** | 185 | UI, Pages, Components |
+| **Backend Tests** | *(via Backend project)* | Services, Routes |
+| **Execution Time** | ~6s | Full suite |
+
+> **Last Verified**: 2026-01-01
 
 ---
 
-## 📦 Functional Capabilities
+## 🏗️ Project Architecture
 
-| Domain | Capability | Description | Code Reference |
-| :--- | :--- | :--- | :--- |
-| **Unit** | **Service Tests** | Isolated testing of Backend services (Auth, Project, Media, AI). | `Backend/Services/*.spec.ts` |
-| **Integration** | **Route Tests** | Controller + Service + Mock DB interaction testing. | `Backend/Routes/*.spec.ts` |
-| **Component** | **UI Tests** | Behavioral verification of V2 components with React Testing Library. | `Frontend/Components/*.spec.ts` |
-| **Page** | **Smoke Tests** | High-level page rendering and Router navigation checks. | `Frontend/Pages/*.test.tsx` |
-| **A11y** | **Accessibility** | WCAG compliance verification for keyboard nav and ARIA. | `Frontend/Accessibility/*.spec.ts` |
-| **Coverage** | **Reporting** | Automated code coverage with lcov and HTML reports. | `jest.config.js` |
+### Directory Structure
 
----
-
-## 🏗️ Project Structure
-
-```text
+```
 Ark.Portfolio.Tests/
-├── Backend/
-│   ├── Routes/              # API route integration tests
-│   │   ├── resume-routes.spec.ts
-│   │   └── timeline-reorder.spec.ts
-│   └── Services/            # Service unit tests
-│       ├── media.service.spec.ts
-│       ├── project.service.spec.ts
-│       └── resume.service.spec.ts
-├── Frontend/
-│   ├── Accessibility/       # A11y compliance tests
-│   │   └── accessibility.spec.ts
-│   ├── Components/          # UI component tests
-│   │   ├── polished-ui.spec.ts
-│   │   └── timeline-grid.spec.ts
-│   ├── Navigation/          # Router configuration tests
-│   │   └── navigation.config.spec.ts
-│   ├── Pages/               # Page-level tests
-│   │   ├── ProjectsPageV2.test.tsx
-│   │   ├── ResumePageV2.test.tsx
-│   │   └── Smoke.test.tsx
-│   └── Services/            # Frontend service tests
-│       └── resume-api.service.spec.ts
-├── Interfaces/              # Test interfaces
-├── Mocks/                   # Shared mocks
-│   ├── styleMock.js         # CSS module mock
-│   └── fileMock.js          # Asset file mock
-├── coverage/                # Coverage reports (generated)
-├── jest.config.js           # Jest configuration
-├── setup.ts                 # Test setup file
-└── tsconfig.json            # TypeScript config
+│
+├── 📁 Backend/                          # Backend test suites
+│   ├── Routes/                          # API route integration tests
+│   │   ├── resume-routes.spec.ts        # Resume API endpoints
+│   │   └── timeline-reorder.spec.ts     # Drag-drop reordering
+│   └── Services/                        # Service unit tests
+│       ├── media.service.spec.ts        # Media CRUD operations
+│       ├── project.service.spec.ts      # Project management
+│       └── resume.service.spec.ts       # Resume data handling
+│
+├── 📁 Frontend/                         # Frontend test suites
+│   ├── Accessibility/                   # WCAG compliance
+│   │   └── accessibility.spec.ts        # A11y verification
+│   ├── Components/                      # UI component tests
+│   │   ├── polished-ui.spec.ts          # Design system tests
+│   │   └── timeline-grid.spec.ts        # Timeline components
+│   ├── Navigation/                      # Router tests
+│   │   └── navigation.config.spec.ts    # Route configuration
+│   ├── Pages/                           # Page-level tests
+│   │   ├── Admin/Projects/              # ⭐ REFACTORED MODULE
+│   │   │   ├── index.ts                 # Central exports
+│   │   │   ├── interfaces.ts            # Type definitions
+│   │   │   ├── constants.ts             # Test constants
+│   │   │   ├── helpers.tsx              # Render utilities
+│   │   │   ├── mocks.ts                 # Mock data
+│   │   │   ├── TestableProjectEditPage.tsx
+│   │   │   ├── TestableProjectManager.tsx
+│   │   │   ├── ProjectEditPage.test.tsx # 12 tests
+│   │   │   └── ProjectManager.test.tsx  # 14 tests
+│   │   ├── ProjectsPageV2.test.tsx      # Projects page tests
+│   │   ├── ResumePageV2.test.tsx        # Resume page tests
+│   │   ├── Smoke.test.tsx               # Health check
+│   │   └── ai-settings.page.spec.ts     # AI settings tests
+│   └── Services/                        # Frontend services
+│       └── resume-api.service.spec.ts   # API client tests
+│
+├── 📁 Interfaces/                       # Shared test interfaces
+│   ├── IProjectService.ts               # Project service contract
+│   ├── IResumeService.ts                # Resume service contract
+│   └── index.ts                         # Interface exports
+│
+├── 📁 Mocks/                            # Global mock data
+│   ├── index.ts                         # Mock exports
+│   ├── project.mock.ts                  # Project mock data
+│   ├── resume.mock.ts                   # Resume mock data
+│   ├── media.mock.ts                    # Media mock data
+│   ├── styleMock.js                     # CSS module mock
+│   └── fileMock.js                      # Asset file mock
+│
+├── 📄 jest.config.js                    # Jest configuration
+├── 📄 setup.ts                          # Test setup/bootstrap
+├── 📄 tsconfig.json                     # TypeScript config
+├── 📄 Agents.md                         # AI agent documentation
+└── 📄 README.md                         # This file
 ```
 
 ---
 
-## 📐 Test Architecture
+## 📐 Testing Patterns
 
-### Testing Pyramid
-
-We follow a test pyramid approach:
+### Test Architecture Philosophy
 
 ```
-          ┌─────────────┐
-          │   E2E/UI    │  ← Few, slow, high confidence
-          │   Tests     │
-          ├─────────────┤
-          │ Integration │  ← Medium count, medium speed
-          │   Tests     │
-          ├─────────────┤
-          │    Unit     │  ← Many, fast, focused
-          │   Tests     │
-          └─────────────┘
+           ┌──────────────────────┐
+           │    E2E / Browser     │  ← Manual / Playwright (future)
+           │        Tests         │
+           ├──────────────────────┤
+           │   Integration Tests  │  ← Route + Service + Mock DB
+           │                      │
+           ├──────────────────────┤
+           │     Component        │  ← React Testing Library
+           │       Tests          │
+           ├──────────────────────┤
+           │      Unit Tests      │  ← Jest + TypeScript
+           │   (Services/Utils)   │
+           └──────────────────────┘
 ```
 
-### Coverage by Layer
+### The Testable Component Pattern
 
-```mermaid
-pie title Test Distribution
-    "Backend Services" : 25
-    "Backend Routes" : 15
-    "Frontend Components" : 30
-    "Frontend Pages" : 20
-    "Accessibility" : 10
+To avoid **dual React instance issues** when testing UI components, we use the **Testable Component Pattern**:
+
+```typescript
+/**
+ * TestableComponent mirrors the real component but:
+ * - Uses dependency injection for mocks
+ * - Avoids importing from UI node_modules
+ * - Enables isolated unit testing
+ */
+export const TestableMyComponent: React.FC<Props> = ({
+    apiClient,    // Injected mock
+    navigate,     // Injected mock
+    showToast     // Injected mock
+}) => {
+    // Component logic using injected dependencies
+};
 ```
+
+**Benefits:**
+- ✅ Avoids React context errors
+- ✅ Full control over dependencies
+- ✅ Predictable test behavior
+- ✅ No module hoisting issues
 
 ---
 
-## 🧪 Test Categories
-
-### Backend Tests
-
-| Suite | Tests | Description |
-|-------|-------|-------------|
-| `media.service.spec.ts` | 15 | CRUD, filtering, validation |
-| `project.service.spec.ts` | 12 | Project management |
-| `resume.service.spec.ts` | 10 | Resume data handling |
-| `resume-routes.spec.ts` | 11 | API route responses |
-| `timeline-reorder.spec.ts` | 8 | Drag-drop reordering |
+## 🧪 Test Suites Reference
 
 ### Frontend Tests
 
-| Suite | Tests | Description |
-|-------|-------|-------------|
-| `polished-ui.spec.ts` | 35 | Design system, HeaderV2, CarouselV2 |
-| `timeline-grid.spec.ts` | 25 | TimelineV2, ProjectGrid filtering |
+| Test Suite | Tests | Coverage | Description |
+|------------|-------|----------|-------------|
+| `ProjectEditPage.test.tsx` | 12 | Create/Edit modes, form submission, validation |
+| `ProjectManager.test.tsx` | 14 | List, navigation, CRUD actions |
+| `ProjectsPageV2.test.tsx` | 9 | Page states, mock data rendering |
+| `ResumePageV2.test.tsx` | 3 | Loading, error, content states |
+| `polished-ui.spec.ts` | 35 | Design system components |
+| `timeline-grid.spec.ts` | 25 | Timeline and grid components |
 | `navigation.config.spec.ts` | 15 | Route configuration |
 | `accessibility.spec.ts` | 30 | WCAG compliance |
-| `ProjectsPageV2.test.tsx` | 9 | Page states with mock data |
+| `ai-settings.page.spec.ts` | 30 | AI settings validation |
+| `Smoke.test.tsx` | 1 | Basic JSX rendering health check |
+
+### Backend Tests
+
+| Test Suite | Tests | Coverage | Description |
+|------------|-------|----------|-------------|
+| `project.service.spec.ts` | 12 | CRUD, filtering, sorting |
+| `resume.service.spec.ts` | 10 | Data handling, validation |
+| `media.service.spec.ts` | 15 | Upload, metadata, filtering |
+| `resume-routes.spec.ts` | 11 | API responses, error handling |
+| `timeline-reorder.spec.ts` | 8 | Drag-drop persistence |
 
 ---
 
-## 🚀 Usage
+## 🚀 Usage Commands
 
-### Run All Tests
+### Running Tests
 
 ```bash
+# Run all tests
 npm test
-```
 
-### Run Specific Suites
-
-```bash
-# Backend tests only
-npm run test:backend
-
-# Frontend tests only
+# Run frontend tests only
 npm run test:frontend
 
-# Share library tests
-npm run test:share
-```
+# Run backend tests only
+npm run test:backend
 
-### Watch Mode
+# Run specific test file
+npm exec jest -- Frontend/Pages/Admin/Projects --verbose
 
-```bash
+# Run tests matching pattern
+npm exec jest -- -t "renders loading state"
+
+# Watch mode (re-run on changes)
 npm run test:watch
 ```
 
-### Generate Coverage Report
+### Coverage Reports
 
 ```bash
+# Generate coverage report
 npm run test:coverage
-# Reports in ./coverage/
+
+# View HTML report
+start coverage/lcov-report/index.html
 ```
 
-### Run Single Test File
+### Debugging
 
 ```bash
-npx jest Frontend/Pages/ProjectsPageV2.test.tsx --verbose
+# Verbose output
+npm exec jest -- --verbose --no-coverage
+
+# Single worker (easier debugging)
+npm exec jest -- --maxWorkers=1
+
+# Debug mode with inspector
+node --inspect-brk node_modules/.bin/jest --runInBand
 ```
 
 ---
@@ -166,48 +222,77 @@ npx jest Frontend/Pages/ProjectsPageV2.test.tsx --verbose
 
 ### Jest Configuration (`jest.config.js`)
 
-Key settings:
-
 ```javascript
 module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
+    roots: ['<rootDir>'],
     testMatch: ['**/*.spec.ts', '**/*.test.tsx'],
+    transform: {
+        '^.+\\.tsx?$': ['ts-jest', {
+            tsconfig: 'tsconfig.json',
+            diagnostics: { ignoreCodes: [2322, 2786] }
+        }]
+    },
     moduleNameMapper: {
-        '@ark/portfolio-share(.*)': '../Ark.Portfolio.Share$1',
-        '@ui/(.*)': '../Ark.Portfolio.UI/src/$1',
-        '\\.(css|less)$': '<rootDir>/Mocks/styleMock.js'
+        '\\.(css|scss)$': '<rootDir>/Mocks/styleMock.js',
+        '^@ark/portfolio-share(.*)$': '<rootDir>/../Ark.Portfolio.Share$1',
+        '^@ui/(.*)$': '<rootDir>/../Ark.Portfolio.UI/src/$1'
     },
     setupFilesAfterEnv: ['<rootDir>/setup.ts'],
-    collectCoverageFrom: ['**/*.ts', '**/*.tsx'],
-    coverageDirectory: './coverage'
+    verbose: true,
+    testTimeout: 10000
 };
 ```
 
-### Mock Data Integration
+### Path Aliases
 
-Tests use `MOCK_PROJECTS` from the Share library, which is synchronized with backend seed data:
-
-```typescript
-import { MOCK_PROJECTS } from '@ark/portfolio-share';
-
-mockUseProjectsModel.mockReturnValue({
-    projects: MOCK_PROJECTS,
-    isLoading: false,
-    error: null
-});
-```
+| Alias | Resolves To | Usage |
+|-------|-------------|-------|
+| `@ark/portfolio-share` | `../Ark.Portfolio.Share/` | Shared DTOs, mocks, enums |
+| `@ui/*` | `../Ark.Portfolio.UI/src/*` | UI components, hooks, services |
 
 ---
 
-## 📝 Writing Tests
+## 📝 Writing Tests - Best Practices
+
+### File Documentation Standard
+
+Every test file MUST include:
+
+```typescript
+/**
+ * @fileoverview [Component/Service] Tests
+ * [Brief description of what is tested]
+ * 
+ * Tests Cover:
+ * - [Test category 1]
+ * - [Test category 2]
+ * 
+ * @author Armand Richelet-Kleinberg
+ * @module [Frontend/Backend]/[Area]
+ */
+```
 
 ### Component Test Template
 
 ```typescript
+/**
+ * @fileoverview MyComponent Tests
+ * @author Armand Richelet-Kleinberg
+ */
+
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+
+// Mock dependencies BEFORE imports
+jest.mock('@ui/hooks/useMyHook', () => ({
+    useMyHook: jest.fn()
+}));
+
+// Import AFTER mocks
+import { MyComponent } from '@ui/components/MyComponent';
 
 describe('MyComponent', () => {
     beforeEach(() => {
@@ -220,54 +305,112 @@ describe('MyComponent', () => {
                 <MyComponent />
             </MemoryRouter>
         );
-        
-        expect(screen.getByText('Expected Text')).toBeInTheDocument();
+        expect(screen.getByTestId('my-component')).toBeInTheDocument();
     });
 });
 ```
 
-### Service Test Template
+### Using the Admin/Projects Module Pattern
+
+For new admin page tests, follow the established pattern:
 
 ```typescript
-describe('MyService', () => {
-    let service: MyService;
+// Import from centralized index
+import {
+    TestableMyPage,
+    renderWithRouter,
+    createMockApiClient,
+    MY_PAGE_TEST_IDS,
+    MOCK_DATA
+} from './index';
 
-    beforeEach(() => {
-        service = new MyService();
-    });
+describe('MyPage', () => {
+    let mockApiClient = createMockApiClient();
+    
+    const renderComponent = () => renderWithRouter(
+        <TestableMyPage apiClient={mockApiClient} />,
+        { initialPath: '/admin/my-page', routePattern: '/admin/my-page' }
+    );
 
-    it('should return expected result', async () => {
-        const result = await service.doSomething();
-        expect(result).toBeDefined();
+    it('renders correctly', () => {
+        renderComponent();
+        expect(screen.getByTestId(MY_PAGE_TEST_IDS.PAGE)).toBeInTheDocument();
     });
 });
 ```
 
 ---
 
-## 🔍 Debugging Tests
+## 🔧 Troubleshooting
 
-### Verbose Output
+### Common Issues
 
-```bash
-npx jest --verbose
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| `useNavigate() outside Router` | Component imports before mocks | Move `jest.mock()` before imports |
+| `Cannot read 'useContext'` | Dual React instances | Use Testable Component pattern |
+| `import.meta.env undefined` | Vite env in Jest | Mock the service that uses it |
+| `TypeError: X is not a function` | Incomplete mock | Add missing mock return values |
+
+### Dual React Instance Issue
+
+**Symptom**: `Cannot read properties of null (reading 'useContext')`
+
+**Cause**: Test project and UI project have different React installations.
+
+**Solution**: Create Testable components that don't import from UI's node_modules:
+
+```typescript
+// ❌ Don't do this
+import { RealComponent } from '@ui/components/RealComponent';
+
+// ✅ Do this instead
+const TestableComponent: React.FC = () => {
+    // Mirror component logic with mocked dependencies
+};
 ```
 
-### Run Single Test
+---
 
-```bash
-npx jest -t "test name pattern"
-```
+## 📋 Contribution Guidelines
 
-### Debug Mode
+### Adding New Tests
 
-```bash
-node --inspect-brk node_modules/.bin/jest --runInBand
-```
+1. **Create test file** in appropriate directory
+2. **Add @fileoverview** header with @author
+3. **Follow naming convention**: `ComponentName.test.tsx` or `service-name.spec.ts`
+4. **Use centralized mocks** from `Mocks/` directory
+5. **Run full suite** before committing
+
+### Code Quality Checklist
+
+- [ ] All tests pass (`npm test`)
+- [ ] File has @fileoverview header
+- [ ] Uses existing mock data where possible
+- [ ] Follows Testable Component pattern for UI tests
+- [ ] No console errors during test run
+- [ ] Coverage maintained at 80%+
+
+---
+
+## 📚 Related Documentation
+
+| Document | Location | Purpose |
+|----------|----------|---------|
+| Share Layer | `../Ark.Portfolio.Share/README.md` | DTOs, mocks, enums |
+| UI Layer | `../Ark.Portfolio.UI/README.md` | Components, pages |
+| Backend Layer | `../Ark.Portfolio.Backend/README.md` | API, services |
+| Agent Notes | `./Agents.md` | AI-assisted development log |
 
 ---
 
 <div align="center">
-  <sub>Armand Richelet-Kleinberg © M2H.IO - Ark Alliance Ecosystem</sub><br>
-  <sub>AI-assisted development with Anthropic Claude & Google Gemini</sub>
+
+**Ark.Portfolio.Tests** — Part of the Ark Alliance Ecosystem
+
+<sub>
+Armand Richelet-Kleinberg © M2H.IO<br>
+AI-assisted development with Anthropic Claude & Google Gemini
+</sub>
+
 </div>

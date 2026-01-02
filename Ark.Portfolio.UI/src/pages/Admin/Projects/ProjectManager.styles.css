@@ -46,6 +46,8 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    color: #1f2937;
+    /* Explicit dark text for light card background */
 }
 
 .pm-card-image {
@@ -63,6 +65,8 @@
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: #111827;
+    /* Dark text for readability */
 }
 
 .pm-card-status {
@@ -75,6 +79,13 @@
     background-color: #e5e7eb;
     color: #374151;
     margin-bottom: 0.5rem;
+}
+
+.pm-card-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    /* Secondary dark text for descriptions */
+    line-height: 1.5;
 }
 
 .pm-card-actions {
@@ -103,4 +114,111 @@
     background-color: #fee2e2;
     color: #991b1b;
     border-color: #fecaca;
+}
+
+/* Loading state */
+.pm-loading {
+    text-align: center;
+    padding: 3rem;
+    color: #6b7280;
+}
+
+/* Card header with badges */
+.pm-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pm-featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #1f2937;
+}
+
+/* Status variants */
+.pm-status-featured {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.pm-status-in-progress,
+.pm-status-in_progress {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.pm-status-completed {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.pm-status-planned {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* Card links section */
+.pm-card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.pm-link-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: #f3f4f6;
+    color: #4b5563;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.pm-link-badge:hover {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.pm-link-badge svg {
+    flex-shrink: 0;
+}
+
+.pm-link-package {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.pm-link-package:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.pm-link-live {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.pm-link-live:hover {
+    background: rgba(16, 185, 129, 0.2);
+}
+
+/* Error message */
+.error-message {
+    padding: 1rem;
+    background: #fee2e2;
+    color: #991b1b;
+    border-radius: 0.5rem;
+    border: 1px solid #fecaca;
 }

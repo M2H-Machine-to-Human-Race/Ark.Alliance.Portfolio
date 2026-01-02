@@ -8,6 +8,7 @@
 import React, { useState } from 'react';
 import { MediaTypeEnum } from '@ark/portfolio-share';
 import { AdminLayout } from '../../../components/generic/AdminLayout';
+import { TabControl, TabItem } from '../../../components/generic/TabControl';
 import { useMediaManagerModel, MediaTab, UploadFormData } from './MediaManager.model';
 import {
     Upload, Trash2, Copy, Check, Search, Grid, List, X,
@@ -29,17 +30,17 @@ const TYPE_ICONS: Record<string, React.ReactNode> = {
     other: <File size={20} />
 };
 
-// Tab configuration
-const TABS: { key: MediaTab; label: string }[] = [
-    { key: 'all', label: 'All' },
-    { key: 'image', label: 'Images' },
-    { key: 'video', label: 'Videos' },
-    { key: 'audio', label: 'Audio' },
-    { key: 'pdf', label: 'PDF' },
-    { key: 'word', label: 'Word' },
-    { key: 'excel', label: 'Excel' },
-    { key: 'markdown', label: 'Markdown' },
-    { key: 'json', label: 'JSON' }
+// Tab configuration with icons
+const MEDIA_TABS: TabItem[] = [
+    { id: 'all', label: 'All', icon: 'Grid3X3' },
+    { id: 'image', label: 'Images', icon: 'Image' },
+    { id: 'video', label: 'Videos', icon: 'Video' },
+    { id: 'audio', label: 'Audio', icon: 'Music' },
+    { id: 'pdf', label: 'PDF', icon: 'FileText' },
+    { id: 'word', label: 'Word', icon: 'FileType' },
+    { id: 'excel', label: 'Excel', icon: 'Table' },
+    { id: 'markdown', label: 'Markdown', icon: 'FileCode' },
+    { id: 'json', label: 'JSON', icon: 'Braces' }
 ];
 
 export const MediaManager: React.FC = () => {
@@ -92,17 +93,13 @@ export const MediaManager: React.FC = () => {
 
                 {/* Filters */}
                 <div className="mm-filters">
-                    <div className="mm-tabs">
-                        {TABS.map(tab => (
-                            <button
-                                key={tab.key}
-                                className={`mm-tab ${vm.activeTab === tab.key ? 'active' : ''}`}
-                                onClick={() => vm.setActiveTab(tab.key)}
-                            >
-                                {tab.label}
-                            </button>
-                        ))}
-                    </div>
+                    <TabControl
+                        tabs={MEDIA_TABS}
+                        activeTab={vm.activeTab}
+                        onTabChange={(tabId) => vm.setActiveTab(tabId as MediaTab)}
+                        variant="default"
+                        ariaLabel="Filter by media type"
+                    />
                     <div className="mm-search">
                         <Search size={16} />
                         <input

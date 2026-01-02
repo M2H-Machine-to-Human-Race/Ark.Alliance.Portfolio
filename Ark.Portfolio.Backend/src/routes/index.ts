@@ -5,6 +5,7 @@ import { ProjectPresentationController } from '../controllers/project-presentati
 import { CvController } from '../controllers/cv.controller';
 import { DashboardController } from '../controllers/dashboard.controller';
 import { WidgetController } from '../controllers/widget.controller';
+import { CarouselController } from '../controllers/carousel.controller';
 import { asyncHandler } from '../middleware/error-handler.middleware';
 import { mediaUpload } from '../middleware/upload.middleware';
 
@@ -20,11 +21,15 @@ const presentationController = new ProjectPresentationController();
 const cvController = new CvController();
 const dashboardController = new DashboardController();
 const widgetController = new WidgetController();
+const carouselController = new CarouselController();
 const adminController = new AdminController();
 const authController = new AuthController();
 
 // Profile
 router.get('/profile', asyncHandler(profileController.getProfile.bind(profileController)));
+
+// Carousel (Public - for homepage)
+router.get('/carousel', asyncHandler(carouselController.getCarousel.bind(carouselController)));
 
 // Projects (Legacy & Presentation)
 router.get('/projects', asyncHandler(presentationController.getAllProjects.bind(presentationController)));

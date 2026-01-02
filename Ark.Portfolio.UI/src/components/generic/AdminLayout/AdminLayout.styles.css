@@ -488,3 +488,44 @@
 .logout-button {
     display: none;
 }
+
+/* ============================================
+   Admin Modal Global Styles
+   Ensures consistent text colors for all modals
+   regardless of Tailwind or custom classes used.
+   ============================================ */
+
+/* Force dark text for inputs in admin context with white backgrounds */
+.admin-layout input[type="text"],
+.admin-layout input[type="email"],
+.admin-layout input[type="password"],
+.admin-layout input[type="url"],
+.admin-layout input[type="number"],
+.admin-layout input[type="date"],
+.admin-layout input[type="search"],
+.admin-layout textarea,
+.admin-layout select {
+    color: #1e293b;
+}
+
+.admin-layout input::placeholder,
+.admin-layout textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* Modal overlays - ensure modals inherit correct styles */
+.admin-layout .fixed {
+    color: #1e293b;
+}
+
+/* White background modal content */
+.admin-layout .bg-white input,
+.admin-layout .bg-white textarea,
+.admin-layout .bg-white select {
+    color: #1e293b;
+}
+
+.admin-layout .bg-white input::placeholder,
+.admin-layout .bg-white textarea::placeholder {
+    color: #94a3b8;
+}

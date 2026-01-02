@@ -49,6 +49,9 @@ export interface AdminTechnologyDto {
  *           type: string
  *         repositoryUrl:
  *           type: string
+ *         packageUrl:
+ *           type: string
+ *           description: NPM/NuGet package URL
  *         liveUrl:
  *           type: string
  *         startDate:
@@ -68,6 +71,7 @@ export interface AdminProjectDto {
     imageUrl?: string;
     mermaidDiagram?: string;
     repositoryUrl?: string;
+    packageUrl?: string;
     liveUrl?: string;
     startDate?: string;
     endDate?: string;
@@ -136,6 +140,8 @@ export interface ProjectDto {
     /** Repository URL (alias for repositoryUrl) */
     repoUrl?: string;
     repositoryUrl?: string;
+    /** Package URL for libraries (npm, nuget, etc.) */
+    packageUrl?: string;
     /** Demo/live URL (alias for liveUrl) */
     demoUrl?: string;
     liveUrl?: string;

@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { cvService } from '../../services/cv.service';
+import { resumeService } from '../../services/resume.service';
 import { TimelineItem } from '../../components/TimelineV2';
 
 /**
@@ -155,7 +155,7 @@ export const useResumePageV2Model = (): ResumePageV2Model => {
         setError(null);
 
         try {
-            const cvData = await cvService.getCv();
+            const cvData = await resumeService.getResume();
 
             // Map experiences
             const experiences = (cvData.experiences || []).map(mapExperience);

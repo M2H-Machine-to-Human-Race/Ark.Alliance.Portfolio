@@ -9,6 +9,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Home, FileText, Briefcase, Settings, LogIn, Download, Loader2 } from 'lucide-react';
 import { useHeaderV2Model } from './HeaderV2.model';
+import { ConnectionIndicator } from '../ConnectionIndicator';
 import './HeaderV2.styles.css';
 
 /**
@@ -106,6 +107,9 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
                             {vm.exportStatus}
                         </div>
                     )}
+
+                    {/* Backend Connection Status Indicator */}
+                    <ConnectionIndicator className="header-connection-indicator" />
 
                     {/* Admin/Login Button (always visible on desktop) */}
                     <Link

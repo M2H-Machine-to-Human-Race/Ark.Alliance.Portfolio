@@ -85,7 +85,7 @@
 .ai-settings-title p {
     margin: 0.25rem 0 0;
     font-size: 0.875rem;
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-muted, #cbd5e1);
 }
 
 /* Toggle */
@@ -215,7 +215,7 @@
 .ai-provider-info p {
     margin: 0.25rem 0 0;
     font-size: 0.75rem;
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-muted, #cbd5e1);
     line-height: 1.4;
 }
 
@@ -239,7 +239,7 @@
 .ai-form-group label {
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-primary, #e2e8f0);
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -247,7 +247,7 @@
 
 .ai-key-hint {
     font-size: 0.75rem;
-    color: #64748b;
+    color: #94a3b8;
     font-weight: 400;
 }
 
@@ -289,7 +289,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: #64748b;
+    color: #94a3b8;
 }
 
 /* Test Result */
@@ -371,7 +371,7 @@
     margin: 0 0 1rem;
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-primary, #e2e8f0);
 }
 
 .ai-feature-grid {
@@ -405,7 +405,7 @@
 .ai-feature p {
     margin: 0.25rem 0 0;
     font-size: 0.75rem;
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-muted, #cbd5e1);
 }
 
 /* Responsive */
