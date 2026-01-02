@@ -1,3 +1,16 @@
+/**
+ * @fileoverview ResumePageV2 Component Tests
+ * Tests the Resume page view layer using mocked model hook.
+ * 
+ * Tests Cover:
+ * - Loading state rendering
+ * - Error state rendering
+ * - Content display with profile data
+ * 
+ * @author Armand Richelet-Kleinberg
+ * @module Frontend/Pages
+ */
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';

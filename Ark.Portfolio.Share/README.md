@@ -1,6 +1,23 @@
 # Ark.Portfolio.Share
 
+<div align="center">
+
+![npm](https://img.shields.io/badge/npm-local%20package-orange?style=for-the-badge&logo=npm)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![DTOs](https://img.shields.io/badge/DTOs-15%2B-green?style=for-the-badge)
+![Enums](https://img.shields.io/badge/Enums-60%2B%20values-purple?style=for-the-badge)
+
+**Shared Contract Layer for Frontend and Backend**
+
+*Type-Safe DTOs • Enumerations • Constants • Mock Data*
+
+</div>
+
+---
+
 The **Shared Library** serves as the contract layer between Frontend and Backend, ensuring type safety and consistency across the entire solution. It provides Data Transfer Objects (DTOs), Enumerations, Constants, and Mock data.
+
+---
 
 ## 📦 Functional Capabilities
 
@@ -18,28 +35,35 @@ The **Shared Library** serves as the contract layer between Frontend and Backend
 
 ```text
 Ark.Portfolio.Share/
-├── constants/           # Global UX strings & Layout config
-│   ├── terminology.constants.ts
-│   └── ui-layout.constants.ts
-├── dtos/                # Data Transfer Objects (15 files)
-│   ├── auth.dto.ts
-│   ├── project.dto.ts
-│   ├── resume.dto.ts
-│   ├── ai.dto.ts
-│   ├── media.dto.ts
-│   └── ...
-├── enums/               # Typed Enumerations (5 files)
-│   ├── project-status.enum.ts
-│   ├── technology.enum.ts     # 60+ technologies
-│   ├── skill-level.enum.ts
-│   └── ...
-├── mocks/               # Static test data
-│   ├── projects.mock.ts
-│   ├── cv.mock.ts
-│   └── profile.mock.ts
-├── index.ts             # Public API barrel
-├── package.json
-└── tsconfig.json
+├── 📁 constants/                 # Global UX strings & Layout config
+│   ├── terminology.constants.ts  # UI text strings
+│   └── ui-layout.constants.ts    # Layout configuration
+│
+├── 📁 dtos/                      # Data Transfer Objects (15+ files)
+│   ├── auth.dto.ts               # Authentication DTOs
+│   ├── project.dto.ts            # Project & Admin DTOs
+│   ├── resume.dto.ts             # Resume/CV DTOs
+│   ├── ai.dto.ts                 # AI settings DTOs
+│   ├── media.dto.ts              # Media/upload DTOs
+│   ├── carousel.dto.ts           # Carousel DTOs
+│   ├── crud-response.dto.ts      # API response wrappers
+│   └── ...                       # Additional DTOs
+│
+├── 📁 enums/                     # Typed Enumerations (5+ files)
+│   ├── project-status.enum.ts    # IN_PROGRESS, COMPLETED, etc.
+│   ├── technology.enum.ts        # 60+ technologies
+│   ├── skill-level.enum.ts       # Beginner to Expert
+│   └── ...                       # Additional enums
+│
+├── 📁 mocks/                     # Static test data
+│   ├── index.ts                  # Mock exports
+│   ├── projects.mock.ts          # Project mock data
+│   ├── cv.mock.ts                # CV/Resume mock data
+│   └── profile.mock.ts           # Profile mock data
+│
+├── 📄 index.ts                   # Public API barrel
+├── 📄 package.json               # Package configuration
+└── 📄 tsconfig.json              # TypeScript config
 ```
 
 ---
@@ -256,7 +280,63 @@ export enum Technology {
 
 ---
 
+## 📏 Best Practices
+
+### DTO Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|--------|
+| Public DTO | `[Entity]Dto` | `ProjectDto` |
+| Admin DTO | `Admin[Entity]Dto` | `AdminProjectDto` |
+| Create DTO | `Create[Entity]Dto` | `CreateProjectDto` |
+| Response | `CrudResponseDto<T>` | `CrudResponseDto<ProjectDto>` |
+
+### Enum Guidelines
+
+- **Always use string values** for JSON serialization
+- **Add JSDoc comments** for each value explaining usage
+- **Group related values** with comment headers
+
+```typescript
+export enum ProjectStatus {
+    /** Project is actively being developed */
+    IN_PROGRESS = 'In Progress',
+    /** Project development is finished */
+    COMPLETED = 'Completed',
+}
+```
+
+### Mock Data Sync
+
+Mock data MUST remain synchronized with backend seed data:
+
+| Mock File | Backend Seed |
+|-----------|-------------|
+| `projects.mock.ts` | `projects.json` |
+| `profile.mock.ts` | `profile.json` |
+| `cv.mock.ts` | `cv.json` |
+
+> **Important**: When updating backend seeds, update corresponding mocks!
+
+---
+
+## 📚 Related Documentation
+
+| Document | Location | Purpose |
+|----------|----------|--------|
+| Tests Layer | `../Ark.Portfolio.Tests/README.md` | Test patterns, mocks usage |
+| UI Layer | `../Ark.Portfolio.UI/README.md` | Component consumption |
+| Backend Layer | `../Ark.Portfolio.Backend/README.md` | DTO mapping, validation |
+
+---
+
 <div align="center">
-  <sub>Armand Richelet-Kleinberg © M2H.IO - Ark Alliance Ecosystem</sub><br>
-  <sub>AI-assisted development with Anthropic Claude & Google Gemini</sub>
+
+**Ark.Portfolio.Share** — Part of the Ark Alliance Ecosystem
+
+<sub>
+Armand Richelet-Kleinberg © M2H.IO<br>
+AI-assisted development with Anthropic Claude & Google Gemini
+</sub>
+
 </div>

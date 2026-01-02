@@ -31,6 +31,9 @@ app.use(express.json());
 // Serve uploaded files statically
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
+// Serve project assets (carousel images, etc.)
+app.use('/Assets', express.static(path.join(__dirname, 'Assets')));
+
 // API Routes
 app.use('/api', routes);
 
@@ -39,7 +42,18 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger.config';
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Health check endpoint
+// Health check endpoint for frontend connection status
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        version: '1.0.0',
+        protocol: req.secure ? 'https' : 'http',
+        uptime: process.uptime(),
+    });
+});
+
+// Health check endpoint (root)
 app.get('/', (req, res) => {
     res.send('Ark Portfolio API is running');
 });

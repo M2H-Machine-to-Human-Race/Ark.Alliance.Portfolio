@@ -1,12 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ark Portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ark Portfolio</title>
+  <style>
+    /* Inline critical CSS for instant loading display */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #020617;
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+
+    /* Pre-React loading screen - visible until React mounts */
+    #initial-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #020617;
+      transition: opacity 0.3s ease;
+    }
+
+    #initial-loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #initial-loader .loader-logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 2rem;
+      animation: pulse-loader 2s ease-in-out infinite;
+    }
+
+    #initial-loader .loader-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #initial-loader .loader-subtitle {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+
+    #initial-loader .loader-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(59, 130, 246, 0.2);
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin-loader 1s linear infinite;
+    }
+
+    @keyframes spin-loader {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse-loader {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.8;
+        transform: scale(0.98);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Instant loading screen shown before React mounts -->
+  <div id="initial-loader">
+    <img src="/Assets/App/LogoArkAlliance.png" alt="" class="loader-logo" />
+    <h1 class="loader-title">Ark.Alliance.Portfolio</h1>
+    <p class="loader-subtitle">Portfolio Content Management System</p>
+    <div class="loader-spinner"></div>
+  </div>
+
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

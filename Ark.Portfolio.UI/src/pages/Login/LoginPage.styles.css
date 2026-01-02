@@ -5,6 +5,9 @@
     min-height: 100vh;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
     font-family: 'Inter', sans-serif;
+    /* Ensure container is above any background overlays */
+    position: relative;
+    z-index: 1;
 }
 
 .login-card {
@@ -17,6 +20,10 @@
         0 0 0 1px rgba(255, 255, 255, 0.1);
     width: 100%;
     max-width: 26rem;
+    /* Ensure card is above any overlays and fully interactive */
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
 }
 
 /* Branding Section */
@@ -95,6 +102,8 @@
     font-size: 0.875rem;
     transition: all 0.2s ease;
     background: #f9fafb;
+    color: #1f2937;
+    /* Consistent dark text color for all inputs */
 }
 
 .form-input:focus {

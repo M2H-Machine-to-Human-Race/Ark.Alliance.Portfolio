@@ -74,8 +74,8 @@
     --bg-card: rgba(15, 23, 42, 0.7);
     --bg-input: rgba(30, 41, 59, 0.5);
     --text-primary: var(--color-neutral-50);
-    --text-secondary: var(--color-neutral-400);
-    --text-muted: var(--color-neutral-500);
+    --text-secondary: var(--color-neutral-300);
+    --text-muted: var(--color-neutral-400);
     --border-color: rgba(148, 163, 184, 0.1);
     --border-color-hover: rgba(148, 163, 184, 0.2);
 

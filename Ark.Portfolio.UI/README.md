@@ -1,5 +1,20 @@
 # Ark.Portfolio.UI
 
+<div align="center">
+
+![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?style=for-the-badge&logo=vite)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![MVVM](https://img.shields.io/badge/Architecture-MVVM-green?style=for-the-badge)
+
+**Modern React Frontend for the Ark.Portfolio Ecosystem**
+
+*MVVM Architecture • Dynamic Theming • Admin CMS • Responsive Design*
+
+</div>
+
+---
+
 The **Frontend** is a modern React application built with Vite and TypeScript. It features a polished, responsive user interface with MVVM architecture, multiple themes, deep linking, and a comprehensive admin dashboard with CMS capabilities.
 
 ## 📦 Functional Capabilities
@@ -23,28 +38,46 @@ The frontend delivers a premium, responsive experience with deep administrative 
 
 ```text
 Ark.Portfolio.UI/
-├── src/
-│   ├── api/             # API client and service abstractions
-│   ├── components/      # Reusable UI components (MVVM)
-│   │   ├── HeaderV2/    # Header with navigation
-│   │   ├── CarouselV2/  # Hero carousel
-│   │   ├── TimelineV2/  # Resume timeline
-│   │   └── generic/     # Base components (GlassCard, etc.)
-│   ├── contexts/        # Global state (Auth, Theme)
-│   ├── hooks/           # Custom React hooks
-│   ├── pages/           # Route views
-│   │   ├── Admin/       # CMS Dashboard (Protected)
-│   │   ├── HomeV2/      # Landing page
-│   │   ├── ResumeV2/    # Resume/CV page
-│   │   ├── ProjectsV2/  # Projects grid
-│   │   └── ProjectDetails/ # Project presentation
-│   ├── services/        # Business logic layer
-│   ├── styles/          # CSS themes and global styles
-│   ├── utils/           # Utility functions
-│   ├── App.tsx          # Router & Provider setup
-│   └── main.tsx         # Entry point
-├── public/              # Static assets
-└── dist/                # Production build output
+├── 📁 src/
+│   ├── api/                    # API client and service abstractions
+│   │   └── client.ts           # Axios-based API client
+│   │
+│   ├── components/             # Reusable UI components (MVVM)
+│   │   ├── HeaderV2/           # Header with navigation
+│   │   ├── CarouselV2/         # Hero carousel
+│   │   ├── TimelineV2/         # Resume timeline
+│   │   ├── Toast/              # Toast notifications
+│   │   └── generic/            # Base components (GlassCard, etc.)
+│   │
+│   ├── contexts/               # Global state providers
+│   │   ├── AuthContext.tsx     # Authentication state
+│   │   ├── ThemeContext.tsx    # Theme switching
+│   │   └── ToastContext.tsx    # Toast notifications
+│   │
+│   ├── hooks/                  # Custom React hooks
+│   │
+│   ├── pages/                  # Route views
+│   │   ├── Admin/              # CMS Dashboard (Protected)
+│   │   │   ├── Dashboard/      # Admin home
+│   │   │   ├── Projects/       # ⭐ Project management
+│   │   │   │   ├── ProjectManager.tsx
+│   │   │   │   └── ProjectEditPage.tsx
+│   │   │   ├── Resume/         # Resume editor
+│   │   │   ├── AiSettings/     # AI configuration
+│   │   │   └── MediaManager/   # Asset management
+│   │   ├── HomeV2/             # Landing page
+│   │   ├── ResumeV2/           # Resume/CV page
+│   │   ├── ProjectsV2/         # Projects grid
+│   │   └── ProjectDetails/     # Project presentation
+│   │
+│   ├── services/               # Business logic layer
+│   ├── styles/                 # CSS themes and global styles
+│   ├── utils/                  # Utility functions
+│   ├── App.tsx                 # Router & Provider setup
+│   └── main.tsx                # Entry point
+│
+├── 📁 public/                   # Static assets
+└── 📁 dist/                     # Production build output
 ```
 
 ---
@@ -197,7 +230,23 @@ The UI is fully responsive with breakpoints:
 
 ---
 
+## 📚 Related Documentation
+
+| Document | Location | Purpose |
+|----------|----------|--------|
+| Share Layer | `../Ark.Portfolio.Share/README.md` | DTOs, enums, mocks |
+| Backend Layer | `../Ark.Portfolio.Backend/README.md` | API endpoints |
+| Tests Layer | `../Ark.Portfolio.Tests/README.md` | Test patterns, coverage |
+
+---
+
 <div align="center">
-  <sub>Armand Richelet-Kleinberg © M2H.IO - Ark Alliance Ecosystem</sub><br>
-  <sub>AI-assisted development with Anthropic Claude & Google Gemini</sub>
+
+**Ark.Portfolio.UI** — Part of the Ark Alliance Ecosystem
+
+<sub>
+Armand Richelet-Kleinberg © M2H.IO<br>
+AI-assisted development with Anthropic Claude & Google Gemini
+</sub>
+
 </div>

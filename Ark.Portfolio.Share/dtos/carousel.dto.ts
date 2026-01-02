@@ -57,3 +57,55 @@ export interface AdminCarouselItemDto {
 export interface ReorderCarouselDto {
     itemIds: number[];
 }
+
+// ============================================
+// Public Carousel DTOs (for Homepage)
+// ============================================
+
+/**
+ * Public carousel slide DTO for homepage display.
+ * Contains only fields needed for public presentation.
+ * 
+ * @example
+ * ```typescript
+ * const slide: CarouselSlideDto = {
+ *     id: 1,
+ *     title: 'Welcome',
+ *     subtitle: 'Portfolio CMS',
+ *     description: 'Explore my work',
+ *     imageUrl: '/assets/hero.png',
+ *     ctaLabel: 'Learn More',
+ *     ctaLink: '/projects'
+ * };
+ * ```
+ */
+export interface CarouselSlideDto {
+    /** Unique identifier */
+    id: number | string;
+    /** Main title displayed on the slide */
+    title: string;
+    /** Subtitle/tagline (optional) */
+    subtitle?: string;
+    /** Longer description text (optional) */
+    description?: string;
+    /** URL to the background/hero image */
+    imageUrl?: string;
+    /** Call-to-action button label */
+    ctaLabel?: string;
+    /** Call-to-action button link */
+    ctaLink?: string;
+}
+
+/**
+ * Default carousel slides for fallback when API fails.
+ */
+export const DEFAULT_CAROUSEL_SLIDES: CarouselSlideDto[] = [
+    {
+        id: 'default',
+        title: 'Welcome to My Portfolio',
+        subtitle: 'Full-Stack Developer',
+        description: 'Explore my projects, experience, and technical expertise in building modern web applications.',
+        ctaLabel: 'View Portfolio',
+        ctaLink: '/projects',
+    }
+];

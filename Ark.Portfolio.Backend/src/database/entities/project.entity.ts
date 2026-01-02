@@ -30,6 +30,9 @@ export class Project {
     @Column({ nullable: true })
     demoUrl!: string;
 
+    @Column({ nullable: true })
+    packageUrl!: string;
+
     @Column({ type: 'date', nullable: true })
     startDate!: Date;
 
