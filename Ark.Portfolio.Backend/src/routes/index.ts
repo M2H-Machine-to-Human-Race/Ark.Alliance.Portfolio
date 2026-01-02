@@ -6,6 +6,7 @@ import { CvController } from '../controllers/cv.controller';
 import { DashboardController } from '../controllers/dashboard.controller';
 import { WidgetController } from '../controllers/widget.controller';
 import { CarouselController } from '../controllers/carousel.controller';
+import { getAllTechnologies, getTechnologyByKey } from '../controllers/technology.controller';
 import { asyncHandler } from '../middleware/error-handler.middleware';
 import { mediaUpload } from '../middleware/upload.middleware';
 
@@ -30,6 +31,10 @@ router.get('/profile', asyncHandler(profileController.getProfile.bind(profileCon
 
 // Carousel (Public - for homepage)
 router.get('/carousel', asyncHandler(carouselController.getCarousel.bind(carouselController)));
+
+// Technologies (Public - for project pages)
+router.get('/technologies', asyncHandler(getAllTechnologies));
+router.get('/technologies/:key', asyncHandler(getTechnologyByKey));
 
 // Projects (Legacy & Presentation)
 router.get('/projects', asyncHandler(presentationController.getAllProjects.bind(presentationController)));

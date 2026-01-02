@@ -47,6 +47,7 @@ const SECTION_ICONS: Record<ProjectSection, React.ReactNode> = {
     [ProjectSection.OVERVIEW]: <Home size={20} />,
     [ProjectSection.ARCHITECTURE]: <Layout size={20} />,
     [ProjectSection.FEATURES]: <Layers size={20} />,
+    [ProjectSection.FUNCTIONAL]: <Layers size={20} />,
     [ProjectSection.TECHNICAL]: <Code size={20} />,
     [ProjectSection.ROADMAP]: <Map size={20} />,
     [ProjectSection.GALLERY]: <Image size={20} />,

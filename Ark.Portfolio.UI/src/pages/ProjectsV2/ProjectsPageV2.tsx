@@ -118,8 +118,8 @@ export const ProjectsPageV2: React.FC = () => {
                                             <p className="tech-label">TECHNOLOGIES</p>
                                             <div className="tech-list">
                                                 {project.technologies.slice(0, 5).map((t, idx) => {
-                                                    const name = typeof t === 'string' ? t : t.name;
-                                                    return <TechBadge key={name || idx} name={name} size="sm" />;
+                                                    const techKey = typeof t === 'string' ? t : t.name;
+                                                    return <TechBadge key={techKey || idx} techKey={techKey} size="sm" showIcon />;
                                                 })}
                                                 {project.technologies.length > 5 && (
                                                     <span className="tech-more">+{project.technologies.length - 5}</span>

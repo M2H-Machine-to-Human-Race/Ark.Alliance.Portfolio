@@ -52,7 +52,11 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
             >
                 {/* Profile Name & Current Page */}
                 <Link to="/" className="header-logo" aria-label="Home">
-                    <div className="header-logo-mark">A</div>
+                    <img
+                        src="/Assets/Site/Icon.png"
+                        alt="Logo"
+                        className="header-logo-mark"
+                    />
                     <div className="header-profile-info">
                         <div className="header-profile-name">
                             {vm.profile.fullName}

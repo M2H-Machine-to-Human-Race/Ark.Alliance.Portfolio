@@ -30,12 +30,13 @@ import {
  * Section display labels
  */
 const SECTION_LABELS: Record<ProjectSection, string> = {
-    [ProjectSection.OVERVIEW]: TERMINOLOGY.PROJECT_DISPLAY + ' Overview',
-    [ProjectSection.ARCHITECTURE]: 'Architecture',
-    [ProjectSection.FEATURES]: 'Features',
-    [ProjectSection.TECHNICAL]: 'Technical Details',
-    [ProjectSection.ROADMAP]: 'Roadmap',
-    [ProjectSection.GALLERY]: 'Gallery',
+    [ProjectSection.OVERVIEW]: 'overview',
+    [ProjectSection.ARCHITECTURE]: 'architecture',
+    [ProjectSection.FUNCTIONAL]: 'functional',
+    [ProjectSection.FEATURES]: 'features',
+    [ProjectSection.TECHNICAL]: 'technical',
+    [ProjectSection.ROADMAP]: 'roadmap',
+    [ProjectSection.GALLERY]: 'gallery',
 };
 
 /**
