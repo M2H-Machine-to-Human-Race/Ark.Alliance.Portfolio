@@ -9,7 +9,7 @@
 import React from 'react';
 import { Play } from 'lucide-react';
 import { useLoadingPageModel, LoadingPageProps } from './LoadingPage.model';
-import LogoArkAlliance from '../../assets/LogoArkAlliance.png';
+import LogoArkAlliance from '../../Assets/LogoArkAlliance.png';
 import '../../styles/design-system.css';
 import './LoadingPage.styles.css';
 

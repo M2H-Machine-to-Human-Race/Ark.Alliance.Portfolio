@@ -46,7 +46,7 @@ import { TimelineV2 } from '../../components/TimelineV2';
 import { TabControl, TabItem } from '../../components/generic/TabControl';
 import { useResumePageV2Model, SkillCategory, ResumeTabType } from './ResumePageV2.model';
 import { PROFICIENCY_LEVEL_LABELS } from '@ark/portfolio-share';
-import LogoArkAlliance from '../../assets/LogoArkAlliance.png';
+import LogoArkAlliance from '../../Assets/LogoArkAlliance.png';
 import '../../styles/design-system.css';
 import './ResumePageV2.styles.css';
 
