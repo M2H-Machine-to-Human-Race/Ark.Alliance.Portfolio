@@ -1,0 +1,54 @@
+{
+    "themes": [
+        {
+            "name": "Professional",
+            "slug": "professional",
+            "description": "Polished dark theme with subtle accents for professional impact",
+            "previewColor": "#00D4FF",
+            "icon": "◆",
+            "isDefault": true,
+            "order": 0,
+            "cssFile": "theme.professional.json"
+        },
+        {
+            "name": "Normal Cyber",
+            "slug": "normal",
+            "description": "Balanced neon glow with teal-cyan palette",
+            "previewColor": "#00d4ff",
+            "icon": "⚡",
+            "isDefault": false,
+            "order": 1,
+            "cssFile": "theme.normal.json"
+        },
+        {
+            "name": "Neon Cyber",
+            "slug": "neon",
+            "description": "Maximum intensity glow effects",
+            "previewColor": "#00ffff",
+            "icon": "✨",
+            "isDefault": false,
+            "order": 2,
+            "cssFile": "theme.neon.json"
+        },
+        {
+            "name": "Minimal",
+            "slug": "minimal",
+            "description": "Reduced effects, clean appearance",
+            "previewColor": "#0099ff",
+            "icon": "○",
+            "isDefault": false,
+            "order": 3,
+            "cssFile": "theme.minimal.json"
+        },
+        {
+            "name": "Glass",
+            "slug": "glass",
+            "description": "Ultra glassmorphism with soft glow",
+            "previewColor": "#7dd3fc",
+            "icon": "◇",
+            "isDefault": false,
+            "order": 4,
+            "cssFile": "theme.glass.json"
+        }
+    ]
+}

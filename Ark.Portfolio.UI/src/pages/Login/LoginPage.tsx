@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoginPageModel } from './LoginPage.model';
+import LogoArkAlliance from '../../Assets/LogoArkAlliance.png';
 import './LoginPage.styles.css';
 
 export const LoginPage: React.FC = () => {
@@ -19,7 +20,7 @@ export const LoginPage: React.FC = () => {
                 {/* Logo and Application Name */}
                 <div className="login-branding">
                     <img
-                        src="/logo.png"
+                        src={LogoArkAlliance}
                         alt="Ark Alliance Logo"
                         className="login-logo"
                     />

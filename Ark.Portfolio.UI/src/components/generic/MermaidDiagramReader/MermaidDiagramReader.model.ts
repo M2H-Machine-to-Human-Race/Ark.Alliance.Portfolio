@@ -18,8 +18,8 @@ export class MermaidDiagramReaderViewModel extends BaseComponentModel {
     public onNodeClickCallback?: (nodeId: string, event: MouseEvent) => void;
 
     // Refs (Assigned by hook/component)
-    public containerRef: React.RefObject<HTMLDivElement> = React.createRef();
-    public diagramRef: React.RefObject<HTMLDivElement> = React.createRef();
+    public containerRef: React.RefObject<HTMLDivElement | null> = React.createRef();
+    public diagramRef: React.RefObject<HTMLDivElement | null> = React.createRef();
 
     constructor(diagramSource: string, theme: MermaidTheme = 'light') {
         super();

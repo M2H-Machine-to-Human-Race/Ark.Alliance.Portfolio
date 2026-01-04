@@ -19,8 +19,7 @@
             "jest",
             "node",
             "react",
-            "react-dom",
-            "vite/client"
+            "react-dom"
         ],
         "jsx": "react-jsx",
         "baseUrl": ".",

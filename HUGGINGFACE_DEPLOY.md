@@ -1,121 +1,166 @@
-# Deploying Ark.Portfolio to Hugging Face Spaces
+# Deploying Ark.Portfolio Frontend to Hugging Face Spaces
 
-This guide walks you through deploying Ark.Portfolio to Hugging Face Spaces.
+This guide walks you through deploying the Ark.Portfolio frontend to Hugging Face Spaces as a static site.
 
 ## Prerequisites
 
-- A Hugging Face account
+- A Hugging Face account with an access token
 - Git installed locally
-- HF CLI (optional but recommended)
+- Git LFS installed: `git lfs install`
+- **git-xet** (required for HuggingFace storage):
+  ```powershell
+  # Windows - using winget
+  winget install git-xet
+  
+  # Then initialize
+  git xet install
+  ```
 
-## Step 1: Clone Your HF Space Repository
+## Step 1: Get HuggingFace Access Token
 
-```bash
-# Clone the existing space (or create a new one)
-git clone https://huggingface.co/spaces/arkleinberg/arkleinberg-https-huggingface-co-spaces-arkleinberg-arkworld
-cd arkleinberg-https-huggingface-co-spaces-arkleinberg-arkworld
+1. Go to [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+2. Create a new token with **write** access
+3. Save the token (starts with `hf_`)
+
+## Step 2: Clone Your HF Space Repository
+
+```powershell
+# Clone with authentication
+git clone https://YOUR_USERNAME:YOUR_TOKEN@huggingface.co/spaces/YOUR_USERNAME/YOUR_SPACE_NAME hf-deploy
+
+cd hf-deploy
 ```
 
-Or create a new space at [huggingface.co/new-space](https://huggingface.co/new-space) with SDK = Docker.
-
-## Step 2: Copy Project Files
-
-Copy the following files from Ark.Portfolio to your HF Space:
-
-```bash
-# Copy all required directories
-cp -r /path/to/Ark.Portfolio/Ark.Portfolio.Backend ./
-cp -r /path/to/Ark.Portfolio/Ark.Portfolio.UI ./
-cp -r /path/to/Ark.Portfolio/Ark.Portfolio.Share ./
-
-# Copy Docker files
-cp /path/to/Ark.Portfolio/Dockerfile ./
-cp /path/to/Ark.Portfolio/nginx.conf ./
-cp /path/to/Ark.Portfolio/start.sh ./
-cp /path/to/Ark.Portfolio/.dockerignore ./
-
-# Copy HF readme as README.md (this is required!)
-cp /path/to/Ark.Portfolio/huggingface-readme.md ./README.md
+Example:
+```powershell
+git clone https://arkleinberg:hf_XXXXX@huggingface.co/spaces/arkleinberg/arkleinberg-https-huggingface-co-spaces-arkleinberg-arkworld hf-deploy
 ```
 
-## Step 3: Push to HF Spaces
+## Step 3: Build the Frontend
 
-```bash
-git add .
-git commit -m "Deploy Ark.Portfolio"
-git push
+```powershell
+cd Ark.Portfolio/Ark.Portfolio.UI
+npm install
+npm run build
 ```
 
-## Step 4: Configure Secrets
+This creates the `dist/` folder with the static files.
 
-1. Go to your Space's Settings
-2. Navigate to **Variables and secrets**
-3. Add the following **Secrets** (not Variables!):
+## Step 4: Copy Built Files to HF Space
 
-| Secret Name | Value | Description |
-|-------------|-------|-------------|
-| `ADMIN_PASSWORD` | Your secure password | Admin login password |
-| `JWT_SECRET` | Random secure string | JWT signing key |
+```powershell
+# Copy built frontend files
+Copy-Item -Path "Ark.Portfolio.UI/dist/*" -Destination "hf-deploy/" -Recurse -Force
 
-> **Important:** Use Secrets, not Variables! Secrets are hidden and won't be copied if someone clones your Space.
+# Remove old files if they exist
+Remove-Item -Path "hf-deploy/prompts.txt" -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "hf-deploy/style.css" -Force -ErrorAction SilentlyContinue
+```
 
-### Optional AI Secrets
+## Step 5: Create/Update README.md
 
-If you want AI features enabled:
+The README.md must have YAML frontmatter for HF Spaces. Create/replace it:
 
-| Secret Name | Value |
-|-------------|-------|
-| `OPENAI_API_KEY` | `sk-...` |
-| `ANTHROPIC_API_KEY` | `sk-ant-...` |
-| `GOOGLE_AI_API_KEY` | Your API key |
+```markdown
+---
+title: Ark Portfolio
+emoji: 🚀
+colorFrom: blue
+colorTo: purple
+sdk: static
+pinned: false
+---
 
-## Step 5: Wait for Build
+# Ark Portfolio
 
-HF Spaces will automatically build your Docker container. This may take 5-10 minutes.
+Your portfolio description here.
+```
 
-Monitor the build status in the Logs tab of your Space.
+> **Important:** The `sdk: static` tells HuggingFace to serve this as a static HTML site.
 
-## Step 6: Verify Deployment
+## Step 6: Push to HuggingFace Spaces
 
-Once running:
+```powershell
+cd hf-deploy
 
-1. **Test Frontend**: Visit your Space URL
-2. **Test API**: Visit `<space-url>/api/health`
-3. **Test Admin**: Visit `<space-url>/admin` and login with:
-   - Username: `admin`
-   - Password: Your `ADMIN_PASSWORD` secret
+# Stage all changes
+git add -A
+
+# Commit
+git commit -m "Deploy Ark.Portfolio frontend"
+
+# Push
+git push origin main
+```
+
+If push fails with "pre-receive hook declined" or xet-storage errors:
+1. Install git-xet: `winget install git-xet`
+2. Run: `git xet install`
+3. Try pushing again
+
+## Step 7: Verify Deployment
+
+Once pushed, HuggingFace will automatically deploy. Visit your Space URL:
+
+```
+https://huggingface.co/spaces/YOUR_USERNAME/YOUR_SPACE_NAME
+```
+
+The deployment typically takes 1-2 minutes for static sites.
 
 ## Troubleshooting
 
-### Build Fails
+### Push Fails with xet-storage Error
 
-Check the build logs for errors. Common issues:
-- Missing files in the Space repository
-- Incorrect `YAML` frontmatter in `README.md`
+```powershell
+# Install git-xet
+winget install git-xet
 
-### API Returns 502
+# Initialize
+git xet install
 
-The backend may still be starting. Wait 30 seconds and try again.
-
-### Login Fails
-
-Ensure you've set the `ADMIN_PASSWORD` secret in Space Settings.
-
-## Updating the Deployment
-
-To update your deployment:
-
-```bash
-cd your-hf-space
-git pull origin main  # Get any remote changes
-# Make your changes or copy updated files
-git add .
-git commit -m "Update deployment"
-git push
+# Retry push
+git push origin main
 ```
 
-HF Spaces will automatically rebuild and redeploy.
+### Git LFS Issues
+
+```powershell
+# Initialize LFS
+git lfs install
+
+# Track large files
+git lfs track "*.png"
+git add .gitattributes
+
+# Commit and push
+git commit -m "Add LFS tracking"
+git push origin main
+```
+
+### Authentication Issues
+
+```powershell
+# Update remote with token
+git remote set-url origin https://USERNAME:HF_TOKEN@huggingface.co/spaces/USERNAME/SPACE_NAME
+
+# Verify
+git remote -v
+```
 
 ---
 
-For more information, see the [Hugging Face Spaces Docker Documentation](https://huggingface.co/docs/hub/spaces-sdks-docker).
+## Full Deployment (Backend + Frontend with Docker)
+
+For full-stack deployment including the backend API, see the Docker-based deployment in the main repository which uses:
+- `Dockerfile` - Multi-stage build for all layers
+- `nginx.conf` - Reverse proxy configuration
+- `start.sh` - Startup script
+
+This requires configuring HF Space secrets:
+- `ADMIN_PASSWORD` - Admin login password
+- `JWT_SECRET` - JWT signing key
+
+---
+
+*For more information, see the [Hugging Face Spaces Documentation](https://huggingface.co/docs/hub/spaces)*

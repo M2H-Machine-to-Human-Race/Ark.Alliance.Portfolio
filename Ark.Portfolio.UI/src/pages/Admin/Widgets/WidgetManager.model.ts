@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+/**
+ * @fileoverview Widget Manager Model
+ * Hook for managing widget configurations with CRUD operations.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+import { useState, useEffect, useCallback } from 'react';
 import { AdminWidgetDto } from '@ark/portfolio-share';
-import { authService } from '../../../services/auth.service';
+import { apiClient } from '../../../api/client/apiClient';
 import { API_CONFIG } from '../../../config/api.constants';
 
 const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/widgets`;
@@ -13,31 +19,27 @@ export const useWidgetManagerModel = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentWidget, setCurrentWidget] = useState<Partial<AdminWidgetDto>>({});
 
-    useEffect(() => {
-        fetchWidgets();
-    }, []);
-
-    const getAuthHeaders = () => ({
-        headers: { Authorization: `Bearer ${authService.getToken()}` }
-    });
-
-    const fetchWidgets = async () => {
+    const fetchWidgets = useCallback(async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get(API_URL, getAuthHeaders());
+            const response = await apiClient.get(API_URL);
             setWidgets(response.data);
         } catch (err) {
             setError('Failed to fetch widgets');
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        fetchWidgets();
+    }, [fetchWidgets]);
 
     const handleDelete = async (id: number) => {
         if (!window.confirm('Are you sure you want to delete this widget?')) return;
 
         try {
-            await axios.delete(`${API_URL}/${id}`, getAuthHeaders());
+            await apiClient.delete(`${API_URL}/${id}`);
             setWidgets(prev => prev.filter(w => w.id !== id));
         } catch (err) {
             setError('Failed to delete widget');
@@ -47,9 +49,9 @@ export const useWidgetManagerModel = () => {
     const handleSave = async (widget: Partial<AdminWidgetDto>) => {
         try {
             if (widget.id) {
-                await axios.put(`${API_URL}/${widget.id}`, widget, getAuthHeaders());
+                await apiClient.put(`${API_URL}/${widget.id}`, widget);
             } else {
-                await axios.post(API_URL, widget, getAuthHeaders());
+                await apiClient.post(API_URL, widget);
             }
             setIsEditing(false);
             fetchWidgets();
@@ -70,4 +72,3 @@ export const useWidgetManagerModel = () => {
         handleSave
     };
 };
-

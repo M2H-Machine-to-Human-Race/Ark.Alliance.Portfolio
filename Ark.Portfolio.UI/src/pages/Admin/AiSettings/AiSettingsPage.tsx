@@ -8,7 +8,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AdminLayout } from '../../../components/generic/AdminLayout';
 import { Bot, Save, Sparkles, RefreshCw, AlertCircle, CheckCircle2, Settings, Zap, Brain, Cpu } from 'lucide-react';
-import { AiSettingsDto } from '@ark/portfolio-share';
+import { AiSettingsDto, AiProviderEnum, AI_PROVIDER_CONFIG, PROVIDER_MODELS } from '@ark/portfolio-share';
 import axios from 'axios';
 import { authService } from '../../../services/auth.service';
 import { API_CONFIG } from '../../../config/api.constants';
@@ -16,51 +16,17 @@ import './AiSettingsPage.styles.css';
 
 const API_URL = API_CONFIG.ADMIN_BASE_URL;
 
-/**
- * AI Provider configuration
- */
-interface ProviderConfig {
-    id: string;
-    name: string;
-    icon: React.ReactNode;
-    models: string[];
-    description: string;
-}
-
-const AI_PROVIDERS: ProviderConfig[] = [
-    {
-        id: 'openai',
-        name: 'OpenAI',
-        icon: <Brain size={24} />,
-        models: ['gpt-4', 'gpt-4-turbo', 'gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'],
-        description: 'Industry-leading AI models with strong reasoning capabilities'
-    },
-    {
-        id: 'anthropic',
-        name: 'Anthropic',
-        icon: <Cpu size={24} />,
-        models: ['claude-3-opus', 'claude-3-sonnet', 'claude-3-haiku', 'claude-3.5-sonnet'],
-        description: 'Advanced AI with focus on safety and helpfulness'
-    },
-    {
-        id: 'google',
-        name: 'Google AI',
-        icon: <Sparkles size={24} />,
-        models: ['gemini-pro', 'gemini-pro-vision', 'gemini-2.0-flash'],
-        description: 'Multimodal AI models from Google DeepMind'
-    },
-    {
-        id: 'custom',
-        name: 'Custom Provider',
-        icon: <Settings size={24} />,
-        models: [],
-        description: 'Configure your own AI endpoint (OpenAI-compatible)'
-    }
-];
+// UI Helper for Icons - Mapping Enum to Icons
+const PROVIDER_ICONS: Record<AiProviderEnum, React.ReactNode> = {
+    [AiProviderEnum.OPENAI]: <Brain size={24} />,
+    [AiProviderEnum.ANTHROPIC]: <Cpu size={24} />,
+    [AiProviderEnum.GOOGLE]: <Sparkles size={24} />,
+    [AiProviderEnum.CUSTOM]: <Settings size={24} />
+};
 
 export const AiSettingsPage: React.FC = () => {
     const [settings, setSettings] = useState<AiSettingsDto>({
-        provider: 'openai',
+        provider: AiProviderEnum.OPENAI,
         model: 'gpt-4',
         temperature: 0.7,
         maxTokens: 2048,
@@ -118,7 +84,6 @@ export const AiSettingsPage: React.FC = () => {
         }
     };
 
-    const selectedProvider = AI_PROVIDERS.find(p => p.id === settings.provider);
 
     if (isLoading) {
         return (
@@ -170,17 +135,17 @@ export const AiSettingsPage: React.FC = () => {
                 <section className="ai-section">
                     <h3><Zap size={18} /> Select Provider</h3>
                     <div className="ai-provider-grid">
-                        {AI_PROVIDERS.map(provider => (
+                        {AI_PROVIDER_CONFIG.map(provider => (
                             <button
                                 key={provider.id}
                                 className={`ai-provider-card ${settings.provider === provider.id ? 'selected' : ''}`}
                                 onClick={() => setSettings({
                                     ...settings,
-                                    provider: provider.id as any,
-                                    model: provider.models[0] || ''
+                                    provider: provider.id,
+                                    model: PROVIDER_MODELS[provider.id]?.[0] || ''
                                 })}
                             >
-                                <div className="ai-provider-icon">{provider.icon}</div>
+                                <div className="ai-provider-icon">{PROVIDER_ICONS[provider.id]}</div>
                                 <div className="ai-provider-info">
                                     <h4>{provider.name}</h4>
                                     <p>{provider.description}</p>
@@ -196,7 +161,7 @@ export const AiSettingsPage: React.FC = () => {
                     <div className="ai-form-grid">
                         <div className="ai-form-group">
                             <label>Model</label>
-                            {settings.provider === 'custom' ? (
+                            {settings.provider === AiProviderEnum.CUSTOM ? (
                                 <input
                                     type="text"
                                     value={settings.model}
@@ -208,14 +173,14 @@ export const AiSettingsPage: React.FC = () => {
                                     value={settings.model}
                                     onChange={e => setSettings({ ...settings, model: e.target.value })}
                                 >
-                                    {selectedProvider?.models.map(m => (
+                                    {PROVIDER_MODELS[settings.provider]?.map(m => (
                                         <option key={m} value={m}>{m}</option>
                                     ))}
                                 </select>
                             )}
                         </div>
 
-                        {settings.provider === 'custom' && (
+                        {settings.provider === AiProviderEnum.CUSTOM && (
                             <div className="ai-form-group full-width">
                                 <label>API URL</label>
                                 <input

@@ -12,6 +12,7 @@ import { HeaderV2 } from '../../components/HeaderV2';
 import { ProjectGrid } from '../../components/ProjectGrid';
 import { ProjectDetailModal } from '../../components/ProjectDetailModal';
 import { usePortfolioPageV2Model } from './PortfolioPageV2.model';
+import { ProjectStatus } from '@ark/portfolio-share';
 import '../../styles/design-system.css';
 import './PortfolioPageV2.styles.css';
 
@@ -30,8 +31,8 @@ export const PortfolioPageV2: React.FC = () => {
     const vm = usePortfolioPageV2Model();
 
     // Calculate stats
-    const completedCount = vm.projects.filter(p => p.status === 'completed').length;
-    const inProgressCount = vm.projects.filter(p => p.status === 'in_progress').length;
+    const completedCount = vm.projects.filter(p => p.status === ProjectStatus.COMPLETED).length;
+    const inProgressCount = vm.projects.filter(p => p.status === ProjectStatus.IN_PROGRESS).length;
     const techCount = new Set(vm.projects.flatMap(p => p.technologies)).size;
 
     // Loading state

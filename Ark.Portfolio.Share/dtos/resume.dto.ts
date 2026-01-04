@@ -4,6 +4,9 @@
  */
 
 import { SkillLevel } from '../enums/skill-level.enum';
+import { LanguageDto, PROFICIENCY_LEVEL_LABELS } from './language.dto';
+import { HobbyDto } from './hobby.dto';
+import { BusinessDomainDto, BUSINESS_DOMAIN_PRESETS, BUSINESS_DOMAIN_LEVELS } from './business-domain.dto';
 
 /**
  * @swagger
@@ -165,7 +168,17 @@ export interface AdminResumeDto {
     experiences: AdminExperienceDto[];
     skills: AdminSkillDto[];
     education: AdminEducationDto[];
+    languages?: LanguageDto[];
+    hobbies?: HobbyDto[];
+    businessDomains?: BusinessDomainDto[];
 }
+
+// Re-export new DTOs for convenience
+export type { LanguageDto } from './language.dto';
+export { PROFICIENCY_LEVEL_LABELS } from './language.dto';
+export type { HobbyDto } from './hobby.dto';
+export type { BusinessDomainDto } from './business-domain.dto';
+export { BUSINESS_DOMAIN_PRESETS, BUSINESS_DOMAIN_LEVELS } from './business-domain.dto';
 
 // ============================================
 // Public Type Aliases

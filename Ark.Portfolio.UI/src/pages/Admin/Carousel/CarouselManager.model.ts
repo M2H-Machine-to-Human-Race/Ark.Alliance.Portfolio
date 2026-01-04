@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+/**
+ * @fileoverview Carousel Manager Model
+ * Hook for managing carousel items with CRUD operations.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+import { useState, useEffect, useCallback } from 'react';
 import { AdminCarouselItemDto } from '@ark/portfolio-share';
-import { authService } from '../../../services/auth.service';
+import { apiClient } from '../../../api/client/apiClient';
 import { API_CONFIG } from '../../../config/api.constants';
 
 const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/carousel`;
@@ -13,31 +19,27 @@ export const useCarouselManagerModel = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentItem, setCurrentItem] = useState<Partial<AdminCarouselItemDto>>({});
 
-    useEffect(() => {
-        fetchItems();
-    }, []);
-
-    const getAuthHeaders = () => ({
-        headers: { Authorization: `Bearer ${authService.getToken()}` }
-    });
-
-    const fetchItems = async () => {
+    const fetchItems = useCallback(async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get(API_URL, getAuthHeaders());
+            const response = await apiClient.get(API_URL);
             setItems(response.data);
         } catch (err) {
             setError('Failed to fetch carousel items');
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        fetchItems();
+    }, [fetchItems]);
 
     const handleDelete = async (id: number) => {
         if (!window.confirm('Are you sure you want to delete this slide?')) return;
 
         try {
-            await axios.delete(`${API_URL}/${id}`, getAuthHeaders());
+            await apiClient.delete(`${API_URL}/${id}`);
             setItems(prev => prev.filter(i => i.id !== id));
         } catch (err) {
             setError('Failed to delete slide');
@@ -47,9 +49,9 @@ export const useCarouselManagerModel = () => {
     const handleSave = async (item: Partial<AdminCarouselItemDto>) => {
         try {
             if (item.id) {
-                await axios.put(`${API_URL}/${item.id}`, item, getAuthHeaders());
+                await apiClient.put(`${API_URL}/${item.id}`, item);
             } else {
-                await axios.post(API_URL, item, getAuthHeaders());
+                await apiClient.post(API_URL, item);
             }
             setIsEditing(false);
             fetchItems();
@@ -71,10 +73,9 @@ export const useCarouselManagerModel = () => {
         setItems(newItems);
 
         try {
-            await axios.put(
+            await apiClient.put(
                 `${API_URL}/reorder`,
-                { itemIds: newItems.map(i => i.id) },
-                getAuthHeaders()
+                { itemIds: newItems.map(i => i.id) }
             );
         } catch (err) {
             setError('Failed to reorder slides');
@@ -95,4 +96,3 @@ export const useCarouselManagerModel = () => {
         handleReorder
     };
 };
-

@@ -14,23 +14,27 @@
 .cm-title {
     font-size: 1.875rem;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--admin-text-primary, #f3f4f6);
 }
 
 .cm-add-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #3b82f6;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    color: #0a0e17;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: none;
+    box-shadow: var(--glow-soft, 0 0 12px rgba(0, 212, 255, 0.4));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cm-add-btn:hover {
-    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: var(--glow-strong, 0 0 20px rgba(0, 212, 255, 0.6));
+    opacity: 1;
 }
 
 .cm-list {
@@ -42,11 +46,18 @@
 .cm-item {
     display: flex;
     align-items: center;
-    background: white;
+    background: var(--admin-panel-bg, rgba(30, 41, 59, 0.5));
     padding: 1rem;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(8px);
     gap: 1rem;
+    transition: all 0.2s;
+}
+
+.cm-item:hover {
+    border-color: var(--theme-primary, #3b82f6);
+    transform: translateY(-2px);
 }
 
 .cm-item-preview {
@@ -54,7 +65,7 @@
     height: 68px;
     object-fit: cover;
     border-radius: 0.25rem;
-    background-color: #f3f4f6;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .cm-item-content {
@@ -63,13 +74,13 @@
 
 .cm-item-title {
     font-weight: 600;
-    color: #111827;
+    color: var(--admin-text-primary, #f3f4f6);
     margin-bottom: 0.25rem;
 }
 
 .cm-item-subtitle {
     font-size: 0.875rem;
-    color: #6b7280;
+    color: var(--admin-text-secondary, #9ca3af);
 }
 
 .cm-item-actions {
@@ -80,18 +91,27 @@
 .cm-action-btn {
     padding: 0.5rem;
     border-radius: 0.375rem;
-    color: #6b7280;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--admin-text-secondary, #9ca3af);
+    border: none;
+    cursor: pointer;
     transition: all 0.2s;
 }
 
 .cm-action-btn:hover {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--admin-text-primary, #f3f4f6);
+}
+
+.cm-action-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
 }
 
 .cm-action-btn.delete:hover {
-    background-color: #fee2e2;
-    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 /* Modal Styles */
@@ -101,7 +121,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,12 +130,14 @@
 }
 
 .modal-content {
-    background: white;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98));
     padding: 2rem;
     border-radius: 0.5rem;
     width: 100%;
     max-width: 500px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.1));
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    color: var(--admin-text-primary, #f3f4f6);
 }
 
 .carousel-manager .form-group {
@@ -125,23 +148,25 @@
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #374151;
+    color: var(--admin-text-secondary, #9ca3af);
     margin-bottom: 0.5rem;
 }
 
 .carousel-manager .form-input,
 .carousel-manager .form-textarea {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
+    padding: 0.625rem 0.875rem;
+    background: var(--admin-input-bg, rgba(0, 0, 0, 0.3));
+    border: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.1));
     border-radius: 0.375rem;
-    transition: border-color 0.2s;
+    color: var(--admin-text-primary, #f3f4f6);
+    transition: all 0.2s;
 }
 
 .carousel-manager .form-input:focus,
 .carousel-manager .form-textarea:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--theme-primary, #3b82f6);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -154,18 +179,32 @@
 
 .btn-cancel {
     padding: 0.5rem 1rem;
-    color: #374151;
+    color: var(--admin-text-secondary, #9ca3af);
     font-weight: 500;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    color: var(--admin-text-primary, #f3f4f6);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .btn-save {
     padding: 0.5rem 1rem;
-    background-color: #3b82f6;
-    color: white;
+    background-color: var(--theme-primary, #3b82f6);
+    color: #000;
     border-radius: 0.375rem;
-    font-weight: 500;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 .btn-save:hover {
-    background-color: #2563eb;
+    opacity: 0.9;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
 }

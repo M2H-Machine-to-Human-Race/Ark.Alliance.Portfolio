@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+/**
+ * @fileoverview Menu Manager Model
+ * Hook for managing menu items with CRUD operations.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+import { useState, useEffect, useCallback } from 'react';
 import { AdminMenuItemDto } from '@ark/portfolio-share';
-import { authService } from '../../../services/auth.service';
+import { apiClient } from '../../../api/client/apiClient';
 import { API_CONFIG } from '../../../config/api.constants';
 
 const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/menu`;
@@ -13,31 +19,27 @@ export const useMenuManagerModel = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentItem, setCurrentItem] = useState<Partial<AdminMenuItemDto>>({});
 
-    useEffect(() => {
-        fetchMenu();
-    }, []);
-
-    const getAuthHeaders = () => ({
-        headers: { Authorization: `Bearer ${authService.getToken()}` }
-    });
-
-    const fetchMenu = async () => {
+    const fetchMenu = useCallback(async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get(API_URL, getAuthHeaders());
+            const response = await apiClient.get(API_URL);
             setMenuItems(response.data);
         } catch (err) {
             setError('Failed to fetch menu items');
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        fetchMenu();
+    }, [fetchMenu]);
 
     const handleDelete = async (id: number) => {
         if (!window.confirm('Are you sure you want to delete this menu item?')) return;
 
         try {
-            await axios.delete(`${API_URL}/${id}`, getAuthHeaders());
+            await apiClient.delete(`${API_URL}/${id}`);
             setMenuItems(prev => prev.filter(i => i.id !== id));
         } catch (err) {
             setError('Failed to delete menu item');
@@ -47,9 +49,9 @@ export const useMenuManagerModel = () => {
     const handleSave = async (item: Partial<AdminMenuItemDto>) => {
         try {
             if (item.id) {
-                await axios.put(`${API_URL}/${item.id}`, item, getAuthHeaders());
+                await apiClient.put(`${API_URL}/${item.id}`, item);
             } else {
-                await axios.post(API_URL, item, getAuthHeaders());
+                await apiClient.post(API_URL, item);
             }
             setIsEditing(false);
             fetchMenu();
@@ -70,4 +72,3 @@ export const useMenuManagerModel = () => {
         handleSave
     };
 };
-

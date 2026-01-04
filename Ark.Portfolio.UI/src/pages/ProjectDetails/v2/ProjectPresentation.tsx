@@ -114,7 +114,7 @@ export const ProjectPresentation: React.FC<ProjectPresentationProps> = ({
                             {(() => {
                                 console.log('[ProjectPresentation] Technologies:', project.technologies);
                                 return project.technologies?.map((tech: any, idx: number) => {
-                                    const techKey = typeof tech === 'string' ? tech : tech.name;
+                                    const techKey = typeof tech === 'string' ? tech : (tech.key || tech.name || tech.label);
                                     console.log('[ProjectPresentation] Rendering tech badge:', techKey, 'type:', typeof tech);
                                     return (
                                         <TechBadge

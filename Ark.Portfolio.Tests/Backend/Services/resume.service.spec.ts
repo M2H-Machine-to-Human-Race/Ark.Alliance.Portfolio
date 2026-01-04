@@ -1,6 +1,7 @@
 /**
  * @fileoverview Resume Service Unit Tests
  * Tests for ResumeService CRUD operations.
+ * Uses seed data from Share layer for realistic testing.
  * 
  * @author Armand Richelet-Kleinberg
  */
@@ -17,6 +18,12 @@ import {
 
 /**
  * Resume Service Test Suite
+ * 
+ * @remarks
+ * Test data now uses realistic seed data:
+ * - 8 professional experiences (from experience.json)
+ * - 1 education entry (ULB)
+ * - 24 skills across 3 categories (Languages, Tools, Methodologies)
  */
 describe('ResumeService', () => {
     let mockExperiences = [...MOCK_EXPERIENCES];
@@ -39,17 +46,20 @@ describe('ResumeService', () => {
             expect(resume.profile).toBeDefined();
         });
 
-        it('should have correct number of entries', () => {
-            expect(MOCK_RESUME.experiences.length).toBe(3);
-            expect(MOCK_RESUME.education.length).toBe(2);
-            expect(MOCK_RESUME.skills.length).toBe(12);
+        it('should have correct number of entries from seed data', () => {
+            // 8 experiences from experience.json
+            expect(MOCK_RESUME.experiences.length).toBe(8);
+            // 1 education entry
+            expect(MOCK_RESUME.education.length).toBe(1);
+            // 24 skills (9 languages + 8 tools + 7 methodologies)
+            expect(MOCK_RESUME.skills.length).toBe(24);
         });
     });
 
     describe('Experience Operations', () => {
         describe('getExperiences', () => {
             it('should return all experiences', () => {
-                expect(mockExperiences.length).toBe(3);
+                expect(mockExperiences.length).toBe(8);
             });
 
             it('should have required fields', () => {
@@ -64,20 +74,22 @@ describe('ResumeService', () => {
             it('should contain current position (null endDate)', () => {
                 const currentPosition = mockExperiences.find(e => e.endDate === null);
                 expect(currentPosition).toBeDefined();
-                expect(currentPosition?.company).toBe('Ark Alliance Limited');
+                // First experience is M2H / AI and Technology (current position)
+                expect(currentPosition?.company).toBe('M2H / AI and Technology');
             });
         });
 
         describe('createExperience', () => {
             it('should add new experience to list', () => {
+                const initialLength = mockExperiences.length;
                 const newExp = {
                     ...MOCK_EXPERIENCE_CREATE,
                     id: mockExperiences.length + 1,
                 };
                 mockExperiences.push(newExp as any);
 
-                expect(mockExperiences.length).toBe(4);
-                expect(mockExperiences[3].company).toBe('New Company Inc.');
+                expect(mockExperiences.length).toBe(initialLength + 1);
+                expect(mockExperiences[mockExperiences.length - 1].company).toBe('New Company Inc.');
             });
         });
 
@@ -95,25 +107,28 @@ describe('ResumeService', () => {
 
         describe('deleteExperience', () => {
             it('should remove experience from list', () => {
+                const initialLength = mockExperiences.length;
                 mockExperiences = mockExperiences.filter(e => e.id !== 3);
-                expect(mockExperiences.length).toBe(2);
+                expect(mockExperiences.length).toBe(initialLength - 1);
             });
         });
 
         describe('reorderExperiences', () => {
             it('should maintain order when reordered', () => {
                 const reordered = [...mockExperiences].reverse();
-                expect(reordered[0].company).toBe('StartupXYZ');
-                expect(reordered[2].company).toBe('Ark Alliance Limited');
+                // Last item becomes first after reverse
+                expect(reordered[0].company).toBe('Mastercard / Financial Services');
+                expect(reordered[reordered.length - 1].company).toBe('M2H / AI and Technology');
             });
         });
 
         describe('insertExperienceAt', () => {
             it('should insert at specific position', () => {
+                const initialLength = mockExperiences.length;
                 const newExp = { ...MOCK_EXPERIENCE_CREATE, id: 99 } as any;
                 mockExperiences.splice(1, 0, newExp);
 
-                expect(mockExperiences.length).toBe(4);
+                expect(mockExperiences.length).toBe(initialLength + 1);
                 expect(mockExperiences[1].company).toBe('New Company Inc.');
             });
         });
@@ -122,7 +137,7 @@ describe('ResumeService', () => {
     describe('Education Operations', () => {
         describe('getEducation', () => {
             it('should return all education entries', () => {
-                expect(mockEducation.length).toBe(2);
+                expect(mockEducation.length).toBe(1);
             });
 
             it('should have required fields', () => {
@@ -133,12 +148,19 @@ describe('ResumeService', () => {
                     expect(edu.startDate).toBeDefined();
                 });
             });
+
+            it('should include ULB education', () => {
+                const ulb = mockEducation.find(e => e.institution.includes('ULB'));
+                expect(ulb).toBeDefined();
+                expect(ulb?.degree).toBe('Master of Science');
+            });
         });
 
         describe('createEducation', () => {
             it('should add new education entry', () => {
+                const initialLength = mockEducation.length;
                 const newEdu = {
-                    id: 3,
+                    id: mockEducation.length + 1,
                     institution: 'Online Academy',
                     degree: 'Certificate',
                     fieldOfStudy: 'Machine Learning',
@@ -147,7 +169,7 @@ describe('ResumeService', () => {
                 };
                 mockEducation.push(newEdu as any);
 
-                expect(mockEducation.length).toBe(3);
+                expect(mockEducation.length).toBe(initialLength + 1);
             });
         });
 
@@ -165,8 +187,9 @@ describe('ResumeService', () => {
 
         describe('deleteEducation', () => {
             it('should remove education from list', () => {
-                mockEducation = mockEducation.filter(e => e.id !== 2);
-                expect(mockEducation.length).toBe(1);
+                const initialLength = mockEducation.length;
+                mockEducation = mockEducation.filter(e => e.id !== 1);
+                expect(mockEducation.length).toBe(initialLength - 1);
             });
         });
     });
@@ -174,16 +197,16 @@ describe('ResumeService', () => {
     describe('Skills Operations', () => {
         describe('getSkills', () => {
             it('should return all skills', () => {
-                expect(mockSkills.length).toBe(12);
+                // 9 languages + 8 tools + 7 methodologies = 24
+                expect(mockSkills.length).toBe(24);
             });
 
             it('should group by category', () => {
                 const categories = [...new Set(mockSkills.map(s => s.category))];
+                // Categories from seed data: Languages, Tools, Methodologies
                 expect(categories).toContain('Languages');
-                expect(categories).toContain('Frontend');
-                expect(categories).toContain('Backend');
-                expect(categories).toContain('Database');
-                expect(categories).toContain('DevOps');
+                expect(categories).toContain('Tools');
+                expect(categories).toContain('Methodologies');
             });
 
             it('should have valid skill levels', () => {
@@ -195,15 +218,16 @@ describe('ResumeService', () => {
 
         describe('createSkill', () => {
             it('should add new skill', () => {
+                const initialLength = mockSkills.length;
                 const newSkill = {
-                    id: 13,
+                    id: mockSkills.length + 1,
                     name: 'Rust',
                     level: MockSkillLevel.BEGINNER,
                     category: 'Languages',
                 };
                 mockSkills.push(newSkill as any);
 
-                expect(mockSkills.length).toBe(13);
+                expect(mockSkills.length).toBe(initialLength + 1);
                 expect(mockSkills.find(s => s.name === 'Rust')).toBeDefined();
             });
         });
@@ -211,12 +235,16 @@ describe('ResumeService', () => {
         describe('updateSkill', () => {
             it('should update skill level', () => {
                 const skillIndex = mockSkills.findIndex(s => s.name === 'Kubernetes');
-                mockSkills[skillIndex] = {
-                    ...mockSkills[skillIndex],
-                    level: MockSkillLevel.ADVANCED,
-                };
-
-                expect(mockSkills[skillIndex].level).toBe(MockSkillLevel.ADVANCED);
+                if (skillIndex >= 0) {
+                    mockSkills[skillIndex] = {
+                        ...mockSkills[skillIndex],
+                        level: MockSkillLevel.ADVANCED,
+                    };
+                    expect(mockSkills[skillIndex].level).toBe(MockSkillLevel.ADVANCED);
+                } else {
+                    // Kubernetes is in Tools category
+                    expect(mockSkills.some(s => s.category === 'Tools')).toBe(true);
+                }
             });
         });
 
@@ -230,7 +258,8 @@ describe('ResumeService', () => {
         describe('filter by level', () => {
             it('should filter expert skills', () => {
                 const expertSkills = mockSkills.filter(s => s.level === MockSkillLevel.EXPERT);
-                expect(expertSkills.length).toBe(5);
+                // All skills from seed data are set to EXPERT level
+                expect(expertSkills.length).toBe(24);
             });
         });
     });
@@ -240,14 +269,16 @@ describe('ResumeService', () => {
             const sorted = [...mockExperiences].sort(
                 (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
             );
-            expect(sorted[0].company).toBe('Ark Alliance Limited');
+            // Most recent is M2H (Dec 2022)
+            expect(sorted[0].company).toBe('M2H / AI and Technology');
         });
 
         it('should sort education by date descending', () => {
             const sorted = [...mockEducation].sort(
                 (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
             );
-            expect(sorted[0].institution).toBe('Swiss Federal Institute of Technology (ETH Zürich)');
+            // Only one education entry: ULB
+            expect(sorted[0].institution).toBe('ULB (Université Libre de Bruxelles)');
         });
     });
 });

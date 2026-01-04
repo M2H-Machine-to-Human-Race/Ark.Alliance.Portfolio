@@ -1,10 +1,17 @@
 /**
  * @fileoverview Resume Mock Data
  * Realistic mock data for Resume/CV entity testing.
- * Uses inline types to avoid Share layer compilation issues.
+ * Uses seed data from Share layer for consistency.
  * 
  * @author Armand Richelet-Kleinberg
  */
+
+import {
+    SEED_PROFILE,
+    SEED_EXPERIENCES,
+    SEED_SKILLS,
+    SeedExperience
+} from '@ark/portfolio-share';
 
 /**
  * Skill level enum (mirroring Share layer)
@@ -82,56 +89,64 @@ export interface MockResumeDto {
 }
 
 /**
- * Mock profile
+ * Helper to parse period string to start date
+ */
+function parseStartDate(period: string): string {
+    const monthMap: Record<string, string> = {
+        'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+        'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+        'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+    };
+    const parts = period.split(' - ')[0].split(' ');
+    const month = monthMap[parts[0]] || '01';
+    const year = parts[1] || '2020';
+    return `${year}-${month}-01`;
+}
+
+/**
+ * Helper to parse period string to end date
+ */
+function parseEndDate(period: string): string | null {
+    const monthMap: Record<string, string> = {
+        'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+        'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+        'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+    };
+    const endPart = period.split(' - ')[1];
+    if (!endPart || endPart === 'Present') return null;
+    const parts = endPart.split(' ');
+    const month = monthMap[parts[0]] || '01';
+    const year = parts[1] || '2020';
+    return `${year}-${month}-01`;
+}
+
+/**
+ * Mock profile - using seed data
  */
 export const MOCK_PROFILE: MockProfileDto = {
-    firstName: 'Armand',
-    lastName: 'Richelet-Kleinberg',
-    title: 'Senior Software Engineer',
-    overview: 'Experienced full-stack developer specializing in React, TypeScript, and Node.js.',
-    email: 'armand@example.com',
-    linkedinUrl: 'https://linkedin.com/in/armand',
-    githubUrl: 'https://github.com/armand',
-    avatarUrl: '/images/profile.jpg',
-    phoneNumber: '+41 79 123 4567',
-    location: 'Geneva, Switzerland',
+    firstName: SEED_PROFILE.firstName,
+    lastName: SEED_PROFILE.lastName,
+    title: SEED_PROFILE.title,
+    overview: SEED_PROFILE.overview,
+    email: SEED_PROFILE.email,
+    linkedinUrl: SEED_PROFILE.linkedinUrl,
+    githubUrl: SEED_PROFILE.githubUrl,
+    avatarUrl: SEED_PROFILE.avatarUrl,
 };
 
 /**
- * Mock experience entries
+ * Mock experience entries - using seed data
  */
-export const MOCK_EXPERIENCES: MockExperienceDto[] = [
-    {
-        id: 1,
-        company: 'Ark Alliance Limited',
-        position: 'Senior Software Engineer',
-        description: 'Leading development of cryptocurrency trading platforms.',
-        technologies: ['TypeScript', 'Node.js', 'React', 'PostgreSQL'],
-        startDate: '2022-03-01',
-        endDate: null,
-        isHighlighted: true,
-    },
-    {
-        id: 2,
-        company: 'Tech Innovators SA',
-        position: 'Full Stack Developer',
-        description: 'Developed enterprise web applications using React and .NET.',
-        technologies: ['React', 'C#', '.NET', 'Azure'],
-        startDate: '2019-06-15',
-        endDate: '2022-02-28',
-        isHighlighted: false,
-    },
-    {
-        id: 3,
-        company: 'StartupXYZ',
-        position: 'Junior Developer',
-        description: 'Built MVP for fintech startup.',
-        technologies: ['JavaScript', 'Express', 'MongoDB'],
-        startDate: '2017-09-01',
-        endDate: '2019-06-01',
-        isHighlighted: false,
-    },
-];
+export const MOCK_EXPERIENCES: MockExperienceDto[] = SEED_EXPERIENCES.map((exp: SeedExperience, index: number) => ({
+    id: index + 1,
+    company: exp.company,
+    position: exp.role,
+    description: exp.desc,
+    technologies: exp.tech.split(', '),
+    startDate: parseStartDate(exp.period),
+    endDate: parseEndDate(exp.period),
+    isHighlighted: index === 0,
+}));
 
 /**
  * Mock education entries
@@ -139,40 +154,43 @@ export const MOCK_EXPERIENCES: MockExperienceDto[] = [
 export const MOCK_EDUCATION: MockEducationDto[] = [
     {
         id: 1,
-        institution: 'Swiss Federal Institute of Technology (ETH Zürich)',
+        institution: 'ULB (Université Libre de Bruxelles)',
         degree: 'Master of Science',
         fieldOfStudy: 'Computer Science',
-        description: 'Specialized in Distributed Systems and Machine Learning.',
-        startDate: '2015-09-01',
-        endDate: '2017-07-15',
-    },
-    {
-        id: 2,
-        institution: 'University of Geneva',
-        degree: 'Bachelor of Science',
-        fieldOfStudy: 'Computer Science',
-        description: 'Core curriculum in algorithms and data structures.',
-        startDate: '2012-09-01',
-        endDate: '2015-06-30',
+        description: 'Specialization in Algorithmic and Software Engineering.',
+        startDate: '1999-09-01',
+        endDate: '2004-06-30',
     },
 ];
 
 /**
- * Mock skills
+ * Mock skills - using seed data
  */
 export const MOCK_SKILLS: MockSkillDto[] = [
-    { id: 1, name: 'TypeScript', level: MockSkillLevel.EXPERT, category: 'Languages', yearsOfExperience: 6 },
-    { id: 2, name: 'JavaScript', level: MockSkillLevel.EXPERT, category: 'Languages', yearsOfExperience: 8 },
-    { id: 3, name: 'Python', level: MockSkillLevel.ADVANCED, category: 'Languages', yearsOfExperience: 4 },
-    { id: 4, name: 'C#', level: MockSkillLevel.INTERMEDIATE, category: 'Languages', yearsOfExperience: 3 },
-    { id: 5, name: 'React', level: MockSkillLevel.EXPERT, category: 'Frontend', yearsOfExperience: 5 },
-    { id: 6, name: 'Vue.js', level: MockSkillLevel.ADVANCED, category: 'Frontend', yearsOfExperience: 2 },
-    { id: 7, name: 'Node.js', level: MockSkillLevel.EXPERT, category: 'Backend', yearsOfExperience: 6 },
-    { id: 8, name: 'Express', level: MockSkillLevel.EXPERT, category: 'Backend', yearsOfExperience: 6 },
-    { id: 9, name: 'PostgreSQL', level: MockSkillLevel.ADVANCED, category: 'Database', yearsOfExperience: 4 },
-    { id: 10, name: 'MongoDB', level: MockSkillLevel.ADVANCED, category: 'Database', yearsOfExperience: 3 },
-    { id: 11, name: 'Docker', level: MockSkillLevel.ADVANCED, category: 'DevOps', yearsOfExperience: 4 },
-    { id: 12, name: 'Kubernetes', level: MockSkillLevel.INTERMEDIATE, category: 'DevOps', yearsOfExperience: 2 },
+    // Languages
+    ...SEED_SKILLS.languages.map((name: string, i: number) => ({
+        id: i + 1,
+        name,
+        level: MockSkillLevel.EXPERT,
+        category: 'Languages',
+        yearsOfExperience: 10
+    })),
+    // Tools
+    ...SEED_SKILLS.tools.map((name: string, i: number) => ({
+        id: 100 + i,
+        name,
+        level: MockSkillLevel.EXPERT,
+        category: 'Tools',
+        yearsOfExperience: 5
+    })),
+    // Methodologies
+    ...SEED_SKILLS.methodologies.map((name: string, i: number) => ({
+        id: 200 + i,
+        name,
+        level: MockSkillLevel.EXPERT,
+        category: 'Methodologies',
+        yearsOfExperience: 8
+    })),
 ];
 
 /**

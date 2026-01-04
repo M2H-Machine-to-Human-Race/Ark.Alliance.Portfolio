@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+/**
+ * @fileoverview Style Manager Model
+ * Hook for managing style configurations with CRUD operations.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+import { useState, useEffect, useCallback } from 'react';
 import { AdminStyleConfigDto } from '@ark/portfolio-share';
-import { authService } from '../../../services/auth.service';
+import { apiClient } from '../../../api/client/apiClient';
 import { API_CONFIG } from '../../../config/api.constants';
 
 const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/styles`;
@@ -13,29 +19,25 @@ export const useStyleManagerModel = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentStyle, setCurrentStyle] = useState<Partial<AdminStyleConfigDto>>({});
 
-    useEffect(() => {
-        fetchStyles();
-    }, []);
-
-    const getAuthHeaders = () => ({
-        headers: { Authorization: `Bearer ${authService.getToken()}` }
-    });
-
-    const fetchStyles = async () => {
+    const fetchStyles = useCallback(async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get(API_URL, getAuthHeaders());
+            const response = await apiClient.get(API_URL);
             setStyles(response.data);
         } catch (err) {
             setError('Failed to fetch styles');
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        fetchStyles();
+    }, [fetchStyles]);
 
     const handleActivate = async (id: number) => {
         try {
-            await axios.put(`${API_URL}/${id}/activate`, {}, getAuthHeaders());
+            await apiClient.put(`${API_URL}/${id}/activate`, {});
             fetchStyles();
         } catch (err) {
             setError('Failed to activate style');
@@ -46,7 +48,7 @@ export const useStyleManagerModel = () => {
         if (!window.confirm('Are you sure you want to delete this style?')) return;
 
         try {
-            await axios.delete(`${API_URL}/${id}`, getAuthHeaders());
+            await apiClient.delete(`${API_URL}/${id}`);
             setStyles(prev => prev.filter(s => s.id !== id));
         } catch (err) {
             setError('Failed to delete style');
@@ -56,9 +58,9 @@ export const useStyleManagerModel = () => {
     const handleSave = async (style: Partial<AdminStyleConfigDto>) => {
         try {
             if (style.id) {
-                await axios.put(`${API_URL}/${style.id}`, style, getAuthHeaders());
+                await apiClient.put(`${API_URL}/${style.id}`, style);
             } else {
-                await axios.post(API_URL, style, getAuthHeaders());
+                await apiClient.post(API_URL, style);
             }
             setIsEditing(false);
             fetchStyles();
@@ -80,4 +82,3 @@ export const useStyleManagerModel = () => {
         handleSave
     };
 };
-
