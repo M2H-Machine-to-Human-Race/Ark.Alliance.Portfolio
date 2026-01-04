@@ -131,7 +131,8 @@ export const STATIC_VITE_DEPENDENCIES = {
         'react': '^18.2.0',
         'react-dom': '^18.2.0',
         'react-router-dom': '^6.20.0',
-        'lucide-react': '^0.300.0'
+        'lucide-react': '^0.300.0',
+        'ark-alliance-react-ui': '^1.1.5'
     },
     devDependencies: {
         '@types/react': '^18.2.0',

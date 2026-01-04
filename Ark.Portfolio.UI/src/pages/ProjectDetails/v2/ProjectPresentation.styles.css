@@ -8,8 +8,8 @@
    ============================================ */
 .project-presentation {
     min-height: 100vh;
-    background: #0A0E17;
-    color: #F1F5F9;
+    background: var(--bg-primary, #0A0E17);
+    color: var(--text-primary, #F1F5F9);
 }
 
 .project-presentation__main {
@@ -96,8 +96,8 @@
     inset: 0;
     background: linear-gradient(to top,
             var(--bg-primary, #0a0e27) 0%,
-            rgba(10, 14, 39, 0.85) 50%,
-            rgba(10, 14, 39, 0.6) 100%);
+            var(--bg-card, rgba(10, 14, 39, 0.85)) 50%,
+            var(--bg-card-elevated, rgba(10, 14, 39, 0.6)) 100%);
 }
 
 .project-presentation__hero-content {
@@ -141,7 +141,7 @@
 
 .project-presentation__summary {
     font-size: 1.125rem;
-    color: #CBD5E1;
+    color: var(--text-secondary, #CBD5E1);
     line-height: 1.7;
     margin-bottom: 1.5rem;
     max-width: 900px;
@@ -283,6 +283,9 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+/* ============================================
+   No Content
+   ============================================ */
 /* ============================================
    No Content
    ============================================ */

@@ -4,12 +4,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 1px solid rgba(0, 212, 255, 0.15);
-    border-radius: 12px;
-    overflow: hidden;
-    background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 1) 70%, #0A0E17 100%);
+    background: var(--bg-card, rgba(15, 23, 42, 0.95));
     min-height: 500px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-xl, 0 8px 32px rgba(0, 0, 0, 0.3));
+    border-color: var(--border-color, rgba(51, 65, 85, 0.6));
 }
 
 /* Toolbar */
@@ -18,8 +16,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    border-bottom: 1px solid rgba(51, 65, 85, 0.6);
-    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    background: var(--bg-secondary, rgba(15, 23, 42, 0.95));
 }
 
 .mermaid-reader__toolbar-left,
@@ -32,24 +30,25 @@
 .mermaid-reader__title {
     font-weight: 600;
     font-size: 14px;
-    color: #F1F5F9;
+    font-size: 14px;
+    color: var(--text-primary, #F1F5F9);
 }
 
 .mermaid-reader__toolbar button {
     padding: 6px 12px;
-    border: 1px solid rgba(51, 65, 85, 0.6);
+    border: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
     border-radius: 6px;
-    background: rgba(30, 41, 59, 0.8);
-    color: #E2E8F0;
+    background: var(--bg-tertiary, rgba(30, 41, 59, 0.8));
+    color: var(--text-secondary, #E2E8F0);
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 13px;
 }
 
 .mermaid-reader__toolbar button:hover {
-    background: rgba(0, 212, 255, 0.15);
-    border-color: rgba(0, 212, 255, 0.4);
-    color: #00D4FF;
+    background: var(--bg-hover, rgba(51, 65, 85, 0.5));
+    border-color: var(--accent-primary, #00D4FF);
+    color: var(--accent-primary, #00D4FF);
 }
 
 /* Export Dropdown */
@@ -64,8 +63,8 @@
     margin-top: 4px;
     display: none;
     flex-direction: column;
-    background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(51, 65, 85, 0.6);
+    background: var(--bg-secondary, rgba(15, 23, 42, 0.98));
+    border: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     z-index: 10;
@@ -153,10 +152,10 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
-    border-top: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    background: var(--bg-secondary, rgba(15, 23, 42, 1));
     font-size: 12px;
-    color: var(--text-secondary);
+    color: var(--text-secondary, #94a3b8);
 }
 
 /* Theme Variants */

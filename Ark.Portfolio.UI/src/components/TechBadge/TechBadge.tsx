@@ -55,7 +55,7 @@ export const TechBadge: React.FC<TechBadgeProps> = ({
         key: safeTechKey,
         name: safeTechKey.charAt(0).toUpperCase() + safeTechKey.slice(1), // Capitalize first letter
         label: safeTechKey.charAt(0).toUpperCase() + safeTechKey.slice(1), // Same as name for fallback
-        color: '#94a3b8', // Slate-400 - visible on dark backgrounds
+        color: 'var(--text-secondary, #94a3b8)', // Use theme variable with fallback
         icon: '',
         description: `Technology: ${safeTechKey}`,
         category: 'Other'
