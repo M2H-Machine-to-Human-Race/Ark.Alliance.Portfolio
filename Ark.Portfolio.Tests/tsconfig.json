@@ -37,7 +37,8 @@
     },
     "include": [
         "./**/*.ts",
-        "./**/*.tsx"
+        "./**/*.tsx",
+        "./global.d.ts"
     ],
     "exclude": [
         "node_modules",

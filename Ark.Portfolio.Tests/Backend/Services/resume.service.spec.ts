@@ -152,7 +152,7 @@ describe('ResumeService', () => {
             it('should include ULB education', () => {
                 const ulb = mockEducation.find(e => e.institution.includes('ULB'));
                 expect(ulb).toBeDefined();
-                expect(ulb?.degree).toBe('Master of Science');
+                expect(ulb?.degree).toBe('Master in Computer Science');
             });
         });
 

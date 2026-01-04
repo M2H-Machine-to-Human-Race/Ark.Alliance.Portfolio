@@ -10,7 +10,15 @@ import {
     SEED_PROFILE,
     SEED_EXPERIENCES,
     SEED_SKILLS,
-    SeedExperience
+    SEED_EDUCATION,
+    SEED_LANGUAGES,
+    SEED_HOBBIES,
+    SEED_BUSINESS_DOMAINS,
+    SeedExperience,
+    SeedEducation,
+    SeedLanguage,
+    SeedHobby,
+    SeedBusinessDomain
 } from '@ark/portfolio-share';
 
 /**
@@ -149,19 +157,17 @@ export const MOCK_EXPERIENCES: MockExperienceDto[] = SEED_EXPERIENCES.map((exp: 
 }));
 
 /**
- * Mock education entries
+ * Mock education entries - using seed data
  */
-export const MOCK_EDUCATION: MockEducationDto[] = [
-    {
-        id: 1,
-        institution: 'ULB (Université Libre de Bruxelles)',
-        degree: 'Master of Science',
-        fieldOfStudy: 'Computer Science',
-        description: 'Specialization in Algorithmic and Software Engineering.',
-        startDate: '1999-09-01',
-        endDate: '2004-06-30',
-    },
-];
+export const MOCK_EDUCATION: MockEducationDto[] = SEED_EDUCATION.map((edu: SeedEducation, index: number) => ({
+    id: index + 1,
+    institution: edu.institution,
+    degree: edu.degree,
+    fieldOfStudy: edu.fieldOfStudy,
+    description: edu.description,
+    startDate: `${edu.startYear}-09-01`,
+    endDate: edu.endYear ? `${edu.endYear}-06-30` : null,
+}));
 
 /**
  * Mock skills - using seed data
@@ -219,3 +225,18 @@ export const MOCK_EXPERIENCE_CREATE: Partial<MockExperienceDto> = {
     startDate: '2025-01-01',
     endDate: null,
 };
+
+/**
+ * Mock languages - using seed data
+ */
+export const MOCK_LANGUAGES = SEED_LANGUAGES;
+
+/**
+ * Mock hobbies - using seed data
+ */
+export const MOCK_HOBBIES = SEED_HOBBIES;
+
+/**
+ * Mock business domains - using seed data
+ */
+export const MOCK_BUSINESS_DOMAINS = SEED_BUSINESS_DOMAINS;

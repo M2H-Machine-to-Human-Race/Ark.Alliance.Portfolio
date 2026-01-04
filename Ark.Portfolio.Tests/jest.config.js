@@ -25,7 +25,8 @@ module.exports = {
         '^@ark/portfolio-share/(.*)$': '<rootDir>/../Ark.Portfolio.Share/$1',
         '^@ark/portfolio-share$': '<rootDir>/../Ark.Portfolio.Share/index.ts',
         '^@ui/(.*)$': '<rootDir>/../Ark.Portfolio.UI/src/$1',
-        '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/Mocks/fileMock.js'
+        '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/Mocks/fileMock.js',
+        '^lucide-react$': '<rootDir>/__mocks__/lucide-react.js'
     },
     collectCoverageFrom: [
         '**/*.ts',
