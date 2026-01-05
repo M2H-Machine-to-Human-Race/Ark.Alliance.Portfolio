@@ -1,10 +1,20 @@
 [
     {
+        "title": "Ark.Alliance",
+        "subtitle": "A New Era for Human Recognition",
+        "description": "Honoring the journey, not just the destination. Your failures today are tomorrow's algorithms. If AI uses OUR collective knowledge to generate BILLIONS in value, we deserve our fair share.",
+        "imageUrl": "/Assets/Projects/Ark.Alliance/Ark_Alliance_Hero.png",
+        "linkUrl": "/projects/ark-alliance",
+        "linkText": "Discover More",
+        "order": 0,
+        "isActive": true
+    },
+    {
         "title": "Ark.Portfolio",
         "subtitle": "AI-Powered Portfolio CMS",
         "description": "Enterprise-grade portfolio platform with multi-provider AI integration, comprehensive CMS, and static site export. 235+ tests, MVVM architecture, JWT authentication.",
         "imageUrl": "/Assets/Projects/Ark.Portfolio/portfolio-hero.png",
-        "linkUrl": "/projects/1",
+        "linkUrl": "/projects/ark-alliance-portfolio",
         "linkText": "View Project",
         "order": 1,
         "isActive": true
@@ -14,7 +24,7 @@
         "subtitle": "Enterprise React Component Library",
         "description": "40 component categories spanning Finance, Healthcare, Logistics, and more. React 19, TypeScript 5.9, 258 passing tests with 100% coverage, MVVM architecture.",
         "imageUrl": "/Assets/Projects/Ark.Alliance.React.Component/components-hero.png",
-        "linkUrl": "/projects/2",
+        "linkUrl": "/projects/ark-alliance-react-component-ui",
         "linkText": "Explore Components",
         "order": 2,
         "isActive": true
@@ -24,7 +34,7 @@
         "subtitle": "Automated Cryptocurrency Trading",
         "description": "Real-time algorithmic trading platform with WebSocket integration, multi-exchange support, and advanced analytics dashboard. Built for high-frequency trading.",
         "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Bot/bot-hero.png",
-        "linkUrl": "/projects",
+        "linkUrl": "/projects/ark-alliance-trading-bot",
         "linkText": "Learn More",
         "order": 3,
         "isActive": true
@@ -34,7 +44,7 @@
         "subtitle": "Multi-Exchange Trading SDK",
         "description": "TypeScript SDK unifying cryptocurrency trading across Binance Futures, Deribit with Result pattern, WebSocket streams, and 70+ tested scenarios. Published on NPM.",
         "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Providers.Lib/providers-hero.png",
-        "linkUrl": "/projects/3",
+        "linkUrl": "/projects/ark-alliance-trading-providers-lib",
         "linkText": "View Documentation",
         "order": 4,
         "isActive": true
@@ -44,7 +54,7 @@
         "subtitle": "Real-Time Crypto Trend Analysis",
         "description": "Production-grade microservice for cryptocurrency trend analysis. Combines Hurst Exponent, GARCH, Linear Regression, and EMA with optional Gemini AI. WebSocket streaming for sub-second updates.",
         "imageUrl": "/Assets/Projects/Ark.Alliance.TrendsCalculator/trends-hero.png",
-        "linkUrl": "/projects/4",
+        "linkUrl": "/projects/ark-alliance-trading-trendscalculator",
         "linkText": "Explore Trends",
         "order": 5,
         "isActive": true

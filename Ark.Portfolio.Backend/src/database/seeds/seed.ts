@@ -103,10 +103,9 @@ export const seedDatabase = async (dataSource: DataSource): Promise<void> => {
     await seedHobbies(dataSource);
     await seedBusinessDomains(dataSource);
 
-    // 3. Content & Media
+    // 3. Media Assets
     console.log('');
-    console.log('─── Content & Media ───');
-    await seedCarousel(dataSource);
+    console.log('─── Media Assets ───');
     await seedMedia(dataSource);
 
     // 4. Master Data
@@ -123,6 +122,11 @@ export const seedDatabase = async (dataSource: DataSource): Promise<void> => {
     console.log('');
     console.log('─── Portfolio Projects ───');
     await seedProjects(dataSource);
+
+    // 7. Carousel (seeded after projects to link by project ID)
+    console.log('');
+    console.log('─── Carousel ───');
+    await seedCarousel(dataSource);
 
     console.log('');
     console.log('════════════════════════════════════════════════════════════');

@@ -3,7 +3,7 @@
     "description": "Production-ready real-time cryptocurrency trend analysis microservice combining advanced statistical indicators (Hurst Exponent, GARCH, Linear Regression, EMA) with optional Google Gemini AI integration. Features WebSocket streaming, configurable thresholds, walk-forward validation, and seamless integration with distributed trading systems. Built with TypeScript, React 19, Express, and Socket.IO.",
     "status": "Featured",
     "imageUrl": "/Assets/Projects/Ark.Alliance.TrendsCalculator/trends-hero.png",
-    "repoUrl": "https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator",
+    "repoUrl": "https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator",
     "demoUrl": "",
     "packageUrl": "",
     "technologies": [
