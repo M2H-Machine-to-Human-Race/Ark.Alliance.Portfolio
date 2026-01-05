@@ -13,19 +13,30 @@
 }
 
 .project-presentation__main {
-    margin-left: var(--sidebar-width-expanded, 280px);
-    transition: margin-left 0.3s ease;
+    margin-left: 64px;
+    /* Default: collapsed sidebar width */
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    width: calc(100% - 64px);
 }
 
-/* Collapsed sidebar adjustment */
-.project-presentation--sidebar-collapsed .project-presentation__main {
-    margin-left: var(--sidebar-width-collapsed, 64px);
+/* When sidebar is expanded, adjust content to accommodate wider sidebar */
+/* Uses modern CSS :has() selector to detect sibling sidebar state */
+.project-presentation:has(.project-sidebar--expanded) .project-presentation__main {
+    margin-left: 280px;
+    /* Expanded sidebar width */
+    width: calc(100% - 280px);
 }
 
-/* Mobile: full width */
+/* Mobile: full width (no sidebar offset) */
 @media (max-width: 768px) {
     .project-presentation__main {
         margin-left: 0;
+        width: 100%;
+    }
+
+    .project-presentation:has(.project-sidebar--expanded) .project-presentation__main {
+        margin-left: 0;
+        width: 100%;
     }
 }
 
@@ -213,20 +224,21 @@
    Content Section
    ============================================ */
 .project-presentation__content {
-    padding: 3rem;
+    padding: 3rem 4rem;
     min-height: 50vh;
+    width: 100%;
 }
 
 .project-presentation__content-container {
     width: 100%;
     max-width: 100%;
-    /* Use full available width */
+    /* Use full available width - no constraints */
 }
 
-/* Constrain only text-heavy elements for readability */
-.project-presentation__markdown p,
-.project-presentation__markdown li {
-    max-width: 900px;
+/* Text paragraphs can be slightly constrained for readability */
+/* but allow wider content for tables and diagrams */
+.project-presentation__markdown p {
+    max-width: 1100px;
 }
 
 .project-presentation__section-title {
@@ -243,13 +255,14 @@
 }
 
 /* ============================================
-   Diagrams
+   Diagrams - Full Width Responsive
    ============================================ */
 .project-presentation__diagrams {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     margin-bottom: 3rem;
+    width: 100%;
 }
 
 .project-presentation__diagrams .mermaid-reader {
@@ -257,6 +270,9 @@
     border-radius: var(--radius-lg, 0.75rem);
     border: 1px solid var(--bg-tertiary, #1e2749);
     overflow: hidden;
+    width: 100%;
+    min-height: 600px;
+    /* Ensure diagrams have enough height */
 }
 
 /* ============================================

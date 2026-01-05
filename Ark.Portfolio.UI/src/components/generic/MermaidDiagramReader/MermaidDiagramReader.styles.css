@@ -5,7 +5,8 @@
     flex-direction: column;
     width: 100%;
     background: var(--bg-card, rgba(15, 23, 42, 0.95));
-    min-height: 500px;
+    min-height: 600px;
+    /* Increased for better visibility */
     box-shadow: var(--shadow-xl, 0 8px 32px rgba(0, 0, 0, 0.3));
     border-color: var(--border-color, rgba(51, 65, 85, 0.6));
 }
@@ -98,20 +99,25 @@
     cursor: grabbing;
 }
 
-/* Diagram - Centered and fully visible */
+/* Diagram - Centered and fully visible with better scaling */
 .mermaid-reader__diagram {
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: 100%;
+    width: 100%;
     transform-origin: center;
     transition: transform 0.2s ease-out;
+    padding: 1rem;
 }
 
-/* Ensure SVG diagrams scale properly */
+/* Ensure SVG diagrams scale properly and use full width */
 .mermaid-reader__diagram svg {
     max-width: 100%;
+    width: auto;
     height: auto;
+    min-width: min(100%, 800px);
+    /* Ensure minimum readable size */
 }
 
 /* Loader */

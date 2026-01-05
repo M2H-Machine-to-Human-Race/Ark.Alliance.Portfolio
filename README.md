@@ -32,6 +32,7 @@
 
 - [Overview](#-overview)
 - [Key Features](#-key-features)
+- [Recent Updates](#-recent-updates)
 - [Project Structure](#-project-structure)
 - [Architecture Layers](#-architecture-layers)
 - [Getting Started](#-getting-started)
@@ -101,6 +102,27 @@ Full-featured content management:
 - Resume/CV editing with timeline components
 - Skill and technology tagging
 - Analytics and visitor insights (planned)
+
+---
+
+## 🔄 Recent Updates
+
+### January 2026
+
+**Carousel Navigation & Slug-Based URLs**
+- Added slug-based project URL routing (e.g., `/projects/ark-alliance` instead of UUIDs)
+- Fixed carousel button navigation to correctly route to project details pages
+- Enhanced `ProjectRepository` with `findBySlug()` method for flexible project lookup
+
+**Layout Improvements**
+- Project details page now uses full available browser width
+- Main content dynamically adjusts to sidebar state using CSS `:has()` selector
+- Mermaid diagrams display with larger min-height (600px) for better readability
+- Diagrams scale to use available horizontal space (min 800px)
+
+**New Content**
+- Added "Ark.Alliance" project with manifesto, applications, and timeline roadmap
+- Carousel items now use semantic slug URLs matching project titles
 
 ---
 
