@@ -1,5 +1,15 @@
 [
     {
+        "title": "Ark.Alliance",
+        "subtitle": "A New Era for Human Recognition",
+        "description": "Honoring the journey, not just the destination. Your failures today are tomorrow's algorithms. If AI uses OUR collective knowledge to generate BILLIONS in value, we deserve our fair share.",
+        "imageUrl": "/Assets/Projects/Ark.Alliance/Ark_Alliance_Hero.png",
+        "linkUrl": "/projects/ark-alliance",
+        "linkText": "Discover More",
+        "order": 0,
+        "isActive": true
+    },
+    {
         "title": "Ark.Portfolio",
         "subtitle": "AI-Powered Portfolio CMS",
         "description": "Enterprise-grade portfolio platform with multi-provider AI integration, comprehensive CMS, and static site export. 235+ tests, MVVM architecture, JWT authentication.",

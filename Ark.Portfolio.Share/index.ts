@@ -40,5 +40,6 @@ export * from './constants/ai.constants';
 export * from './mocks/resume.mock';
 export * from './mocks/profile.mock';
 export * from './mocks/projects.mock';
+export * from './mocks/technology.mock';
 export * from './mocks/seed-data';
 

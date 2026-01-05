@@ -53,6 +53,7 @@ export async function seedProjects(dataSource: DataSource): Promise<void> {
 
     // Load individual project JSON files for better maintainability
     const projectFiles = [
+        'ark-alliance.json',
         'ark-portfolio.json',
         'react-component-ui.json',
         'trading-providers-lib.json',
