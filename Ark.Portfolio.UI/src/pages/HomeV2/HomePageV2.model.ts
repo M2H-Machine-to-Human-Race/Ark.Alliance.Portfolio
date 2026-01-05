@@ -110,8 +110,8 @@ export const useHomePageV2Model = (): HomePageV2Model => {
                 subtitle: item.subtitle,
                 description: item.description,
                 imageUrl: item.imageUrl || item.mediaUrl,
-                ctaLabel: item.ctaLabel || 'Learn More',
-                ctaLink: item.ctaLink || '/projects',
+                ctaLabel: item.linkText || item.ctaLabel || 'Learn More',
+                ctaLink: item.linkUrl || item.ctaLink || '/projects',
             }));
 
             // Add default slide if no carousel items
