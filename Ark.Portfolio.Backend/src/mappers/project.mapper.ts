@@ -6,7 +6,7 @@
  * @author Armand Richelet-Kleinberg
  */
 
-import { ProjectDto, ProjectFeatureDto, ProjectPageDto, ProjectStatus, Technology } from '@ark/portfolio-share';
+import { ProjectDto, ProjectFeatureDto, ProjectPageDto, ProjectStatus, TechnologyDto } from '@ark/portfolio-share';
 import { Project } from '../database/entities/project.entity';
 import { ProjectFeature } from '../database/entities/project-feature.entity';
 import { ProjectPage } from '../database/entities/project-page.entity';
@@ -66,7 +66,7 @@ export function mapProjectToDto(project: Project): ProjectDto {
         isFeatured: project.isFeatured,
         status: project.status as ProjectStatus,
         technologies: project.technologies
-            ? project.technologies.map((t: any) => t.technology as Technology)
+            ? project.technologies.map((t: any) => t.technology as TechnologyDto)
             : [],
         imageUrl: project.imageUrl,
         repoUrl: project.repoUrl,

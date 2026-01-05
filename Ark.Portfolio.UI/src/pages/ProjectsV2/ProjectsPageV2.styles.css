@@ -126,12 +126,16 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: var(--bg-card, rgba(15, 23, 42, 0.85));
+    border: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    border-radius: var(--radius-xl);
     transition: all var(--duration) var(--ease-out);
 }
 
 .project-card:hover {
-    border-color: var(--color-primary-500);
-    box-shadow: var(--shadow-xl), 0 0 30px rgba(59, 130, 246, 0.1);
+    border-color: var(--accent, #00D4FF);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 212, 255, 0.4);
+    transform: translateY(-6px);
 }
 
 /* ============================================
@@ -140,7 +144,7 @@
 
 .project-card-image-container {
     position: relative;
-    height: 180px;
+    height: 220px;
     overflow: hidden;
     background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
 }
@@ -216,10 +220,10 @@
 .project-card-status {
     display: inline-block;
     font-size: var(--text-xs);
-    font-weight: var(--font-medium);
+    font-weight: var(--font-semibold);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-primary-400);
+    color: var(--accent, #00D4FF);
     margin-top: var(--space-1);
 }
 
@@ -274,8 +278,9 @@
 .project-card-footer .tech-label {
     font-size: var(--text-xs);
     font-weight: var(--font-semibold);
-    color: var(--text-muted);
+    color: var(--accent, #00D4FF);
     letter-spacing: 0.1em;
+    text-transform: uppercase;
     margin-bottom: var(--space-2);
 }
 
@@ -287,9 +292,9 @@
 
 .tech-more {
     font-size: var(--text-xs);
-    color: var(--text-muted);
+    color: var(--theme-primary, #00d4ff);
     padding: 2px 8px;
-    background: var(--bg-secondary);
+    background: rgba(0, 212, 255, 0.1);
     border-radius: var(--radius-full);
 }
 
@@ -304,12 +309,12 @@
 }
 
 .project-card-cta-text {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--space-2);
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
-    color: var(--color-primary-400);
+    color: var(--accent, #00D4FF);
     transition: all var(--duration) var(--ease-out);
 }
 
@@ -318,7 +323,8 @@
 }
 
 .project-card-link:hover .project-card-cta-text {
-    color: var(--color-primary-300);
+    color: var(--text-primary);
+    gap: var(--space-3);
 }
 
 .project-card-link:hover .project-card-cta-text svg {
@@ -357,4 +363,121 @@
     .project-card-image-container {
         height: 140px;
     }
+}
+
+/* ============================================
+   Cyber Theme Enhancements
+   Applied when data-cyber-theme is set
+   ============================================ */
+
+/* Page background with cyber space effect */
+[data-cyber-theme] .projects-page {
+    background: var(--bg-space, #0a0e17);
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 153, 255, 0.05) 0%, transparent 50%);
+}
+
+/* Title with neon gradient */
+[data-cyber-theme] .projects-title {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Subtitle with cyber color */
+[data-cyber-theme] .projects-subtitle {
+    color: var(--text-neon-secondary, #94a3b8);
+}
+
+/* Project cards with cyber styling */
+[data-cyber-theme] .project-card {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-cyber-theme] .project-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3),
+        0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Project card title with neon hover */
+[data-cyber-theme] .project-card-title {
+    color: var(--text-neon, #e0e7ff);
+    transition: color 0.3s ease-out, text-shadow 0.3s ease-out;
+}
+
+[data-cyber-theme] .project-card:hover .project-card-title {
+    color: var(--neon-primary, #00d4ff);
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+/* Tech list with neon tags */
+[data-cyber-theme] .tech-list .tech-tag,
+[data-cyber-theme] .project-card .tech-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--theme-primary, #00d4ff);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+}
+
+[data-cyber-theme] .tech-list .tech-tag:hover,
+[data-cyber-theme] .project-card .tech-tag:hover {
+    background: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+}
+
+/* Loading spinner with neon */
+[data-cyber-theme] .projects-loading-spinner {
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-top-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.3);
+}
+
+/* Footer with cyber style */
+[data-cyber-theme] .projects-footer {
+    background: rgba(10, 14, 23, 0.8);
+    border-top-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+/* Neon mode - intensified effects */
+[data-cyber-theme="neon"] .project-card:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5),
+        0 0 60px rgba(0, 212, 255, 0.2),
+        0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-cyber-theme="neon"] .project-card:hover .project-card-title {
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+}
+
+/* Glass mode - maximum transparency */
+[data-cyber-theme="glass"] .project-card {
+    background: rgba(15, 20, 30, 0.35);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* Minimal mode - reduced effects */
+[data-cyber-theme="minimal"] .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+[data-cyber-theme="minimal"] .project-card:hover .project-card-title {
+    text-shadow: none;
 }

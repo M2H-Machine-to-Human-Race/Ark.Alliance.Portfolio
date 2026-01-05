@@ -6,7 +6,7 @@
  */
 
 import { apiClient } from '../api/client';
-import { CvDto, CV_MOCK } from '@ark/portfolio-share';
+import { ResumeDto, RESUME_MOCK } from '@ark/portfolio-share';
 
 /**
  * Resume Service
@@ -17,14 +17,14 @@ export class ResumeService {
     /**
      * Get the complete resume data.
      */
-    async getResume(): Promise<CvDto> {
-        return apiClient.get<CvDto>('/resume', {}, CV_MOCK);
+    async getResume(): Promise<ResumeDto> {
+        return apiClient.get<ResumeDto>('/resume', {}, RESUME_MOCK);
     }
 
     /**
      * @deprecated Use getResume() instead
      */
-    async getCv(): Promise<CvDto> {
+    async getCv(): Promise<ResumeDto> {
         return this.getResume();
     }
 }

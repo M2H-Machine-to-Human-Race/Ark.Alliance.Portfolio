@@ -27,6 +27,11 @@ import { User } from '../database/entities/user.entity';
 import { AiSettings } from '../database/entities/ai-settings.entity';
 import { Outbox } from '../database/entities/outbox.entity';
 import { Technology } from '../database/entities/technology.entity';
+import { Language } from '../database/entities/language.entity';
+import { Hobby } from '../database/entities/hobby.entity';
+import { BusinessDomain } from '../database/entities/business-domain.entity';
+import { PageDefinition } from '../database/entities/page-definition.entity';
+import { Theme } from '../database/entities/theme.entity';
 
 dotenv.config();
 
@@ -43,7 +48,7 @@ const baseConfig = {
         Profile, Project, ProjectTechnology, Technology, Education, Experience, Skill,
         SkillCategory, Widget, Media, ProjectPage, ProjectFeature, ProjectController,
         ProjectEndpoint, TeamMember, MenuItem, StyleConfig, CarouselItem,
-        User, AiSettings, Outbox
+        User, AiSettings, Outbox, Language, Hobby, BusinessDomain, PageDefinition, Theme
     ],
     subscribers: [],
     migrations: [],

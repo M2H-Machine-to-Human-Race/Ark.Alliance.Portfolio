@@ -8,39 +8,46 @@
 import { Request, Response } from 'express';
 import { BaseController } from './base.controller';
 import { AdminProjectService } from '../services/admin-project.service';
-import { AdminCvService } from '../services/admin-cv.service';
+import { AdminResumeService } from '../services/admin-resume.service';
 import { AdminWidgetService } from '../services/admin-widget.service';
 import { AdminMenuService } from '../services/admin-menu.service';
 import { AdminStyleService } from '../services/admin-style.service';
 import { AdminMediaService } from '../services/admin-media.service';
 import { AdminCarouselService } from '../services/admin-carousel.service';
+import { AdminThemeService, AdminThemeDto } from '../services/admin-theme.service';
+import { ThemeAiService, ThemeAiRequest } from '../services/theme-ai.service';
 import { AiService } from '../services/ai.service';
 import {
-    AdminProjectDto, AdminCvDto, AdminWidgetDto, AdminMenuItemDto,
+    AdminProjectDto, AdminResumeDto, AdminWidgetDto, AdminMenuItemDto,
     AdminStyleConfigDto, UploadMediaDto, ReorderWidgetsDto, ReorderMenuItemsDto,
     AdminCarouselItemDto, ReorderCarouselDto, AdminExperienceDto, AdminEducationDto,
-    AdminSkillDto, SkillCategoryDto, ReorderSkillsDto, AiSettingsDto
+    AdminSkillDto, SkillCategoryDto, ReorderSkillsDto, AiSettingsDto,
+    LanguageDto, HobbyDto, BusinessDomainDto
 } from '@ark/portfolio-share';
 
 export class AdminController extends BaseController {
     private projectService: AdminProjectService;
-    private cvService: AdminCvService;
+    private resumeService: AdminResumeService;
     private widgetService: AdminWidgetService;
     private menuService: AdminMenuService;
     private styleService: AdminStyleService;
     private mediaService: AdminMediaService;
     private carouselService: AdminCarouselService;
+    private themeService: AdminThemeService;
+    private themeAiService: ThemeAiService;
     private aiService: AiService;
 
     constructor() {
         super();
         this.projectService = new AdminProjectService();
-        this.cvService = new AdminCvService();
+        this.resumeService = new AdminResumeService();
         this.widgetService = new AdminWidgetService();
         this.menuService = new AdminMenuService();
         this.styleService = new AdminStyleService();
         this.mediaService = new AdminMediaService();
         this.carouselService = new AdminCarouselService();
+        this.themeService = new AdminThemeService();
+        this.themeAiService = new ThemeAiService();
         this.aiService = new AiService();
     }
 
@@ -83,17 +90,17 @@ export class AdminController extends BaseController {
     }
 
     // ============================================
-    // CV Endpoints
+    // RESUME Endpoints
     // ============================================
 
-    async getCv(req: Request, res: Response) {
-        const result = await this.cvService.getFullCv();
+    async getResume(req: Request, res: Response) {
+        const result = await this.resumeService.getFullResume();
         return this.ok(res, result);
     }
 
     async updateProfile(req: Request, res: Response) {
-        const dto = req.body as AdminCvDto['profile'];
-        const result = await this.cvService.updateProfile(dto);
+        const dto = req.body as AdminResumeDto['profile'];
+        const result = await this.resumeService.updateProfile(dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
@@ -101,20 +108,20 @@ export class AdminController extends BaseController {
     // Experience CRUD
     async createExperience(req: Request, res: Response) {
         const dto = req.body as AdminExperienceDto;
-        const result = await this.cvService.createExperience(dto);
+        const result = await this.resumeService.createExperience(dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async updateExperience(req: Request, res: Response) {
         const dto = req.body as AdminExperienceDto;
-        const result = await this.cvService.updateExperience(parseInt(req.params.id), dto);
+        const result = await this.resumeService.updateExperience(parseInt(req.params.id), dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async deleteExperience(req: Request, res: Response) {
-        const result = await this.cvService.deleteExperience(parseInt(req.params.id));
+        const result = await this.resumeService.deleteExperience(parseInt(req.params.id));
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
@@ -122,34 +129,34 @@ export class AdminController extends BaseController {
     // Education CRUD
     async createEducation(req: Request, res: Response) {
         const dto = req.body as AdminEducationDto;
-        const result = await this.cvService.createEducation(dto);
+        const result = await this.resumeService.createEducation(dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async updateEducation(req: Request, res: Response) {
         const dto = req.body as AdminEducationDto;
-        const result = await this.cvService.updateEducation(parseInt(req.params.id), dto);
+        const result = await this.resumeService.updateEducation(parseInt(req.params.id), dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async deleteEducation(req: Request, res: Response) {
-        const result = await this.cvService.deleteEducation(parseInt(req.params.id));
+        const result = await this.resumeService.deleteEducation(parseInt(req.params.id));
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async reorderExperiences(req: Request, res: Response) {
         const { experienceIds } = req.body as { experienceIds: number[] };
-        const result = await this.cvService.reorderExperiences(experienceIds);
+        const result = await this.resumeService.reorderExperiences(experienceIds);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async reorderEducation(req: Request, res: Response) {
         const { educationIds } = req.body as { educationIds: number[] };
-        const result = await this.cvService.reorderEducation(educationIds);
+        const result = await this.resumeService.reorderEducation(educationIds);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
@@ -157,53 +164,146 @@ export class AdminController extends BaseController {
     // Skills CRUD
     async createSkill(req: Request, res: Response) {
         const dto = req.body as AdminSkillDto;
-        const result = await this.cvService.createSkill(dto);
+        const result = await this.resumeService.createSkill(dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async updateSkill(req: Request, res: Response) {
         const dto = req.body as AdminSkillDto;
-        const result = await this.cvService.updateSkill(parseInt(req.params.id), dto);
+        const result = await this.resumeService.updateSkill(parseInt(req.params.id), dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async deleteSkill(req: Request, res: Response) {
-        const result = await this.cvService.deleteSkill(parseInt(req.params.id));
+        const result = await this.resumeService.deleteSkill(parseInt(req.params.id));
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async reorderSkills(req: Request, res: Response) {
         const dto = req.body as ReorderSkillsDto;
-        const result = await this.cvService.reorderSkills(dto);
+        const result = await this.resumeService.reorderSkills(dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     // Skill Categories CRUD
     async getSkillCategories(req: Request, res: Response) {
-        const result = await this.cvService.getSkillCategories();
+        const result = await this.resumeService.getSkillCategories();
         return this.ok(res, result);
     }
 
     async createSkillCategory(req: Request, res: Response) {
         const dto = req.body as SkillCategoryDto;
-        const result = await this.cvService.createSkillCategory(dto);
+        const result = await this.resumeService.createSkillCategory(dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async updateSkillCategory(req: Request, res: Response) {
         const dto = req.body as SkillCategoryDto;
-        const result = await this.cvService.updateSkillCategory(parseInt(req.params.id), dto);
+        const result = await this.resumeService.updateSkillCategory(parseInt(req.params.id), dto);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
 
     async deleteSkillCategory(req: Request, res: Response) {
-        const result = await this.cvService.deleteSkillCategory(parseInt(req.params.id));
+        const result = await this.resumeService.deleteSkillCategory(parseInt(req.params.id));
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    // ============================================
+    // Language Endpoints
+    // ============================================
+
+    async createLanguage(req: Request, res: Response) {
+        const dto = req.body as LanguageDto;
+        const result = await this.resumeService.createLanguage(dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async updateLanguage(req: Request, res: Response) {
+        const dto = req.body as LanguageDto;
+        const result = await this.resumeService.updateLanguage(parseInt(req.params.id), dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async deleteLanguage(req: Request, res: Response) {
+        const result = await this.resumeService.deleteLanguage(parseInt(req.params.id));
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async reorderLanguages(req: Request, res: Response) {
+        const { languageIds } = req.body as { languageIds: number[] };
+        const result = await this.resumeService.reorderLanguages(languageIds);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    // ============================================
+    // Hobby Endpoints
+    // ============================================
+
+    async createHobby(req: Request, res: Response) {
+        const dto = req.body as HobbyDto;
+        const result = await this.resumeService.createHobby(dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async updateHobby(req: Request, res: Response) {
+        const dto = req.body as HobbyDto;
+        const result = await this.resumeService.updateHobby(parseInt(req.params.id), dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async deleteHobby(req: Request, res: Response) {
+        const result = await this.resumeService.deleteHobby(parseInt(req.params.id));
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async reorderHobbies(req: Request, res: Response) {
+        const { hobbyIds } = req.body as { hobbyIds: number[] };
+        const result = await this.resumeService.reorderHobbies(hobbyIds);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    // ============================================
+    // Business Domain Endpoints
+    // ============================================
+
+    async createBusinessDomain(req: Request, res: Response) {
+        const dto = req.body as BusinessDomainDto;
+        const result = await this.resumeService.createBusinessDomain(dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async updateBusinessDomain(req: Request, res: Response) {
+        const dto = req.body as BusinessDomainDto;
+        const result = await this.resumeService.updateBusinessDomain(parseInt(req.params.id), dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async deleteBusinessDomain(req: Request, res: Response) {
+        const result = await this.resumeService.deleteBusinessDomain(parseInt(req.params.id));
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async reorderBusinessDomains(req: Request, res: Response) {
+        const { domainIds } = req.body as { domainIds: number[] };
+        const result = await this.resumeService.reorderBusinessDomains(domainIds);
         if (!result.success) return this.fail(res, new Error(result.message));
         return this.ok(res, result);
     }
@@ -501,6 +601,79 @@ export class AdminController extends BaseController {
         const dto = req.body as ReorderCarouselDto;
         const result = await this.carouselService.reorderCarouselItems(dto);
         if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    // ============================================
+    // Theme Management Endpoints
+    // ============================================
+
+    async getThemes(req: Request, res: Response) {
+        const result = await this.themeService.getAllThemes();
+        return this.ok(res, result);
+    }
+
+    async getTheme(req: Request, res: Response) {
+        const result = await this.themeService.getThemeById(parseInt(req.params.id));
+        if (!result) return this.notFound(res, 'Theme not found');
+        return this.ok(res, result);
+    }
+
+    async createTheme(req: Request, res: Response) {
+        const dto = req.body as AdminThemeDto;
+        const result = await this.themeService.createTheme(dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async updateTheme(req: Request, res: Response) {
+        const dto = req.body as AdminThemeDto;
+        const result = await this.themeService.updateTheme(parseInt(req.params.id), dto);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async deleteTheme(req: Request, res: Response) {
+        const result = await this.themeService.deleteTheme(parseInt(req.params.id));
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async setDefaultTheme(req: Request, res: Response) {
+        const result = await this.themeService.setDefaultTheme(parseInt(req.params.id));
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    async reorderThemes(req: Request, res: Response) {
+        const { themeIds } = req.body as { themeIds: number[] };
+        const result = await this.themeService.reorderThemes(themeIds);
+        if (!result.success) return this.fail(res, new Error(result.message));
+        return this.ok(res, result);
+    }
+
+    // ============================================
+    // Theme AI Endpoints
+    // ============================================
+
+    async themeAiChat(req: Request, res: Response) {
+        const request = req.body as ThemeAiRequest;
+        const result = await this.themeAiService.chat(request);
+        if (result.error) return this.fail(res, new Error(result.error));
+        return this.ok(res, result);
+    }
+
+    async themeAiGenerate(req: Request, res: Response) {
+        const { description } = req.body as { description: string };
+        const result = await this.themeAiService.generateTheme(description);
+        if (result.error) return this.fail(res, new Error(result.error));
+        return this.ok(res, result);
+    }
+
+    async themeAiSuggest(req: Request, res: Response) {
+        const { css, goal } = req.body as { css: string; goal?: string };
+        const result = await this.themeAiService.suggestImprovements(css, goal);
+        if (result.error) return this.fail(res, new Error(result.error));
         return this.ok(res, result);
     }
 }

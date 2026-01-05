@@ -30,3 +30,36 @@
     background: rgba(15, 23, 42, 0.6);
     border-color: rgba(51, 65, 85, 1);
 }
+
+/* ============================================
+   Cyber Theme Enhancements
+   ============================================ */
+
+[data-cyber-theme] .glass-card {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .glass-card--hover:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.3),
+        0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-cyber-theme="neon"] .glass-card--hover:hover {
+    box-shadow: 0 0 24px rgba(0, 255, 255, 0.4),
+        0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-cyber-theme="glass"] .glass-card {
+    background: rgba(15, 20, 30, 0.35);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+[data-cyber-theme="minimal"] .glass-card--hover:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}

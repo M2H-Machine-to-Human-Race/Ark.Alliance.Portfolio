@@ -1,0 +1,679 @@
+/**
+ * Consolidated Theme Component Classes
+ * Standardized class categories for theme-aware components
+ * 
+ * Categories:
+ * - Panel classes (.panel-*)
+ * - Section classes (.section-*)
+ * - Card classes (.card-*)
+ * - Preview classes (.preview-*)
+ * - Badge classes (.badge-*)
+ * - Form classes (.form-*)
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+/* ============================================
+   PANEL CLASSES
+   Consistent panel styling across the application
+   ============================================ */
+
+/* Base Panel - Glassmorphic container */
+.panel-base {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-xl, 1rem);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.panel-base:hover {
+    border-color: var(--border-neon-bright, rgba(0, 212, 255, 0.4));
+}
+
+/* Panel - Project Details */
+.panel-project {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-xl, 1rem);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.panel-project:hover {
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: var(--glow-soft, 0 0 12px rgba(0, 212, 255, 0.4));
+}
+
+/* Panel - Skill Category */
+.panel-skill {
+    background: var(--bg-surface-light, rgba(20, 25, 35, 0.5));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.panel-skill:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-neon-bright, rgba(0, 212, 255, 0.4));
+    box-shadow: var(--shadow-neon-sm, 0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Panel - Resume Section */
+.panel-resume {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-xl, 1rem);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Panel - Widget */
+.panel-widget {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Panel - Sidebar */
+.panel-sidebar {
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border-right: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    height: 100%;
+}
+
+/* ============================================
+   SECTION CLASSES
+   Consistent section layout and typography
+   ============================================ */
+
+/* Section Header */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+.section-header-icon {
+    color: var(--neon-primary, #00d4ff);
+    filter: drop-shadow(var(--glow-soft, 0 0 6px rgba(0, 212, 255, 0.4)));
+}
+
+.section-header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-neon, #e0e7ff);
+    margin: 0;
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-header-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-neon-secondary, #94a3b8);
+    margin: 0;
+}
+
+/* Section Content */
+.section-content {
+    padding: 1rem 0;
+}
+
+/* Section Compact */
+.section-compact {
+    margin-bottom: 1rem;
+}
+
+/* Section Divider */
+.section-divider {
+    height: 1px;
+    background: var(--border-neon, rgba(0, 212, 255, 0.2));
+    margin: 2rem 0;
+}
+
+.section-divider-glow {
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--neon-primary, #00d4ff) 50%,
+            transparent 100%);
+    margin: 2rem 0;
+}
+
+/* ============================================
+   CARD CLASSES
+   Standardized card styles for different content types
+   ============================================ */
+
+/* Card - Base */
+.card-base {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-base:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-neon-bright, rgba(0, 212, 255, 0.4));
+    box-shadow: var(--shadow-neon-md, 0 4px 16px rgba(0, 0, 0, 0.4));
+}
+
+/* Card - Project */
+.card-project {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-xl, 1rem);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-project:hover {
+    transform: translateY(-8px);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: var(--shadow-neon-lg, 0 8px 32px rgba(0, 0, 0, 0.5));
+}
+
+.card-project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+.card-project-content {
+    padding: 1.25rem;
+}
+
+.card-project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-neon, #e0e7ff);
+    margin: 0 0 0.5rem 0;
+}
+
+.card-project-description {
+    font-size: 0.875rem;
+    color: var(--text-neon-secondary, #94a3b8);
+    line-height: 1.5;
+}
+
+/* Card - Skill */
+.card-skill {
+    background: var(--bg-surface-light, rgba(20, 25, 35, 0.5));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-md, 0.5rem);
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.card-skill:hover {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    border-color: var(--border-neon-bright, rgba(0, 212, 255, 0.4));
+    transform: scale(1.02);
+}
+
+.card-skill-name {
+    font-weight: 600;
+    color: var(--text-neon, #e0e7ff);
+    margin-bottom: 0.5rem;
+}
+
+.card-skill-bar {
+    height: 4px;
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.card-skill-bar-fill {
+    height: 100%;
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+/* Card - Experience/Timeline */
+.card-experience {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: var(--glass-blur, blur(16px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(16px));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.card-experience:hover {
+    border-color: var(--border-neon-bright, rgba(0, 212, 255, 0.4));
+    box-shadow: var(--shadow-neon-sm, 0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.card-experience::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: var(--neon-primary, #00d4ff);
+    border-radius: 50%;
+    box-shadow: var(--glow-medium, 0 0 16px rgba(0, 212, 255, 0.7));
+    transform: translateY(-50%);
+}
+
+/* Card - Technology Badge */
+.card-tech {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-sm, 0.375rem);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text-neon, #e0e7ff);
+    transition: all 0.2s ease;
+}
+
+.card-tech:hover {
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: var(--glow-soft, 0 0 12px rgba(0, 212, 255, 0.4));
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   PREVIEW CLASSES
+   Consistent styling for code, diagrams, media
+   ============================================ */
+
+/* Preview Base */
+.preview-base {
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    overflow: hidden;
+}
+
+/* Preview - Code */
+.preview-code {
+    background: var(--bg-space, #0a0e17);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    overflow: hidden;
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.preview-code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border-bottom: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+.preview-code-language {
+    font-size: 0.75rem;
+    color: var(--neon-primary, #00d4ff);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.preview-code-content {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.preview-code pre {
+    margin: 0;
+    color: var(--text-neon, #e0e7ff);
+}
+
+.preview-code code {
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Preview - Diagram */
+.preview-diagram {
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.preview-diagram svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Preview - Image */
+.preview-image {
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    overflow: hidden;
+}
+
+.preview-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.preview-image-caption {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-neon-secondary, #94a3b8);
+    border-top: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+/* Preview - Video */
+.preview-video {
+    background: var(--bg-space, #0a0e17);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-lg, 0.75rem);
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.preview-video video,
+.preview-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============================================
+   BADGE CLASSES
+   Status, category, and label badges
+   ============================================ */
+
+/* Badge - Base */
+.badge-base {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    color: var(--text-neon, #e0e7ff);
+}
+
+/* Badge - Primary (Neon) */
+.badge-primary {
+    background: rgba(0, 212, 255, 0.15);
+    border: 1px solid var(--neon-primary, #00d4ff);
+    color: var(--neon-primary, #00d4ff);
+}
+
+/* Badge - Success */
+.badge-success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid #10b981;
+    color: #10b981;
+}
+
+/* Badge - Warning */
+.badge-warning {
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid #fbbf24;
+    color: #fbbf24;
+}
+
+/* Badge - Danger */
+.badge-danger {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid #ef4444;
+    color: #ef4444;
+}
+
+/* Badge - Status Active */
+.badge-active {
+    background: rgba(0, 212, 255, 0.2);
+    border: 1px solid var(--neon-primary, #00d4ff);
+    color: var(--neon-primary, #00d4ff);
+    box-shadow: var(--glow-soft, 0 0 8px rgba(0, 212, 255, 0.3));
+}
+
+/* Badge - Technology Category */
+.badge-tech-frontend {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+}
+
+.badge-tech-backend {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid #10b981;
+    color: #10b981;
+}
+
+.badge-tech-database {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid #8b5cf6;
+    color: #8b5cf6;
+}
+
+.badge-tech-devops {
+    background: rgba(249, 115, 22, 0.15);
+    border: 1px solid #f97316;
+    color: #f97316;
+}
+
+/* ============================================
+   FORM CLASSES
+   Input, select, textarea styling
+   ============================================ */
+
+/* Form Group */
+.form-group-cyber {
+    margin-bottom: 1.25rem;
+}
+
+/* Form Label */
+.form-label-cyber {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-neon-secondary, #94a3b8);
+    margin-bottom: 0.5rem;
+}
+
+/* Form Input */
+.form-input-cyber {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-md, 0.5rem);
+    color: var(--text-neon, #e0e7ff);
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.form-input-cyber:focus {
+    outline: none;
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+.form-input-cyber::placeholder {
+    color: var(--text-neon-muted, #64748b);
+}
+
+/* Form Textarea */
+.form-textarea-cyber {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-md, 0.5rem);
+    color: var(--text-neon, #e0e7ff);
+    font-size: 0.875rem;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.2s ease;
+}
+
+.form-textarea-cyber:focus {
+    outline: none;
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+/* Form Select */
+.form-select-cyber {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300d4ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 14px;
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-radius: var(--radius-md, 0.5rem);
+    color: var(--text-neon, #e0e7ff);
+    font-size: 0.875rem;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-select-cyber:focus {
+    outline: none;
+    border-color: var(--neon-primary, #00d4ff);
+}
+
+/* ============================================
+   LIST CLASSES
+   Standardized list styling
+   ============================================ */
+
+/* List - Base */
+.list-cyber {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-cyber-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-neon, rgba(0, 212, 255, 0.1));
+    transition: all 0.2s ease;
+}
+
+.list-cyber-item:last-child {
+    border-bottom: none;
+}
+
+.list-cyber-item:hover {
+    background: var(--bg-surface-light, rgba(20, 25, 35, 0.5));
+}
+
+/* List - Navigation */
+.list-nav-cyber li {
+    margin-bottom: 0.25rem;
+}
+
+.list-nav-cyber a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    color: var(--text-neon-secondary, #94a3b8);
+    text-decoration: none;
+    border-radius: var(--radius-md, 0.5rem);
+    transition: all 0.2s ease;
+}
+
+.list-nav-cyber a:hover {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    color: var(--text-neon, #e0e7ff);
+}
+
+.list-nav-cyber a.active {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--neon-primary, #00d4ff);
+    border-left: 2px solid var(--neon-primary, #00d4ff);
+}
+
+/* ============================================
+   LOADING STATES
+   Skeleton and spinner styles
+   ============================================ */
+
+/* Skeleton */
+.skeleton-cyber {
+    background: linear-gradient(90deg,
+            var(--bg-surface-dark, rgba(10, 15, 25, 0.8)) 25%,
+            var(--bg-surface, rgba(15, 20, 30, 0.65)) 50%,
+            var(--bg-surface-dark, rgba(10, 15, 25, 0.8)) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: var(--radius-md, 0.5rem);
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Spinner */
+.spinner-cyber {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-top-color: var(--neon-primary, #00d4ff);
+    border-radius: 50%;
+    animation: spinner-rotate 1s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}

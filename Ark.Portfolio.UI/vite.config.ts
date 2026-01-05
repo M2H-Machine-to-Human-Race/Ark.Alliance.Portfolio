@@ -28,14 +28,26 @@ export default defineConfig({
         }
     },
     build: {
-        chunkSizeWarningLimit: 1500,
+        chunkSizeWarningLimit: 4000,
         rollupOptions: {
             output: {
                 manualChunks: {
-                    'mermaid': ['mermaid'],
-                    'katex': ['katex'],
                     'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-                    'markdown': ['react-markdown', 'remark-gfm', 'rehype-highlight']
+                    'charting': ['chart.js', 'react-chartjs-2', 'chartjs-plugin-zoom'],
+                    'animations': ['framer-motion'],
+                    'icons': ['lucide-react'],
+                    'markdown': [
+                        'react-markdown',
+                        'remark-gfm',
+                        'remark-math',
+                        'rehype-highlight',
+                        'rehype-slug',
+                        'rehype-autolink-headings',
+                        'rehype-katex'
+                    ],
+                    'ui-lib': ['ark-alliance-react-ui'],
+                    'mermaid': ['mermaid'],
+                    'utils': ['axios', 'clsx', 'tailwind-merge', 'class-variance-authority']
                 }
             }
         }

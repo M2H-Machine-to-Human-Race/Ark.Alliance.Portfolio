@@ -69,6 +69,21 @@ export const TERMINOLOGY = {
     ADMIN: 'admin',
     ADMIN_DISPLAY: 'Admin',
 
+    // Languages
+    LANGUAGE: 'language',
+    LANGUAGE_DISPLAY: 'Language',
+    LANGUAGE_PLURAL: 'languages',
+
+    // Hobbies
+    HOBBY: 'hobby',
+    HOBBY_DISPLAY: 'Hobby',
+    HOBBY_PLURAL: 'hobbies',
+
+    // Business Domains
+    BUSINESS_DOMAIN: 'business-domain',
+    BUSINESS_DOMAIN_DISPLAY: 'Business Domain',
+    BUSINESS_DOMAIN_PLURAL: 'business-domains',
+
     // Deprecated (for backwards compatibility)
     /** @deprecated Use RESUME instead */
     CV: 'cv',

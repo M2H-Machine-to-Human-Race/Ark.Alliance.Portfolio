@@ -1,0 +1,692 @@
+/**
+ * Cyber-Futuristic Theme System
+ * Teal-cyan neon palette with glassmorphism and glow effects
+ * Unified with Ark.Alliance component library aesthetic
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
+/* ============================================
+   Cyber Theme CSS Variables
+   ============================================ */
+
+:root {
+    /* ========================================
+       Neon Color Palette
+       ======================================== */
+
+    /* Primary Neon Colors */
+    --neon-primary: #00d4ff;
+    /* Teal neon glow */
+    --neon-cyan: #00ffff;
+    /* Cyan accent */
+    --neon-blue: #0099ff;
+    /* Deep blue neon */
+    --neon-purple: #b366ff;
+    /* Purple accent (secondary) */
+
+    /* Background Colors */
+    --bg-space: #0a0e17;
+    /* Deep space black */
+    --bg-surface: rgba(15, 20, 30, 0.65);
+    /* Glassmorphic surfaces */
+    --bg-surface-light: rgba(20, 25, 35, 0.5);
+    /* Lighter surface */
+    --bg-surface-dark: rgba(10, 15, 25, 0.8);
+    /* Darker surface */
+    --bg-overlay: rgba(10, 14, 23, 0.9);
+    /* Dark overlay for images */
+
+    /* Text Colors */
+    --text-neon: #e0e7ff;
+    /* High contrast text */
+    --text-neon-secondary: #94a3b8;
+    /* Subtle contrast */
+    --text-neon-muted: #64748b;
+    /* Muted text */
+
+    /* Border Colors */
+    --border-neon: rgba(0, 212, 255, 0.2);
+    /* Subtle neon border */
+    --border-neon-bright: rgba(0, 212, 255, 0.5);
+    /* Brighter border */
+    --border-neon-glow: rgba(0, 212, 255, 0.8);
+    /* Glowing border */
+
+    /* ========================================
+       Glow & Shadow Effects
+       ======================================== */
+
+    /* Neon Glow Shadows */
+    --glow-soft: 0 0 12px rgba(0, 212, 255, 0.4);
+    --glow-medium: 0 0 16px rgba(0, 212, 255, 0.7);
+    --glow-strong: 0 0 24px rgba(0, 212, 255, 0.9);
+    --glow-pulse: 0 0 32px rgba(0, 212, 255, 1);
+
+    /* Multi-layer Glow */
+    --glow-layered: 0 0 8px rgba(0, 212, 255, 0.5),
+        0 0 16px rgba(0, 212, 255, 0.3),
+        0 0 24px rgba(0, 212, 255, 0.2);
+
+    /* Card Shadows with Glow */
+    --shadow-neon-sm: 0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(0, 212, 255, 0.2);
+    --shadow-neon-md: 0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 12px rgba(0, 212, 255, 0.3);
+    --shadow-neon-lg: 0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(0, 212, 255, 0.4);
+
+    /* ========================================
+       Gradients
+       ======================================== */
+
+    /* Primary Gradients */
+    --gradient-neon: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+    --gradient-neon-reverse: linear-gradient(135deg, #00ffff 0%, #00d4ff 100%);
+    --gradient-cyber: linear-gradient(135deg, #00d4ff 0%, #0099ff 50%, #b366ff 100%);
+
+    /* Background Gradients */
+    --gradient-dark-overlay: linear-gradient(to bottom,
+            rgba(10, 14, 23, 0.7),
+            rgba(10, 14, 23, 0.9));
+    --gradient-dark-radial: radial-gradient(circle at 50% 0%,
+            rgba(0, 212, 255, 0.1) 0%,
+            rgba(10, 14, 23, 1) 50%);
+
+    /* Shimmer/Shine Effects */
+    --gradient-shine: linear-gradient(90deg,
+            transparent,
+            rgba(0, 212, 255, 0.3),
+            transparent);
+
+    /* ========================================
+       Glassmorphism
+       ======================================== */
+
+    --glass-blur-light: blur(8px);
+    --glass-blur-medium: blur(16px);
+    --glass-blur-strong: blur(24px);
+    --glass-blur-ultra: blur(32px);
+}
+
+/* ============================================
+   Theme Mode Variations
+   ============================================ */
+
+/* Normal Mode - Default balanced neon */
+[data-cyber-theme="normal"] {
+    --theme-primary: var(--neon-primary);
+    --theme-glow: var(--glow-medium);
+    --theme-border: var(--border-neon);
+    --glass-blur: var(--glass-blur-medium);
+}
+
+/* Neon Mode - High intensity glow */
+[data-cyber-theme="neon"] {
+    --theme-primary: var(--neon-cyan);
+    --theme-glow: var(--glow-strong);
+    --theme-border: var(--border-neon-glow);
+    --glass-blur: var(--glass-blur-light);
+}
+
+/* Minimal Mode - Reduced effects */
+[data-cyber-theme="minimal"] {
+    --theme-primary: var(--neon-blue);
+    --theme-glow: var(--glow-soft);
+    --theme-border: var(--border-neon);
+    --glass-blur: var(--glass-blur-light);
+
+    /* Disable some effects */
+    --glow-layered: none;
+    --gradient-shine: none;
+}
+
+/* Glass Mode - Maximum glassmorphism */
+[data-cyber-theme="glass"] {
+    --theme-primary: var(--neon-primary);
+    --theme-glow: var(--glow-soft);
+    --theme-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: var(--glass-blur-ultra);
+
+    /* Enhanced glass surfaces */
+    --bg-surface: rgba(15, 20, 30, 0.3);
+    --bg-surface-light: rgba(20, 25, 35, 0.2);
+}
+
+/* ============================================
+   Admin Semantic Variables (Fallback)
+   ============================================ */
+:root {
+    --admin-panel-bg: rgba(30, 41, 59, 0.5);
+    --admin-panel-border: rgba(255, 255, 255, 0.05);
+    --admin-card-bg: rgba(30, 41, 59, 0.5);
+    --admin-input-bg: rgba(0, 0, 0, 0.3);
+    --admin-text-primary: #f3f4f6;
+    --admin-text-secondary: #9ca3af;
+}
+
+/* ============================================
+   Utility Classes - Neon Effects
+   ============================================ */
+
+/* Text Gradients */
+.text-gradient-neon {
+    background: var(--gradient-neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-cyber {
+    background: var(--gradient-cyber);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Text with Glow */
+.text-neon-glow {
+    color: var(--neon-primary);
+    text-shadow: var(--glow-medium);
+}
+
+.text-neon-glow-strong {
+    color: var(--neon-cyan);
+    text-shadow: var(--glow-strong);
+}
+
+/* ============================================
+   Glassmorphism Utilities
+   ============================================ */
+
+.glass-cyber {
+    background: var(--bg-surface);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-neon);
+}
+
+.glass-cyber-light {
+    background: var(--bg-surface-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-cyber-dark {
+    background: var(--bg-surface-dark);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-neon);
+}
+
+/* Hover state for glass elements */
+.glass-cyber-hover {
+    transition: all 0.3s ease-out;
+}
+
+.glass-cyber-hover:hover {
+    background: rgba(20, 25, 35, 0.7);
+    border-color: var(--border-neon-bright);
+    box-shadow: var(--shadow-neon-md);
+}
+
+/* ============================================
+   Neon Border Effects
+   ============================================ */
+
+.border-neon {
+    border: 1px solid var(--border-neon);
+}
+
+.border-neon-bright {
+    border: 1px solid var(--border-neon-bright);
+}
+
+.border-neon-glow {
+    border: 1px solid var(--border-neon-glow);
+    box-shadow: inset 0 0 8px rgba(0, 212, 255, 0.3);
+}
+
+/* Animated border glow */
+.border-neon-pulse {
+    border: 1px solid var(--neon-primary);
+    animation: border-pulse 2s ease-in-out infinite;
+}
+
+@keyframes border-pulse {
+
+    0%,
+    100% {
+        border-color: var(--border-neon);
+        box-shadow: 0 0 0 rgba(0, 212, 255, 0);
+    }
+
+    50% {
+        border-color: var(--border-neon-glow);
+        box-shadow: var(--glow-medium);
+    }
+}
+
+/* ============================================
+   Glow Effects
+   ============================================ */
+
+.glow-soft {
+    box-shadow: var(--glow-soft);
+}
+
+.glow-medium {
+    box-shadow: var(--glow-medium);
+}
+
+.glow-strong {
+    box-shadow: var(--glow-strong);
+}
+
+.glow-layered {
+    box-shadow: var(--glow-layered);
+}
+
+/* Hover glow effects */
+.hover-glow {
+    transition: box-shadow 0.3s ease-out;
+}
+
+.hover-glow:hover {
+    box-shadow: var(--glow-strong);
+}
+
+/* Pulsing glow animation */
+.glow-pulse {
+    animation: glow-pulse-anim 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-anim {
+
+    0%,
+    100% {
+        box-shadow: var(--glow-soft);
+    }
+
+    50% {
+        box-shadow: var(--glow-pulse);
+    }
+}
+
+/* ============================================
+   Card Styles - Cyber Edition
+   ============================================ */
+
+.card-cyber {
+    background: var(--bg-surface);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-neon);
+    border-radius: var(--radius-xl);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-cyber:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-neon-bright);
+    box-shadow: var(--shadow-neon-lg);
+}
+
+/* Enhanced card with strong glow */
+.card-cyber-glow {
+    background: var(--bg-surface);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-neon);
+    border-radius: var(--radius-xl);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-cyber-glow:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--neon-cyan);
+    box-shadow: var(--glow-layered),
+        0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================
+   Button Styles - Neon Edition
+   ============================================ */
+
+.btn-neon {
+    background: var(--gradient-neon);
+    color: #0a0e17;
+    font-weight: 600;
+    border: none;
+    box-shadow: var(--glow-soft);
+    transition: all 0.3s ease-out;
+}
+
+.btn-neon:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-strong);
+}
+
+.btn-neon:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Ghost button with neon border */
+.btn-neon-ghost {
+    background: transparent;
+    color: var(--neon-primary);
+    border: 1px solid var(--border-neon-bright);
+    transition: all 0.3s ease-out;
+}
+
+.btn-neon-ghost:hover:not(:disabled) {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--neon-cyan);
+    box-shadow: var(--glow-medium);
+}
+
+/* ============================================
+   Global Button Overrides for Cyber Theme
+   ============================================ */
+
+/* Standard buttons with cyber styling */
+[data-cyber-theme] .btn {
+    transition: all 0.3s ease-out;
+}
+
+[data-cyber-theme] .btn-primary {
+    background: var(--gradient-neon);
+    color: #0a0e17;
+    border: none;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+[data-cyber-theme] .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+[data-cyber-theme] .btn-secondary {
+    background: rgba(15, 20, 30, 0.6);
+    color: var(--text-neon, #e0e7ff);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.3));
+}
+
+[data-cyber-theme] .btn-secondary:hover:not(:disabled) {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+[data-cyber-theme] .btn-outline {
+    background: transparent;
+    color: var(--neon-primary, #00d4ff);
+    border: 1px solid var(--border-neon-bright, rgba(0, 212, 255, 0.5));
+}
+
+[data-cyber-theme] .btn-outline:hover:not(:disabled) {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--neon-cyan, #00ffff);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+/* Large button with enhanced glow */
+[data-cyber-theme] .btn-lg {
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.3);
+}
+
+[data-cyber-theme] .btn-lg:hover:not(:disabled) {
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.5);
+}
+
+/* Neon mode - intensified */
+[data-cyber-theme="neon"] .btn-primary {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+[data-cyber-theme="neon"] .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+}
+
+/* Minimal mode - reduced effects */
+[data-cyber-theme="minimal"] .btn-primary {
+    box-shadow: none;
+}
+
+[data-cyber-theme="minimal"] .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   Animations - Cyber Effects
+   ============================================ */
+
+/* Shimmer effect */
+@keyframes shimmer-neon {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.shimmer-neon {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-neon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-shine);
+    animation: shimmer-neon 3s infinite;
+}
+
+/* Neon blink effect */
+@keyframes neon-blink {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        opacity: 1;
+        text-shadow: var(--glow-medium);
+    }
+
+    20%,
+    24%,
+    55% {
+        opacity: 0.7;
+        text-shadow: var(--glow-soft);
+    }
+}
+
+.neon-blink {
+    animation: neon-blink 5s infinite;
+}
+
+/* Floating animation */
+@keyframes float-cyber {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.float-cyber {
+    animation: float-cyber 3s ease-in-out infinite;
+}
+
+/* Scan line effect */
+@keyframes scan-line {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.scan-line-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right,
+            transparent,
+            rgba(0, 212, 255, 0.5),
+            transparent);
+    animation: scan-line 4s linear infinite;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ============================================
+   Background Effects
+   ============================================ */
+
+.bg-space {
+    background-color: var(--bg-space);
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 153, 255, 0.05) 0%, transparent 50%);
+}
+
+.bg-nebula {
+    background:
+        radial-gradient(ellipse at top, rgba(0, 212, 255, 0.15), transparent 50%),
+        radial-gradient(ellipse at bottom, rgba(0, 153, 255, 0.1), transparent 50%),
+        var(--bg-space);
+}
+
+/* Particle field simulation */
+.particle-field {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, rgba(0, 212, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 60px 70px, rgba(0, 212, 255, 0.2), transparent),
+        radial-gradient(1px 1px at 130px 180px, rgba(0, 212, 255, 0.15), transparent),
+        radial-gradient(1px 1px at 220px 120px, rgba(0, 212, 255, 0.25), transparent);
+    background-size: 250px 250px;
+    background-repeat: repeat;
+    opacity: 0.6;
+    animation: particle-drift 20s linear infinite;
+}
+
+@keyframes particle-drift {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-250px, -250px);
+    }
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+/* Reduce effects on mobile for performance */
+@media (max-width: 768px) {
+    :root {
+        --glass-blur-light: blur(6px);
+        --glass-blur-medium: blur(12px);
+        --glass-blur-strong: blur(16px);
+        --glass-blur-ultra: blur(20px);
+    }
+
+    /* Disable expensive animations on mobile */
+    .particle-field,
+    .scan-line-effect {
+        display: none;
+    }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+
+    .glow-pulse,
+    .neon-blink,
+    .float-cyber,
+    .shimmer-neon,
+    .particle-field,
+    .scan-line-effect {
+        animation: none;
+    }
+
+    .card-cyber:hover,
+    .card-cyber-glow:hover {
+        transform: none;
+    }
+}
+
+/* ============================================
+   Fallback for unsupported backdrop-filter
+   ============================================ */
+
+@supports not (backdrop-filter: blur(1px)) {
+
+    .glass-cyber,
+    .glass-cyber-light,
+    .glass-cyber-dark {
+        background: rgba(15, 20, 30, 0.95);
+    }
+}
+
+/* ============================================
+   TechBadge Styles
+   ============================================ */
+
+[data-cyber-theme] .tech-badge {
+    background: rgba(15, 20, 30, 0.6);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.3));
+    color: var(--text-neon, #e0e7ff);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+[data-cyber-theme] .tech-badge:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Neon mode */
+[data-cyber-theme="neon"] .tech-badge {
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+[data-cyber-theme="neon"] .tech-badge:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+/* Minimal mode */
+[data-cyber-theme="minimal"] .tech-badge {
+    box-shadow: none;
+}
+
+[data-cyber-theme="minimal"] .tech-badge:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}

@@ -1,6 +1,7 @@
 /**
  * @fileoverview ResumePageV2 ViewModel
- * Manages resume data, timeline items, and skills visualization.
+ * Manages resume data, timeline items, skills visualization,
+ * languages, hobbies, and business domains.
  * 
  * @author Armand Richelet-Kleinberg
  */
@@ -8,6 +9,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { resumeService } from '../../services/resume.service';
 import { TimelineItem } from '../../components/TimelineV2';
+import { LanguageDto, HobbyDto, BusinessDomainDto } from '@ark/portfolio-share';
 
 /**
  * Skill data with category and proficiency
@@ -32,6 +34,11 @@ export interface SkillCategory {
 }
 
 /**
+ * Resume tab types
+ */
+export type ResumeTabType = 'experience' | 'education' | 'skills' | 'languages' | 'domains' | 'hobbies';
+
+/**
  * ResumePageV2 ViewModel state
  */
 export interface ResumePageV2Model {
@@ -39,6 +46,10 @@ export interface ResumePageV2Model {
     isLoading: boolean;
     /** Error message if any */
     error: string | null;
+    /** Currently active tab */
+    activeTab: ResumeTabType;
+    /** Set active tab */
+    setActiveTab: (tab: ResumeTabType) => void;
     /** Timeline items for Experience */
     experienceItems: TimelineItem[];
     /** Timeline items for Education */
@@ -49,6 +60,16 @@ export interface ResumePageV2Model {
     skillCategories: SkillCategory[];
     /** Profile summary */
     profileSummary: string | null;
+    /** Profile full name */
+    profileName: string;
+    /** Profile title */
+    profileTitle: string;
+    /** Languages */
+    languages: LanguageDto[];
+    /** Hobbies */
+    hobbies: HobbyDto[];
+    /** Business Domains */
+    businessDomains: BusinessDomainDto[];
     /** Is admin mode */
     isAdmin: boolean;
 
@@ -144,10 +165,16 @@ const createSkillCategories = (skills: any[]): SkillCategory[] => {
 export const useResumePageV2Model = (): ResumePageV2Model => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [activeTab, setActiveTab] = useState<ResumeTabType>('experience');
     const [experienceItems, setExperienceItems] = useState<TimelineItem[]>([]);
     const [educationItems, setEducationItems] = useState<TimelineItem[]>([]);
     const [skillCategories, setSkillCategories] = useState<SkillCategory[]>([]);
     const [profileSummary, setProfileSummary] = useState<string | null>(null);
+    const [profileName, setProfileName] = useState<string>('Armand Richelet-Kleinberg');
+    const [profileTitle, setProfileTitle] = useState<string>('AI Principal Solutions Architect');
+    const [languages, setLanguages] = useState<LanguageDto[]>([]);
+    const [hobbies, setHobbies] = useState<HobbyDto[]>([]);
+    const [businessDomains, setBusinessDomains] = useState<BusinessDomainDto[]>([]);
     const [isAdmin, setIsAdmin] = useState(false);
 
     const fetchData = useCallback(async () => {
@@ -169,10 +196,27 @@ export const useResumePageV2Model = (): ResumePageV2Model => {
             const categories = createSkillCategories(cvData.skills || []);
             setSkillCategories(categories);
 
-            // Profile summary (if available)
-            if (cvData.profile?.overview) {
-                setProfileSummary(cvData.profile.overview);
+            // Profile data (if available)
+            if (cvData.profile) {
+                if (cvData.profile.overview) {
+                    setProfileSummary(cvData.profile.overview);
+                }
+                if (cvData.profile.firstName && cvData.profile.lastName) {
+                    setProfileName(`${cvData.profile.firstName} ${cvData.profile.lastName}`);
+                }
+                if (cvData.profile.title) {
+                    setProfileTitle(cvData.profile.title);
+                }
             }
+
+            // Languages
+            setLanguages(cvData.languages || []);
+
+            // Hobbies
+            setHobbies(cvData.hobbies || []);
+
+            // Business Domains
+            setBusinessDomains(cvData.businessDomains || []);
 
             // Check admin status
             const token = localStorage.getItem('auth_token');
@@ -204,11 +248,18 @@ export const useResumePageV2Model = (): ResumePageV2Model => {
     return {
         isLoading,
         error,
+        activeTab,
+        setActiveTab,
         experienceItems,
         educationItems,
         allTimelineItems,
         skillCategories,
         profileSummary,
+        profileName,
+        profileTitle,
+        languages,
+        hobbies,
+        businessDomains,
         isAdmin,
         refetch: fetchData,
         handleEditTimeline,
@@ -216,3 +267,4 @@ export const useResumePageV2Model = (): ResumePageV2Model => {
 };
 
 export default useResumePageV2Model;
+

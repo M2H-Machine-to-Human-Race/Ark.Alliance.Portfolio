@@ -42,6 +42,7 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     { id: 'carousel', label: 'Carousel', path: '/admin/carousel', icon: <GalleryHorizontal size={20} /> },
     { id: 'menu', label: 'Menu', path: '/admin/menu', icon: <MenuIcon size={20} /> },
     { id: 'styles', label: 'Styles', path: '/admin/styles', icon: <Palette size={20} /> },
+    { id: 'themes', label: 'Themes', path: '/admin/themes', icon: <Palette size={20} /> },
     { id: 'media', label: 'Media', path: '/admin/media', icon: <Image size={20} /> },
     { id: 'ai-settings', label: 'AI Settings', path: '/admin/ai-settings', icon: <Bot size={20} /> }
 ];

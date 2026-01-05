@@ -3,6 +3,29 @@ import { useMermaidDiagramViewModel } from './MermaidDiagramReader.hooks';
 import { MermaidDiagramReaderProps } from './MermaidDiagramReader.types';
 import './MermaidDiagramReader.styles.css';
 
+/**
+ * MermaidDiagramReader Component
+ * 
+ * A robust, interactive viewer for Mermaid.js diagrams with zoom, pan, and export capabilities.
+ * Designed to integrate seamlessly with the application's global theme system while offering
+ * fallback support for standalone customization.
+ * 
+ * Features:
+ * - Interactive Zoom & Pan (d3-style)
+ * - Export to PNG, SVG, PDF
+ * - Theme toggling (aligns with semantic variables)
+ * - Fullscreen mode
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <MermaidDiagramReader 
+ *   diagramSource="graph TD; A-->B;" 
+ *   theme="dark" 
+ *   enableZoom={true} 
+ * />
+ * ```
+ */
 export const MermaidDiagramReader: React.FC<MermaidDiagramReaderProps> = ({
     diagramSource,
     theme = 'light',

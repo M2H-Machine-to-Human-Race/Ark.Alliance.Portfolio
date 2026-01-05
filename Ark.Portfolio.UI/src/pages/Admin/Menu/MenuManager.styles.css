@@ -1,3 +1,12 @@
+/**
+ * Menu Manager Styles - Admin Panel
+ * 
+ * Cyber-themed styling with glassmorphic cards and neon accents.
+ * Uses admin CSS variables for consistent theming.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
 .menu-manager {
     display: flex;
     flex-direction: column;
@@ -13,36 +22,50 @@
 .mm-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--admin-text-primary, #f3f4f6);
 }
 
 .mm-add-btn {
-    background-color: #2563eb;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
+    background: linear-gradient(135deg, var(--theme-primary, #00d4ff) 0%, #00ffff 100%);
+    color: #0a0e17;
+    padding: 0.625rem 1.25rem;
+    border-radius: 10px;
     border: none;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+.mm-add-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
 }
 
 .mm-list {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .mm-item {
-    background: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: var(--admin-card-bg, rgba(30, 41, 59, 0.6));
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.05));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.2s ease;
+}
+
+.mm-item:hover {
+    border-color: var(--theme-primary, #00d4ff);
+    background: rgba(30, 41, 59, 0.8);
 }
 
 .mm-item-content {
@@ -51,13 +74,166 @@
     gap: 1rem;
 }
 
+.mm-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+    color: var(--theme-primary, #00d4ff);
+}
+
+.mm-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
 .mm-item-label {
     font-weight: 600;
-    color: #111827;
+    color: var(--admin-text-primary, #f3f4f6);
 }
 
 .mm-item-path {
-    font-size: 0.875rem;
-    color: #6b7280;
-    font-family: monospace;
+    font-size: 0.8125rem;
+    color: var(--admin-text-secondary, #94a3b8);
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+}
+
+.mm-item-actions {
+    display: flex;
+    gap: 0.375rem;
+}
+
+.mm-item-actions button {
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.1));
+    border-radius: 8px;
+    color: var(--admin-text-secondary, #94a3b8);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mm-item-actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--admin-text-primary, #f3f4f6);
+    border-color: var(--admin-text-primary, #f3f4f6);
+}
+
+.mm-item-actions button.danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
+/* Empty State */
+.mm-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    color: var(--admin-text-secondary, #94a3b8);
+    text-align: center;
+}
+
+.mm-empty svg {
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.mm-empty p {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+}
+
+/* Loading */
+.mm-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    color: var(--admin-text-secondary, #94a3b8);
+}
+
+/* Modal Styles */
+.menu-modal .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.menu-modal .modal-content {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98));
+    border: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.1));
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.menu-modal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.05));
+}
+
+.menu-modal .modal-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--admin-text-primary, #f3f4f6);
+    margin: 0;
+}
+
+.menu-modal .modal-body {
+    padding: 1.5rem;
+}
+
+.menu-manager .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.menu-manager .form-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--admin-text-secondary, #94a3b8);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+}
+
+.menu-manager .form-input,
+.menu-manager .form-select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: var(--admin-input-bg, rgba(0, 0, 0, 0.3));
+    border: 1px solid var(--admin-panel-border, rgba(255, 255, 255, 0.1));
+    border-radius: 12px;
+    font-size: 0.9375rem;
+    color: var(--admin-text-primary, #f3f4f6);
+    transition: all 0.2s ease;
+}
+
+.menu-manager .form-input:focus,
+.menu-manager .form-select:focus {
+    outline: none;
+    border-color: var(--theme-primary, #00d4ff);
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.15);
+    background: rgba(0, 0, 0, 0.5);
 }

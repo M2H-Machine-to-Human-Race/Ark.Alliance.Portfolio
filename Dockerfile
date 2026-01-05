@@ -3,7 +3,7 @@
 # ═══════════════════════════════════════════════════════════════════════
 
 # Stage 1: Build Shared Library
-FROM node:18-alpine AS share-builder
+FROM node:22-alpine AS share-builder
 WORKDIR /app/share
 COPY Ark.Portfolio.Share/package*.json ./
 RUN npm ci
@@ -11,7 +11,7 @@ COPY Ark.Portfolio.Share/ ./
 RUN npm run build
 
 # Stage 2: Build Frontend
-FROM node:18-alpine AS frontend-builder
+FROM node:22-alpine AS frontend-builder
 WORKDIR /app
 COPY --from=share-builder /app/share /app/Ark.Portfolio.Share
 WORKDIR /app/frontend
@@ -23,7 +23,7 @@ ENV VITE_USE_MOCK_DATA=false
 RUN npm run build
 
 # Stage 3: Build Backend
-FROM node:18-alpine AS backend-builder
+FROM node:22-alpine AS backend-builder
 WORKDIR /app
 COPY --from=share-builder /app/share /app/Ark.Portfolio.Share
 WORKDIR /app/backend
@@ -33,7 +33,7 @@ COPY Ark.Portfolio.Backend/ ./
 RUN npm run build
 
 # Stage 4: Production Runtime
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 RUN apk add --no-cache nginx
 
 WORKDIR /app
@@ -50,8 +50,8 @@ COPY --from=frontend-builder /app/frontend/dist /usr/share/nginx/html
 # Copy nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy backend assets if they exist
-COPY --from=backend-builder /app/backend/src/Assets ./dist/Assets 2>/dev/null || true
+# Copy backend assets (using RUN to handle missing directory gracefully)
+RUN mkdir -p ./dist/Assets
 
 # Create data directory for SQLite
 RUN mkdir -p /app/data

@@ -1,13 +1,15 @@
 /**
  * @fileoverview TimelineV2 View Component
- * Chronological timeline with filtering and search.
+ * Chronological timeline with search and clickable technology badges.
  * 
  * @author Armand Richelet-Kleinberg
  */
 
 import React from 'react';
 import { Search, Calendar, Building2, MapPin, Edit2, Inbox } from 'lucide-react';
+import { BadgeDetailModal } from 'ark-alliance-react-ui';
 import { useTimelineV2Model, TimelineItem, TimelineCategory } from './TimelineV2.model';
+import { TechBadge } from '../TechBadge';
 import './TimelineV2.styles.css';
 
 /**
@@ -72,24 +74,8 @@ export const TimelineV2: React.FC<TimelineV2Props> = ({
 
     return (
         <div className={`timeline ${className}`}>
-            {/* Controls */}
+            {/* Controls - Search Only */}
             <div className="timeline-controls">
-                {/* Category Filters */}
-                <div className="timeline-filters" role="tablist" aria-label="Filter by category">
-                    {vm.categories.map(cat => (
-                        <button
-                            key={cat.id}
-                            className={`timeline-filter-btn ${vm.category === cat.id ? 'active' : ''}`}
-                            onClick={() => vm.setCategory(cat.id)}
-                            role="tab"
-                            aria-selected={vm.category === cat.id}
-                        >
-                            {cat.label}
-                            <span className="timeline-filter-count">{cat.count}</span>
-                        </button>
-                    ))}
-                </div>
-
                 {/* Search */}
                 <div className="timeline-search">
                     <Search size={16} className="timeline-search-icon" aria-hidden="true" />
@@ -158,9 +144,12 @@ export const TimelineV2: React.FC<TimelineV2Props> = ({
                                 {item.skills && item.skills.length > 0 && (
                                     <div className="timeline-card-skills">
                                         {item.skills.map((skill, i) => (
-                                            <span key={i} className="timeline-skill-tag">
-                                                {skill}
-                                            </span>
+                                            <TechBadge
+                                                key={i}
+                                                techKey={skill.toLowerCase().replace(/[\s.]+/g, '-')}
+                                                size="sm"
+                                                onClick={(tech) => vm.setSelectedTechnology(tech)}
+                                            />
                                         ))}
                                     </div>
                                 )}
@@ -199,6 +188,24 @@ export const TimelineV2: React.FC<TimelineV2Props> = ({
                         </button>
                     )}
                 </div>
+            )}
+
+            {/* Technology Detail Modal */}
+            {vm.selectedTechnology && (
+                <BadgeDetailModal
+                    isOpen={true}
+                    onClose={() => vm.setSelectedTechnology(null)}
+                    data={{
+                        name: vm.selectedTechnology.name,
+                        category: vm.selectedTechnology.category,
+                        description: vm.selectedTechnology.description,
+                        icon: vm.selectedTechnology.icon,
+                        color: vm.selectedTechnology.color || '#00D4FF',
+                        links: vm.selectedTechnology.website
+                            ? [{ label: 'Official Website', url: vm.selectedTechnology.website }]
+                            : undefined
+                    }}
+                />
             )}
         </div>
     );

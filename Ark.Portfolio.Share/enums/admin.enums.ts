@@ -115,9 +115,13 @@ export enum AdminEntityTypeEnum {
     EXPERIENCE = 'experience',
     SKILL = 'skill',
     EDUCATION = 'education',
+    LANGUAGE = 'language',
+    HOBBY = 'hobby',
+    BUSINESS_DOMAIN = 'business_domain',
     WIDGET = 'widget',
     MENU_ITEM = 'menu_item',
     STYLE = 'style',
     MEDIA = 'media',
     PROFILE = 'profile'
 }
+

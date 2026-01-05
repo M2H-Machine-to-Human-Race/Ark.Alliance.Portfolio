@@ -60,7 +60,7 @@ const QUICK_NAV_CARDS: QuickNavCard[] = [
         description: 'View my professional experience, education, and skills timeline',
         path: '/resume',
         icon: 'FileText',
-        gradient: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)',
+        gradient: 'var(--gradient-info, linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%))',
     },
     {
         id: 'portfolio',
@@ -68,15 +68,7 @@ const QUICK_NAV_CARDS: QuickNavCard[] = [
         description: 'Explore my projects, case studies, and technical work',
         path: '/projects',
         icon: 'Briefcase',
-        gradient: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
-    },
-    {
-        id: 'architecture',
-        title: 'Architecture',
-        description: 'Discover the technical architecture and design patterns',
-        path: '/architecture',
-        icon: 'Layers',
-        gradient: 'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)',
+        gradient: 'var(--gradient-secondary, linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%))',
     },
 ];
 

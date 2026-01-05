@@ -5,12 +5,13 @@
  * @author Armand Richelet-Kleinberg
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { TechnologyDto } from '@ark/portfolio-share';
 import { HeaderV2 } from '../../components/HeaderV2';
 import { GlassCard } from '../../components/generic/GlassCard';
-import { TechBadge } from '../../components/TechBadge/TechBadge';
+import { TechBadge, TechnologyModal } from '../../components/TechBadge';
 import { useProjectsPageV2Model } from './ProjectsPageV2.model';
 import './ProjectsPageV2.styles.css';
 
@@ -22,9 +23,19 @@ import './ProjectsPageV2.styles.css';
  * - Page title in content area (not header)
  * - Clickable project cards linking to detail pages
  * - Grid layout for projects
+ * - Technology badges with modal on click
  */
 export const ProjectsPageV2: React.FC = () => {
     const vm = useProjectsPageV2Model();
+    const [selectedTech, setSelectedTech] = useState<TechnologyDto | null>(null);
+
+    const handleTechClick = (tech: TechnologyDto) => {
+        setSelectedTech(tech);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedTech(null);
+    };
 
     return (
         <div className="projects-page">
@@ -114,12 +125,21 @@ export const ProjectsPageV2: React.FC = () => {
 
                                         <p className="project-card-description">{project.description}</p>
 
-                                        <div className="project-card-footer">
+                                        {/* Technology Badges - Clickable with modal */}
+                                        <div className="project-card-footer relative z-20">
                                             <p className="tech-label">TECHNOLOGIES</p>
-                                            <div className="tech-list">
+                                            <div className="tech-list" onClick={(e) => e.stopPropagation()}>
                                                 {project.technologies.slice(0, 5).map((t, idx) => {
                                                     const techKey = typeof t === 'string' ? t : t.name;
-                                                    return <TechBadge key={techKey || idx} techKey={techKey} size="sm" showIcon />;
+                                                    return (
+                                                        <TechBadge
+                                                            key={techKey || idx}
+                                                            techKey={techKey}
+                                                            size="sm"
+                                                            showIcon
+                                                            onClick={handleTechClick}
+                                                        />
+                                                    );
                                                 })}
                                                 {project.technologies.length > 5 && (
                                                     <span className="tech-more">+{project.technologies.length - 5}</span>
@@ -146,8 +166,17 @@ export const ProjectsPageV2: React.FC = () => {
             <footer className="projects-footer">
                 <p>© {new Date().getFullYear()} Ark.Portfolio. Built with React, TypeScript, and ❤️</p>
             </footer>
+
+            {/* Technology Detail Modal */}
+            {selectedTech && (
+                <TechnologyModal
+                    technology={selectedTech}
+                    onClose={handleCloseModal}
+                />
+            )}
         </div>
     );
 };
 
 export default ProjectsPageV2;
+

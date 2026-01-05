@@ -3,12 +3,11 @@
 .mermaid-reader {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    background: var(--bg-primary);
-    min-height: 400px;
+    width: 100%;
+    background: var(--bg-card, rgba(15, 23, 42, 0.95));
+    min-height: 500px;
+    box-shadow: var(--shadow-xl, 0 8px 32px rgba(0, 0, 0, 0.3));
+    border-color: var(--border-color, rgba(51, 65, 85, 0.6));
 }
 
 /* Toolbar */
@@ -17,8 +16,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    border-bottom: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    background: var(--bg-secondary, rgba(15, 23, 42, 0.95));
 }
 
 .mermaid-reader__toolbar-left,
@@ -31,21 +30,25 @@
 .mermaid-reader__title {
     font-weight: 600;
     font-size: 14px;
-    color: var(--text-primary);
+    font-size: 14px;
+    color: var(--text-primary, #F1F5F9);
 }
 
 .mermaid-reader__toolbar button {
     padding: 6px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    border: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    border-radius: 6px;
+    background: var(--bg-tertiary, rgba(30, 41, 59, 0.8));
+    color: var(--text-secondary, #E2E8F0);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    font-size: 13px;
 }
 
 .mermaid-reader__toolbar button:hover {
-    background: var(--bg-hover);
+    background: var(--bg-hover, rgba(51, 65, 85, 0.5));
+    border-color: var(--accent-primary, #00D4FF);
+    color: var(--accent-primary, #00D4FF);
 }
 
 /* Export Dropdown */
@@ -60,10 +63,10 @@
     margin-top: 4px;
     display: none;
     flex-direction: column;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: var(--bg-secondary, rgba(15, 23, 42, 0.98));
+    border: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     z-index: 10;
 }
 
@@ -78,26 +81,37 @@
     white-space: nowrap;
 }
 
-/* Container */
+/* Container - Full width, centered content */
 .mermaid-reader__container {
     flex: 1;
     position: relative;
-    overflow: hidden;
+    overflow: auto;
     cursor: grab;
-    background: var(--bg-diagram);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: transparent;
 }
 
 .mermaid-reader__container:active {
     cursor: grabbing;
 }
 
-/* Diagram */
+/* Diagram - Centered and fully visible */
 .mermaid-reader__diagram {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
     transform-origin: center;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.2s ease-out;
+}
+
+/* Ensure SVG diagrams scale properly */
+.mermaid-reader__diagram svg {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Loader */
@@ -138,10 +152,10 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
-    border-top: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    background: var(--bg-secondary, rgba(15, 23, 42, 1));
     font-size: 12px;
-    color: var(--text-secondary);
+    color: var(--text-secondary, #94a3b8);
 }
 
 /* Theme Variants */

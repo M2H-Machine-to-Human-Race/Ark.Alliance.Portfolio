@@ -6,11 +6,7 @@
  */
 
 import { useState, useMemo, useCallback } from 'react';
-
-/**
- * Project status type
- */
-export type ProjectStatus = 'completed' | 'in_progress' | 'planned' | 'archived';
+import { ProjectStatus } from '@ark/portfolio-share';
 
 /**
  * Project data structure

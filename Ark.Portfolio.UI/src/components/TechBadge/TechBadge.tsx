@@ -1,6 +1,6 @@
 /**
  * @fileoverview Enhanced TechBadge Component
- * Displays technology badges with icons, colors, and click functionality
+ * Wrapper around ark-alliance-react-ui TechBadge that handles data fetching
  * 
  * @module components/TechBadge
  * @author Armand Richelet-Kleinberg
@@ -9,13 +9,13 @@
 import React from 'react';
 import { TechnologyDto } from '@ark/portfolio-share';
 import { useTechnology } from '../../hooks/useTechnology';
-import { cn } from '../../utils/cn';
+import { TechBadge as LibraryTechBadge } from 'ark-alliance-react-ui';
 
 interface TechBadgeProps {
     /** Technology key (e.g., "react", "typescript") */
     techKey: string;
     /** Badge size */
-    size?: 'sm' | 'md';
+    size?: 'sm' | 'md' | 'lg';
     /** Active state */
     active?: boolean;
     /** Show technology icon */
@@ -28,7 +28,7 @@ interface TechBadgeProps {
 
 /**
  * TechBadge Component
- * Displays a stylized badge for a technology with optional icon and click handler
+ * Wrapper around ark-alliance-react-ui TechBadge that handles data fetching
  */
 export const TechBadge: React.FC<TechBadgeProps> = ({
     techKey,
@@ -38,52 +38,59 @@ export const TechBadge: React.FC<TechBadgeProps> = ({
     onClick,
     className
 }) => {
-    const tech = useTechnology(techKey);
+    // Guard against null/undefined techKey
+    const safeTechKey = techKey || '';
 
-    // Fallback if technology not found
-    const displayName = tech?.name || techKey;
-    const brandColor = tech?.color || '#64748b';
-    const iconClass = tech?.icon || 'fas fa-code';
+    // Always call the hook (React hooks must be called unconditionally)
+    const tech = useTechnology(safeTechKey);
+
+    // Don't render anything if techKey is empty
+    if (!safeTechKey) {
+        return null;
+    }
+
+    // Create fallback technology data when lookup fails
+    // This ensures badges are visible even when technology data hasn't loaded
+    const fallbackTech: TechnologyDto = {
+        key: safeTechKey,
+        name: safeTechKey.charAt(0).toUpperCase() + safeTechKey.slice(1), // Capitalize first letter
+        label: safeTechKey.charAt(0).toUpperCase() + safeTechKey.slice(1), // Same as name for fallback
+        color: 'var(--text-secondary, #94a3b8)', // Use theme variable with fallback
+        icon: '',
+        description: `Technology: ${safeTechKey}`,
+        category: 'Other'
+    };
+
+    // Use actual tech data or fallback
+    const effectiveTech = tech || fallbackTech;
 
     const handleClick = () => {
-        if (onClick && tech) {
-            onClick(tech);
+        if (onClick) {
+            onClick(effectiveTech);
         }
     };
 
+    // Construct technology data object for library component
+    const techData = {
+        key: effectiveTech.key,
+        name: effectiveTech.name,
+        color: effectiveTech.color,
+        icon: effectiveTech.icon,
+        description: effectiveTech.description,
+        category: effectiveTech.category,
+        website: effectiveTech.website,
+        versions: effectiveTech.versions
+    };
+
     return (
-        <span
-            className={cn(
-                "tech-badge",
-                "font-mono font-semibold rounded-lg border transition-all duration-300 inline-flex items-center gap-1.5",
-                size === 'sm' ? "text-[10px] px-2 py-0.5" : "text-xs px-3 py-1",
-                active
-                    ? "shadow-[0_0_10px_rgba(59,130,246,0.2)]"
-                    : "hover:shadow-[0_0_10px_rgba(100,116,139,0.15)]",
-                onClick && tech && "cursor-pointer hover:scale-105",
-                !tech && "opacity-70",
-                className
-            )}
-            style={{
-                backgroundColor: active
-                    ? `${brandColor}20`
-                    : `rgba(30, 41, 59, 0.6)`,
-                borderColor: active
-                    ? `${brandColor}80`
-                    : `${brandColor}40`,
-                color: active ? brandColor : `${brandColor}cc`
-            }}
-            onClick={handleClick}
-            title={tech?.description || displayName}
-        >
-            {showIcon && tech && (
-                <i
-                    className={iconClass}
-                    style={{ color: brandColor, fontSize: size === 'sm' ? '10px' : '12px' }}
-                    aria-hidden="true"
-                />
-            )}
-            <span>{displayName}</span>
-        </span>
+        <LibraryTechBadge
+            techKey={safeTechKey}
+            technology={techData}
+            size={size}
+            active={active}
+            showIcon={showIcon}
+            onClick={onClick ? handleClick : undefined}
+            className={`tech-badge ${className || ''}`}
+        />
     );
 };

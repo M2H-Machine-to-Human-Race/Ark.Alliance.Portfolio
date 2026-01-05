@@ -7,7 +7,7 @@
 
 export * from './common.dto';
 export * from './project.dto';
-export * from './cv.dto';
+export * from './resume.dto';
 export * from './widget.dto';
 export * from './menu.dto';
 export * from './style.dto';

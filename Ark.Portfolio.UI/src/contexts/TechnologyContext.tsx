@@ -52,7 +52,17 @@ export const TechnologyProvider: React.FC<TechnologyProviderProps> = ({ children
     }, []);
 
     const getTechnologyByKey = (key: string): TechnologyDto | undefined => {
-        return data?.technologies.find(t => t.key === key);
+        // First try exact key match
+        let found = data?.technologies.find(t => t.key === key);
+        // If not found, try case-insensitive key match
+        if (!found) {
+            found = data?.technologies.find(t => t.key?.toLowerCase() === key?.toLowerCase());
+        }
+        // If still not found, try name match (case-insensitive)
+        if (!found) {
+            found = data?.technologies.find(t => t.name?.toLowerCase() === key?.toLowerCase());
+        }
+        return found;
     };
 
     const value: TechnologyContextValue = {

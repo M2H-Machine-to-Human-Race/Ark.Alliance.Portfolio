@@ -1,0 +1,26 @@
+[
+    {
+        "language": "French",
+        "speaking": 5,
+        "writing": 5,
+        "presenting": 5
+    },
+    {
+        "language": "English",
+        "speaking": 5,
+        "writing": 5,
+        "presenting": 5
+    },
+    {
+        "language": "Spanish",
+        "speaking": 4,
+        "writing": 3,
+        "presenting": 3
+    },
+    {
+        "language": "Dutch",
+        "speaking": 2,
+        "writing": 1,
+        "presenting": 1
+    }
+]

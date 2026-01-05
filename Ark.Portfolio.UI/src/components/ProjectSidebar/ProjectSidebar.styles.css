@@ -247,3 +247,84 @@
         display: none;
     }
 }
+
+/* ============================================
+   Cyber Theme Enhancements
+   ============================================ */
+
+[data-cyber-theme] .project-sidebar {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.95));
+    border-right-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+[data-cyber-theme] .project-sidebar__toggle {
+    background: rgba(15, 20, 30, 0.6);
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.3));
+    color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+}
+
+[data-cyber-theme] .project-sidebar__toggle:hover {
+    background: var(--neon-primary, #00d4ff);
+    color: #0a0e17;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+[data-cyber-theme] .project-sidebar__nav-item:hover {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--neon-primary, #00d4ff);
+}
+
+[data-cyber-theme] .project-sidebar__nav-item.active {
+    background: rgba(0, 212, 255, 0.15);
+    color: var(--neon-cyan, #00ffff);
+    font-weight: 600;
+}
+
+[data-cyber-theme] .project-sidebar__nav-item.active::before {
+    background: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 8px var(--neon-primary);
+}
+
+[data-cyber-theme] .project-sidebar__nav-badge {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    color: #0a0e17;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+[data-cyber-theme] .project-sidebar__link {
+    color: var(--text-neon-secondary, #94a3b8);
+}
+
+[data-cyber-theme] .project-sidebar__link:hover {
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--neon-primary, #00d4ff);
+}
+
+[data-cyber-theme] .project-sidebar__links {
+    border-top-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+/* Neon mode */
+[data-cyber-theme="neon"] .project-sidebar {
+    border-right-color: var(--neon-primary, #00d4ff);
+    box-shadow: 4px 0 20px rgba(0, 212, 255, 0.1);
+}
+
+[data-cyber-theme="neon"] .project-sidebar__nav-item.active {
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+/* Glass mode */
+[data-cyber-theme="glass"] .project-sidebar {
+    background: rgba(15, 20, 30, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* Minimal mode */
+[data-cyber-theme="minimal"] .project-sidebar__nav-item.active::before {
+    box-shadow: none;
+}
