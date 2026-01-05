@@ -7,7 +7,8 @@
 
 import React from 'react';
 import { Search, FolderOpen, Edit2, Trash2, ExternalLink, Layers } from 'lucide-react';
-import { useProjectGridModel, ProjectCardData, ProjectStatus } from './ProjectGrid.model';
+import { useProjectGridModel, ProjectCardData } from './ProjectGrid.model';
+import { ProjectStatus } from '@ark/portfolio-share';
 import './ProjectGrid.styles.css';
 
 /**
@@ -33,9 +34,9 @@ export interface ProjectGridProps {
  */
 const STATUS_OPTIONS: { id: ProjectStatus | 'all'; label: string }[] = [
     { id: 'all', label: 'All' },
-    { id: 'completed', label: 'Completed' },
-    { id: 'in_progress', label: 'In Progress' },
-    { id: 'planned', label: 'Planned' },
+    { id: 'completed' as ProjectStatus, label: 'Completed' }, // Backward compat or fix ProjectStatus values
+    { id: 'in_progress' as ProjectStatus, label: 'In Progress' },
+    { id: 'planned' as ProjectStatus, label: 'Planned' },
 ];
 
 /**

@@ -1,19 +1,20 @@
+import { AiProviderEnum } from '../enums/ai-provider.enum';
+import { PROVIDER_MODELS } from '../constants/ai.constants';
+
 /**
  * @fileoverview AI DTOs
  * Data Transfer Objects for AI configuration and operations.
  */
 
-/**
- * Available AI providers.
- */
-export type AiProvider = 'openai' | 'anthropic' | 'google' | 'custom';
+// Re-export enum for backward compatibility if needed, or just use it directly
+export type AiProvider = AiProviderEnum;
 
 /**
  * AI Settings configuration DTO.
  */
 export interface AiSettingsDto {
     id?: number;
-    provider: AiProvider;
+    provider: AiProviderEnum;
     apiUrl?: string;
     /** Raw API key (only for updates, never returned) */
     apiKey?: string;
@@ -72,10 +73,6 @@ export interface TextImproveRequestDto {
 
 /**
  * Provider models mapping.
+ * @deprecated Use PROVIDER_MODELS from constants/ai.constants
  */
-export const AI_PROVIDER_MODELS: Record<AiProvider, string[]> = {
-    openai: ['gpt-4', 'gpt-4-turbo', 'gpt-3.5-turbo'],
-    anthropic: ['claude-3-opus', 'claude-3-sonnet', 'claude-3-haiku'],
-    google: ['gemini-pro', 'gemini-pro-vision'],
-    custom: []
-};
+export const AI_PROVIDER_MODELS = PROVIDER_MODELS;

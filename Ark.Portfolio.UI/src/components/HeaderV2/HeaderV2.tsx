@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import { Menu, X, Home, FileText, Briefcase, Settings, LogIn, Download, Loader2 } from 'lucide-react';
 import { useHeaderV2Model } from './HeaderV2.model';
 import { ConnectionIndicator } from '../ConnectionIndicator';
+import { ThemeSwitcher } from '../ThemeSwitcher';
+import LogoArkAlliance from '../../Assets/LogoArkAlliance.png';
 import './HeaderV2.styles.css';
 
 /**
@@ -52,7 +54,11 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
             >
                 {/* Profile Name & Current Page */}
                 <Link to="/" className="header-logo" aria-label="Home">
-                    <div className="header-logo-mark">A</div>
+                    <img
+                        src={LogoArkAlliance}
+                        alt="Logo"
+                        className="header-logo-mark"
+                    />
                     <div className="header-profile-info">
                         <div className="header-profile-name">
                             {vm.profile.fullName}
@@ -110,6 +116,11 @@ export const HeaderV2: React.FC<HeaderV2Props> = ({ className = '' }) => {
 
                     {/* Backend Connection Status Indicator */}
                     <ConnectionIndicator className="header-connection-indicator" />
+
+                    {/* Cyber Theme Switcher (admin only) */}
+                    {vm.isAdmin && (
+                        <ThemeSwitcher variant="compact" className="header-theme-switcher" />
+                    )}
 
                     {/* Admin/Login Button (always visible on desktop) */}
                     <Link

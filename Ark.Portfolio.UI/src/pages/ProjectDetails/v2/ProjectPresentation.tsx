@@ -82,6 +82,7 @@ export const ProjectPresentation: React.FC<ProjectPresentationProps> = ({
                 onSectionChange={vm.setActiveSection}
                 githubUrl={project.repoUrl}
                 liveUrl={project.demoUrl}
+                initialCollapsed={true}
             />
 
             {/* Main Content */}
@@ -110,16 +111,21 @@ export const ProjectPresentation: React.FC<ProjectPresentationProps> = ({
 
                         {/* Technology badges */}
                         <div className="project-presentation__technologies">
-                            {project.technologies?.map((tech: any, idx: number) => {
-                                const name = typeof tech === 'string' ? tech : tech.name;
-                                return (
-                                    <TechBadge
-                                        key={name || idx}
-                                        name={name}
-                                        size="sm"
-                                    />
-                                );
-                            })}
+                            {(() => {
+                                console.log('[ProjectPresentation] Technologies:', project.technologies);
+                                return project.technologies?.map((tech: any, idx: number) => {
+                                    const techKey = typeof tech === 'string' ? tech : (tech.key || tech.name || tech.label);
+                                    console.log('[ProjectPresentation] Rendering tech badge:', techKey, 'type:', typeof tech);
+                                    return (
+                                        <TechBadge
+                                            key={techKey || idx}
+                                            techKey={techKey}
+                                            size="sm"
+                                            showIcon
+                                        />
+                                    );
+                                });
+                            })()}
                         </div>
 
                         {/* Action buttons */}

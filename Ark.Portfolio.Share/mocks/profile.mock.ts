@@ -1,13 +1,24 @@
-// Mock verified to match ProfileDto
-import { ProfileDto } from '../dtos/profile.dto';
+/**
+ * @fileoverview Profile Mock Data
+ * Mock data for profile matching backend seed data.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
 
+import { ProfileDto } from '../dtos/profile.dto';
+import { SEED_PROFILE } from './seed-data';
+
+/**
+ * Profile mock using centralized seed data.
+ * Matches: InitDbAsset/JsonDatas/profile.json
+ */
 export const PROFILE_MOCK: ProfileDto = {
-    firstName: "Armand",
-    lastName: "Richelet-Kleinberg",
-    title: "AI Principal Solutions Architect",
-    overview: "Visionary AI Architect with over 20 years of experience in distributed systems, high-frequency trading, and cognitive computing. Specializing in bridging the gap between theoretical AI models and production-grade enterprise solutions. Proven track record of delivering resilient, high-scale architectures for Fintech and Logistics sectors.",
-    email: "arkleinberg@gmail.com", // Secondary: arkleinberg@m2h.io
-    githubUrl: "https://github.com/ArmandRicheletKleinberg",
-    linkedinUrl: "https://do.linkedin.com/in/arkleinberg/es",
-    avatarUrl: "/Assets/Site/Icon.png"
+    firstName: SEED_PROFILE.firstName,
+    lastName: SEED_PROFILE.lastName,
+    title: SEED_PROFILE.title,
+    overview: SEED_PROFILE.overview,
+    email: SEED_PROFILE.email,
+    githubUrl: SEED_PROFILE.githubUrl,
+    linkedinUrl: SEED_PROFILE.linkedinUrl,
+    avatarUrl: SEED_PROFILE.avatarUrl
 };

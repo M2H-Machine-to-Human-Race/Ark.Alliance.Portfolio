@@ -7,8 +7,10 @@
  */
 
 export { ResumeManager } from './ResumeManager';
-export { useResumeManagerModel, type ResumeTab } from './ResumeManager.model';
+export { useResumeManagerModel } from './ResumeManager.model';
+export { ResumeTabEnum as ResumeTab } from '@ark/portfolio-share';
 
 // Legacy exports for backward compatibility
 export { ResumeManager as CvManager } from './ResumeManager';
-export { useResumeManagerModel as useCvManagerModel, type ResumeTab as CvTab } from './ResumeManager.model';
+export { useResumeManagerModel as useCvManagerModel } from './ResumeManager.model';
+export { ResumeTabEnum as CvTab } from '@ark/portfolio-share';

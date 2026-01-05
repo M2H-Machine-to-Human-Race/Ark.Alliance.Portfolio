@@ -1,24 +1,96 @@
+/**
+ * @fileoverview Enhanced TechBadge Component
+ * Wrapper around ark-alliance-react-ui TechBadge that handles data fetching
+ * 
+ * @module components/TechBadge
+ * @author Armand Richelet-Kleinberg
+ */
+
 import React from 'react';
-import { cn } from '../../utils/cn';
+import { TechnologyDto } from '@ark/portfolio-share';
+import { useTechnology } from '../../hooks/useTechnology';
+import { TechBadge as LibraryTechBadge } from 'ark-alliance-react-ui';
 
 interface TechBadgeProps {
-    name: string;
-    size?: 'sm' | 'md';
+    /** Technology key (e.g., "react", "typescript") */
+    techKey: string;
+    /** Badge size */
+    size?: 'sm' | 'md' | 'lg';
+    /** Active state */
     active?: boolean;
+    /** Show technology icon */
+    showIcon?: boolean;
+    /** Click handler - receives full technology data */
+    onClick?: (tech: TechnologyDto) => void;
+    /** Additional className */
+    className?: string;
 }
 
-export const TechBadge: React.FC<TechBadgeProps & { className?: string }> = ({ name, size = 'md', active = false, className }) => {
+/**
+ * TechBadge Component
+ * Wrapper around ark-alliance-react-ui TechBadge that handles data fetching
+ */
+export const TechBadge: React.FC<TechBadgeProps> = ({
+    techKey,
+    size = 'md',
+    active = false,
+    showIcon = false,
+    onClick,
+    className
+}) => {
+    // Guard against null/undefined techKey
+    const safeTechKey = techKey || '';
+
+    // Always call the hook (React hooks must be called unconditionally)
+    const tech = useTechnology(safeTechKey);
+
+    // Don't render anything if techKey is empty
+    if (!safeTechKey) {
+        return null;
+    }
+
+    // Create fallback technology data when lookup fails
+    // This ensures badges are visible even when technology data hasn't loaded
+    const fallbackTech: TechnologyDto = {
+        key: safeTechKey,
+        name: safeTechKey.charAt(0).toUpperCase() + safeTechKey.slice(1), // Capitalize first letter
+        label: safeTechKey.charAt(0).toUpperCase() + safeTechKey.slice(1), // Same as name for fallback
+        color: 'var(--text-secondary, #94a3b8)', // Use theme variable with fallback
+        icon: '',
+        description: `Technology: ${safeTechKey}`,
+        category: 'Other'
+    };
+
+    // Use actual tech data or fallback
+    const effectiveTech = tech || fallbackTech;
+
+    const handleClick = () => {
+        if (onClick) {
+            onClick(effectiveTech);
+        }
+    };
+
+    // Construct technology data object for library component
+    const techData = {
+        key: effectiveTech.key,
+        name: effectiveTech.name,
+        color: effectiveTech.color,
+        icon: effectiveTech.icon,
+        description: effectiveTech.description,
+        category: effectiveTech.category,
+        website: effectiveTech.website,
+        versions: effectiveTech.versions
+    };
+
     return (
-        <span className={cn(
-            "font-mono font-bold rounded-lg border transition-all duration-300",
-            size === 'sm' ? "text-[10px] px-2 py-0.5" : "text-xs px-3 py-1",
-            active
-                ? "bg-blue-500/20 text-blue-400 border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.2)]"
-                : "bg-slate-800/50 text-slate-500 border-slate-700 hover:text-slate-300 hover:border-slate-600",
-            className
-        )}>
-            {name}
-        </span>
+        <LibraryTechBadge
+            techKey={safeTechKey}
+            technology={techData}
+            size={size}
+            active={active}
+            showIcon={showIcon}
+            onClick={onClick ? handleClick : undefined}
+            className={`tech-badge ${className || ''}`}
+        />
     );
 };
-

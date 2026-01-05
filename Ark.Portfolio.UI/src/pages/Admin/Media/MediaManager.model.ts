@@ -6,17 +6,18 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import { apiClient } from '../../../api/client/apiClient';
 import { AdminMediaDto, MediaTypeEnum } from '@ark/portfolio-share';
-import { authService } from '../../../services/auth.service';
-import { API_CONFIG } from '../../../config/api.constants';
-
-const API_URL = `${API_CONFIG.ADMIN_BASE_URL}/media`;
 
 /**
- * Media type filter tabs.
+ * Media tab filter type.
+ * 
+ * @remarks
+ * Combines 'all' filter option with MediaTypeEnum values from the shared layer.
+ * 'all' is UI-specific and not persisted to the database.
  */
-export type MediaTab = 'all' | 'image' | 'video' | 'audio' | 'pdf' | 'word' | 'excel' | 'markdown' | 'json' | 'other';
+export type MediaTabFilter = 'all' | `${MediaTypeEnum}`;
+export type MediaTab = MediaTabFilter;
 
 /**
  * Media list response from API.
@@ -49,7 +50,7 @@ export const useMediaManagerModel = () => {
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [activeTab, setActiveTab] = useState<MediaTab>('all');
+    const [activeTab, setActiveTab] = useState<MediaTabFilter>('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [availableTags, setAvailableTags] = useState<string[]>([]);
@@ -57,13 +58,6 @@ export const useMediaManagerModel = () => {
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-
-    /**
-     * Get auth headers for API requests.
-     */
-    const getAuthHeaders = () => ({
-        headers: { Authorization: `Bearer ${authService.getToken()}` }
-    });
 
     /**
      * Show success message briefly.
@@ -92,10 +86,9 @@ export const useMediaManagerModel = () => {
             if (searchQuery) params.append('search', searchQuery);
             if (selectedTags.length) params.append('tags', selectedTags.join(','));
 
-            const response = await axios.get<MediaListResponse>(
-                `${API_URL}?${params.toString()}`,
-                getAuthHeaders()
-            );
+            // NOTE: Using apiClient. BaseURL handles the domain. We need path relative to base.
+            // Assuming base is /api
+            const response = await apiClient.get<MediaListResponse>(`/admin/media?${params.toString()}`);
             setMedia(response.data.items || []);
             setTotalCount(response.data.total || 0);
         } catch (err) {
@@ -110,7 +103,7 @@ export const useMediaManagerModel = () => {
      */
     const fetchTags = useCallback(async () => {
         try {
-            const response = await axios.get<string[]>(`${API_URL}/tags`, getAuthHeaders());
+            const response = await apiClient.get<string[]>(`/admin/media/tags`);
             setAvailableTags(response.data);
         } catch (err) {
             console.error('Failed to fetch tags');
@@ -139,9 +132,11 @@ export const useMediaManagerModel = () => {
             if (data.tags.length) formData.append('tags', JSON.stringify(data.tags));
             formData.append('isPublic', String(data.isPublic));
 
-            await axios.post(`${API_URL}/upload`, formData, {
+            // Content-Type multipart/form-data is usually handled automatically by browser when passing FormData
+            // But if we defined 'application/json' in apiClient defaults, we might need to override it or let axios handle it.
+            // Axios generally handles FormData correctly by setting the boundary.
+            await apiClient.post(`/admin/media/upload`, formData, {
                 headers: {
-                    Authorization: `Bearer ${authService.getToken()}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
@@ -163,7 +158,7 @@ export const useMediaManagerModel = () => {
     const createFromUrl = async (url: string, type: MediaTypeEnum, data: UploadFormData) => {
         setUploading(true);
         try {
-            await axios.post(`${API_URL}/url`, {
+            await apiClient.post(`/admin/media/url`, {
                 url,
                 type,
                 name: data.name,
@@ -171,7 +166,7 @@ export const useMediaManagerModel = () => {
                 altText: data.altText,
                 description: data.description,
                 tags: data.tags
-            }, getAuthHeaders());
+            });
 
             showSuccess('Media created successfully');
             await fetchMedia();
@@ -189,7 +184,7 @@ export const useMediaManagerModel = () => {
      */
     const updateMedia = async (id: string, data: Partial<UploadFormData>) => {
         try {
-            await axios.put(`${API_URL}/${id}`, data, getAuthHeaders());
+            await apiClient.put(`/admin/media/${id}`, data);
             showSuccess('Media updated');
             await fetchMedia();
             await fetchTags();
@@ -205,7 +200,7 @@ export const useMediaManagerModel = () => {
     const deleteMedia = async (id: string) => {
         if (!confirm('Delete this media permanently?')) return;
         try {
-            await axios.delete(`${API_URL}/${id}`, getAuthHeaders());
+            await apiClient.delete(`/admin/media/${id}`);
             showSuccess('Media deleted');
             await fetchMedia();
         } catch (err) {

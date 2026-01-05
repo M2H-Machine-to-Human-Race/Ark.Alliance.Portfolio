@@ -1,9 +1,75 @@
 /**
  * LoadingPage Styles
- * Startup loading screen with modern dark theme.
+ * BwarkOs-style intro screen with globe animation and phased transitions.
  * 
  * @author Ark.Alliance
  */
+
+/* ============================================
+   Keyframe Animations
+   ============================================ */
+
+@keyframes globe-spin {
+    0% {
+        transform: rotateY(0deg) rotateX(20deg);
+    }
+
+    100% {
+        transform: rotateY(360deg) rotateX(20deg);
+    }
+}
+
+@keyframes data-extract {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-150px) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* ============================================
    Loading Page Layout
@@ -19,7 +85,8 @@
     justify-content: center;
     min-height: 100vh;
     overflow: hidden;
-    background: var(--bg-primary);
+    background: #0A0E17;
+    perspective: 1000px;
 }
 
 /* Background Effects */
@@ -27,58 +94,189 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(ellipse at center,
-            rgba(59, 130, 246, 0.08) 0%,
-            rgba(139, 92, 246, 0.05) 30%,
+            rgba(0, 212, 255, 0.08) 0%,
+            rgba(6, 182, 212, 0.04) 30%,
             transparent 70%);
     pointer-events: none;
 }
 
-.loading-page-gradient {
+.loading-page-grid {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-            transparent 0%,
-            rgba(15, 23, 42, 0.5) 50%,
-            var(--bg-primary) 100%);
+    opacity: 0.15;
+    background-image:
+        linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.03) 75%, rgba(255, 255, 255, 0.03) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.03) 75%, rgba(255, 255, 255, 0.03) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
     pointer-events: none;
 }
 
 /* ============================================
-   Content Container
+   Logo Watermark
    ============================================ */
 
-.loading-page-content {
-    position: relative;
-    z-index: 1;
+.loading-page-watermark {
+    position: absolute;
+    inset: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: var(--space-8);
-    animation: fade-in var(--duration-slower) var(--ease-out);
+    justify-content: center;
+    pointer-events: none;
 }
 
-/* ============================================
-   Logo
-   ============================================ */
-
-.loading-page-logo-container {
-    margin-bottom: var(--space-8);
-    animation: scale-in var(--duration-slower) var(--ease-out);
-}
-
-.loading-page-logo {
-    width: 120px;
-    height: 120px;
+.loading-page-watermark-img {
+    width: 400px;
+    height: 400px;
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.3));
-    animation: pulse 3s var(--ease-in-out) infinite;
+    opacity: 0.15;
+    animation: pulse-glow 4s ease-in-out infinite;
 }
 
 @media (min-width: 768px) {
-    .loading-page-logo {
-        width: 160px;
-        height: 160px;
+    .loading-page-watermark-img {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+/* ============================================
+   Globe Animation
+   ============================================ */
+
+.loading-page-globe-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+@media (min-width: 768px) {
+    .loading-page-globe-container {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+.loading-page-globe {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    transform-style: preserve-3d;
+    transition: all 1s ease;
+}
+
+@media (min-width: 768px) {
+    .loading-page-globe {
+        width: 192px;
+        height: 192px;
+    }
+}
+
+.loading-page-globe--hidden {
+    transform: scale(0);
+    opacity: 0;
+}
+
+.loading-page-globe-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+}
+
+.loading-page-globe-ring--main {
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    animation: globe-spin 10s linear infinite;
+}
+
+.loading-page-globe-ring--outer {
+    width: 120%;
+    height: 120%;
+    left: -10%;
+    top: -10%;
+    border: 1px dashed rgba(6, 182, 212, 0.2);
+    animation: globe-spin 15s linear infinite reverse;
+}
+
+.loading-page-globe-lat {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 50%;
+}
+
+.loading-page-globe-core {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 212, 255, 0.1);
+    filter: blur(20px);
+    border-radius: 50%;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ============================================
+   Data Extraction Strands
+   ============================================ */
+
+.loading-page-strand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+}
+
+.loading-page-strand-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    left: -2px;
+    top: -2px;
+    box-shadow: 0 0 10px #00D4FF;
+    animation: data-extract 2s ease-out infinite;
+}
+
+.loading-page-strand-trail {
+    position: absolute;
+    width: 1px;
+    height: 96px;
+    background: linear-gradient(to top, #00D4FF, transparent);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ============================================
+   UI Reveal
+   ============================================ */
+
+.loading-page-ui {
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+    pointer-events: none;
+}
+
+.loading-page-ui--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+    .loading-page-ui {
+        bottom: 100px;
     }
 }
 
@@ -87,12 +285,15 @@
    ============================================ */
 
 .loading-page-title {
-    font-size: var(--text-3xl);
-    font-weight: var(--font-bold);
-    color: var(--text-primary);
-    margin-bottom: var(--space-3);
-    letter-spacing: -0.025em;
-    background: var(--gradient-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+}
+
+.loading-page-title span {
+    background: linear-gradient(135deg, #00D4FF 0%, #06B6D4 50%, #0891B2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -100,57 +301,39 @@
 
 @media (min-width: 768px) {
     .loading-page-title {
-        font-size: var(--text-5xl);
+        font-size: 3.5rem;
     }
 }
 
-.loading-page-subtitle {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    margin-bottom: var(--space-10);
-    max-width: 400px;
+.loading-page-profile-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #00D4FF;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
 }
 
 @media (min-width: 768px) {
-    .loading-page-subtitle {
-        font-size: var(--text-lg);
+    .loading-page-profile-name {
+        font-size: 1.5rem;
     }
 }
 
-/* ============================================
-   Loading Spinner
-   ============================================ */
-
-.loading-page-spinner-container {
-    margin-bottom: var(--space-6);
+.loading-page-tagline {
+    font-size: 0.875rem;
+    color: #64748B;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
 }
-
-.loading-page-spinner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: var(--radius-full);
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-.loading-page-spinner-icon {
-    color: var(--color-primary-400);
-}
-
-/* ============================================
-   Status Message
-   ============================================ */
 
 .loading-page-status {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    margin-bottom: var(--space-6);
-    min-height: 1.5rem;
+    font-size: 0.75rem;
+    color: #94A3B8;
+    margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    min-height: 1.25rem;
 }
 
 /* ============================================
@@ -159,10 +342,11 @@
 
 .loading-page-progress {
     width: 200px;
-    height: 4px;
-    background: rgba(100, 116, 139, 0.2);
-    border-radius: var(--radius-full);
+    height: 3px;
+    background: rgba(51, 65, 85, 0.4);
+    border-radius: 100px;
     overflow: hidden;
+    margin-bottom: 24px;
 }
 
 @media (min-width: 768px) {
@@ -173,22 +357,110 @@
 
 .loading-page-progress-bar {
     height: 100%;
-    background: var(--gradient-primary);
-    border-radius: var(--radius-full);
-    transition: width var(--duration-slow) var(--ease-out);
+    background: linear-gradient(90deg, #00D4FF, #06B6D4, #0891B2);
+    border-radius: 100px;
+    transition: width 0.5s ease-out;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 .loading-page-progress-bar::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
+   Enter Button
+   ============================================ */
+
+.loading-page-enter-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 32px;
+    background: transparent;
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    border-radius: 100px;
+    color: #00D4FF;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-page-enter-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #00D4FF, #06B6D4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.loading-page-enter-btn:hover::before {
+    opacity: 0.2;
+}
+
+.loading-page-enter-btn:hover {
+    border-color: #00D4FF;
+    color: #FFFFFF;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.loading-page-enter-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.loading-page-enter-btn span,
+.loading-page-enter-icon {
+    position: relative;
+    z-index: 1;
+}
+
+.loading-page-enter-icon {
+    fill: currentColor;
+}
+
+/* ============================================
+   Skip Button
+   ============================================ */
+
+.loading-page-skip-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    color: #475569;
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.loading-page-skip-btn:hover {
+    color: #F1F5F9;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+    .loading-page-skip-btn {
+        top: 32px;
+        right: 32px;
+        font-size: 0.75rem;
+    }
 }
 
 /* ============================================
@@ -196,13 +468,13 @@
    ============================================ */
 
 .loading-page-error {
-    margin-top: var(--space-4);
-    padding: var(--space-3) var(--space-4);
+    margin-top: 16px;
+    padding: 8px 16px;
     background: rgba(239, 68, 68, 0.1);
     border: 1px solid rgba(239, 68, 68, 0.2);
-    border-radius: var(--radius-md);
-    color: var(--color-error-light);
-    font-size: var(--text-sm);
+    border-radius: 8px;
+    color: #F87171;
+    font-size: 0.75rem;
 }
 
 /* ============================================
@@ -211,13 +483,14 @@
 
 .loading-page-footer {
     position: absolute;
-    bottom: var(--space-6);
+    bottom: 24px;
     left: 0;
     right: 0;
     text-align: center;
 }
 
 .loading-page-footer p {
-    font-size: var(--text-xs);
-    color: var(--text-muted);
+    font-size: 0.625rem;
+    color: #475569;
+    letter-spacing: 0.05em;
 }

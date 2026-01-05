@@ -8,8 +8,8 @@
    ============================================ */
 .project-presentation {
     min-height: 100vh;
-    background: var(--bg-primary, #0a0e27);
-    color: var(--text-primary, #e2e8f0);
+    background: var(--bg-primary, #0A0E17);
+    color: var(--text-primary, #F1F5F9);
 }
 
 .project-presentation__main {
@@ -96,14 +96,14 @@
     inset: 0;
     background: linear-gradient(to top,
             var(--bg-primary, #0a0e27) 0%,
-            rgba(10, 14, 39, 0.85) 50%,
-            rgba(10, 14, 39, 0.6) 100%);
+            var(--bg-card, rgba(10, 14, 39, 0.85)) 50%,
+            var(--bg-card-elevated, rgba(10, 14, 39, 0.6)) 100%);
 }
 
 .project-presentation__hero-content {
     position: relative;
     z-index: 1;
-    max-width: 800px;
+    width: 100%;
 }
 
 .project-presentation__back-link {
@@ -115,21 +115,25 @@
     border: none;
     cursor: pointer;
     font-size: 0.9375rem;
-    padding: 0.5rem 0;
+    padding: 0.75rem 1rem;
     margin-bottom: 1rem;
-    transition: color 0.2s;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 2;
 }
 
 .project-presentation__back-link:hover {
     color: var(--text-primary, #e2e8f0);
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 0.5rem;
 }
 
 .project-presentation__title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    background: linear-gradient(135deg, #00D4FF 0%, #06B6D4 50%, #0891B2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -137,10 +141,10 @@
 
 .project-presentation__summary {
     font-size: 1.125rem;
-    color: var(--text-secondary, #94a3b8);
-    line-height: 1.6;
+    color: var(--text-secondary, #CBD5E1);
+    line-height: 1.7;
     margin-bottom: 1.5rem;
-    max-width: 600px;
+    max-width: 900px;
 }
 
 .project-presentation__technologies {
@@ -214,6 +218,14 @@
 }
 
 .project-presentation__content-container {
+    width: 100%;
+    max-width: 100%;
+    /* Use full available width */
+}
+
+/* Constrain only text-heavy elements for readability */
+.project-presentation__markdown p,
+.project-presentation__markdown li {
     max-width: 900px;
 }
 
@@ -274,6 +286,9 @@
 /* ============================================
    No Content
    ============================================ */
+/* ============================================
+   No Content
+   ============================================ */
 .project-presentation__no-content {
     padding: 4rem 2rem;
     text-align: center;
@@ -303,4 +318,139 @@
     .project-presentation__gallery {
         grid-template-columns: 1fr;
     }
+}
+
+/* ============================================
+   Cyber Theme Enhancements
+   Applied when data-cyber-theme is set
+   ============================================ */
+
+/* Base page with cyber background */
+[data-cyber-theme] .project-presentation {
+    background: var(--bg-space, #0a0e17);
+    background-image:
+        radial-gradient(ellipse at top, rgba(0, 212, 255, 0.08), transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(0, 153, 255, 0.06), transparent 50%);
+}
+
+/* Hero title with neon gradient */
+[data-cyber-theme] .project-presentation__title {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Hero overlay with cyber tint */
+[data-cyber-theme] .project-presentation__hero-overlay {
+    background: linear-gradient(to top,
+            var(--bg-space, #0a0e17) 0%,
+            rgba(10, 14, 23, 0.9) 50%,
+            rgba(10, 14, 23, 0.7) 100%);
+}
+
+/* Back link with neon hover */
+[data-cyber-theme] .project-presentation__back-link:hover {
+    color: var(--neon-primary, #00d4ff);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+/* Section title with neon border */
+[data-cyber-theme] .project-presentation__section-title {
+    color: var(--text-neon, #e0e7ff);
+    border-bottom-color: var(--neon-primary, #00d4ff);
+}
+
+/* Content area with cyber styling */
+[data-cyber-theme] .project-presentation__content {
+    background: rgba(10, 14, 23, 0.6);
+}
+
+/* BEM Buttons with cyber styling */
+[data-cyber-theme] .btn--primary {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    color: #0a0e17;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+[data-cyber-theme] .btn--primary:hover {
+    background: var(--gradient-neon);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+[data-cyber-theme] .btn--secondary {
+    background: rgba(15, 20, 30, 0.6);
+    color: var(--text-neon, #e0e7ff);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.3));
+}
+
+[data-cyber-theme] .btn--secondary:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+[data-cyber-theme] .btn--ghost {
+    color: var(--text-neon-secondary, #94a3b8);
+}
+
+[data-cyber-theme] .btn--ghost:hover {
+    color: var(--neon-primary, #00d4ff);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+/* Loading spinner with neon */
+[data-cyber-theme] .project-presentation__spinner {
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-top-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.3);
+}
+
+/* Diagrams with cyber border */
+[data-cyber-theme] .project-presentation__diagrams .mermaid-reader {
+    background: rgba(15, 20, 30, 0.6);
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+/* Gallery images with neon hover */
+[data-cyber-theme] .project-presentation__gallery img {
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .project-presentation__gallery img:hover {
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* No content with cyber styling */
+[data-cyber-theme] .project-presentation__no-content {
+    background: rgba(15, 20, 30, 0.6);
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.3));
+    color: var(--text-neon-secondary, #94a3b8);
+}
+
+/* Neon mode - intensified */
+[data-cyber-theme="neon"] .project-presentation__title {
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+[data-cyber-theme="neon"] .btn--primary {
+    box-shadow: 0 0 24px rgba(0, 255, 255, 0.6);
+}
+
+/* Glass mode - maximum transparency */
+[data-cyber-theme="glass"] .project-presentation__content {
+    background: rgba(10, 14, 23, 0.3);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* Minimal mode - reduced effects */
+[data-cyber-theme="minimal"] .btn--primary {
+    box-shadow: none;
+}
+
+[data-cyber-theme="minimal"] .project-presentation__spinner {
+    box-shadow: none;
 }

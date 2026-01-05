@@ -42,17 +42,27 @@ import {
     seedProfile,
     seedExperience,
     seedSkills,
+    seedEducation,
+    seedLanguages,
+    seedHobbies,
+    seedBusinessDomains,
     seedCarousel,
     seedMedia,
     seedTechnologies,
     seedProjects,
+    seedThemes,
     clearProfile,
     clearExperience,
     clearSkills,
+    clearEducation,
+    clearLanguages,
+    clearHobbies,
+    clearBusinessDomains,
     clearCarousel,
     clearMedia,
     clearTechnologies,
-    clearProjects
+    clearProjects,
+    clearThemes
 } from './seeders';
 
 /**
@@ -88,6 +98,10 @@ export const seedDatabase = async (dataSource: DataSource): Promise<void> => {
     console.log('─── Resume Components ───');
     await seedExperience(dataSource);
     await seedSkills(dataSource);
+    await seedEducation(dataSource);
+    await seedLanguages(dataSource);
+    await seedHobbies(dataSource);
+    await seedBusinessDomains(dataSource);
 
     // 3. Content & Media
     console.log('');
@@ -100,7 +114,12 @@ export const seedDatabase = async (dataSource: DataSource): Promise<void> => {
     console.log('─── Master Data ───');
     await seedTechnologies(dataSource);
 
-    // 5. Portfolio Projects
+    // 5. Themes
+    console.log('');
+    console.log('─── Themes ───');
+    await seedThemes(dataSource);
+
+    // 6. Portfolio Projects
     console.log('');
     console.log('─── Portfolio Projects ───');
     await seedProjects(dataSource);
@@ -123,9 +142,14 @@ export const clearDatabase = async (dataSource: DataSource): Promise<void> => {
 
     // Clear in reverse order of dependencies
     await clearProjects(dataSource);       // ProjectTechnology, ProjectFeature, ProjectPage, Project
+    await clearThemes(dataSource);         // Theme (standalone)
     await clearTechnologies(dataSource);   // Technology (master data)
     await clearMedia(dataSource);          // Media
     await clearCarousel(dataSource);       // CarouselItem
+    await clearBusinessDomains(dataSource); // BusinessDomain
+    await clearHobbies(dataSource);        // Hobby
+    await clearLanguages(dataSource);      // Language
+    await clearEducation(dataSource);      // Education
     await clearSkills(dataSource);         // Skill
     await clearExperience(dataSource);     // Experience
     await clearProfile(dataSource);        // Profile

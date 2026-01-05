@@ -1,0 +1,72 @@
+[
+    {
+        "domain": "Logistics",
+        "level": "Expert",
+        "yearsOfExperience": 12,
+        "description": "Supply chain management, warehouse systems, TMS integration, delivery tracking, and last-mile logistics optimization.",
+        "icon": "Truck"
+    },
+    {
+        "domain": "Finance",
+        "level": "Expert",
+        "yearsOfExperience": 8,
+        "description": "Asset management, portfolio systems, trading platforms, regulatory compliance, and financial data integration.",
+        "icon": "TrendingUp"
+    },
+    {
+        "domain": "Trading",
+        "level": "Expert",
+        "yearsOfExperience": 5,
+        "description": "Algorithmic trading systems, market data processing, order management, and cryptocurrency platforms.",
+        "icon": "LineChart"
+    },
+    {
+        "domain": "Banking",
+        "level": "Advanced",
+        "yearsOfExperience": 3,
+        "description": "Core banking systems, payment processing, VoIP infrastructure for banking operations.",
+        "icon": "Building"
+    },
+    {
+        "domain": "Asset Management",
+        "level": "Expert",
+        "yearsOfExperience": 4,
+        "description": "Investment portfolio systems, fund management, asset position tracking, and regulatory reporting.",
+        "icon": "Briefcase"
+    },
+    {
+        "domain": "Steel Manufacturing",
+        "level": "Advanced",
+        "yearsOfExperience": 2,
+        "description": "Production planning, SAP ERP integration, supply chain for steel industry, and manufacturing logistics.",
+        "icon": "Factory"
+    },
+    {
+        "domain": "Retail",
+        "level": "Expert",
+        "yearsOfExperience": 10,
+        "description": "E-commerce platforms, inventory management, supplier systems, and omnichannel retail solutions.",
+        "icon": "ShoppingCart"
+    },
+    {
+        "domain": "Entertainment",
+        "level": "Expert",
+        "yearsOfExperience": 10,
+        "description": "Live show control systems, real-time audio/visual synchronization, and interactive performance technology.",
+        "icon": "Clapperboard"
+    },
+    {
+        "domain": "Theatre",
+        "level": "Expert",
+        "yearsOfExperience": 10,
+        "description": "Stage automation, lighting control systems, MIDI integration, and 3D stereoscopic visual effects for live performances.",
+        "icon": "Drama"
+    },
+    {
+        "domain": "Music Composing",
+        "level": "Advanced",
+        "yearsOfExperience": 15,
+        "description": "Original music composition for performances, electronic music production, and sound design.",
+        "icon": "Music2"
+    }
+]

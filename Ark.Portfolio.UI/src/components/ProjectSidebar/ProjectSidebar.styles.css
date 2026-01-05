@@ -60,31 +60,43 @@
    Toggle Button
    ============================================ */
 .project-sidebar__toggle {
-    position: absolute;
-    top: 1rem;
-    right: -12px;
-    width: 24px;
-    height: 24px;
+    /* Position inside sidebar at top-right */
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 1rem 1rem 1.5rem auto;
+    /* top, right, bottom, auto-left */
     background: var(--bg-secondary, #141b3d);
-    border: 1px solid var(--bg-tertiary, #1e2749);
-    border-radius: 50%;
+    border: 1px solid var(--accent-primary, #6366f1);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--text-secondary, #94a3b8);
-    transition: background 0.2s, color 0.2s;
-    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
 }
 
 .project-sidebar__toggle:hover {
     background: var(--accent-primary, #6366f1);
-    color: var(--text-primary, #e2e8f0);
+    color: white;
+    transform: scale(1.05);
+    box-shadow:
+        0 4px 16px rgba(99, 102, 241, 0.4),
+        0 0 24px rgba(99, 102, 241, 0.2);
+}
+
+/* When collapsed, center the toggle button */
+.project-sidebar--collapsed .project-sidebar__toggle {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .project-sidebar--right .project-sidebar__toggle {
-    right: auto;
-    left: -12px;
+    margin-left: 1rem;
+    margin-right: auto;
 }
 
 /* Mobile toggle (inside sidebar) */
@@ -234,4 +246,85 @@
     .project-sidebar:not(.project-sidebar--mobile) {
         display: none;
     }
+}
+
+/* ============================================
+   Cyber Theme Enhancements
+   ============================================ */
+
+[data-cyber-theme] .project-sidebar {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.95));
+    border-right-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+[data-cyber-theme] .project-sidebar__toggle {
+    background: rgba(15, 20, 30, 0.6);
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.3));
+    color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+}
+
+[data-cyber-theme] .project-sidebar__toggle:hover {
+    background: var(--neon-primary, #00d4ff);
+    color: #0a0e17;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+[data-cyber-theme] .project-sidebar__nav-item:hover {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--neon-primary, #00d4ff);
+}
+
+[data-cyber-theme] .project-sidebar__nav-item.active {
+    background: rgba(0, 212, 255, 0.15);
+    color: var(--neon-cyan, #00ffff);
+    font-weight: 600;
+}
+
+[data-cyber-theme] .project-sidebar__nav-item.active::before {
+    background: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 8px var(--neon-primary);
+}
+
+[data-cyber-theme] .project-sidebar__nav-badge {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    color: #0a0e17;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+[data-cyber-theme] .project-sidebar__link {
+    color: var(--text-neon-secondary, #94a3b8);
+}
+
+[data-cyber-theme] .project-sidebar__link:hover {
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--neon-primary, #00d4ff);
+}
+
+[data-cyber-theme] .project-sidebar__links {
+    border-top-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+/* Neon mode */
+[data-cyber-theme="neon"] .project-sidebar {
+    border-right-color: var(--neon-primary, #00d4ff);
+    box-shadow: 4px 0 20px rgba(0, 212, 255, 0.1);
+}
+
+[data-cyber-theme="neon"] .project-sidebar__nav-item.active {
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+/* Glass mode */
+[data-cyber-theme="glass"] .project-sidebar {
+    background: rgba(15, 20, 30, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* Minimal mode */
+[data-cyber-theme="minimal"] .project-sidebar__nav-item.active::before {
+    box-shadow: none;
 }

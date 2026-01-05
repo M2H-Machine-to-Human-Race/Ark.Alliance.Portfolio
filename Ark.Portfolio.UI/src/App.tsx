@@ -16,6 +16,8 @@ import { LoginPage } from './pages/Login';
 import { LoadingPage } from './pages/Loading';
 import { ThemeProvider } from './components/generic/ThemeContext';
 import { AuthProvider } from './components/generic/AuthContext';
+import { TechnologyProvider } from './contexts/TechnologyContext';
+import { CyberThemeProvider } from './contexts/CyberThemeContext';
 import { ProtectedRoute } from './components/generic/ProtectedRoute';
 import './styles/architectural-theme.css';
 import './styles/design-system.css';
@@ -27,9 +29,11 @@ import { ResumeManager } from './pages/Admin/Resume';
 import { WidgetManager } from './pages/Admin/Widgets';
 import { MenuManager } from './pages/Admin/Menu';
 import { StyleManager } from './pages/Admin/Styles';
+import { ThemeManager } from './pages/Admin/Themes';
 import { MediaManager } from './pages/Admin/Media';
 import { CarouselManager } from './pages/Admin/Carousel';
 import { AiSettingsPage } from './pages/Admin/AiSettings';
+import { StaticExportManager } from './pages/Admin/StaticExport';
 import { ToastProvider } from './contexts/ToastContext';
 import { ToastContainer } from './components/generic/Toast';
 
@@ -59,9 +63,11 @@ const AppRoutes = () => {
                         <Route path="widgets" element={<WidgetManager />} />
                         <Route path="menu" element={<MenuManager />} />
                         <Route path="styles" element={<StyleManager />} />
+                        <Route path="themes" element={<ThemeManager />} />
                         <Route path="media" element={<MediaManager />} />
                         <Route path="carousel" element={<CarouselManager />} />
                         <Route path="ai-settings" element={<AiSettingsPage />} />
+                        <Route path="export" element={<StaticExportManager />} />
                         <Route path="*" element={<Navigate to="dashboard" replace />} />
                     </Routes>
                 </ProtectedRoute>
@@ -91,12 +97,16 @@ function App() {
     return (
         <AuthProvider>
             <ThemeProvider>
-                <ToastProvider>
-                    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-                        <AppRoutes />
-                        <ToastContainer />
-                    </BrowserRouter>
-                </ToastProvider>
+                <CyberThemeProvider>
+                    <TechnologyProvider>
+                        <ToastProvider>
+                            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                                <AppRoutes />
+                                <ToastContainer />
+                            </BrowserRouter>
+                        </ToastProvider>
+                    </TechnologyProvider>
+                </CyberThemeProvider>
             </ThemeProvider>
         </AuthProvider>
     );

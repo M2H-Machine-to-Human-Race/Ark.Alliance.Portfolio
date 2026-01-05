@@ -1,0 +1,11 @@
+[
+    {
+        "title": "Ark.Alliance.React.Component.UI",
+        "subtitle": "Enterprise MVVM Component Library",
+        "description": "Production-grade React components with strict MVVM architecture, Zod validation, and 100% test coverage. 40 categories for Finance, Healthcare, E-Commerce, and more.",
+        "imageUrl": "/Assets/Projects/Ark.Alliance.React.Component/components-hero.png",
+        "linkUrl": "/projects/ark-alliance-react-component-ui",
+        "order": 1,
+        "isActive": true
+    }
+]

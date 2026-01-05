@@ -36,7 +36,7 @@ export class DataGridViewModel extends BaseComponentModel {
     public _resizingColumn: string | null = null;
 
     // Refs
-    public scrollContainerRef: React.RefObject<HTMLDivElement> = React.createRef();
+    public scrollContainerRef: React.RefObject<HTMLDivElement | null> = React.createRef();
 
     // Callbacks
     private updateCallback?: () => void;

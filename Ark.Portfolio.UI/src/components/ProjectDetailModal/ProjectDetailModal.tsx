@@ -18,6 +18,7 @@ import {
 import { useProjectDetailModalModel } from './ProjectDetailModal.model';
 import { ProjectCardData } from '../ProjectGrid/ProjectGrid.model';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
+import { MarkdownRenderer } from '../MarkdownRenderer/MarkdownRenderer';
 import './ProjectDetailModal.styles.css';
 
 /**
@@ -176,10 +177,13 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                             {project.status.replace('_', ' ')}
                         </span>
 
-                        {/* Description */}
-                        <p className="project-modal-description">
-                            {project.description || project.summary}
-                        </p>
+                        {/* Description - Rendered as Markdown */}
+                        <div className="project-modal-description">
+                            <MarkdownRenderer
+                                content={project.description || project.summary}
+                                className="project-modal-markdown"
+                            />
+                        </div>
 
                         {/* Technologies */}
                         {project.technologies.length > 0 && (

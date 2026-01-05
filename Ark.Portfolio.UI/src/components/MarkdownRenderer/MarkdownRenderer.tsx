@@ -13,6 +13,7 @@ import rehypeHighlight from 'rehype-highlight';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeKatex from 'rehype-katex';
+import { MermaidDiagramReader } from '../generic/MermaidDiagramReader/MermaidDiagramReader';
 import 'highlight.js/styles/github-dark.css';
 import 'katex/dist/katex.min.css';
 import './MarkdownRenderer.styles.css';
@@ -31,6 +32,7 @@ export interface MarkdownRendererProps {
  * - GitHub Flavored Markdown (tables, strikethrough, task lists)
  * - Syntax highlighting for code blocks
  * - Math equations support (KaTeX)
+ * - Mermaid diagram rendering
  * - Auto-generated heading anchors
  * - Professional styling matching site theme
  */
@@ -56,6 +58,28 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
                     img: ({ node, ...props }) => (
                         <img {...props} loading="lazy" alt={props.alt || ''} />
                     ),
+                    // Handle Mermaid code blocks
+                    code: ({ node, className: codeClassName, children, ...props }) => {
+                        const match = /language-mermaid/.exec(codeClassName || '');
+                        if (match) {
+                            const code = String(children).replace(/\n$/, '');
+                            return (
+                                <div className="markdown-mermaid-container">
+                                    <MermaidDiagramReader
+                                        diagramSource={code}
+                                        theme="dark"
+                                        enableZoom={true}
+                                        enableExport={true}
+                                    />
+                                </div>
+                            );
+                        }
+                        return (
+                            <code className={codeClassName} {...props}>
+                                {children}
+                            </code>
+                        );
+                    },
                 }}
             >
                 {content}
@@ -65,3 +89,4 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 };
 
 export default MarkdownRenderer;
+

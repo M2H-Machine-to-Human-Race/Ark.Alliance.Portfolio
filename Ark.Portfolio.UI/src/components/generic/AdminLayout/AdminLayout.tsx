@@ -1,57 +1,67 @@
+/**
+ * @fileoverview AdminLayout Component
+ * Main layout wrapper for all Admin pages with sidebar, header, and content area.
+ * 
+ * @author Armand Richelet-Kleinberg
+ */
+
 import React, { useState } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext/AuthContext';
 import { ADMIN_NAV_ITEMS } from './AdminLayout.config';
 import { LogOut, User as UserIcon, Lock, Menu, X, Sparkles } from 'lucide-react';
 import { ChangePasswordModal } from '../ChangePasswordModal/ChangePasswordModal';
 import './AdminLayout.styles.css';
 
-// Logo is served from public folder
+// Logo is loaded from public assets
+const LOGO_PATH = '/Assets/App/LogoArkAlliance.png';
 
+/**
+ * Props for AdminLayout component
+ */
 interface AdminLayoutProps {
     children: React.ReactNode;
     title?: string;
 }
 
 /**
- * AdminLayout Component - 2026 Edition
+ * AdminLayout Component
  * 
- * Modern, polished admin interface featuring:
- * - Gradient dark sidebar with logo
- * - Light theme content area with glassmorphism
- * - Purple accent system with glow effects
- * - Responsive mobile-first design
- * 
- * @author Armand Richelet-Kleinberg
+ * Provides consistent layout structure for all admin pages including:
+ * - Collapsible sidebar with navigation
+ * - Header with breadcrumb and user info
+ * - Content area for page-specific content
+ * - Password change modal
  */
 export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
-    const location = useLocation();
-    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
-    const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
+    /**
+     * Handle user logout
+     */
     const handleLogout = () => {
         logout();
         navigate('/login');
     };
 
+    /**
+     * Toggle mobile menu visibility
+     */
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(prev => !prev);
+    };
+
     return (
         <div className="admin-layout">
-            {/* Mobile Overlay */}
-            <div
-                className={`admin-mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-            />
-
             {/* Sidebar */}
             <aside className={`admin-sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
                 {/* Logo Section */}
                 <div className="admin-sidebar-header">
                     <div className="admin-logo-wrapper">
-                        <img src="/LogoArkAlliance.png" alt="Ark Alliance" className="admin-logo-img" />
+                        <img src={LOGO_PATH} alt="Ark Alliance" className="admin-logo-img" />
                         <div className="admin-logo-text">
                             <span className="admin-logo-name">Ark.Portfolio</span>
                             <span className="admin-logo-badge">Admin</span>
@@ -147,3 +157,5 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => 
         </div>
     );
 };
+
+export default AdminLayout;

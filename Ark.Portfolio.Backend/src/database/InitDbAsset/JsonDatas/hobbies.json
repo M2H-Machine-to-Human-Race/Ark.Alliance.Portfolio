@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Music Production",
+        "description": "Electronic music composition and production using DAWs, synthesizers, and audio engineering techniques.",
+        "icon": "Music"
+    },
+    {
+        "name": "3D Graphics & Animation",
+        "description": "Creating 3D models, animations, and visual effects using Cinema 4D, Maya, and Three.js.",
+        "icon": "Box"
+    },
+    {
+        "name": "Gaming",
+        "description": "Strategy games, simulation, and game development exploration.",
+        "icon": "Gamepad2"
+    },
+    {
+        "name": "Photography",
+        "description": "Digital photography with focus on architectural and landscape subjects.",
+        "icon": "Camera"
+    },
+    {
+        "name": "AI Research",
+        "description": "Exploring cutting-edge AI technologies, prompt engineering, and building AI-powered applications.",
+        "icon": "Brain"
+    }
+]

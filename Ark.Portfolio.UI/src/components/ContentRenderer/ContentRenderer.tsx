@@ -32,7 +32,7 @@ export const ContentRenderer: React.FC<ContentRendererProps> = ({ content, class
     const parseMarkdown = (text: string) => {
         // Pre-process common markdown issues if needed
         const lines = text.split('\n');
-        const elements: JSX.Element[] = [];
+        const elements: React.ReactElement[] = [];
         let inMermaidBlock = false;
         let mermaidCode = '';
         let key = 0;

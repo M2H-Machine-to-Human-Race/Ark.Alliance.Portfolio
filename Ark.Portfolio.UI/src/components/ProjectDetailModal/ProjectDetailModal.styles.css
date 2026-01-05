@@ -367,3 +367,81 @@
         transition: none;
     }
 }
+
+/* ============================================
+   Cyber Theme Enhancements
+   ============================================ */
+
+[data-cyber-theme] .project-modal-overlay {
+    background: rgba(10, 14, 23, 0.85);
+}
+
+[data-cyber-theme] .project-modal {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.95));
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+[data-cyber-theme] .project-modal-header {
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border-bottom-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .project-modal-title {
+    color: var(--text-neon, #e0e7ff);
+}
+
+[data-cyber-theme] .project-modal-close:hover {
+    background: rgba(0, 212, 255, 0.2);
+    color: var(--neon-primary, #00d4ff);
+}
+
+[data-cyber-theme] .project-modal-gallery {
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .project-modal-gallery-nav:hover {
+    background: var(--neon-primary, #00d4ff);
+    color: #0a0e17;
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.5);
+}
+
+[data-cyber-theme] .project-modal-tech-tag {
+    color: var(--neon-primary, #00d4ff);
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .project-modal-link {
+    color: var(--text-neon, #e0e7ff);
+    background: rgba(0, 212, 255, 0.05);
+    border-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .project-modal-link:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+[data-cyber-theme] .project-modal-footer {
+    background: var(--bg-surface-dark, rgba(10, 15, 25, 0.8));
+    border-top-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+/* Neon mode */
+[data-cyber-theme="neon"] .project-modal {
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+}
+
+[data-cyber-theme="neon"] .project-modal-link:hover {
+    box-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
+}
+
+/* Glass mode */
+[data-cyber-theme="glass"] .project-modal {
+    background: rgba(15, 20, 30, 0.5);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}

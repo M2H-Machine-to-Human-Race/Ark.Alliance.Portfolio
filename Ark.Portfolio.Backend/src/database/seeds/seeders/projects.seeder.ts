@@ -51,7 +51,22 @@ export async function seedProjects(dataSource: DataSource): Promise<void> {
     const pageRepo = dataSource.getRepository(ProjectPage);
     const featureRepo = dataSource.getRepository(ProjectFeature);
 
-    const projectsData = JSON.parse(fs.readFileSync(PROJECTS_DATA_PATH, 'utf-8'));
+    // Load individual project JSON files for better maintainability
+    const projectFiles = [
+        'ark-portfolio.json',
+        'react-component-ui.json',
+        'trading-providers-lib.json',
+        'trends-calculator.json'
+    ];
+
+    const projectsData = projectFiles.map(filename => {
+        const filePath = path.join(__dirname, '../../InitDbAsset/ProjectData', filename);
+        if (fs.existsSync(filePath)) {
+            return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        }
+        return null;
+    }).filter(p => p !== null);
+
     let seededCount = 0;
 
     for (const pData of projectsData) {

@@ -40,6 +40,9 @@ export enum ProjectSection {
     /** Architecture diagrams and system design */
     ARCHITECTURE = 'architecture',
 
+    /** Functional requirements and user stories */
+    FUNCTIONAL = 'functional',
+
     /** Features and functionality demonstration */
     FEATURES = 'features',
 

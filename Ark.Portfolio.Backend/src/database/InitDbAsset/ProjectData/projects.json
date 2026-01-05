@@ -1,7 +1,7 @@
 [
     {
-        "title": "Ark.Portfolio - AI-Powered Portfolio CMS",
-        "description": "Enterprise-grade, AI-powered portfolio platform combining comprehensive content management with multi-provider AI integration (OpenAI, Anthropic, Google Gemini), static site export capabilities, and end-to-end type safety. Features 20 TypeORM entities, 235+ passing tests, MVVM architecture in React frontend, and RESTful API backend with JWT authentication.",
+        "title": "Ark.Alliance.Portfolio",
+        "description": "Production-grade portfolio CMS and static site generator with AI-powered content creation. Features 20 TypeORM entities, multi-provider AI integration (OpenAI, Anthropic, Gemini), one-click static export, MVVM architecture, 235+ passing tests, and comprehensive admin dashboard. Built with React 18, TypeScript, Express, and TypeORM with end-to-end type safety.",
         "status": "Featured",
         "imageUrl": "/Assets/Projects/Ark.Portfolio/portfolio-hero.png",
         "repoUrl": "https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Portfolio",
@@ -12,7 +12,10 @@
             "typescript",
             "nodejs",
             "express",
+            "typeorm",
             "sqlite",
+            "vite",
+            "jest",
             "rest",
             "openai",
             "anthropic",
@@ -20,33 +23,33 @@
         ],
         "features": [
             {
-                "title": "Multi-Provider AI Integration",
-                "description": "Seamlessly integrated with OpenAI GPT-4, Anthropic Claude 3, and Google Gemini for intelligent content generation, summarization, and enhancement with AES-256 encrypted API key storage",
-                "icon": "brain"
-            },
-            {
-                "title": "Comprehensive CMS",
-                "description": "Full-featured content management system with 20 TypeORM entities covering profile, projects, experiences, education, skills, media assets, carousel items, and dynamic widgets",
+                "title": "20-Entity Content Management System",
+                "description": "Comprehensive CMS with TypeORM entities for Profile, Projects (with multi-page documentation), Experiences, Education, Skills, Media Assets, Carousel, Widgets, and more. Full CRUD operations through an intuitive admin dashboard.",
                 "icon": "database"
             },
             {
-                "title": "Static Site Export",
-                "description": "One-click generation of deployable static websites from CMS content, ready for GitHub Pages, Netlify, or Vercel with preserved styling and interactivity",
+                "title": "Multi-Provider AI Integration",
+                "description": "Native integration with OpenAI GPT-4, Anthropic Claude 3, and Google Gemini. AES-256 encrypted API key storage, intelligent content generation, summarization, and professional writing enhancement for all CMS entities.",
+                "icon": "brain"
+            },
+            {
+                "title": "One-Click Static Site Export",
+                "description": "Transform your portfolio CMS into a deployable static website with a single click. Generates optimized HTML/CSS/JS bundles ready for GitHub Pages, Netlify, Vercel, or any CDN with zero server costs.",
                 "icon": "download"
             },
             {
-                "title": "Enterprise Architecture",
-                "description": "Clean three-tier architecture (UI, Backend, Shared) with MVVM pattern, Repository pattern, type-safe DTOs, and comprehensive error handling",
+                "title": "Clean Three-Tier Architecture",
+                "description": "Enterprise-grade separation with Presentation (React MVVM), Shared Contracts (TypeScript DTOs), and Application (Express + TypeORM) layers. Repository pattern, type-safe APIs, and comprehensive error handling throughout.",
                 "icon": "sitemap"
             },
             {
                 "title": "Production-Grade Security",
-                "description": "JWT authentication, bcrypt password hashing (12 rounds), Helmet security headers, CORS protection, and AES-256 encryption for sensitive API keys",
+                "description": "JWT authentication with bcrypt password hashing (12 rounds), Helmet security headers, CORS protection, rate limiting, and AES-256 encryption for sensitive credentials. Built for deployment from day one.",
                 "icon": "shield-alt"
             },
             {
-                "title": "Dynamic Theming",
-                "description": "Runtime theme switching between Architectural and Aloe Vera themes with no page reload, CSS variable injection, and JSON-based configuration",
+                "title": "Dynamic Theme System",
+                "description": "Runtime theme switching with no page reload. Built-in Architectural and Aloe Vera themes, plus JSON-based custom theme creation. CSS variable injection enables instant visual transformations.",
                 "icon": "palette"
             }
         ],
@@ -55,177 +58,191 @@
                 "title": "Overview",
                 "type": "OVERVIEW",
                 "navOrder": 1,
-                "content": "## Project Overview\n\n**Ark.Portfolio** is a production-ready, enterprise-grade portfolio platform that transcends traditional portfolio websites. It combines modern web development practices with AI-powered content generation, comprehensive CMS capabilities, and static site export functionality.\n\n### Core Capabilities\n\n1. **Content Management System (CMS)** - Full CRUD operations for all 20 entities including projects, experiences, skills, media assets, carousel items, and widgets\n2. **AI-Powered Features** - Multi-provider AI integration with encrypted API key storage and content generation capabilities\n3. **Static Site Export** - Generate deployable static websites from CMS content with one click\n4. **Enterprise Architecture** - Clean three-tier structure with type-safe contracts and comprehensive testing\n\n### Technology Highlights\n\n- **Frontend**: React 18, TypeScript, Vite, MVVM Architecture\n- **Backend**: Node.js, Express, TypeORM, SQLite/PostgreSQL\n- **AI Integration**: OpenAI, Anthropic Claude, Google Gemini\n- **Security**: JWT, bcrypt, Helmet, AES-256 encryption\n- **Testing**: 235+ tests with Jest and React Testing Library\n\n### Key Statistics\n\n- 20 TypeORM Entities\n- 3-Layer Architecture\n- 16 Backend Services\n- 9 API Controllers\n- 235+ Test Cases\n- Multi-provider AI support"
+                "content": "## Ark.Alliance.Portfolio\n\n**Production-Grade Portfolio CMS & Static Site Generator**\n\nA comprehensive portfolio platform that goes beyond simple showcases. It combines enterprise-grade software practices with AI-powered content generation, full content management capabilities, and one-click static site deployment.\n\n### Perfect For\n\n- 💼 **Professionals** — Showcase work experience and projects with dynamic CMS\n- 🎓 **Academics** — Document research, publications, and teaching\n- 🎨 **Creatives** — Present portfolio work with rich media management\n- 💻 **Engineers** — Demonstrate technical projects with multi-page documentation\n- 🏢 **Agencies** — Manage team portfolios with collaborative features\n\n### Core Capabilities\n\n| Capability | Description |\n|------------|-------------|\n| **Content Management** | 20 TypeORM entities covering all portfolio aspects |\n| **AI Content Creation** | Multi-provider AI (OpenAI, Anthropic, Gemini) |\n| **Static Site Export** | One-click deployment to any static host |\n| **Multi-Page Projects** | Rich documentation with Markdown + Mermaid |\n| **Dynamic Theming** | Runtime theme switching, no reload required |\n| **Media Management** | Upload, organize, and optimize assets |\
+| **Type Safety** | End-to-end TypeScript with shared DTOs |\n| **Security** | JWT auth, bcrypt, AES-256, Helmet headers |\n\n### Technology Stack\n\n**Frontend**\n- React 18 with TypeScript 5.x\n- Vite build tool\n- MVVM component architecture\n- React Router for navigation\n- Axios for API communication\n\n**Backend**\n- Node.js 18+ with Express\n- TypeORM for data access\n- SQLite (dev) / PostgreSQL (prod)\n- 16 business services\n- 9 API controllers\n\n**Shared**\n- TypeScript DTOs\n- Shared enumerations\n- Type-safe contracts\n\n**AI Integration**\n- OpenAI GPT-4 & GPT-4 Turbo\n- Anthropic Claude 3 (Opus, Sonnet, Haiku)\n- Google Gemini 1.5 (Pro, Flash)\n\n### Key Statistics\n\n- **20** TypeORM Entities\n- **16** Backend Services  \n- **9** API Controllers\n- **235+** Test Cases (100% pass rate)\n- **3** Architecture Layers\n- **3** AI Providers\n\n### Quick Start\n\n```bash\n# Install shared library\ncd Ark.Portfolio.Share\nnpm install && npm run build\n\n# Start backend (port 3085)\ncd ../Ark.Portfolio.Backend\nnpm install && npm run dev\n\n# Start frontend (port 3080)\ncd ../Ark.Portfolio.UI\nnpm install && npm run dev\n```\n\nDefault admin credentials: `admin` / `admin123`"
             },
             {
-                "title": "Architecture & Data Model",
+                "title": "Architecture & System Design",
                 "type": "ARCHITECTURE",
                 "navOrder": 2,
-                "content": "## System Architecture\n\n### Three-Tier Structure\n\n```\nPresentation Layer (Ark.Portfolio.UI)\n├── React 18 + TypeScript\n├── MVVM Component Architecture\n├── Vite Build Tool\n└── Client-side Routing\n        ↓\nShared Contracts (Ark.Portfolio.Share)\n├── Data Transfer Objects (DTOs)\n├── Shared Enumerations\n└── Type Definitions\n        ↓\nApplication Layer (Ark.Portfolio.Backend)\n├── Express REST API\n├── TypeORM Data Access\n├── Business Services\n└── JWT Authentication\n        ↓\nDatabase Layer\n└── SQLite (Dev) / PostgreSQL (Prod)\n```\n\n### Data Model (20 Entities)\n\n**Core Identity**\n- Profile - Portfolio owner information\n- User - Authentication and authorization\n\n**Professional Background**\n- Experience - Work history (8 seeded records)\n- Education - Academic background\n- Skill - Technical competencies (30+ technologies)\n- SkillCategory - Skill groupings (5 categories)\n\n**Project Management**\n- Project - Portfolio projects\n- ProjectPage - Multi-page documentation\n- ProjectFeature - Feature highlights\n- ProjectTechnology - Technology tags\n- ProjectController - API endpoint docs\n- ProjectEndpoint - Endpoint details\n\n**Content & Media**\n- Media - Comprehensive asset management\n- CarouselItem - Homepage carousel slides\n- MenuItem - Dynamic navigation\n- Widget - Extensible content blocks\n- StyleConfig - Theme configuration\n\n**Advanced Features**\n- AiSettings - Multi-provider AI config\n- TeamMember - Collaboration info\n- Outbox - Event sourcing pattern\n\n### API Endpoints\n\n**Public**\n- GET /api/profile\n- GET /api/projects\n- GET /api/resume\n- GET /api/carousel\n\n**Protected (Admin)**\n- Full CRUD for all entities\n- POST /api/admin/media/upload\n- POST /api/admin/export/static\n- POST /api/ai/generate"
-            },
-            {
-                "title": "Features & Use Cases",
-                "type": "FUNCTIONAL",
-                "navOrder": 3,
-                "content": "## Functional Use Cases\n\n### 1. Portfolio Management\n\n**Use Case**: Professional wants to showcase their work and experience\n\n**Workflow**:\n1. Admin logs in via JWT authentication\n2. Creates/updates profile with professional summary\n3. Adds experiences with technologies and descriptions\n4. Creates project entries with multi-page documentation\n5. Uploads media assets (images, PDFs, documents)\n6. Configures carousel for homepage highlights\n7. Publishes changes or exports to static site\n\n**Benefits**:\n- Centralized content management\n- Version control through database\n- Type-safe data structures\n- Professional presentation\n\n### 2. AI-Assisted Content Generation\n\n**Use Case**: User needs help writing project descriptions or summaries\n\n**Workflow**:\n1. Navigate to AI Settings in admin panel\n2. Configure preferred AI provider (OpenAI/Anthropic/Gemini)\n3. Enter encrypted API key (stored with AES-256)\n4. Use AI generation interface for content creation\n5. Review and edit AI-generated content\n6. Save to appropriate entity (Project, Experience, etc.)\n\n**Supported Operations**:\n- Content generation from prompts\n- Text summarization\n- Professional writing enhancement\n- Technical documentation assistance\n\n### 3. Static Website Deployment\n\n**Use Case**: Deploy portfolio to static hosting without backend\n\n**Workflow**:\n1. Configure all content in CMS\n2. Click \"Generate Static Site\" in admin panel\n3. System exports:\n   - Optimized HTML/CSS/JS\n   - All media assets\n   - Styled components\n   - SEO-optimized markup\n4. Download ZIP file\n5. Deploy to GitHub Pages/Netlify/Vercel\n\n**Advantages**:\n- No server costs\n- CDN-ready\n- Fast loading times\n- Maximum availability\n\n### 4. Dynamic Theming\n\n**Use Case**: Customize visual appearance without code changes\n\n**Workflow**:\n1. Access StyleConfig in admin panel\n2. Choose from built-in themes:\n   - Architectural (clean, structural)\n   - Aloe Vera (organic, nature-inspired)\n3. Or create custom theme with JSON configuration\n4. Apply theme (instant, no reload)\n5. Theme persists across sessions\n\n**Configuration Options**:\n- Color palettes\n- Typography (fonts, sizes)\n- Spacing and borders\n- Component-specific styles\n\n### 5. Multi-Page Project Documentation\n\n**Use Case**: Provide comprehensive technical documentation for projects\n\n**Workflow**:\n1. Create Project entity\n2. Add ProjectPages with types:\n   - OVERVIEW - Project summary\n   - FUNCTIONAL - Feature specifications\n   - TECHNICAL - Technical details\n   - ARCHITECTURE - System diagrams\n   - ROADMAP - Future plans\n3. Write Markdown content (supports Mermaid diagrams)\n4. Set navigation order\n5. Publish with automatic rendering\n\n**Benefits**:\n- Professional documentation\n- Version controlled\n- Searchable content\n- Rich formatting support"
-            },
-            {
-                "title": "Deployment & Integration",
-                "type": "TECHNICAL",
-                "navOrder": 4,
-                "content": "## Deployment Options\n\n### Option 1: Full Stack Deployment\n\n**Requirements**:\n- Node.js 18+\n- Database (SQLite/PostgreSQL)\n- HTTPS-capable server\n\n**Setup**:\n```bash\n# Install shared library\ncd Ark.Portfolio.Share\nnpm install && npm run build\n\n# Start backend\ncd ../Ark.Portfolio.Backend\nnpm install\nnpm run build\nnpm start  # Production on port 3085\n\n# Start frontend\ncd ../Ark.Portfolio.UI\nnpm install\nnpm run build\n# Serve dist/ with nginx or similar\n```\n\n**Environment Variables**:\n```env\n# Backend\nPORT=3085\nJWT_SECRET=your-256-bit-secret\nDATABASE_TYPE=postgresql\nOPENAI_API_KEY=sk-...\nCORS_ORIGIN=https://yourdomain.com\n\n# Frontend\nVITE_API_URL=https://api.yourdomain.com\nVITE_ENABLE_AI_FEATURES=true\n```\n\n### Option 2: Static Export\n\n**Process**:\n1. Populate CMS with all content\n2. Use admin panel: Export → Static Site\n3. Download generated ZIP\n4. Extract and deploy to:\n   - GitHub Pages\n   - Netlify\n   - Vercel\n   - AWS S3 + CloudFront\n\n**Advantages**:\n- Zero server costs\n- Infinite scalability\n- Global CDN distribution\n- No security concerns (no backend)\n\n### Option 3: Docker Deployment\n\n```bash\n# Using docker-compose\ndocker-compose up -d\n\n# Services:\n# - backend: Port 3085\n# - frontend: Port 3080\n# - database: PostgreSQL\n```\n\n## Integration Examples\n\n### API Integration\n\n```typescript\n// Fetch projects\nconst response = await fetch('/api/projects');\nconst projects = await response.json();\n\n// Authenticated request\nconst token = localStorage.getItem('jwt');\nconst response = await fetch('/api/admin/projects', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify(projectData)\n});\n```\n\n### AI Content Generation\n\n```typescript\n// Generate content with AI\nconst response = await fetch('/api/ai/generate', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    prompt: 'Write a professional project description',\n    provider: 'openai',\n    model: 'gpt-4',\n    temperature: 0.7\n  })\n});\n```\n\n## Security Best Practices\n\n1. **Always use HTTPS** in production\n2. **Rotate JWT secrets** regularly\n3. **Keep dependencies updated** (`npm audit`)\n4. **Validate all inputs** server-side\n5. **Rate limit** API endpoints\n6. **Monitor logs** for suspicious activity\n7. **Backup database** regularly\n8. **Use environment variables** for secrets"
-            }
-        ]
-    },
-    {
-        "title": "Ark.Alliance.React.Component.UI",
-        "description": "Enterprise-grade React component library with MVVM architecture spanning 40 component categories across Finance/Trading, Healthcare, Logistics, E-Commerce, AI/ML, and more. Built with React 19, TypeScript 5.9, Zod validation, and Tailwind CSS 4. Features 258 passing tests (100% coverage), premium neon aesthetics, interactive showcase dashboard at localhost:5090, and complete type safety.",
-        "status": "Featured",
-        "imageUrl": "/Assets/Projects/Ark.Alliance.React.Component/components-hero.png",
-        "repoUrl": "https://github.com/ArmandRicheletKleinberg/Ark.Alliance.React.Component.UI",
-        "demoUrl": "",
-        "packageUrl": "https://www.npmjs.com/package/@ark-alliance/react-ui",
-        "technologies": [
-            "react",
-            "typescript",
-            "tailwindcss",
-            "threejs",
-            "vitest",
-            "docker"
-        ],
-        "features": [
-            {
-                "title": "MVVM Architecture Pattern",
-                "description": "Strict Model-View-ViewModel separation with Zod schema-based models, custom React Hook ViewModels, and pure presentation Views. Ensures testable, maintainable, and scalable component design.",
-                "icon": "layer-group"
-            },
-            {
-                "title": "40 Component Categories",
-                "description": "Comprehensive component suite spanning Buttons, Cards, Gauges (5 types), Input (6 variants), Chart3D (Three.js), Charts, Grids, Modal, TimeLines, Documents (Markdown), and 28 more categories covering multiple business domains.",
-                "icon": "th"
-            },
-            {
-                "title": "Multi-Domain Support",
-                "description": "Components designed for Finance/Trading, Healthcare, Logistics, E-Commerce, AI/ML, Music/Audio, Video/Streaming, Social/Communication, Payments, and Data Visualization industries.",
-                "icon": "industry"
-            },
-            {
-                "title": "Runtime Zod Validation",
-                "description": "All models use Zod 4 schemas for runtime type checking, schema-based validation with clear error messages, and TypeScript type inference from schemas for compile-time safety.",
-                "icon": "check-circle"
-            },
-            {
-                "title": "Premium Visual Modes",
-                "description": "Four distinct visual modes: Normal (standard), Neon (glowing borders/gradients for trading), Minimal (reduced weight), and Glass (glassmorphism with backdrop blur). Mode switching without code changes.",
-                "icon": "palette"
-            },
-            {
-                "title": "100% Test Coverage",
-                "description": "258 tests passing with Vitest and React Testing Library. 35 BaseInput tests, 28 ProgressBar tests, 25 GenericPanel tests, 24 Tooltip tests, 23 TradingGridCard tests, and comprehensive scenario-based testing.",
-                "icon": "vial"
-            }
-        ],
-        "pages": [
-            {
-                "title": "Overview",
-                "type": "OVERVIEW",
-                "navOrder": 1,
-                "content": "## Ark.Alliance.React.Component.UI\n\n**Enterprise-Grade React Component Library with MVVM Architecture**\n\nA comprehensive, institutional-quality UI component library designed for multi-domain enterprise applications — including Finance & Trading, Healthcare, Logistics, E-Commerce, AI/ML, Media & Entertainment, Social Platforms, and more — with premium neon aesthetics and complete MVVM separation.\n\n### Key Features\n\n| Feature | Description |\n|---------|-------------|\n| **40 Component Categories** | Comprehensive UI elements from buttons to 3D charts |\n| **MVVM Architecture** | Clear separation with Model, ViewModel, and View layers |\n| **Zod Validation** | Runtime type safety with schema-based validation |\n| **Premium Aesthetics** | Neon, minimal, and glassmorphism visual modes |\n| **100% Test Coverage** | 258 tests passing with scenario-based testing |\n| **Enterprise Ready** | TypeScript strict mode, accessibility, responsive |\n| **Interactive Showcase** | Component explorer at localhost:5090 |\n\n### Business Domains\n\nWhile primarily designed for **large-scale trading and financial applications**, this component library serves **multiple industry verticals**:\n\n- 🏦 **Finance & Trading** - Trading dashboards, portfolio management, market data\n- 🏥 **Healthcare & Medical** - Patient portals, clinical dashboards, health monitoring\n- 🚚 **Logistics & Supply Chain** - Shipping tracking, inventory, warehouse ops\n- 🛒 **E-Commerce & Retail** - Shopping carts, product catalogs, checkout\n- 🤖 **AI & Machine Learning** - AI dashboards, model monitoring, predictions\n- 🎵 **Music & Audio** - Audio players, music libraries, sound visualization\n- 🎬 **Video & Streaming** - Video players, media galleries, streaming\n- 💬 **Social & Communication** - Social feeds, messaging, communities\n- 💳 **Payments & Fintech** - Payment processing, transactions\n- 📊 **Data Visualization** - 2D/3D charts, flow diagrams, analytics\n\n### Technology Stack\n\n- **React 19** with hooks\n- **TypeScript 5.9** (strict mode)\n- **Tailwind CSS 4** for styling\n- **Zod 4** for validation\n- **Vite 7** for builds\n- **Vitest 2** for testing\n- **Three.js** for 3D components\n- **React Testing Library** for component tests"
-            },
-            {
-                "title": "MVVM Architecture",
-                "type": "ARCHITECTURE",
-                "navOrder": 2,
-                "content": "## Model-View-ViewModel Pattern\n\n### Architecture Layers\n\n```\n┌─────────────────────────────────────┐\n│         VIEW (*.tsx)                │\n│  • React Component                  │\n│  • Renders UI from ViewModel        │\n│  • Dispatches events to ViewModel   │\n│  • forwardRef/memo optimization     │\n└──────────────┬──────────────────────┘\n               │ Uses Hook\n               ↓\n┌─────────────────────────────────────┐\n│     VIEWMODEL (*.viewmodel.ts)      │\n│  • Custom React Hook                │\n│  • State management (useState)      │\n│  • Event handlers (useCallback)     │\n│  • Returns {model, state, handlers} │\n└──────────────┬──────────────────────┘\n               │ Extends\n               ↓\n┌─────────────────────────────────────┐\n│       MODEL (*.model.ts)            │\n│  • Zod Schema definition            │\n│  • TypeScript types (inferred)      │\n│  • Default values & factories       │\n│  • Extends BaseModelSchema          │\n└─────────────────────────────────────┘\n```\n\n### Core Infrastructure\n\n**Base Classes** (`src/core/base/`):\n\n1. **BaseComponentModel**\n   - Common props: id, disabled, loading, className, testId, ariaLabel\n   - Extends all component models\n\n2. **BaseViewModel**\n   - Lifecycle management\n   - State handling\n   - Event bus integration\n   - Async execution utilities\n\n3. **FormInputModel**\n   - Form input base with validation\n   - Pattern matching restrictions\n   - Length limits\n\n4. **useFormInputRestrictions**\n   - Input validation hook\n   - Character filtering\n   - Length enforcement\n\n### Data Flow\n\n1. **Model** defines data structure with Zod schema\n2. **ViewModel** manages state and business logic\n3. **View** renders UI and handles user interaction\n4. **Events** flow from View → ViewModel → Model\n5. **State** flows from Model → ViewModel → View"
-            },
-            {
-                "title": "Component Catalog",
-                "type": "FUNCTIONAL",
-                "navOrder": 3,
-                "content": "## Implemented Components\n\n### Primitive Components\n\n**Buttons**\n- `NeonButton` - Premium button with glow effects, 4 variants, 3 sizes\n\n**Toggles**\n- `NeonToggle` - Switch with neon styling and custom colors\n\n**Cards**\n- `GlowCard` - Status-based card with hover effects\n- `TradingGridCard` - Specialized for trading data with 5 status variants\n\n**Input Components** (6 types)\n- `Input` - Base text input with validation\n- `Select` - Dropdown with keyboard navigation\n- `TextArea` - Multi-line text\n- `Slider` - Range input\n- `NumericInput` - Number-only input with formatting\n- `FileUpload` - Drag-drop file upload\n\n**Gauges** (5 types)\n- `CircularGauge` - Circular progress with gradient\n- `SpeedometerGauge` - Speedometer-style gauge\n- `DigitalGauge` - Digital display gauge\n- `BatteryGauge` - Battery level indicator\n- `SignalBarsGauge` - Signal strength bars\n\n### Advanced Components\n\n**Charts & Visualization**\n- `Chart3D` - Three.js 3D charts (Cuboid, Cylinder, Bubble, Candle)\n- `Charts` - 2D chart components\n- `Diagram` - Flow diagram rendering\n- `FlowChart` - Interactive flow charts\n\n**Data Display**\n- `DataGrid` - Sortable, filterable data table\n- `TradingGridCard` - Real-time trading data display\n- `Timeline` - Event timeline with customizable display\n\n**Layout Components**\n- `Header` - Visual modes, icons, search, backgrounds\n- `Footer` - Paging controls, multiple slots\n- `SideBarMenu` - Navigation with categories\n- `Panel` - Container with header/footer slots\n- `GenericPanel` - Universal panel with glassmorphism, gradients, grid overlays\n\n**Interaction**\n- `Modal` - Dialog with portal, backdrop, escape handling\n- `Tooltip` - Tooltip with HOC (`withTooltip`)\n- `ProgressBar` - Linear progress with animations\n\n**Content**\n- `MarkdownRenderer` - Render markdown with syntax highlighting\n- `DocumentViewer` - Document display component\n- `Slides` - Presentation slides\n\n## Visual Modes\n\nAll components support 4 visual modes:\n\n| Mode | Description | Use Case |\n|------|-------------|----------|\n| `normal` | Standard appearance | General purpose |\n| `neon` | Glowing borders & gradients | Trading dashboards, gaming |\n| `minimal` | Reduced visual weight | Clean interfaces |\n| `glass` | Glassmorphism with backdrop blur | Modern, premium UIs |"
-            },
-            {
-                "title": "Testing & Quality",
-                "type": "TECHNICAL",
-                "navOrder": 4,
-                "content": "## Test Suite\n\n### Test Statistics\n\n**Total**: 258 tests ✅ 100% pass rate  \n**Framework**: Vitest 2.1.8  \n**Library**: @testing-library/react 16.1.0  \n**Duration**: 10.86s (average)\n\n### Test Breakdown\n\n| Test Family | Tests | Coverage |\n|-------------|-------|----------|\n| BaseInput | 35 | Input types, validation, focus/blur, size variants, states |\n| ProgressBar | 28 | Percentage, clamping, colors, display, animation |\n| GenericPanel | 25 | Panel layouts, modes, customization |\n| Tooltip | 24 | Positioning, delay timing, HOC pattern, refs |\n| TradingGridCard | 23 | Status variants, validation, themes, interactions |\n| FormInputModel | 21 | Schema validation, defaults |\n| Button | 20 | Click handling, variants, sizes, states |\n| FAIcon | 16 | Icon rendering, props |\n| useFormInputRestrictions | 13 | Pattern matching, length limits |\n| Input | 12 | Controlled inputs, events |\n| Page | 12 | Page layouts, routing |\n| Card | 11 | Card variants, content |\n| BaseComponentModel | 10 | Base model validation |\n| Panel | 8 | Panel functionality |\n\n### Running Tests\n\n```bash\ncd Ark.Alliance.React.Component.UI.Tests\n\n# Watch mode\nnpm test\n\n# CI mode\nnpm test -- --run\n\n# Specific file\nnpm test -- components/Button/Button.test.tsx\n\n# With coverage\nnpm test -- --coverage\n```"
-            }
-        ]
-    },
-    {
-        "title": "Ark.Alliance.Trading.Providers.Lib",
-        "description": "Production-ready TypeScript SDK unifying cryptocurrency trading across multiple exchanges (Binance Futures, Deribit) with a single, elegant API. Features Result pattern for type-safe error handling, event-driven async architecture, WebSocket streams for low-latency market data, HMAC-SHA256 and Ed25519 authentication, 70+ test scenarios with 100% pass rate, and comprehensive documentation. Published on NPM.",
-        "status": "Featured",
-        "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Providers.Lib/trading-hero.png",
-        "repoUrl": "https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.Providers.Lib",
-        "demoUrl": "",
-        "packageUrl": "https://www.npmjs.com/package/ark-alliance-trading-providers-lib",
-        "technologies": [
-            "typescript",
-            "nodejs",
-            "binance",
-            "deribit",
-            "rest",
-            "jest",
-            "docker"
-        ],
-        "features": [
-            {
-                "title": "Multi-Provider Abstraction",
-                "description": "Unified interface for Binance Futures and Deribit exchanges with IProviderClient pattern. Write once, trade on any supported exchange without code changes. Extensible architecture for adding new providers.",
-                "icon": "plug"
-            },
-            {
-                "title": "Result Pattern Error Handling",
-                "description": "Type-safe Result<T> pattern for functional error handling. No exceptions in normal flow, explicit success/failure states, chainable operations (map, flatMap), and comprehensive error details with ResultStatus enum.",
-                "icon": "check-circle"
-            },
-            {
-                "title": "Real-Time WebSocket Streams",
-                "description": "Low-latency market data via WebSocket connections. Subscribe to klines, book ticker, user data streams, and order events. Event-driven architecture with typed event emitters for order fills and position updates.",
-                "icon": "wifi"
-            },
-            {
-                "title": "Secure Authentication",
-                "description": "HMAC-SHA256 signature generation for Binance, Ed25519 signature generation for Deribit, automatic token refresh mechanisms, and secure credential storage with IAuthStrategy interface.",
-                "icon": "lock"
-            },
-            {
-                "title": "Comprehensive Testing",
-                "description": "70+ test scenarios with ReflectionTestEngine, scenario-driven JSON test definitions, dynamic parameter resolution ($DYNAMIC_LIMIT_BUY), tested against live testnets, and 100% pass rate across all categories.",
-                "icon": "vial"
-            },
-            {
-                "title": "Clean Architecture",
-                "description": "Domain-driven design with clear layer separation: Domain (entities, interfaces), Application (use cases, mappers), and Infrastructure (clients, auth). TypeScript-first with full IntelliSense support.",
-                "icon": "sitemap"
-            }
-        ],
-        "pages": [
-            {
-                "title": "Overview",
-                "type": "OVERVIEW",
-                "navOrder": 1,
-                "content": "## Ark Alliance Trading Providers Library\n\n**Production-Ready Multi-Provider Cryptocurrency Trading SDK**\n\nA TypeScript SDK that unifies cryptocurrency trading across multiple exchanges with a single, elegant API. Stop writing exchange-specific code—write once, trade everywhere.\n\n### Perfect For\n\n- 🤖 Algorithmic trading bots\n- 📊 Market data aggregators\n- 💼 Portfolio management systems\n- 📈 Trading analytics platforms\n\n### Key Features\n\n| Feature | Description |\n|---------|-------------|\n| **Multi-Provider** | Unified interface for Binance Futures and Deribit |\n| **Order Management** | Place, modify, cancel, and track orders |\n| **Position Tracking** | Real-time position monitoring with P&L |\n| **WebSocket Streams** | Low-latency market data and user events |\n| **Event-Driven** | Async event architecture for fills, updates |\n| **Result Pattern** | Type-safe error handling|\n| **Secure Auth** | HMAC-SHA256 (Binance) and Ed25519 (Deribit) |\n| **100% Tested** | 70+ scenarios, 100% pass rate |\n| **TypeScript-First** | Full type definitions with IntelliSense |\n| **Testnet Support** | Built-in testnet URLs for development |\n\n### Installation\n\n```bash\nnpm install ark-alliance-trading-providers-lib\n```\n\n### Quick Start\n\n```typescript\nimport { BinanceRestClient } from 'ark-alliance-trading-providers-lib/Binance';\n\n// Initialize client\nconst client = new BinanceRestClient(apiKey, secret, { testnet: true });\n\n// Place order with type-safe Result pattern\nconst orderResult = await client.placeOrder({\n  symbol: 'BTCUSDT',\n  side: 'BUY',\n  type: 'MARKET',\n  quantity: 0.001\n});\n\nif (orderResult.success) {\n  console.log(`Order placed! ID: ${orderResult.data.orderId}`);\n} else {\n  console.error(`Error: ${orderResult.error.message}`);\n}\n```"
-            },
-            {
-                "title": "Architecture",
-                "type": "ARCHITECTURE",
-                "navOrder": 2,
-                "content": "## Clean Architecture\n\n### Layer Structure\n\n```\nDomain Layer\n├── Domain Entities (Order, Position, Account)\n└── Interfaces (IProviderClient, IAuthStrategy)\n        ↓\nApplication Layer\n├── Use Cases (Place Order, Get Position)\n└── Data Mappers (API ↔ Domain)\n        ↓\nInfrastructure Layer\n├── API Clients (REST, WebSocket)\n└── Authentication (HMAC, Ed25519)\n        ↓\nExternal Systems\n└── Exchange APIs (Binance, Deribit)\n```\n\n### Provider Abstraction\n\n**Your Application**\n\n↓ Uses\n\n**IProviderClient Interface**\n- connect() / disconnect()\n- isConnected() / getProviderName()\n\n↓ Implemented by\n\n**Provider Implementations**\n- Binance Provider (REST + WebSocket)\n- Deribit Provider (JSON-RPC)\n\n↓ Uses\n\n**IAuthStrategy Interface**\n- generateSignature()\n- authenticate()\n\n↓ Connects to\n\n**External APIs**\n- Binance Futures API (HTTPS + WSS)\n- Deribit API (WebSocket JSON-RPC)"
-            },
-            {
-                "title": "Use Cases & Examples",
-                "type": "FUNCTIONAL",
-                "navOrder": 3,
-                "content": "## Functional Use Cases\n\n### 1. Algorithmic Trading Bot\n\n**Scenario**: Automated trading strategy execution\n\n**Workflow**:\n```typescript\nimport { BinanceRestClient, BinanceWebSocketClient } from 'ark-alliance-trading-providers-lib';\n\n// Initialize clients\nconst rest = new BinanceRestClient(apiKey, secret, { testnet: true });\nconst ws = new BinanceWebSocketClient({ testnet: true });\n\n// Subscribe to market data\nws.subscribeBookTicker('BTCUSDT');\nws.on('bookTicker', async (ticker) => {\n  const signal = analyzeMarket(ticker);\n  \n  if (signal === 'BUY') {\n    const result = await rest.placeOrder({\n      symbol: 'BTCUSDT',\n      side: 'BUY',\n      type: 'MARKET',\n      quantity: 0.001\n    });\n    \n    if (result.success) {\n      console.log(`Buy order placed: ${result.data.orderId}`);\n    }\n  }\n});\n```\n\n### 2. Portfolio Management\n\n```typescript\nclass PortfolioManager {\n  async getTotalBalance(): Promise<number> {\n    const binancePositions = await this.binanceClient.getPositionRisk();\n    const deribitPositions = await this.deribitClient.getPositions();\n    \n    return this.calculateTotalValue([\n      ...binancePositions.data || [],\n      ...deribitPositions.data || []\n    ]);\n  }\n}\n```"
-            },
-            {
-                "title": "Testing & Quality",
-                "type": "TECHNICAL",
-                "navOrder": 4,
-                "content": "## Test Suite\n\n### Test Coverage\n\n**Total**: 70+ scenarios  \n**Pass Rate**: ✅ 100%  \n**Framework**: ReflectionTestEngine (custom)  \n**Execution**: Against live Binance Testnet\n\n| Scenario File | Category | Scenarios | Pass Rate |\n|---------------|----------|-----------|----------|\n| account.scenarios.json | Account | 8 | ✅ 100% |\n| market-data.scenarios.json | Market Data | 8 | ✅ 100% |\n| orders.scenarios.json | Orders | 12 | ✅ 92% (2 disabled) |\n| positions.scenarios.json | Positions | 14 | ✅ 100% |\n| gtx-orders.scenarios.json | Post-Only (GTX) | 13 | ✅ 100% |\n| market-orders.scenarios.json | Market Orders | 8 | ✅ 100% |\n| algo-orders.scenarios.json | Algo Orders | 10 | ✅ 100% |\n| mixed-orders.scenarios.json | Mixed Workflows | 10 | ✅ 100% |\n\n### Running Tests\n\n```bash\ncd Ark.Alliance.Trading.Providers.Lib.Test\n\n# Run all scenarios\nnpm run test:execute\n\n# Run specific category\nnpm run test:execute -- --filter=account\n\n# Generate report\nnpm run test:report\n```"
-            }
-        ]
-    }
-]
+                "content": "## System Architecture\n\n### Three-Tier Architecture\n\n```mermaid\ngraph TB\n    subgraph Client[\"🖥️ Presentation Layer\"]\n        UI[\"Ark.Portfolio.UI<br/>React 18 + TypeScript<br/>MVVM Architecture<br/>Vite Build Tool\"]\n    end\n    \n    subgraph Contracts[\"📦 Shared Contracts\"]\n        Share[\"Ark.Portfolio.Share<br/>DTOs + Enums<br/>Type Definitions<br/>End-to-End Type Safety\"]\n    end\n    \n    subgraph Server[\"⚙️ Application Layer\"]\n        Backend[\"Ark.Portfolio.Backend<br/>Express REST API<br/>16 Services + 9 Controllers<br/>TypeORM Data Access\"]\n    end\n    \n    subgraph Data[\"💾 Data Layer\"]\n        DB[(\"SQLite (Dev)<br/>PostgreSQL (Prod)<br/>20 Entities\")]\n    end\n    \n    subgraph External[\"🌐 External Services\"]\
+        AI1[\"OpenAI<br/>GPT-4\"]\
+        AI2[\"Anthropic<br/>Claude 3\"]\
+        AI3[\"Google<br/>Gemini 1.5\"]\
+    end\
+    \
+    UI -->|\"REST API<br/>(Axios)\"| Backend\
+    UI -.->|\"Import Types\"| Share\
+    Backend -.->|\"Import Types\"| Share\
+    Backend -->|\"TypeORM ORM\"| DB\
+    Backend -->|\"Encrypted API\"| AI1\
+    Backend -->|\"Encrypted API\"| AI2\
+    Backend -->|\"Encrypted API\"| AI3\
+    \
+    style Client fill:#2d3748,stroke:#4299e1,stroke-width: 2px,color:#fff\
+    style Contracts fill:#2d3748,stroke:#48bb78,stroke-width: 2px,color:#fff\
+    style Server fill:#2d3748,stroke:#ed8936,stroke-width: 2px,color:#fff\
+    style Data fill:#2d3748,stroke:#9f7aea,stroke-width: 2px,color:#fff\
+    style External fill:#2d3748,stroke:#f56565,stroke-width: 2px,color:#fff\
+```\n\n### Entity Relationship Model\n\n```mermaid\nerDiagram\n    PROFILE ||--o{ USER : \"manages\"\n    PROFILE {\n        uuid id PK\n        string name\n        string title\n        string summary\n        string email\n        string phone\n        string location\n    }\n    \n    USER ||--o{ PROJECT : \"creates\"\n    USER {\n        uuid id PK\n        string username UK\n        string password\n        string role\n    }\n    \n    PROJECT ||--|{ PROJECT_PAGE : \"contains\"\n    PROJECT ||--|{ PROJECT_FEATURE : \"has\"\n    PROJECT ||--|{ PROJECT_TECHNOLOGY : \"uses\"\n    PROJECT {\n        uuid id PK\n        string title\n        string description\n        string status\n        string imageUrl\n        string repoUrl\n        string demoUrl\n    }\n    \n    PROJECT_PAGE {\n        uuid id PK\n        string title\n        string type\n        text content\n        int navOrder\n    }\n    \n    PROJECT_FEATURE {\n        uuid id PK\n        string title\n        text description\n        string icon\n    }\n    \n    TECHNOLOGY ||--|{ PROJECT_TECHNOLOGY : \"links\"\n    TECHNOLOGY {\n        uuid id PK\n        string name UK\n        string category\n        string icon\n    }\n    \n    EXPERIENCE ||--|{ SKILL : \"requires\"\n    EXPERIENCE {\n        uuid id PK\n        string company\n        string role\n        string description\n        date startDate\n        date endDate\n    }\n    \n    EDUCATION {\n        uuid id PK\n        string institution\n        string degree\n        string field\n        date graduationDate\n    }\n    \n    SKILL ||--|| SKILL_CATEGORY : \"belongsTo\"\n    SKILL {\n        uuid id PK\n        string name\n        int proficiency\n        int yearsOfExperience\n    }\n    \n    SKILL_CATEGORY {\n        uuid id PK\n        string name UK\n        string description\n        int displayOrder\n    }\n    \n    MEDIA {\n        uuid id PK\n        string filename\n        string mimetype\n        string url\n        string category\n        int fileSize\n    }\n    \n    CAROUSEL_ITEM {\n        uuid id PK\n        string title\n        string subtitle\n        string imageUrl\n        string linkUrl\n        int order\n        boolean isActive\n    }\n    \n    AI_SETTINGS {\n        uuid id PK\n        string provider\n        string model\n        string encryptedApiKey\n        json config\n    }\n    \n    STYLE_CONFIG {\n        uuid id PK\n        string themeName UK\n        json colorPalette\n        json typography\n        boolean isActive\n    }\n```\n\n### Service Architecture\n\n**Backend Services (16 total)**\n\n| Service | Responsibility | Lines of Code |\n|---------|----------------|---------------|\n| `ProfileService` | Profile CRUD operations | ~180 |\n| `ProjectService` | Project management | ~320 |\n| `ExperienceService` | Work history | ~200 |\n| `EducationService` | Academic background | ~180 |\n| `SkillService` | Skill management | ~220 |\n| `MediaService` | Asset upload & management | ~280 |\n| `AiService` | Multi-provider AI integration | ~450 |\n| `ExportService` | Static site generation | ~650 |\n| `AuthService` | JWT authentication | ~240 |\n| `CarouselService` | Homepage carousel | ~160 |\n| `StyleConfigService` | Theme management | ~190 |\n| ...and 5 more | Additional features | ~800 |\n\n**API Controllers (9 total)**\n- Public: Profile, Projects, Resume, Carousel\n- Admin: All entity CRUD, Media Upload, Static Export, AI Generation\n\n### Admin Dashboard\n\n![Admin Dashboard Overview](/Assets/Projects/Ark.Portfolio/Admin_Dashobard.PNG)\n\n*Comprehensive admin interface for managing all portfolio content*"
+                            },
+                            {
+                                "title": "Features & Use Cases",
+                                "type": "FUNCTIONAL",
+                                "navOrder": 3,
+                                "content": "## Functional Use Cases\n\n### 1. Portfolio Content Management\n\n**Scenario**: Professional wants to maintain a dynamic portfolio with CMS\n\n**Workflow**:\n1. Admin logs in with JWT authentication\n2. Navigate to Admin Dashboard\n3. Create/update profile information (name, title, summary, contact)\n4. Add work experiences with:\n   - Company, role, dates\n   - Detailed descriptions\n   - Technology tags\n5. Create projects with:\n   - Title, description, status\n   - Repository and demo URLs\n   - Hero images\n6. Add multi-page project documentation\n7. Upload media assets (images, PDFs, videos)\n8. Configure homepage carousel\n9. Publish changes (live update)\n\n**Benefits**:\n- ✅ Centralized content management\n- ✅ Version control through database\n- ✅ Type-safe data structures\n- ✅ Real-time preview\n- ✅ No code deployments needed\n\n![Projects Management](/Assets/Projects/Ark.Portfolio/Admin_Projects.PNG)\n\n*Manage projects with full CRUD operations and multi-page documentation*\n\n---\n\n### 2. AI-Assisted Content Generation\n\n**Scenario**: User needs professional content for project descriptions\n\n**Workflow**:\n1. Navigate to **AI Settings** in admin panel\n2. Configure AI provider:\n   - Choose: OpenAI, Anthropic, or Gemini\n   - Select model (GPT-4, Claude 3 Opus, Gemini 1.5 Pro)\n   - Enter API key (encrypted with AES-256)\n3. Select content entity (Project, Experience, Skill, etc.)\n4. Write prompt or select template:\n   - \"Generate a professional project summary\"\n   - \"Create compelling feature descriptions\"\n   - \"Write technical documentation\"\n5. Review AI-generated content\n6. Edit and refine as needed\n7. Save to entity\n\n**Supported Operations**:\n- 📝 Content generation from prompts\n- 📄 Text summarization\n- ✨ Professional writing enhancement\n- 📚 Technical documentation assistance\n- 🎯 SEO optimization suggestions\n\n**AI Provider Comparison**:\n\n| Provider | Best For | Models Available |\n|----------|----------|------------------|\n| OpenAI | General purpose, code | GPT-4, GPT-4 Turbo |\n| Anthropic | Long-form content, analysis | Claude 3 Opus, Sonnet, Haiku |\n| Google Gemini | Multi-modal, structured data | Gemini 1.5 Pro, Flash |\n\n---\n\n### 3. Static Website Deployment\n\n**Scenario**: Deploy portfolio to static hosting (zero server costs)\n\n**Workflow**:\n1. Populate all CMS content (profile, projects, experiences)\n2. Configure visual theme (Architectural or Aloe Vera)\n3. Navigate to **Export** → **Static Site** in admin\n4. Click **\"Generate Static Website\"**\n5. System processes:\n   - Renders all React components to HTML\n   - Bundles CSS with theme variables\n   - Optimizes JavaScript bundle\n   - Copies media assets\n   - Generates sitemap.xml\n   - Creates SEO meta tags\n6. Download ZIP file (typically 5-15 MB)\n7. Extract and deploy to:\n   - **GitHub Pages**: Push to `gh-pages` branch\n   - **Netlify**: Drag-drop ZIP or connect repo\n   - **Vercel**: Import from GitHub\n   - **AWS S3 + CloudFront**: Upload to S3 bucket\n\n**Advantages**:\n- 💰 Zero server costs\n- 🚀 Infinite scalability via CDN\n- ⚡ Fast loading times (static assets)\n- 🔒 Maximum security (no backend to attack)\n- 🌍 Global CDN distribution\n- 📱 Mobile-optimized responsive design\n\n**Generated Structure**:\n```\nstatic-export.zip\n├── index.html\n├── projects.html\n├── resume.html\n├── assets/\n│   ├── images/\n│   ├── css/\n│   └── js/\n├── sitemap.xml\n└── robots.txt\n```\n\n---\n\n### 4. Dynamic Theming System\n\n**Scenario**: Customize portfolio appearance without code changes\n\n**Workflow**:\n1. Access **StyleConfig** in admin panel\n2. Choose from built-in themes:\n   - **Architectural**: Clean, minimalist, structural aesthetic\n   - **Aloe Vera**: Organic, nature-inspired, warm tones\n3. Or create custom theme with JSON:\n   ```json\n   {\n     \"colorPalette\": {\n       \"primary\": \"#3B82F6\",\n       \"secondary\": \"#8B5CF6\",\n       \"accent\": \"#F59E0B\"\n     },\n     \"typography\": {\n       \"fontFamily\": \"Inter, sans-serif\",\n       \"headingWeight\": 700\n     }\n   }\n   ```\n4. Click **\"Apply Theme\"** (instant, no reload)\n5. Preview changes across all pages\n6. Save configuration to database\n7. Theme persists across user sessions\n\n**Configuration Options**:\n- 🎨 Color palettes (primary, secondary, accent, backgrounds)\n- 🔤 Typography (fonts, sizes, weights, line heights)\n- 📏 Spacing and padding\n- 🖼️ Border styles and radius\n- 🌈 Gradient definitions\n- 🎭 Component-specific overrides\n\n![Hero Carousel Management](/Assets/Projects/Ark.Portfolio/Admin_Hero_Carrousel.PNG)\n\n*Configure homepage carousel with dynamic theming*\n\n---\n\n### 5. Multi-Page Project Documentation\n\n**Scenario**: Create comprehensive technical documentation for projects\n\n**Workflow**:\n1. Create or edit **Project** entity\n2. Navigate to **Project Pages** tab\n3. Add pages with specific types:\n   - **OVERVIEW**: Project summary, quick start\n   - **FUNCTIONAL**: Feature specifications, use cases\n   - **TECHNICAL**: Implementation details, API docs\n   - **ARCHITECTURE**: System diagrams (Mermaid support)\n   - **ROADMAP**: Future plans, milestones\n4. Write content in Markdown:\n   - Headers, lists, tables\n   - Code blocks with syntax highlighting\n   - **Mermaid diagrams** for architecture\n   - Links and images\n5. Set navigation order (drag-and-drop)\n6. Preview rendered output\n7. Publish (available immediately)\n\n**Benefits**:\n- 📖 Professional documentation structure\n- 🔄 Version controlled in database\n- 🔍 Searchable content\n- 🎨 Rich formatting with Markdown\n- 📊 Visual diagrams with Mermaid\n- 🔗 Deep linking to specific sections\n\n![Resume/Experience Management](/Assets/Projects/Ark.Portfolio/Admin_ResumeManager.PNG)\n\n*Manage professional experience with timeline visualization*\n\n---\n\n### 6. Media Asset Management\n\n**Scenario**: Organize and optimize portfolio media\n\n**Workflow**:\n1. Navigate to **Media** in admin panel\n2. Upload files:\n   - Images: PNG, JPG, WebP (auto-optimization)\n   - Documents: PDF, DOCX\n   - Videos: MP4, WebM\n3. Organize with:\n   - Categories (Projects, Experiences, General)\n   - Tags for searchability\n   - Descriptions and alt text\n4. System processes:\n   - Thumbnail generation\n   - Image optimization\n   - CDN-ready URLs\n5. Use media in projects, experiences, or carousel\n6. Track usage and file sizes\n\n**Supported Operations**:\n- 📤 Upload (single or batch)\n- 🗂️ Categorize and tag\n- 🔍 Search and filter\n- 🖼️ Preview and edit metadata\n- 🗑️ Delete with orphan detection\n- 📊 Storage analytics"
+                            },
+                            {
+                                "title": "Deployment & Integration",
+                                "type": "TECHNICAL",
+                                "imageUrl": "/Assets/Projects/Ark.Alliance.Trading.Providers.Lib/trading-hero.png",
+                                "repoUrl": "https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.Providers.Lib",
+                                "demoUrl": "",
+                                "packageUrl": "https://www.npmjs.com/package/ark-alliance-trading-providers-lib",
+                                "technologies": [
+                                    "typescript",
+                                    "nodejs",
+                                    "binance",
+                                    "deribit",
+                                    "rest",
+                                    "jest",
+                                    "docker"
+                                ],
+                                "features": [
+                                    {
+                                        "title": "Multi-Provider Abstraction",
+                                        "description": "Unified interface for Binance Futures and Deribit exchanges with IProviderClient pattern. Write once, trade on any supported exchange without code changes. Extensible architecture for adding new providers.",
+                                        "icon": "plug"
+                                    },
+                                    {
+                                        "title": "Result Pattern Error Handling",
+                                        "description": "Type-safe Result<T> pattern for functional error handling. No exceptions in normal flow, explicit success/failure states, chainable operations (map, flatMap), and comprehensive error details with ResultStatus enum.",
+                                        "icon": "check-circle"
+                                    },
+                                    {
+                                        "title": "Real-Time WebSocket Streams",
+                                        "description": "Low-latency market data via WebSocket connections. Subscribe to klines, book ticker, user data streams, and order events. Event-driven architecture with typed event emitters for order fills and position updates.",
+                                        "icon": "wifi"
+                                    },
+                                    {
+                                        "title": "Secure Authentication",
+                                        "description": "HMAC-SHA256 signature generation for Binance, Ed25519 signature generation for Deribit, automatic token refresh mechanisms, and secure credential storage with IAuthStrategy interface.",
+                                        "icon": "lock"
+                                    },
+                                    {
+                                        "title": "Comprehensive Testing",
+                                        "description": "70+ test scenarios with ReflectionTestEngine, scenario-driven JSON test definitions, dynamic parameter resolution ($DYNAMIC_LIMIT_BUY), tested against live testnets, and 100% pass rate across all categories.",
+                                        "icon": "vial"
+                                    },
+                                    {
+                                        "title": "Clean Architecture",
+                                        "description": "Domain-driven design with clear layer separation: Domain (entities, interfaces), Application (use cases, mappers), and Infrastructure (clients, auth). TypeScript-first with full IntelliSense support.",
+                                        "icon": "sitemap"
+                                    }
+                                ],
+                                "pages": [
+                                    {
+                                        "title": "Overview",
+                                        "type": "OVERVIEW",
+                                        "navOrder": 1,
+                                        "content": "## Ark Alliance Trading Providers Library\n\n**Production-Ready Multi-Provider Cryptocurrency Trading SDK**\n\nA TypeScript SDK that unifies cryptocurrency trading across multiple exchanges with a single, elegant API. Stop writing exchange-specific code—write once, trade everywhere.\n\n### Perfect For\n\n- 🤖 Algorithmic trading bots\n- 📊 Market data aggregators\n- 💼 Portfolio management systems\n- 📈 Trading analytics platforms\n\n### Key Features\n\n| Feature | Description |\n|---------|-------------|\n| **Multi-Provider** | Unified interface for Binance Futures and Deribit |\n| **Order Management** | Place, modify, cancel, and track orders |\n| **Position Tracking** | Real-time position monitoring with P&L |\n| **WebSocket Streams** | Low-latency market data and user events |\n| **Event-Driven** | Async event architecture for fills, updates |\n| **Result Pattern** | Type-safe error handling|\n| **Secure Auth** | HMAC-SHA256 (Binance) and Ed25519 (Deribit) |\n| **100% Tested** | 70+ scenarios, 100% pass rate |\n| **TypeScript-First** | Full type definitions with IntelliSense |\n| **Testnet Support** | Built-in testnet URLs for development |\n\n### Installation\n\n```bash\nnpm install ark-alliance-trading-providers-lib\n```\n\n### Quick Start\n\n```typescript\nimport { BinanceRestClient } from 'ark-alliance-trading-providers-lib/Binance';\n\n// Initialize client\nconst client = new BinanceRestClient(apiKey, secret, { testnet: true });\n\n// Place order with type-safe Result pattern\nconst orderResult = await client.placeOrder({\n  symbol: 'BTCUSDT',\n  side: 'BUY',\n  type: 'MARKET',\n  quantity: 0.001\n});\n\nif (orderResult.success) {\n  console.log(`Order placed! ID: ${orderResult.data.orderId}`);\n} else {\n  console.error(`Error: ${orderResult.error.message}`);\n}\n```"
+                                    },
+                                    {
+                                        "title": "Architecture",
+                                        "type": "ARCHITECTURE",
+                                        "navOrder": 2,
+                                        "content": "## Clean Architecture\n\n### Layer Structure\n\n```\nDomain Layer\n├── Domain Entities (Order, Position, Account)\n└── Interfaces (IProviderClient, IAuthStrategy)\n        ↓\nApplication Layer\n├── Use Cases (Place Order, Get Position)\n└── Data Mappers (API ↔ Domain)\n        ↓\nInfrastructure Layer\n├── API Clients (REST, WebSocket)\n└── Authentication (HMAC, Ed25519)\n        ↓\nExternal Systems\n└── Exchange APIs (Binance, Deribit)\n```\n\n### Provider Abstraction\n\n**Your Application**\n\n↓ Uses\n\n**IProviderClient Interface**\n- connect() / disconnect()\n- isConnected() / getProviderName()\n\n↓ Implemented by\n\n**Provider Implementations**\n- Binance Provider (REST + WebSocket)\n- Deribit Provider (JSON-RPC)\n\n↓ Uses\n\n**IAuthStrategy Interface**\n- generateSignature()\n- authenticate()\n\n↓ Connects to\n\n**External APIs**\n- Binance Futures API (HTTPS + WSS)\n- Deribit API (WebSocket JSON-RPC)"
+                                    },
+                                    {
+                                        "title": "Use Cases & Examples",
+                                        "type": "FUNCTIONAL",
+                                        "navOrder": 3,
+                                        "content": "## Functional Use Cases\n\n### 1. Algorithmic Trading Bot\n\n**Scenario**: Automated trading strategy execution\n\n**Workflow**:\n```typescript\nimport { BinanceRestClient, BinanceWebSocketClient } from 'ark-alliance-trading-providers-lib';\n\n// Initialize clients\nconst rest = new BinanceRestClient(apiKey, secret, { testnet: true });\nconst ws = new BinanceWebSocketClient({ testnet: true });\n\n// Subscribe to market data\nws.subscribeBookTicker('BTCUSDT');\nws.on('bookTicker', async (ticker) => {\n  const signal = analyzeMarket(ticker);\n  \n  if (signal === 'BUY') {\n    const result = await rest.placeOrder({\n      symbol: 'BTCUSDT',\n      side: 'BUY',\n      type: 'MARKET',\n      quantity: 0.001\n    });\n    \n    if (result.success) {\n      console.log(`Buy order placed: ${result.data.orderId}`);\n    }\n  }\n});\n```\n\n### 2. Portfolio Management\n\n```typescript\nclass PortfolioManager {\n  async getTotalBalance(): Promise<number> {\n    const binancePositions = await this.binanceClient.getPositionRisk();\n    const deribitPositions = await this.deribitClient.getPositions();\n    \n    return this.calculateTotalValue([\n      ...binancePositions.data || [],\n      ...deribitPositions.data || []\n    ]);\n  }\n}\n```"
+                                    },
+                                    {
+                                        "title": "Testing & Quality",
+                                        "type": "TECHNICAL",
+                                        "navOrder": 4,
+                                        "content": "## Test Suite\n\n### Test Coverage\n\n**Total**: 70+ scenarios  \n**Pass Rate**: ✅ 100%  \n**Framework**: ReflectionTestEngine (custom)  \n**Execution**: Against live Binance Testnet\n\n| Scenario File | Category | Scenarios | Pass Rate |\n|---------------|----------|-----------|----------|\n| account.scenarios.json | Account | 8 | ✅ 100% |\n| market-data.scenarios.json | Market Data | 8 | ✅ 100% |\n| orders.scenarios.json | Orders | 12 | ✅ 92% (2 disabled) |\n| positions.scenarios.json | Positions | 14 | ✅ 100% |\n| gtx-orders.scenarios.json | Post-Only (GTX) | 13 | ✅ 100% |\n| market-orders.scenarios.json | Market Orders | 8 | ✅ 100% |\n| algo-orders.scenarios.json | Algo Orders | 10 | ✅ 100% |\n| mixed-orders.scenarios.json | Mixed Workflows | 10 | ✅ 100% |\n\n### Running Tests\n\n```bash\ncd Ark.Alliance.Trading.Providers.Lib.Test\n\n# Run all scenarios\nnpm run test:execute\n\n# Run specific category\nnpm run test:execute -- --filter=account\n\n# Generate report\nnpm run test:report\n```"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Ark.Alliance.Trading.TrendsCalculator",
+                                "description": "Production-ready real-time cryptocurrency trend analysis microservice combining advanced statistical indicators (Hurst Exponent, GARCH, Linear Regression, EMA) with optional Google Gemini AI integration. Features WebSocket streaming, configurable thresholds, walk-forward validation, and seamless integration with distributed trading systems. Built with TypeScript, React 19, Express, and Socket.IO.",
+                                "status": "Featured",
+                                "imageUrl": "/Assets/Projects/Ark.Alliance.TrendsCalculator/trends-hero.png",
+                                "repoUrl": "https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator",
+                                "demoUrl": "",
+                                "packageUrl": "",
+                                "technologies": [
+                                    "react",
+                                    "typescript",
+                                    "nodejs",
+                                    "express",
+                                    "socketio",
+                                    "vite",
+                                    "zod",
+                                    "binance",
+                                    "gemini"
+                                ],
+                                "features": [
+                                    {
+                                        "title": "Real-Time Trend Analysis",
+                                        "description": "Sub-second WebSocket streaming of trend calculations with composite scoring from multiple mathematical indicators. Maintains rolling buffer of 200 price points per symbol for accurate statistical analysis.",
+                                        "icon": "chart-line"
+                                    },
+                                    {
+                                        "title": "Multi-Indicator Engine",
+                                        "description": "Combines Hurst Exponent (market persistence), GARCH (volatility forecasting), Linear Regression (trend slope/R²), and EMA crossovers (50/200) into a unified composite score for LONG/SHORT/WAIT decisions.",
+                                        "icon": "calculator"
+                                    },
+                                    {
+                                        "title": "AI-Augmented Insights",
+                                        "description": "Optional Google Gemini integration provides contextual analysis and confidence scoring. Mathematical indicators ground AI recommendations in quantitative data for informed trading decisions.",
+                                        "icon": "brain"
+                                    },
+                                    {
+                                        "title": "Distributed Trading Integration",
+                                        "description": "REST API and WebSocket events designed for seamless integration with trading bots, portfolio managers, and analytics platforms. Event-driven architecture enables real-time signal consumption.",
+                                        "icon": "network-wired"
+                                    },
+                                    {
+                                        "title": "Walk-Forward Validation",
+                                        "description": "Training mode for backtesting and parameter optimization. Evaluate strategy performance across historical data with accuracy metrics per direction (LONG/SHORT/WAIT).",
+                                        "icon": "graduation-cap"
+                                    },
+                                    {
+                                        "title": "MVVM Architecture",
+                                        "description": "Clean separation of concerns with Model-View-ViewModel pattern in React frontend. Zod-validated DTOs ensure type safety across the entire stack from backend to UI.",
+                                        "icon": "layer-group"
+                                    }
+                                ],
+                                "pages": [
+                                    {
+                                        "title": "Overview",
+                                        "type": "OVERVIEW",
+                                        "navOrder": 1,
+                                        "content": "## Ark.Alliance.Trading.TrendsCalculator\n\n**Real-Time Cryptocurrency Trend Analysis Microservice**\n\nA production-grade service that transforms raw market data into actionable trend intelligence. It answers one critical question for trading systems: **Should I go LONG, SHORT, or WAIT?**\n\n### Core Capabilities\n\n| Capability | Description |\n|------------|-------------|\n| **Real-Time Analysis** | Sub-second trend updates via WebSocket |\n| **Multi-Indicator** | Hurst, GARCH, Linear Regression, EMA |\n| **AI Integration** | Optional Gemini for contextual insights |\n| **Training Mode** | Walk-forward validation for optimization |\n| **Type Safety** | Zod-validated DTOs across stack |\n\n### Perfect For\n\n- 🤖 **Algorithmic Trading Bots** — Entry/exit signal generation\n- 📊 **Analytics Platforms** — Multi-symbol trend monitoring\n- 💼 **Portfolio Managers** — Risk assessment and allocation\n- 🔬 **Quant Research** — Strategy backtesting and validation\n\n### Technology Stack\n\n- **Frontend**: React 19, TypeScript, Vite, Socket.IO Client\n- **Backend**: Node.js 18+, Express, Socket.IO Server\n- **Math Engine**: Hurst, GARCH, Linear Regression, EMA\n- **External**: Binance Futures API, Google Gemini AI\n- **Shared**: Zod validation, TypeScript DTOs"
+                                    },
+                                    {
+                                        "title": "Architecture & Data Model",
+                                        "type": "ARCHITECTURE",
+                                        "navOrder": 2,
+                                        "content": "## System Architecture\n\n### Three-Layer Structure\n\n```\nPresentation Layer (TrendsCalculator.Ui)\n├── React 19 + TypeScript\n├── MVVM Component Pattern\n├── Socket.IO Real-Time\n└── Vite Build Tool\n        ↓\nShared Layer (TrendsCalculator.Share)\n├── 23 Data Transfer Objects\n├── 12 Enumerations\n└── Zod Validation Schemas\n        ↓\nApplication Layer (TrendsCalculator.Backend)\n├── Express REST API\n├── Socket.IO WebSocket\n├── 5 Core Services\n└── Mathematical Engine\n        ↓\nExternal Systems\n├── Binance Futures (Market Data)\n└── Google Gemini (AI Analysis)\n```\n\n### Core Services\n\n| Service | Lines | Responsibility |\n|---------|-------|----------------|\n| `TrendCalculatorService` | 751 | Trend calculation engine |\n| `BinanceStreamService` | 290 | Market data ingestion |\n| `SymbolTrackingService` | 220 | Symbol lifecycle |\n| `StreamingAnalysisService` | 330 | Real-time processing |\n| `MarketDataService` | 180 | Data aggregation |\n\n### Mathematical Indicators\n\n**Hurst Exponent** — Market memory analysis\n- H < 0.5: Mean-reverting (range trading)\n- H ≈ 0.5: Random walk (neutral)\n- H > 0.5: Trending (momentum)\n\n**GARCH** — Volatility forecasting\n- Predicts next-period variance\n- Identifies volatility clustering\n\n**Linear Regression** — Trend direction\n- Slope: direction and steepness\n- R²: trend reliability (0-1)\n\n**EMA Crossover** — MA bias\n- EMA 50 > EMA 200: Bullish\n- EMA 50 < EMA 200: Bearish"
+                                    },
+                                    {
+                                        "title": "Features & Use Cases",
+                                        "type": "FUNCTIONAL",
+                                        "navOrder": 3,
+                                        "content": "## Functional Use Cases\n\n### 1. Algorithmic Trading Bot Integration\n\n**Scenario**: Trading bot needs trend signals for entry timing\n\n**Workflow**:\n1. Bot connects via WebSocket\n2. Subscribes to symbol (e.g., BTCUSDT)\n3. Receives `buffer:progress` events during warmup\n4. Receives `trend:update` events with direction + strength\n5. Executes trades based on composite score threshold\n\n**Benefits**:\n- Sub-second latency\n- Confidence scoring\n- Multiple indicator confirmation\n\n### 2. Multi-Symbol Portfolio Screening\n\n**Scenario**: Analyst monitors 20 symbols for strong trends\n\n**Workflow**:\n1. Track multiple symbols via REST API\n2. Receive parallel WebSocket updates\n3. Filter by strength > 0.7\n4. Request AI analysis for top candidates\n5. Make informed allocation decisions\n\n**Benefits**:\n- Parallel processing\n- Unified trend view\n- AI-augmented insights\n\n### 3. Walk-Forward Strategy Validation\n\n**Scenario**: Quant validates indicator parameters\n\n**Workflow**:\n1. Start training session with historical data\n2. System splits into train/test periods\n3. Parameters optimized on training data\n4. Validated against test data\n5. Accuracy metrics reported per direction\n\n**Benefits**:\n- Avoid overfitting\n- Direction-specific accuracy\n- Parameter optimization\n\n### 4. Real-Time Dashboard Monitoring\n\n**UI Pages**:\n- **Overview**: Summary metrics and active symbols\n- **Symbols**: Add/remove tracking with buffer progress\n- **Visualization**: Live price charts with trend overlays\n- **Configuration**: AI settings and parameters\n- **Training**: Validation metrics and history"
+                                    },
+                                    {
+                                        "title": "Deployment & Integration",
+                                        "type": "TECHNICAL",
+                                        "navOrder": 4,
+                                        "content": "## Deployment\n\n### Prerequisites\n\n- Node.js >= 18.0.0\n- npm >= 8.0.0\n- Binance account (optional, for live data)\n- Google Gemini API key (optional, for AI)\n\n### Quick Start\n\n```bash\n# 1. Install Share layer\ncd Ark.Alliance.TrendsCalculator.Share\nnpm install && npm run build\n\n# 2. Start Backend\ncd ../Ark.Alliance.TrendsCalculator.Backend\nnpm install\ncp .env.example .env\nnpm run dev\n\n# 3. Start Frontend\ncd ../Ark.Alliance.TrendsCalculator.Ui\nnpm install\nnpm run dev\n```\n\n### Environment Variables\n\n```env\n# Server\nPORT=3001\nNODE_ENV=development\n\n# Binance\nBINANCE_API_KEY=your_key\nBINANCE_SECRET_KEY=your_secret\nBINANCE_USE_TESTNET=true\n\n# AI (optional)\nGEMINI_API_KEY=your_gemini_key\n\n# Calculation\nDEFAULT_BUFFER_SIZE=200\nMIN_BUFFER_SIZE=50\n```\n\n## API Integration\n\n### REST Endpoints\n\n| Endpoint | Method | Purpose |\n|----------|--------|---------|\n| `/api/health` | GET | Health check |\n| `/api/symbol/track` | POST | Start tracking |\n| `/api/symbol/:symbol/track` | DELETE | Stop tracking |\n| `/api/symbol/:symbol/status` | GET | Buffer status |\n| `/api/trend/:symbol/analyze` | GET | Current trend |\n| `/api/trend/:symbol/history` | GET | Trend history |\n\n### WebSocket Events\n\n**Server → Client**:\n- `trend:update` — Trend analysis result\n- `buffer:progress` — Buffer filling status\n- `symbol:added` — Symbol tracking started\n- `ai:analysis` — AI analysis result\n\n**Client → Server**:\n- `subscribe:symbol` — Subscribe to updates\n- `unsubscribe:symbol` — Unsubscribe\n\n### Example Consumer\n\n```typescript\nimport { io } from 'socket.io-client';\n\nconst socket = io('wss://trends-api.example.com');\n\nsocket.emit('subscribe:symbol', 'BTCUSDT');\n\nsocket.on('trend:update', (data) => {\n  console.log(`${data.symbol}: ${data.direction}`);\n  console.log(`Strength: ${data.strength}`);\n  console.log(`Composite: ${data.compositeScore}`);\n});\n```"
+                                    }
+                                ]
+                            }
+                        ]

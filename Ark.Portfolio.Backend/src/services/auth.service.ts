@@ -81,18 +81,19 @@ export class AuthService {
 
     async seedAdminUser(): Promise<void> {
         const adminUser = await this.userRepository.findOne({ where: { username: 'admin' } });
+        const adminPassword = process.env.ADMIN_PASSWORD || 'Admin1234';
 
         if (!adminUser) {
             console.log('Seeding initial admin user...');
-            await this.register('admin', 'Admin1234');
+            await this.register('admin', adminPassword);
             console.log('Admin user seeded.');
         } else {
-            console.log('Admin user exists. Updating password to default...');
+            console.log('Admin user exists. Updating password to configured value...');
             const salt = await bcrypt.genSalt(10);
-            const passwordHash = await bcrypt.hash('Admin1234', salt);
+            const passwordHash = await bcrypt.hash(adminPassword, salt);
             adminUser.passwordHash = passwordHash;
             await this.userRepository.save(adminUser);
-            console.log('Admin password updated to default.');
+            console.log('Admin password updated.');
         }
     }
 }

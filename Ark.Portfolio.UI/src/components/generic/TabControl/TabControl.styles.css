@@ -1,11 +1,11 @@
 /**
  * TabControl Styles
  * 
- * Consolidated with Resume Manager tab styling.
- * Light theme: gray background, white active tabs, purple accent.
+ * Dark theme with teal active tab styling.
+ * Matches Admin Dashboard and public Resume page tabs.
  * 
  * Variants:
- * - default: Standard tabs matching cv-tabs (recommended)
+ * - default: Dark container with teal active tab (primary)
  * - pills: Rounded pill-shaped tabs
  * - underline: Tabs with bottom border indicator
  * - compact: Smaller tabs with minimal padding
@@ -18,40 +18,29 @@
    ============================================ */
 
 .tab-control {
-    /* Light theme colors (matching Resume Manager) */
-    --tab-container-bg: #f1f5f9;
+    /* Dark theme with teal accent */
+    --tab-container-bg: rgba(15, 23, 42, 0.85);
+    --tab-container-border: rgba(51, 65, 85, 0.6);
     --tab-bg: transparent;
-    --tab-bg-hover: rgba(255, 255, 255, 0.5);
-    --tab-bg-active: #ffffff;
-    --tab-text: #64748b;
-    --tab-text-hover: #475569;
-    --tab-text-active: #8b5cf6;
-    --tab-shadow-active: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --tab-bg-hover: rgba(0, 212, 255, 0.1);
+    --tab-bg-active: #00D4FF;
+    --tab-text: #94A3B8;
+    --tab-text-hover: #F1F5F9;
+    --tab-text-active: #0A0E17;
+    --tab-shadow-active: 0 2px 8px rgba(0, 212, 255, 0.3);
 
     /* Spacing */
-    --tab-container-padding: 0.375rem;
+    --tab-container-padding: 0.5rem;
     --tab-padding-x: 1.25rem;
     --tab-padding-y: 0.75rem;
     --tab-gap: 0.25rem;
-    --tab-container-radius: 14px;
-    --tab-radius: 10px;
+    --tab-container-radius: 12px;
+    --tab-radius: 8px;
 
     /* Typography */
     --tab-font-size: 0.875rem;
     --tab-font-weight: 500;
     --tab-icon-size: 18px;
-}
-
-/* Dark theme overrides */
-.tab-control--dark {
-    --tab-container-bg: rgba(15, 23, 42, 0.5);
-    --tab-bg: rgba(51, 65, 85, 0.6);
-    --tab-bg-hover: rgba(71, 85, 105, 0.8);
-    --tab-bg-active: #8b5cf6;
-    --tab-text: #cbd5e1;
-    --tab-text-hover: #f1f5f9;
-    --tab-text-active: #ffffff;
-    --tab-shadow-active: 0 0 12px rgba(139, 92, 246, 0.4);
 }
 
 /* ============================================
@@ -65,8 +54,7 @@
     padding: var(--tab-container-padding);
     background: var(--tab-container-bg);
     border-radius: var(--tab-container-radius);
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    /* Kept from original */
+    border: 1px solid var(--tab-container-border);
 }
 
 .tab-control--scrollable {
@@ -133,20 +121,41 @@
 }
 
 /* ============================================
-   Variant: Pills
+   Variant: Pills (Professional)
    ============================================ */
 
 .tab-control--pills {
-    /* Kept from original, but content changed */
-    background: rgba(15, 23, 42, 0.5);
-    /* Kept from original */
-    padding: 0.375rem;
-    /* Kept from original */
+    background: var(--bg-card, rgba(15, 23, 42, 0.85));
+    border: 1px solid var(--border-color, rgba(51, 65, 85, 0.6));
+    padding: 0.5rem;
+    border-radius: 9999px;
 }
 
 .tab-control--pills .tab-control-tab {
     border-radius: 9999px;
-    padding: 0.5rem 1rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-secondary, #94A3B8);
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.tab-control--pills .tab-control-tab:hover:not(:disabled) {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--text-primary, #F1F5F9);
+}
+
+.tab-control--pills .tab-control-tab--active {
+    background: var(--accent, #00D4FF);
+    color: #0A0E17;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+}
+
+.tab-control--pills .tab-control-tab--active:hover {
+    background: var(--accent, #00D4FF);
+    color: #0A0E17;
 }
 
 /* ============================================

@@ -1,0 +1,413 @@
+/**
+ * @fileoverview Theme Manager Styles
+ * Styles for the Admin Theme Management page.
+ * Uses CSS variables from shared-panel-styles for consistency.
+ * 
+ * @module pages/Admin/Themes
+ * @author Armand Richelet-Kleinberg
+ */
+
+/* ============================================
+   Layout
+   ============================================ */
+
+.theme-manager {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tm-header-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-neon, #e0f2fe);
+}
+
+.tm-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-neon, #f0f9ff);
+}
+
+.tm-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-neon-secondary, #94a3b8);
+    margin: 0;
+}
+
+/* ============================================
+   Theme Grid
+   ============================================ */
+
+.tm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.tm-empty {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--text-neon-secondary, #94a3b8);
+    text-align: center;
+    gap: 1rem;
+}
+
+.tm-loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-neon-secondary, #94a3b8);
+}
+
+/* ============================================
+   Theme Card
+   ============================================ */
+
+.tm-card {
+    background: var(--bg-surface, rgba(15, 23, 42, 0.8));
+    border: 1px solid var(--border-neon, rgba(56, 189, 248, 0.2));
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.tm-card:hover {
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+}
+
+.tm-card.default {
+    border-color: var(--neon-accent, #fbbf24);
+    box-shadow: 0 0 12px rgba(251, 191, 36, 0.2);
+}
+
+.tm-card-preview {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.tm-card-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+.tm-card-content {
+    padding: 1rem;
+}
+
+.tm-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tm-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-neon, #f0f9ff);
+    margin: 0;
+}
+
+.tm-card-desc {
+    font-size: 0.875rem;
+    color: var(--text-neon-secondary, #94a3b8);
+    margin: 0 0 0.25rem 0;
+}
+
+.tm-card-slug {
+    font-size: 0.75rem;
+    color: var(--text-neon-muted, #64748b);
+    font-family: monospace;
+    margin: 0;
+}
+
+.tm-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tm-badge.default {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}
+
+.tm-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border-neon, rgba(56, 189, 248, 0.1));
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.tm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tm-btn.primary {
+    background: var(--neon-primary, #00d4ff);
+    color: #0a0e17;
+}
+
+.tm-btn.primary:hover {
+    background: var(--neon-cyan, #22d3ee);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+.tm-btn.secondary {
+    background: rgba(100, 116, 139, 0.3);
+    color: var(--text-neon, #e0f2fe);
+    border: 1px solid rgba(100, 116, 139, 0.4);
+}
+
+.tm-btn.secondary:hover {
+    background: rgba(100, 116, 139, 0.5);
+}
+
+.tm-btn.danger {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.tm-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.4);
+}
+
+.tm-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   Error & Confirmation
+   ============================================ */
+
+.tm-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 0.5rem;
+    color: #f87171;
+    font-size: 0.875rem;
+}
+
+.tm-error button {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.tm-confirm-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(251, 191, 36, 0.9);
+    color: #0a0e17;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    z-index: 1000;
+}
+
+.tm-confirm-toast button {
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* ============================================
+   Modal
+   ============================================ */
+
+.tm-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+}
+
+.tm-modal {
+    background: var(--bg-deep, #0f172a);
+    border: 1px solid var(--border-neon, rgba(56, 189, 248, 0.3));
+    border-radius: 0.75rem;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.tm-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-neon, rgba(56, 189, 248, 0.2));
+}
+
+.tm-modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-neon, #f0f9ff);
+}
+
+.tm-modal-close {
+    background: none;
+    border: none;
+    color: var(--text-neon-secondary, #94a3b8);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: color 0.2s;
+}
+
+.tm-modal-close:hover {
+    color: var(--text-neon, #f0f9ff);
+}
+
+.tm-modal-form {
+    padding: 1.5rem;
+}
+
+.tm-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .tm-form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tm-form-group {
+    margin-bottom: 1rem;
+}
+
+.tm-form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-neon-secondary, #94a3b8);
+    margin-bottom: 0.375rem;
+}
+
+.tm-form-input {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-neon, rgba(56, 189, 248, 0.2));
+    border-radius: 0.375rem;
+    color: var(--text-neon, #f0f9ff);
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+}
+
+.tm-form-input:focus {
+    outline: none;
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+}
+
+.tm-form-textarea {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-neon, rgba(56, 189, 248, 0.2));
+    border-radius: 0.375rem;
+    color: var(--text-neon, #f0f9ff);
+    font-size: 0.875rem;
+    font-family: monospace;
+    resize: vertical;
+    min-height: 150px;
+}
+
+.tm-form-textarea:focus {
+    outline: none;
+    border-color: var(--neon-primary, #00d4ff);
+}
+
+.tm-color-input {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.tm-color-input input[type="color"] {
+    width: 40px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid var(--border-neon, rgba(56, 189, 248, 0.2));
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.tm-color-input input[type="text"] {
+    flex: 1;
+}
+
+.tm-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-neon, rgba(56, 189, 248, 0.1));
+}

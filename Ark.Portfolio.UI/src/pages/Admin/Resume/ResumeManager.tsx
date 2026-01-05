@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { AdminLayout } from '../../../components/generic/AdminLayout';
-import { useResumeManagerModel, ResumeTab } from './ResumeManager.model';
-import { AdminExperienceDto, AdminEducationDto, AdminSkillDto, SkillCategoryDto, AiSettingsDto } from '@ark/portfolio-share';
-import { Plus, Edit2, Trash2, Sparkles, Settings, Save, Briefcase, GraduationCap, Code, User, Bot, X, Calendar, Building2, Award, Wand2 } from 'lucide-react';
+import { useResumeManagerModel } from './ResumeManager.model';
+import {
+    AdminExperienceDto, AdminEducationDto, AdminSkillDto, SkillCategoryDto, AiSettingsDto,
+    LanguageDto, HobbyDto, BusinessDomainDto, PROFICIENCY_LEVEL_LABELS, SkillLevel,
+    ResumeTabEnum, AiProviderEnum, AI_PROVIDER_CONFIG, PROVIDER_MODELS, BUSINESS_DOMAIN_PRESETS
+} from '@ark/portfolio-share';
+import { Plus, Edit2, Trash2, Sparkles, Settings, Save, Briefcase, GraduationCap, Code, User, Bot, X, Calendar, Building2, Award, Wand2, Languages, Heart, Landmark, Star, Zap, Brain, Cpu } from 'lucide-react';
 import './ResumeManager.styles.css';
 
 // ============================================
 // Tab Navigation
 // ============================================
 
-const tabs: { key: ResumeTab; label: string; icon: React.ReactNode }[] = [
-    { key: 'profile', label: 'Profile', icon: <User size={18} /> },
-    { key: 'experience', label: 'Experience', icon: <Briefcase size={18} /> },
-    { key: 'education', label: 'Education', icon: <GraduationCap size={18} /> },
-    { key: 'skills', label: 'Skills', icon: <Code size={18} /> },
-    { key: 'ai-settings', label: 'AI Settings', icon: <Bot size={18} /> }
+import { TabItem, TabControl } from '../../../components/generic/TabControl';
+
+const RESUME_TABS: TabItem[] = [
+    { id: ResumeTabEnum.PROFILE, label: 'Profile', iconElement: <User size={18} /> },
+    { id: ResumeTabEnum.EXPERIENCE, label: 'Experience', iconElement: <Briefcase size={18} /> },
+    { id: ResumeTabEnum.EDUCATION, label: 'Education', iconElement: <GraduationCap size={18} /> },
+    { id: ResumeTabEnum.SKILLS, label: 'Skills', iconElement: <Code size={18} /> },
+    { id: ResumeTabEnum.LANGUAGES, label: 'Languages', iconElement: <Languages size={18} /> },
+    { id: ResumeTabEnum.HOBBIES, label: 'Hobbies', iconElement: <Heart size={18} /> },
+    { id: ResumeTabEnum.BUSINESS_DOMAINS, label: 'Domains', iconElement: <Landmark size={18} /> },
+    { id: ResumeTabEnum.AI_SETTINGS, label: 'AI Settings', iconElement: <Bot size={18} /> }
 ];
 
 // ============================================
@@ -40,26 +49,26 @@ export const ResumeManager: React.FC = () => {
                 {vm.successMessage && <div className="cv-success">{vm.successMessage}</div>}
 
                 {/* Tab Navigation */}
-                <div className="cv-tabs">
-                    {tabs.map(tab => (
-                        <button
-                            key={tab.key}
-                            className={`cv-tab ${vm.activeTab === tab.key ? 'active' : ''}`}
-                            onClick={() => vm.setActiveTab(tab.key)}
-                        >
-                            {tab.icon}
-                            <span>{tab.label}</span>
-                        </button>
-                    ))}
+                <div className="cv-tabs-container">
+                    <TabControl
+                        tabs={RESUME_TABS}
+                        activeTab={vm.activeTab}
+                        onTabChange={(id) => vm.setActiveTab(id as ResumeTabEnum)}
+                        variant="pills"
+                        ariaLabel="Resume sections"
+                    />
                 </div>
 
                 {/* Tab Content */}
                 <div className="cv-content">
-                    {vm.activeTab === 'profile' && <ProfileTab vm={vm} />}
-                    {vm.activeTab === 'experience' && <ExperienceTab vm={vm} />}
-                    {vm.activeTab === 'education' && <EducationTab vm={vm} />}
-                    {vm.activeTab === 'skills' && <SkillsTab vm={vm} />}
-                    {vm.activeTab === 'ai-settings' && <AiSettingsTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.PROFILE && <ProfileTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.EXPERIENCE && <ExperienceTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.EDUCATION && <EducationTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.SKILLS && <SkillsTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.LANGUAGES && <LanguagesTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.HOBBIES && <HobbiesTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.BUSINESS_DOMAINS && <BusinessDomainsTab vm={vm} />}
+                    {vm.activeTab === ResumeTabEnum.AI_SETTINGS && <AiSettingsTab vm={vm} />}
                 </div>
             </div>
         </AdminLayout>
@@ -416,10 +425,11 @@ const SkillsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> = ({
     const [editSkill, setEditSkill] = useState<AdminSkillDto | null>(null);
     const [editCategory, setEditCategory] = useState<SkillCategoryDto | null>(null);
 
-    const skillLevels = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+    // Use shared Enum values
+    const skillLevels = Object.values(SkillLevel);
 
     const handleAddSkill = () => {
-        setEditSkill({ name: '', level: 'Intermediate' as any, category: '' });
+        setEditSkill({ name: '', level: SkillLevel.INTERMEDIATE, category: '' });
         setIsEditingSkill(true);
     };
 
@@ -500,7 +510,7 @@ const SkillsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> = ({
                             {skills.map(skill => (
                                 <div key={skill.id} className="cv-skill-item">
                                     <span className="skill-name">{skill.name}</span>
-                                    <span className={`skill-level level-${skill.level?.toLowerCase()}`}>{skill.level}</span>
+                                    <span className={`skill - level level - ${skill.level?.toLowerCase()} `}>{skill.level}</span>
                                     <div className="skill-actions">
                                         <button onClick={() => handleEditSkill(skill)}><Edit2 size={14} /></button>
                                         <button className="danger" onClick={() => vm.deleteSkill(skill.id!)}><Trash2 size={14} /></button>
@@ -578,7 +588,7 @@ const SkillsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> = ({
 
 const AiSettingsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> = ({ vm }) => {
     const [settings, setSettings] = useState<AiSettingsDto>({
-        provider: 'openai',
+        provider: AiProviderEnum.OPENAI,
         model: 'gpt-4',
         temperature: 0.7,
         maxTokens: 2048,
@@ -592,11 +602,12 @@ const AiSettingsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> 
         }
     }, [vm.aiSettings]);
 
-    const providerModels: Record<string, string[]> = {
-        openai: ['gpt-4', 'gpt-4-turbo', 'gpt-3.5-turbo'],
-        anthropic: ['claude-3-opus', 'claude-3-sonnet', 'claude-3-haiku'],
-        google: ['gemini-pro', 'gemini-pro-vision'],
-        custom: []
+    // UI Helper for Icons - Mapping Enum to Icons
+    const PROVIDER_ICONS: Record<AiProviderEnum, React.ReactNode> = {
+        [AiProviderEnum.OPENAI]: <Brain size={24} />,
+        [AiProviderEnum.ANTHROPIC]: <Cpu size={24} />,
+        [AiProviderEnum.GOOGLE]: <Sparkles size={24} />,
+        [AiProviderEnum.CUSTOM]: <Settings size={24} />
     };
 
     const handleSave = () => vm.updateAiSettings(settings);
@@ -629,22 +640,24 @@ const AiSettingsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> 
                         <label>Provider</label>
                         <select
                             value={settings.provider}
-                            onChange={e => setSettings({
-                                ...settings,
-                                provider: e.target.value as any,
-                                model: providerModels[e.target.value]?.[0] || ''
-                            })}
+                            onChange={e => {
+                                const newProvider = e.target.value as AiProviderEnum;
+                                setSettings({
+                                    ...settings,
+                                    provider: newProvider,
+                                    model: PROVIDER_MODELS[newProvider]?.[0] || ''
+                                });
+                            }}
                         >
-                            <option value="openai">OpenAI</option>
-                            <option value="anthropic">Anthropic</option>
-                            <option value="google">Google AI</option>
-                            <option value="custom">Custom</option>
+                            {AI_PROVIDER_CONFIG.map(p => (
+                                <option key={p.id} value={p.id}>{p.name}</option>
+                            ))}
                         </select>
                     </div>
 
                     <div className="form-group">
                         <label>Model</label>
-                        {settings.provider === 'custom' ? (
+                        {settings.provider === AiProviderEnum.CUSTOM ? (
                             <input
                                 value={settings.model}
                                 onChange={e => setSettings({ ...settings, model: e.target.value })}
@@ -652,12 +665,12 @@ const AiSettingsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> 
                             />
                         ) : (
                             <select value={settings.model} onChange={e => setSettings({ ...settings, model: e.target.value })}>
-                                {providerModels[settings.provider]?.map(m => <option key={m} value={m}>{m}</option>)}
+                                {PROVIDER_MODELS[settings.provider]?.map(m => <option key={m} value={m}>{m}</option>)}
                             </select>
                         )}
                     </div>
 
-                    {settings.provider === 'custom' && (
+                    {settings.provider === AiProviderEnum.CUSTOM && (
                         <div className="form-group full-width">
                             <label>API URL</label>
                             <input
@@ -705,7 +718,7 @@ const AiSettingsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> 
                 </div>
 
                 {testResult && (
-                    <div className={`test-result ${testResult.success ? 'success' : 'error'}`}>
+                    <div className={`test - result ${testResult.success ? 'success' : 'error'} `}>
                         {testResult.success ? '✓' : '✗'} {testResult.message}
                     </div>
                 )}
@@ -718,6 +731,354 @@ const AiSettingsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> 
                         <Save size={16} /> Save Settings
                     </button>
                 </div>
+            </div>
+        </div>
+    );
+};
+
+// ============================================
+// Languages Tab
+// ============================================
+
+const LanguagesTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> = ({ vm }) => {
+    const [formData, setFormData] = useState<LanguageDto>({
+        language: '',
+        speaking: 3,
+        writing: 3,
+        presenting: 3
+    });
+    const [isEditing, setIsEditing] = useState(false);
+    const [editId, setEditId] = useState<number | null>(null);
+
+    const resetForm = () => {
+        setFormData({ language: '', speaking: 3, writing: 3, presenting: 3 });
+        setIsEditing(false);
+        setEditId(null);
+    };
+
+    const handleEdit = (lang: LanguageDto) => {
+        setFormData(lang);
+        setEditId(lang.id || null);
+        setIsEditing(true);
+    };
+
+    const handleSave = async () => {
+        if (editId) {
+            await vm.updateLanguage(editId, formData);
+        } else {
+            await vm.createLanguage(formData);
+        }
+        resetForm();
+    };
+
+    const renderStars = (value: number, onChange: (val: number) => void) => (
+        <div className="star-rating">
+            {[1, 2, 3, 4, 5].map(n => (
+                <button
+                    key={n}
+                    type="button"
+                    className={`star ${n <= value ? 'active' : ''} `}
+                    onClick={() => onChange(n)}
+                >
+                    <Star size={16} fill={n <= value ? 'currentColor' : 'none'} />
+                </button>
+            ))}
+            <span className="star-label">{PROFICIENCY_LEVEL_LABELS[value] || ''}</span>
+        </div>
+    );
+
+    return (
+        <div className="cv-section">
+            <div className="section-header">
+                <h2>Languages</h2>
+            </div>
+
+            {/* Form */}
+            <div className="cv-form compact-form">
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Language Name</label>
+                        <input
+                            type="text"
+                            value={formData.language}
+                            onChange={e => setFormData({ ...formData, language: e.target.value })}
+                            placeholder="e.g., English, French"
+                        />
+                    </div>
+                </div>
+                <div className="form-row three-col">
+                    <div className="form-group">
+                        <label>Speaking</label>
+                        {renderStars(formData.speaking, val => setFormData({ ...formData, speaking: val }))}
+                    </div>
+                    <div className="form-group">
+                        <label>Writing</label>
+                        {renderStars(formData.writing, val => setFormData({ ...formData, writing: val }))}
+                    </div>
+                    <div className="form-group">
+                        <label>Presenting</label>
+                        {renderStars(formData.presenting, val => setFormData({ ...formData, presenting: val }))}
+                    </div>
+                </div>
+                <div className="cv-actions">
+                    {isEditing && <button className="btn-secondary" onClick={resetForm}>Cancel</button>}
+                    <button className="btn-primary" onClick={handleSave} disabled={!formData.language.trim() || vm.isSaving}>
+                        <Save size={16} /> {isEditing ? 'Update' : 'Add'} Language
+                    </button>
+                </div>
+            </div>
+
+            {/* List */}
+            <div className="cv-list">
+                {vm.resumeData?.languages?.map(lang => (
+                    <div key={lang.id} className="cv-item">
+                        <div className="item-content">
+                            <h4>{lang.language}</h4>
+                            <div className="language-levels">
+                                <span>Speaking: {PROFICIENCY_LEVEL_LABELS[lang.speaking]}</span>
+                                <span>Writing: {PROFICIENCY_LEVEL_LABELS[lang.writing]}</span>
+                                <span>Presenting: {PROFICIENCY_LEVEL_LABELS[lang.presenting]}</span>
+                            </div>
+                        </div>
+                        <div className="item-actions">
+                            <button onClick={() => handleEdit(lang)}><Edit2 size={16} /></button>
+                            <button onClick={() => vm.deleteLanguage(lang.id!)}><Trash2 size={16} /></button>
+                        </div>
+                    </div>
+                ))}
+                {(!vm.resumeData?.languages || vm.resumeData.languages.length === 0) && (
+                    <div className="empty-state">No languages added yet</div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// ============================================
+// Hobbies Tab
+// ============================================
+
+const HobbiesTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> = ({ vm }) => {
+    const [formData, setFormData] = useState<HobbyDto>({
+        name: '',
+        description: '',
+        icon: ''
+    });
+    const [isEditing, setIsEditing] = useState(false);
+    const [editId, setEditId] = useState<number | null>(null);
+
+    const resetForm = () => {
+        setFormData({ name: '', description: '', icon: '' });
+        setIsEditing(false);
+        setEditId(null);
+    };
+
+    const handleEdit = (hobby: HobbyDto) => {
+        setFormData(hobby);
+        setEditId(hobby.id || null);
+        setIsEditing(true);
+    };
+
+    const handleSave = async () => {
+        if (editId) {
+            await vm.updateHobby(editId, formData);
+        } else {
+            await vm.createHobby(formData);
+        }
+        resetForm();
+    };
+
+    return (
+        <div className="cv-section">
+            <div className="section-header">
+                <h2>Hobbies & Interests</h2>
+            </div>
+
+            {/* Form */}
+            <div className="cv-form compact-form">
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Hobby Name</label>
+                        <input
+                            type="text"
+                            value={formData.name}
+                            onChange={e => setFormData({ ...formData, name: e.target.value })}
+                            placeholder="e.g., Music, Photography"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Icon (Lucide name)</label>
+                        <input
+                            type="text"
+                            value={formData.icon || ''}
+                            onChange={e => setFormData({ ...formData, icon: e.target.value })}
+                            placeholder="e.g., Music, Camera"
+                        />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label>Description (optional)</label>
+                    <textarea
+                        value={formData.description || ''}
+                        onChange={e => setFormData({ ...formData, description: e.target.value })}
+                        placeholder="Brief description of your hobby..."
+                        rows={2}
+                    />
+                </div>
+                <div className="cv-actions">
+                    {isEditing && <button className="btn-secondary" onClick={resetForm}>Cancel</button>}
+                    <button className="btn-primary" onClick={handleSave} disabled={!formData.name.trim() || vm.isSaving}>
+                        <Save size={16} /> {isEditing ? 'Update' : 'Add'} Hobby
+                    </button>
+                </div>
+            </div>
+
+            {/* List */}
+            <div className="cv-list hobbies-grid">
+                {vm.resumeData?.hobbies?.map(hobby => (
+                    <div key={hobby.id} className="cv-item hobby-card">
+                        <div className="item-content">
+                            <h4>{hobby.icon && <span className="hobby-icon">{hobby.icon}</span>} {hobby.name}</h4>
+                            {hobby.description && <p>{hobby.description}</p>}
+                        </div>
+                        <div className="item-actions">
+                            <button onClick={() => handleEdit(hobby)}><Edit2 size={16} /></button>
+                            <button onClick={() => vm.deleteHobby(hobby.id!)}><Trash2 size={16} /></button>
+                        </div>
+                    </div>
+                ))}
+                {(!vm.resumeData?.hobbies || vm.resumeData.hobbies.length === 0) && (
+                    <div className="empty-state">No hobbies added yet</div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// ============================================
+// Business Domains Tab
+// ============================================
+
+const BusinessDomainsTab: React.FC<{ vm: ReturnType<typeof useResumeManagerModel> }> = ({ vm }) => {
+    const [formData, setFormData] = useState<BusinessDomainDto>({
+        domain: '',
+        level: SkillLevel.INTERMEDIATE,
+        yearsOfExperience: 1,
+        description: '',
+        icon: ''
+    });
+    const [isEditing, setIsEditing] = useState(false);
+    const [editId, setEditId] = useState<number | null>(null);
+
+    const resetForm = () => {
+        setFormData({ domain: '', level: SkillLevel.INTERMEDIATE, yearsOfExperience: 1, description: '', icon: '' });
+        setIsEditing(false);
+        setEditId(null);
+    };
+
+    const handleEdit = (domain: BusinessDomainDto) => {
+        setFormData(domain);
+        setEditId(domain.id || null);
+        setIsEditing(true);
+    };
+
+    const handleSave = async () => {
+        if (editId) {
+            await vm.updateBusinessDomain(editId, formData);
+        } else {
+            await vm.createBusinessDomain(formData);
+        }
+        resetForm();
+    };
+
+    const skillLevelLabels: Record<string, string> = {
+        [SkillLevel.BEGINNER]: 'Beginner',
+        [SkillLevel.INTERMEDIATE]: 'Intermediate',
+        [SkillLevel.ADVANCED]: 'Advanced',
+        [SkillLevel.EXPERT]: 'Expert',
+        [SkillLevel.MASTER]: 'Master'
+    };
+
+    return (
+        <div className="cv-section">
+            <div className="section-header">
+                <h2>Business Domains</h2>
+            </div>
+
+            {/* Form */}
+            <div className="cv-form compact-form">
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Domain</label>
+                        <select
+                            value={formData.domain}
+                            onChange={e => setFormData({ ...formData, domain: e.target.value })}
+                        >
+                            <option value="">Select a domain...</option>
+                            {BUSINESS_DOMAIN_PRESETS.map(d => (
+                                <option key={d} value={d}>{d}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Proficiency Level</label>
+                        <select
+                            value={formData.level || SkillLevel.INTERMEDIATE}
+                            onChange={e => setFormData({ ...formData, level: e.target.value as SkillLevel })}
+                        >
+                            {Object.entries(skillLevelLabels).map(([value, label]) => (
+                                <option key={value} value={value}>{label}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Years of Experience</label>
+                        <input
+                            type="number"
+                            min="0"
+                            value={formData.yearsOfExperience || 0}
+                            onChange={e => setFormData({ ...formData, yearsOfExperience: parseInt(e.target.value) || 0 })}
+                        />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label>Description (optional)</label>
+                    <textarea
+                        value={formData.description || ''}
+                        onChange={e => setFormData({ ...formData, description: e.target.value })}
+                        placeholder="Describe your experience in this domain..."
+                        rows={2}
+                    />
+                </div>
+                <div className="cv-actions">
+                    {isEditing && <button className="btn-secondary" onClick={resetForm}>Cancel</button>}
+                    <button className="btn-primary" onClick={handleSave} disabled={!formData.domain || vm.isSaving}>
+                        <Save size={16} /> {isEditing ? 'Update' : 'Add'} Domain
+                    </button>
+                </div>
+            </div>
+
+            {/* List */}
+            <div className="cv-list">
+                {vm.resumeData?.businessDomains?.map(domain => (
+                    <div key={domain.id} className="cv-item">
+                        <div className="item-content">
+                            <h4>{domain.domain}</h4>
+                            <div className="domain-meta">
+                                <span className="domain-level">{skillLevelLabels[domain.level || ''] || domain.level}</span>
+                                {domain.yearsOfExperience && <span className="domain-years">{domain.yearsOfExperience} years</span>}
+                            </div>
+                            {domain.description && <p className="domain-desc">{domain.description}</p>}
+                        </div>
+                        <div className="item-actions">
+                            <button onClick={() => handleEdit(domain)}><Edit2 size={16} /></button>
+                            <button onClick={() => vm.deleteBusinessDomain(domain.id!)}><Trash2 size={16} /></button>
+                        </div>
+                    </div>
+                ))}
+                {(!vm.resumeData?.businessDomains || vm.resumeData.businessDomains.length === 0) && (
+                    <div className="empty-state">No business domains added yet</div>
+                )}
             </div>
         </div>
     );

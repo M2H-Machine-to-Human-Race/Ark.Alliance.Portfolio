@@ -261,3 +261,117 @@
 .home-animate-in.delay-3 {
     animation-delay: 300ms;
 }
+
+/* ============================================
+   Cyber Theme Enhancements
+   Applied when data-cyber-theme is set
+   ============================================ */
+
+/* Page background with cyber space nebula */
+[data-cyber-theme] .home-page {
+    background: var(--bg-space, #0a0e17);
+    background-image:
+        radial-gradient(ellipse at top, rgba(0, 212, 255, 0.1), transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(0, 153, 255, 0.08), transparent 50%);
+}
+
+/* Quick nav title with neon gradient */
+[data-cyber-theme] .home-quicknav-title {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Quick nav cards with cyber styling */
+[data-cyber-theme] .home-quicknav-card {
+    background: var(--bg-surface, rgba(15, 20, 30, 0.65));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-cyber-theme] .home-quicknav-card::before {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+[data-cyber-theme] .home-quicknav-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--neon-primary, #00d4ff);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3),
+        0 16px 32px rgba(0, 0, 0, 0.5);
+}
+
+[data-cyber-theme] .home-quicknav-card-title {
+    color: var(--text-neon, #e0e7ff);
+}
+
+[data-cyber-theme] .home-quicknav-card:hover .home-quicknav-card-title {
+    color: var(--neon-primary, #00d4ff);
+}
+
+[data-cyber-theme] .home-quicknav-card-arrow {
+    color: var(--neon-primary, #00d4ff);
+}
+
+/* Icon with neon glow */
+[data-cyber-theme] .home-quicknav-icon {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.4);
+}
+
+/* CTA section with cyber styling */
+[data-cyber-theme] .home-cta {
+    background: rgba(10, 14, 23, 0.6);
+    border-top: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+    border-bottom: 1px solid var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .home-cta-title {
+    background: var(--gradient-neon, linear-gradient(135deg, #00d4ff 0%, #00ffff 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Footer with cyber style */
+[data-cyber-theme] .home-footer {
+    background: rgba(10, 14, 23, 0.8);
+    border-top-color: var(--border-neon, rgba(0, 212, 255, 0.2));
+}
+
+[data-cyber-theme] .home-footer-text a {
+    color: var(--neon-primary, #00d4ff);
+}
+
+[data-cyber-theme] .home-footer-text a:hover {
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+/* Neon mode - intensified effects */
+[data-cyber-theme="neon"] .home-quicknav-card:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4),
+        0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-cyber-theme="neon"] .home-quicknav-icon {
+    box-shadow: 0 0 24px rgba(0, 255, 255, 0.6);
+}
+
+/* Glass mode - maximum transparency */
+[data-cyber-theme="glass"] .home-quicknav-card {
+    background: rgba(15, 20, 30, 0.35);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* Minimal mode - reduced effects */
+[data-cyber-theme="minimal"] .home-quicknav-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+[data-cyber-theme="minimal"] .home-quicknav-icon {
+    box-shadow: none;
+}

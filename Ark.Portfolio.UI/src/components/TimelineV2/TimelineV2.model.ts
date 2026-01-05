@@ -6,11 +6,16 @@
  */
 
 import { useState, useMemo, useCallback } from 'react';
+import { TechnologyDto } from '@ark/portfolio-share';
+import { TimelineCategoryEnum } from '../../enums';
 
 /**
- * Timeline item category
+ * Timeline category filter type.
+ * 
+ * @remarks
+ * Type alias for the enum to maintain API compatibility.
  */
-export type TimelineCategory = 'experience' | 'education' | 'achievement' | 'all';
+export type TimelineCategory = `${TimelineCategoryEnum}`;
 
 /**
  * Timeline item structure
@@ -56,12 +61,15 @@ export interface TimelineV2Model {
     categories: { id: TimelineCategory; label: string; count: number }[];
     /** Is admin mode enabled */
     showAdmin: boolean;
+    /** Selected technology for modal */
+    selectedTechnology: TechnologyDto | null;
 
     // Actions
     setCategory: (category: TimelineCategory) => void;
     setSearchQuery: (query: string) => void;
     handleEdit: (item: TimelineItem) => void;
     clearFilters: () => void;
+    setSelectedTechnology: (tech: TechnologyDto | null) => void;
 }
 
 /**
@@ -84,6 +92,7 @@ export const useTimelineV2Model = (config: TimelineV2Config): TimelineV2Model =>
 
     const [category, setCategory] = useState<TimelineCategory>(initialCategory);
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedTechnology, setSelectedTechnology] = useState<TechnologyDto | null>(null);
 
     // Sort items by date (most recent first)
     const sortedItems = useMemo(() => {
@@ -157,10 +166,12 @@ export const useTimelineV2Model = (config: TimelineV2Config): TimelineV2Model =>
         searchQuery,
         categories,
         showAdmin,
+        selectedTechnology,
         setCategory,
         setSearchQuery,
         handleEdit,
         clearFilters,
+        setSelectedTechnology,
     };
 };
 

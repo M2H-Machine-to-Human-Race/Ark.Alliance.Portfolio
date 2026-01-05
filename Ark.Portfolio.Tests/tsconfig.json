@@ -19,8 +19,7 @@
             "jest",
             "node",
             "react",
-            "react-dom",
-            "vite/client"
+            "react-dom"
         ],
         "jsx": "react-jsx",
         "baseUrl": ".",
@@ -38,7 +37,8 @@
     },
     "include": [
         "./**/*.ts",
-        "./**/*.tsx"
+        "./**/*.tsx",
+        "./global.d.ts"
     ],
     "exclude": [
         "node_modules",
