@@ -44,12 +44,13 @@ export class ProjectController extends BaseController {
 
     /**
      * GET /api/projects/:id
-     * Retrieves a single project by ID.
+     * Retrieves a single project by ID or slug.
+     * Supports both UUID format and URL-friendly slugs (e.g., 'ark-alliance').
      */
     async getProjectById(req: Request, res: Response) {
         try {
-            const id = req.params.id;
-            const project = await projectService.getProjectById(id);
+            const idOrSlug = req.params.id;
+            const project = await projectService.getProjectByIdOrSlug(idOrSlug);
             if (!project) {
                 return this.notFound(res, 'Project not found');
             }
